@@ -15,19 +15,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies (frontend)
-        run: |
-          cd frontend
-          npm ci
+      - name: Install root dependencies
+        run: npm ci
+      - name: Install backend dependencies
+        run: cd backend && npm ci
       - name: Run frontend tests
-        run: |
-          cd frontend
-          npm test
-      - name: Install dependencies (backend)
-        run: |
-          cd backend
-          npm ci
+        run: npm test -- --coverage --runInBand
       - name: Run backend tests
-        run: |
-          cd backend
-          npm test
+        run: cd backend && npm test -- --coverage --runInBand

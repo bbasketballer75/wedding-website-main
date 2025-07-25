@@ -1,0 +1,113 @@
+import React, { useCallback, memo } from 'react';
+import NavLink from './NavLink';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
+
+type NavbarProps = {
+  onePage?: boolean;
+};
+
+const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
+  // Smooth scroll for anchor links
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, id?: string) => {
+      if (onePage && id) {
+        e.preventDefault();
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    },
+    [onePage]
+  );
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container">
+        {onePage ? (
+          <a className="navbar-brand" href="#home" onClick={(e) => handleNavClick(e, 'home')}>
+            Austin & Jordyn
+          </a>
+        ) : (
+          <Link className="navbar-brand" to="/">
+            Austin & Jordyn
+          </Link>
+        )}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#home"
+                to="/"
+                label="Home"
+                onClick={(e) => handleNavClick(e, 'home')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#album"
+                to="/album"
+                label="Album"
+                onClick={(e) => handleNavClick(e, 'album')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#guestbook"
+                to="/guestbook"
+                label="Guestbook"
+                onClick={(e) => handleNavClick(e, 'guestbook')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#map"
+                to="/map"
+                label="Map"
+                onClick={(e) => handleNavClick(e, 'map')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#family"
+                to="/family-tree"
+                label="Family Tree"
+                onClick={(e) => handleNavClick(e, 'family')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#party"
+                to="/wedding-party"
+                label="Wedding Party"
+                onClick={(e) => handleNavClick(e, 'party')}
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+
+  Navbar.displayName = 'Navbar';
+});
+
+export default Navbar;

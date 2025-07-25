@@ -29,38 +29,41 @@ const OnePage = () => {
       </a>
       <Navbar onePage />
       <main className="onepage-main" id="main-content" role="main" aria-label="Main content">
+        {/* 1. Thank You Section - Welcome message (play intro video after landing page and before showing this section) */}
         <ThankYouSection />
-        <WeddingHighlightsSection />
-        <Suspense fallback={<LoadingScreen message="Loading section..." />}>
-          <section id="memorywall" aria-label="Memory Wall and Photo Booth" role="region">
-            <MemoryWall />
-          </section>
-          <section id="keepsakes" aria-label="Downloadable Keepsakes" role="region">
-            <KeepsakesSection />
-          </section>
-          <section id="timeline" aria-label="Wedding Day Timeline" role="region">
-            <TimelineSection />
-          </section>
-          <section id="home" aria-label="Home" role="region">
-            <HomePage onePage />
-          </section>
-          <section id="album" aria-label="Album" role="region">
-            <AlbumPage onePage />
-          </section>
-          <section id="guestbook" aria-label="Guestbook" role="region">
-            <GuestbookPage onePage />
-          </section>
-          <section id="map" aria-label="Map" role="region">
-            <MapPage onePage />
-          </section>
-          <section id="family" aria-label="Family Tree" role="region">
-            <FamilyTreePage onePage />
-          </section>
-          <section id="party" aria-label="Wedding Party" role="region">
-            <WeddingPartyPage onePage />
-          </section>
-          <StayInTouchSection />
-        </Suspense>
+        {/* 2. Family Tree - Parent videos (with photos of me and jordyn above the parents) */}
+        <section id="family-tree" aria-label="Family Tree" role="region">
+          {/* Add photos of Austin & Jordyn above parent videos */}
+          {/* <FamilyTreePage onePage /> */}
+        </section>
+        {/* 3. Wedding Party - Bridesmaids & groomsmen */}
+        <section id="wedding-party" aria-label="Wedding Party" role="region">
+          {/* <WeddingPartyPage onePage /> */}
+        </section>
+        {/* 4. Main Wedding Video Section with Custom Player */}
+        <section id="main-wedding-video" aria-label="Main Wedding Video" role="region">
+          {/* <CustomYouTubePlayer /> */}
+        </section>
+        {/* 5. Album - Engagement Photos Only */}
+        <section id="engagement-album" aria-label="Engagement Album" role="region">
+          {/* Custom Engagement Album component here */}
+        </section>
+        {/* 6. Memory Wall - Guest uploads */}
+        <section id="memory-wall" aria-label="Memory Wall" role="region">
+          {/* <MemoryWall /> */}
+        </section>
+        {/* 7. Guestbook & Map side by side (landscape) */}
+        <section id="guestbook-map" aria-label="Guestbook and Map" role="region" style={{ display: 'flex', flexDirection: 'row', gap: '2rem' }}>
+          <div style={{ flex: 1 }}>
+            {/* <GuestbookPage onePage /> */}
+          </div>
+          <div style={{ flex: 1 }}>
+            {/* <MapPage onePage /> */}
+          </div>
+        </section>
+        {/* 8. Stay in Touch - Contact info */}
+        <StayInTouchSection />
+      </main>
       </main>
     </div>
   );

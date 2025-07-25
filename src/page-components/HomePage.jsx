@@ -43,9 +43,9 @@ const HomePage = () => {
               </div>
               <div className="col-lg-6 text-center">
                 <picture>
-                  <source srcSet="/images/engagement.webp" type="image/webp" />
+                  <source srcSet="/images/engagement/PoradaProposal-11.webp" type="image/webp" />
                   <img
-                    src="/images/engagement.jpg"
+                    src="/images/engagement/PoradaProposal-11.webp"
                     alt="Our Engagement"
                     className="img-fluid rounded-circle shadow-lg"
                     loading="eager"

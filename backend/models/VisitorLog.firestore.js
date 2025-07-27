@@ -1,6 +1,6 @@
-const db = require('../config/firestore.js');
+import db from '../config/firestore.js';
 
-export class VisitorLog {
+class VisitorLog {
   constructor(data) {
     this.ip_address = data.ip_address;
     this.latitude = data.latitude;
@@ -103,6 +103,7 @@ export class VisitorLog {
   // Delete by ID
   static async deleteById(id) {
     await db.collection('visitorLogs').doc(id).delete();
+
     return true;
   }
 }

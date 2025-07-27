@@ -4,7 +4,7 @@ import asyncHandler from '../utils/asyncHandler.js';
  * Protects routes by checking for a secret key in the Authorization header.
  * The key should be sent as 'Bearer <your-secret-key>'.
  */
-export const protectAdmin = asyncHandler(async (req, res, next) => {
+const protectAdmin = asyncHandler(async (req, res, next) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -18,3 +18,5 @@ export const protectAdmin = asyncHandler(async (req, res, next) => {
     throw new Error('Not authorized, token failed or is missing.');
   }
 });
+
+export { protectAdmin };

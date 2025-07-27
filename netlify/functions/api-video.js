@@ -1,7 +1,20 @@
 import { Storage } from '@google-cloud/storage';
 
+// Initialize storage with credentials from environment
+let storageConfig = {};
+if (process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64) {
+  try {
+    const credentials = JSON.parse(
+      Buffer.from(process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64, 'base64').toString('utf8')
+    );
+    storageConfig.credentials = credentials;
+  } catch (error) {
+    console.error('Failed to decode GCP credentials:', error);
+  }
+}
+
 export async function handler(event) {
-  const storage = new Storage();
+  const storage = new Storage(storageConfig);
   const gcsPath = process.env.WEDDING_VIDEO_GCS_PATH || 'videos/wedding_video.mp4';
   const bucket = storage.bucket(process.env.GCS_BUCKET_NAME);
   const file = bucket.file(gcsPath);

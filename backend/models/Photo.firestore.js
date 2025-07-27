@@ -1,6 +1,6 @@
-const db = require('../config/firestore.js');
+import db from '../config/firestore.js';
 
-export class Photo {
+class Photo {
   constructor(data) {
     this.filename = data.filename;
     this.filepath = data.filepath;
@@ -104,6 +104,7 @@ export class Photo {
   // Delete photo
   static async deleteById(id) {
     await db.collection('photos').doc(id).delete();
+
     return true;
   }
 }

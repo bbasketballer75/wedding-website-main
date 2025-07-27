@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { errorHandler } from '../errorHandler.js';
 
 describe('errorHandler', () => {

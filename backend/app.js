@@ -2,12 +2,13 @@ import express from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import { specs, swaggerUi } from './config/swagger.js';
+import swaggerUi from 'swagger-ui-express';
+import specs from './config/swagger.js';
 import winston from 'winston';
 import xss from 'xss';
+import { fileURLToPath } from 'url';
 
 // Import routes
 import guestbookRoutes from './routes/guestbookRoutes.js';
@@ -16,6 +17,10 @@ import videoRoutes from './routes/videoRoutes.js';
 import mapRoutes from './routes/mapRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import { errorHandler } from './utils/errorHandler.js';
+
+// Get __dirname equivalent in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 // Enable gzip compression for all responses
@@ -87,9 +92,6 @@ app.use(express.urlencoded({ extended: false, limit: '10mb' }));
 // Trust the first proxy hop (important for getting the correct IP in production on services like Cloud Run)
 app.set('trust proxy', 1);
 
-// Get the directory name of the current module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 // The project root is one level up from the 'backend' directory
 const rootDir = path.join(__dirname, '..');
 // Serve static assets with long cache headers

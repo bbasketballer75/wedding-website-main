@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import asyncHandler from '../asyncHandler.js';
 
 describe('asyncHandler', () => {

@@ -2,9 +2,9 @@ import express from 'express';
 import {
   uploadMedia,
   getAlbumMedia,
-  getAllAlbumMedia as getAllMedia, // Or change the usage below
+  getAllAlbumMedia as getAllMedia,
   moderateMedia,
-} from '../controllers/albumController.js'; // Assuming this is the correct controller
+} from '../controllers/albumController.js';
 import upload from '../middleware/uploadMiddleware.js';
 import { protectAdmin } from '../middleware/authMiddleware.js';
 

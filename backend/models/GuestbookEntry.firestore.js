@@ -1,6 +1,6 @@
-const db = require('../config/firestore.js');
+import db from '../config/firestore.js';
 
-export class GuestbookEntry {
+class GuestbookEntry {
   constructor(data) {
     this.name = data.name || 'Anonymous';
     this.message = data.message;

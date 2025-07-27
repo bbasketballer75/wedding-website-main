@@ -1,5 +1,6 @@
 import { Storage } from '@google-cloud/storage';
 import winston from 'winston';
+import { getGoogleCredentials } from '../config/gcp-credentials.js';
 
 // Centralized logger setup
 const logger = winston.createLogger({
@@ -11,8 +12,19 @@ const logger = winston.createLogger({
   ],
 });
 
-// Initialize Google Cloud Storage
-const storage = new Storage();
+// Initialize Google Cloud Storage with credentials
+let storageConfig = {};
+try {
+  const credentials = getGoogleCredentials();
+  if (credentials) {
+    storageConfig.credentials = credentials;
+  }
+  // In development, Storage SDK will use local file path automatically
+} catch (error) {
+  console.warn('Google Cloud credentials not available:', error.message);
+}
+
+const storage = new Storage(storageConfig);
 
 class CloudStorageService {
   constructor() {

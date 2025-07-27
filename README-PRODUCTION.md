@@ -14,7 +14,7 @@ Welcome to Austin & [Partner's] wedding website! This full-stack application fea
 ## Tech Stack
 
 - **Frontend**: React, React Router, CSS3
-- **Backend**: Node.js, Express, MongoDB
+  **Backend**: Node.js, Express, Google Firestore
 - **Cloud**: Google Cloud Storage
 - **Testing**: Jest, React Testing Library
 - **Deployment**: Netlify
@@ -27,9 +27,8 @@ Set these in your Netlify environment:
 
 ```
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://bbasketballer75:passw0rd@wedding-site-cluster.apkobf4.mongodb.net/
 GCS_BUCKET_NAME=the-poradas-uploads
-GOOGLE_APPLICATION_CREDENTIALS=./config/gcs-key.json
+GOOGLE_APPLICATION_CREDENTIALS=./config/gcp-service-account.json
 SESSION_SECRET=theporadas2025weddingsitesecret123!
 ADMIN_KEY=admin2025theporadas
 BASE_URL=https://www.theporadas.com

@@ -16,7 +16,7 @@ const config = {
   externals: {
     // Exclude node_modules from bundle
     express: 'express',
-    mongoose: 'mongoose',
+    // mongoose removed
   },
   resolve: {
     extensions: ['.js', '.json'],

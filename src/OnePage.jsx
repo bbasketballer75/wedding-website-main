@@ -2,21 +2,13 @@ import React, { useEffect, Suspense } from 'react';
 import { setupSectionFadeIn } from './scrollFadeIn';
 import Navbar from './components/Navbar';
 import ThankYouSection from './components/ThankYouSection';
-import WeddingHighlightsSection from './components/WeddingHighlightsSection';
 import LoadingScreen from './components/LoadingScreen';
 import './App.css';
-
-// Lazy load heavy components
-const MemoryWall = React.lazy(() => import('./components/MemoryWall'));
-const KeepsakesSection = React.lazy(() => import('./components/KeepsakesSection'));
-const TimelineSection = React.lazy(() => import('./components/TimelineSection'));
+// Only import components that are still used
 const StayInTouchSection = React.lazy(() => import('./components/StayInTouchSection'));
-const HomePage = React.lazy(() => import('./page-components/HomePage'));
 const AlbumPage = React.lazy(() => import('./page-components/AlbumPage'));
 const GuestbookPage = React.lazy(() => import('./page-components/GuestbookPage'));
 const MapPage = React.lazy(() => import('./page-components/MapPage'));
-const FamilyTreePage = React.lazy(() => import('./page-components/FamilyTreePage'));
-const WeddingPartyPage = React.lazy(() => import('./page-components/WeddingPartyPage'));
 
 const OnePage = () => {
   useEffect(() => {

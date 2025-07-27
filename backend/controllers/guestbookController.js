@@ -59,12 +59,13 @@ const createGuestbookEntry = asyncHandler(async (req, res) => {
     message: message.trim(),
   });
 
-  await entry.save();
+  const saved = await entry.save();
+  // Always return a plain object, even if the mock returns a class instance
   res.status(201).json({
-    name: entry.name,
-    message: entry.message,
-    id: entry.id,
-    timestamp: entry.timestamp,
+    name: saved.name,
+    message: saved.message,
+    id: saved.id,
+    timestamp: saved.timestamp,
   });
 });
 

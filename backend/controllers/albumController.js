@@ -3,7 +3,7 @@ import os from 'os';
 import sharp from 'sharp';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
-import Photo from '../models/Photo.js';
+import Photo from '../models/Photo.firestore.js';
 import cloudStorage from '../services/cloudStorage.js';
 import fs from 'fs/promises'; // Only for temp files
 
@@ -133,7 +133,7 @@ export const uploadMedia = async (req, res) => {
  */
 export const getAlbumMedia = async (req, res) => {
   try {
-    const media = await Photo.find({ approved: true }).sort({ createdAt: -1 });
+    const media = await Photo.findApproved();
     res.json(media);
   } catch {
     res.status(500).json({ message: 'Server error fetching media.' });
@@ -145,7 +145,7 @@ export const getAlbumMedia = async (req, res) => {
  */
 export const getAllAlbumMedia = async (req, res) => {
   try {
-    const media = await Photo.find({}).sort({ createdAt: -1 });
+    const media = await Photo.findAll();
     res.json(media);
   } catch {
     res.status(500).json({ message: 'Server error fetching all media.' });
@@ -159,12 +159,14 @@ export const moderateMedia = async (req, res) => {
   const { photoId, isApproved } = req.body;
   try {
     if (isApproved) {
-      const photo = await Photo.findByIdAndUpdate(photoId, { approved: true }, { new: true });
+      await Photo.updateApproval(photoId, true);
+      const photo = await Photo.findById(photoId);
       if (!photo) return res.status(404).json({ message: 'Photo not found.' });
       res.json({ message: 'Media has been approved.', photo });
     } else {
-      const photo = await Photo.findByIdAndDelete(photoId);
+      const photo = await Photo.findById(photoId);
       if (!photo) return res.status(404).json({ message: 'Photo not found.' });
+      await Photo.deleteById(photoId);
       // Delete from GCS
       await cloudStorage.deleteFile(photo.filename).catch(() => {});
       res.json({ message: 'Media has been rejected and deleted.' });

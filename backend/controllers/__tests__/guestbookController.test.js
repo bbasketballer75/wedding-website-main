@@ -1,14 +1,7 @@
-jest.mock('mongoose', () => ({
-  Schema: jest.fn(),
-  model: jest.fn(() => ({
-    find: jest.fn(),
-    create: jest.fn(),
-  })),
-}));
 import { getGuestbookEntries, createGuestbookEntry } from '../guestbookController.js';
-import GuestbookEntry from '../../models/GuestbookEntry.js';
+import GuestbookEntry from '../../models/GuestbookEntry.firestore.js';
 
-jest.mock('../../models/GuestbookEntry.js');
+jest.mock('../../models/GuestbookEntry.firestore.js');
 
 // describe('Guestbook Controller', () => {
 let mockReq, mockRes;
@@ -31,29 +24,14 @@ describe('getGuestbookEntries', () => {
       { name: 'Jane Smith', message: 'Beautiful ceremony', timestamp: new Date() },
     ];
 
-    const mockSort = jest.fn().mockResolvedValue(mockEntries);
-    const mockFind = jest.fn().mockReturnValue({ sort: mockSort });
-    GuestbookEntry.find = mockFind;
-
+    GuestbookEntry.findAll.mockResolvedValue(mockEntries);
     await getGuestbookEntries(mockReq, mockRes);
-
-    expect(mockFind).toHaveBeenCalledWith({});
-    expect(mockSort).toHaveBeenCalledWith({ timestamp: -1 });
+    expect(GuestbookEntry.findAll).toHaveBeenCalled();
     expect(mockRes.json).toHaveBeenCalledWith(mockEntries);
   });
 
   it('should handle database errors', async () => {
-    const mockSort = jest.fn().mockRejectedValue(new Error('Database error'));
-    const mockFind = jest.fn().mockReturnValue({ sort: mockSort });
-    GuestbookEntry.find = mockFind;
-
-    // Wrap in try/catch to avoid unhandled rejection
-    try {
-      await getGuestbookEntries(mockReq, mockRes);
-    } catch {
-      // expected
-    }
-
+    GuestbookEntry.findAll.mockRejectedValue(new Error('Database error'));
     await expect(getGuestbookEntries(mockReq, mockRes)).rejects.toThrow('Database error');
   });
 });
@@ -62,38 +40,43 @@ describe('createGuestbookEntry', () => {
   it('should create a new guestbook entry successfully', async () => {
     const entryData = { name: 'John Doe', message: 'Great wedding!' };
     const mockEntry = {
-      ...entryData,
-      _id: '507f1f77bcf86cd799439011',
+      name: entryData.name,
+      message: entryData.message,
+      id: '507f1f77bcf86cd799439011',
       timestamp: new Date(),
     };
-
+    const saveSpy = jest.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
     mockReq.body = entryData;
-    GuestbookEntry.create = jest.fn().mockResolvedValue(mockEntry);
 
     await createGuestbookEntry(mockReq, mockRes);
 
-    expect(GuestbookEntry.create).toHaveBeenCalledWith(entryData);
+    expect(saveSpy).toHaveBeenCalled();
     expect(mockRes.status).toHaveBeenCalledWith(201);
-    expect(mockRes.json).toHaveBeenCalledWith(mockEntry);
+    const jsonCall = mockRes.json.mock.calls[0][0];
+    expect(jsonCall.name).toBe(entryData.name);
+    expect(jsonCall.message).toBe(entryData.message);
   });
 
   it('should create entry with anonymous name when name is missing', async () => {
     const entryData = { message: 'Great wedding!' };
     const expectedData = { name: 'Anonymous', message: 'Great wedding!' };
     const mockEntry = {
-      ...expectedData,
-      _id: '507f1f77bcf86cd799439011',
+      name: expectedData.name,
+      message: expectedData.message,
+      id: '507f1f77bcf86cd799439011',
       timestamp: new Date(),
     };
 
     mockReq.body = entryData;
-    GuestbookEntry.create = jest.fn().mockResolvedValue(mockEntry);
+    const saveSpy = jest.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
 
     await createGuestbookEntry(mockReq, mockRes);
 
-    expect(GuestbookEntry.create).toHaveBeenCalledWith(expectedData);
+    expect(saveSpy).toHaveBeenCalled();
     expect(mockRes.status).toHaveBeenCalledWith(201);
-    expect(mockRes.json).toHaveBeenCalledWith(mockEntry);
+    const jsonCall = mockRes.json.mock.calls[0][0];
+    expect(jsonCall.name).toBe(expectedData.name);
+    expect(jsonCall.message).toBe(expectedData.message);
   });
 
   it('should reject empty message', async () => {
@@ -127,7 +110,8 @@ describe('createGuestbookEntry', () => {
 
   it('should handle database creation errors', async () => {
     mockReq.body = { name: 'John Doe', message: 'Great wedding!' };
-    GuestbookEntry.create = jest.fn().mockRejectedValue(new Error('Database error'));
+
+    jest.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(new Error('Database error'));
 
     const mockNext = jest.fn();
 
@@ -145,7 +129,7 @@ describe('createGuestbookEntry', () => {
     const validationError = new Error('Validation failed');
     validationError.name = 'ValidationError';
 
-    GuestbookEntry.create = jest.fn().mockRejectedValue(validationError);
+    jest.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(validationError);
 
     const mockNext = jest.fn();
 

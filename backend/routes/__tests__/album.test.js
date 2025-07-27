@@ -17,7 +17,7 @@ jest.mock('../../middleware/uploadMiddleware.js', () => ({
   },
 }));
 
-jest.mock('../middleware/authMiddleware.js', () => ({
+jest.mock('../../middleware/authMiddleware.js', () => ({
   protectAdmin: (req, res, next) => {
     if (req.headers.authorization === 'Bearer valid-token') {
       next();
@@ -29,7 +29,7 @@ jest.mock('../middleware/authMiddleware.js', () => ({
 
 import request from 'supertest';
 import express from 'express';
-import albumRoutes from './album';
+import albumRoutes from '../album.js';
 import {
   getAlbumMedia,
   uploadMedia,

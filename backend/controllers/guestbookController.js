@@ -1,4 +1,4 @@
-import GuestbookEntry from '../models/GuestbookEntry.js';
+import GuestbookEntry from '../models/GuestbookEntry.firestore.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import { body, validationResult } from 'express-validator';
 
@@ -25,7 +25,7 @@ const validateGuestbookEntry = [
  * @access  Public
  */
 const getGuestbookEntries = asyncHandler(async (req, res) => {
-  const entries = await GuestbookEntry.find({}).sort({ timestamp: -1 });
+  const entries = await GuestbookEntry.findAll();
   res.json(entries);
 });
 
@@ -54,12 +54,18 @@ const createGuestbookEntry = asyncHandler(async (req, res) => {
     throw new Error('A message is required to sign the guestbook.');
   }
 
-  const entry = await GuestbookEntry.create({
+  const entry = new GuestbookEntry({
     name: name || 'Anonymous',
     message: message.trim(),
   });
 
-  res.status(201).json(entry);
+  await entry.save();
+  res.status(201).json({
+    name: entry.name,
+    message: entry.message,
+    id: entry.id,
+    timestamp: entry.timestamp,
+  });
 });
 
 export { validateGuestbookEntry, getGuestbookEntries, createGuestbookEntry };

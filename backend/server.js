@@ -5,7 +5,7 @@ import app from './app.js';
 import connectDB from './config/db.js';
 import logger from './config/logger.js';
 
-// Connect to MongoDB
+// MongoDB removed: now using Google Firestore
 connectDB();
 
 const server = http.createServer(app);

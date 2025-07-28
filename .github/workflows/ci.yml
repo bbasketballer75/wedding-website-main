@@ -25,3 +25,10 @@ jobs:
         run: npm test -- --coverage --runInBand
       - name: Run backend tests
         run: cd backend && npm test -- --coverage --runInBand
+      - name: Debug GCP_SERVICE_ACCOUNT_JSON_BASE64
+        run: |
+          if [ -z "$GCP_SERVICE_ACCOUNT_JSON_BASE64" ]; then
+            echo "GCP_SERVICE_ACCOUNT_JSON_BASE64 is NOT set!" && exit 1
+          else
+            echo "GCP_SERVICE_ACCOUNT_JSON_BASE64 is set. Length: ${#GCP_SERVICE_ACCOUNT_JSON_BASE64}"
+          fi

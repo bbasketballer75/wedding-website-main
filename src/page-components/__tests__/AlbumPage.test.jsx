@@ -8,7 +8,7 @@ import * as api from '../../services/api.js';
 
 jest.mock('../../services/api.js', () => {
   return {
-    getAlbumMedia: jest.fn(
+    getAlbumMedia: vi.fn(
       () =>
         new Promise((resolve) =>
           setTimeout(
@@ -23,7 +23,7 @@ jest.mock('../../services/api.js', () => {
           )
         )
     ),
-    uploadMedia: jest.fn(() => Promise.resolve({})),
+    uploadMedia: vi.fn(() => Promise.resolve({})),
   };
 });
 

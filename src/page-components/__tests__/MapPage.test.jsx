@@ -3,7 +3,7 @@ import { render, screen, waitFor, act } from '@testing-library/react';
 
 import MapPage from '../MapPage.jsx';
 
-jest.mock('../../services/api.js', () => ({
+vi.mock('../../services/api.js', () => ({
   getMapPins: jest.fn(() =>
     Promise.resolve({
       data: [

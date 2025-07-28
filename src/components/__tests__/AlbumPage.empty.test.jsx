@@ -4,7 +4,7 @@ import AlbumPage from '../../page-components/AlbumPage.jsx';
 
 import * as api from '../../services/api.js';
 
-jest.spyOn(api, 'getAlbumMedia').mockResolvedValue({ data: [] });
+vi.spyOn(api, 'getAlbumMedia').mockResolvedValue({ data: [] });
 
 describe('AlbumPage Empty State', () => {
   it('shows empty state when no media is available', async () => {

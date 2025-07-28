@@ -12,4 +12,4 @@ describe('AdminDashboard Session', () => {
   });
 });
 import * as api from '../../services/api.js';
-jest.spyOn(api, 'getAllAlbumMedia').mockResolvedValue({ data: [] });
+vi.spyOn(api, 'getAllAlbumMedia').mockResolvedValue({ data: [] });

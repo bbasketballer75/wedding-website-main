@@ -4,9 +4,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import MusicPlayer from '../MusicPlayer.jsx';
 
 // Mock HTMLAudioElement
-window.HTMLAudioElement.prototype.play = jest.fn();
-window.HTMLAudioElement.prototype.pause = jest.fn();
-window.HTMLAudioElement.prototype.load = jest.fn();
+window.HTMLAudioElement.prototype.play = vi.fn();
+window.HTMLAudioElement.prototype.pause = vi.fn();
+window.HTMLAudioElement.prototype.load = vi.fn();
 
 describe('MusicPlayer', () => {
   beforeEach(() => {

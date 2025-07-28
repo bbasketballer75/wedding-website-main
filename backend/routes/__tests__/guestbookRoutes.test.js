@@ -3,10 +3,10 @@ import express from 'express';
 import guestbookRoutes from '../guestbookRoutes.js';
 
 // Mock the controller functions
-jest.mock('../../controllers/guestbookController.js', () => ({
-  getGuestbookEntries: jest.fn(),
-  createGuestbookEntry: jest.fn(),
-  validateGuestbookEntry: jest.fn((req, res, next) => next()), // Mock middleware
+vi.mock('../../controllers/guestbookController.js', () => ({
+  getGuestbookEntries: vi.fn(),
+  createGuestbookEntry: vi.fn(),
+  validateGuestbookEntry: vi.fn((req, res, next) => next()), // Mock middleware
 }));
 
 import {

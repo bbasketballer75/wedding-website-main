@@ -5,18 +5,18 @@ import { MemoryRouter } from 'react-router-dom';
 import App from '../App.jsx';
 
 // Mock all the service calls
-jest.mock('../services/api.js', () => ({
+vi.mock('../services/api.js', () => ({
   logVisit: jest.fn().mockResolvedValue({}),
   getAlbumMedia: jest.fn(() => Promise.resolve({ data: [] })),
 }));
 
 // Mock HTMLAudioElement
-window.HTMLAudioElement.prototype.play = jest.fn();
-window.HTMLAudioElement.prototype.pause = jest.fn();
-window.HTMLAudioElement.prototype.load = jest.fn();
+window.HTMLAudioElement.prototype.play = vi.fn();
+window.HTMLAudioElement.prototype.pause = vi.fn();
+window.HTMLAudioElement.prototype.load = vi.fn();
 
 // Mock URL.createObjectURL
-window.URL.createObjectURL = jest.fn(() => 'mock-url');
+window.URL.createObjectURL = vi.fn(() => 'mock-url');
 
 describe('App', () => {
   test('renders orientation overlay first when needed', () => {

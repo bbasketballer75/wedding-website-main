@@ -5,7 +5,7 @@ import LandingPage from '../LandingPage.jsx';
 
 describe('LandingPage', () => {
   test('renders landing page with correct content', () => {
-    const mockOnEnter = jest.fn();
+    const mockOnEnter = vi.fn();
     render(<LandingPage onEnter={mockOnEnter} />);
 
     expect(screen.getByText('Austin & Jordyn')).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('LandingPage', () => {
   });
 
   test('calls onEnter when enter button is clicked', () => {
-    const mockOnEnter = jest.fn();
+    const mockOnEnter = vi.fn();
     render(<LandingPage onEnter={mockOnEnter} />);
 
     const enterButton = screen.getByRole('button', {
@@ -29,7 +29,7 @@ describe('LandingPage', () => {
   });
 
   test('displays wedding hero image', () => {
-    const mockOnEnter = jest.fn();
+    const mockOnEnter = vi.fn();
     render(<LandingPage onEnter={mockOnEnter} />);
 
     const heroImage = screen.getByAltText('Austin & Jordyn Wedding');
@@ -38,7 +38,7 @@ describe('LandingPage', () => {
   });
 
   test('has correct button text and subtitle', () => {
-    const mockOnEnter = jest.fn();
+    const mockOnEnter = vi.fn();
     render(<LandingPage onEnter={mockOnEnter} />);
 
     expect(screen.getByText('Enter Our Celebration')).toBeInTheDocument();

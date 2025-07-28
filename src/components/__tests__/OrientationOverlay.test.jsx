@@ -7,7 +7,7 @@ import OrientationOverlay from '../OrientationOverlay.jsx';
 beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation((query) => ({
+    value: vi.fn().mockImplementation((query) => ({
       matches: query.includes('portrait'),
       media: query,
       onchange: null,

@@ -12,11 +12,11 @@ describe('UploadForm', () => {
     expect(screen.getByRole('button', { name: /Upload File/i })).toBeInTheDocument();
   });
 });
-jest.mock('../../services/api.js');
+vi.mock('../../services/api.js');
 
 describe('UploadForm', () => {
   beforeEach(() => {
-    jest.mocked(uploadMedia).mockReset();
+    vi.mocked(uploadMedia).mockReset();
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -56,7 +56,7 @@ describe('UploadForm', () => {
   });
 
   it('calls uploadMedia and shows success on valid upload', async () => {
-    jest.mocked(uploadMedia).mockResolvedValueOnce();
+    vi.mocked(uploadMedia).mockResolvedValueOnce();
     render(<UploadForm />);
     const fileInput = screen.getByLabelText('Select image or video to upload');
     const file = new File(['dummy'], 'photo.jpg', { type: 'image/jpeg' });

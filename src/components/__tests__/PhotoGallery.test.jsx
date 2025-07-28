@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 
 // Always mock getAlbumMedia before importing PhotoGallery
 let mockGetAlbumMedia;
-jest.doMock('../../services/api.js', () => ({
+vi.doMock('../../services/api.js', () => ({
   getAlbumMedia: (...args) => mockGetAlbumMedia(...args),
 }));
 let PhotoGallery;

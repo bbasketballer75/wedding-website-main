@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { getGeoLocation } from '../geo.js';
 
 describe('getGeoLocation', () => {
@@ -9,7 +8,7 @@ describe('getGeoLocation', () => {
   });
 
   it('returns error location for fetch failure', async () => {
-    global.fetch = jest.fn(() => Promise.reject('fail'));
+    global.fetch = vi.fn(() => Promise.reject('fail'));
     const result = await getGeoLocation('8.8.8.8');
     expect(result.city).toBe('Error');
     expect(result.country).toBe('Error');

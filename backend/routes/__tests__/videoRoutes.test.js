@@ -1,10 +1,9 @@
-import { jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
 import videoRoutes from '../videoRoutes.js';
 
 // Mock the controller functions
-jest.mock('../../controllers/videoController.js', () => ({
+vi.mock('../../controllers/videoController.js', () => ({
   streamVideo: (req, res) => res.status(200).send('video stream'),
 }));
 

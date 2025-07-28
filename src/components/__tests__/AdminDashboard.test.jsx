@@ -4,11 +4,11 @@ import { render, screen, act } from '@testing-library/react';
 import AdminDashboard from '../AdminDashboard.jsx';
 
 // Mock the api service
-jest.mock('../../services/api.js', () => ({
-  getAllAlbumMedia: jest.fn(
+vi.mock('../../services/api.js', () => ({
+  getAllAlbumMedia: vi.fn(
     () => new Promise((resolve) => setTimeout(() => resolve({ data: [] }), 100))
   ),
-  moderateMedia: jest.fn(),
+  moderateMedia: vi.fn(),
 }));
 
 describe('AdminDashboard', () => {

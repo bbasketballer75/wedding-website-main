@@ -1,9 +1,13 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 
-jest.mock('../../services/api.js', () => ({
-  moderateMedia: jest.fn(() => Promise.resolve()),
-  getAllAlbumMedia: jest.fn(() => Promise.resolve({ data: [] })),
+vi.mock('../../services/api.js', () => ({
+  moderateMedia: vi.fn(() => Promise.resolve()),
+  getAllAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
+}));
+vi.mock('../../services/api.js', () => ({
+  moderateMedia: vi.fn(() => Promise.resolve()),
+  getAllAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));
 import AdminDashboard from '../AdminDashboard.jsx';
 

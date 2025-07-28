@@ -1,7 +1,7 @@
 // Mock the controller functions
-jest.mock('../../controllers/mapController.js', () => ({
-  getLocations: jest.fn(),
-  logVisit: jest.fn(),
+vi.mock('../../controllers/mapController.js', () => ({
+  getLocations: vi.fn(),
+  logVisit: vi.fn(),
 }));
 
 import request from 'supertest';

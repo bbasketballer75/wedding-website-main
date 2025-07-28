@@ -1,9 +1,9 @@
 // Mock the controller functions
-jest.mock('../../controllers/albumController.js', () => ({
-  getAlbumMedia: jest.fn(),
-  uploadMedia: jest.fn(),
-  getAllAlbumMedia: jest.fn(),
-  moderateMedia: jest.fn(),
+vi.mock('../../controllers/albumController.js', () => ({
+  getAlbumMedia: vi.fn(),
+  uploadMedia: vi.fn(),
+  getAllAlbumMedia: vi.fn(),
+  moderateMedia: vi.fn(),
 }));
 
 // Mock the middleware

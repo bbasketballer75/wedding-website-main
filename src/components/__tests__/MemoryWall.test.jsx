@@ -4,7 +4,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import MemoryWall from '../MemoryWall.jsx';
 
 // Mock URL.createObjectURL
-window.URL.createObjectURL = jest.fn(() => 'mock-url');
+window.URL.createObjectURL = vi.fn(() => 'mock-url');
 
 describe('MemoryWall', () => {
   test('renders memory wall with initial memories', () => {

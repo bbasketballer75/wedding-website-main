@@ -6,17 +6,17 @@ import VideoPlayer from '../VideoPlayer.jsx';
 // Mock for HTMLMediaElement methods
 Object.defineProperty(window.HTMLMediaElement.prototype, 'load', {
   writable: true,
-  value: jest.fn(),
+  value: vi.fn(),
 });
 
 Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
   writable: true,
-  value: jest.fn(() => Promise.resolve()),
+  value: vi.fn(() => Promise.resolve()),
 });
 
 Object.defineProperty(window.HTMLMediaElement.prototype, 'pause', {
   writable: true,
-  value: jest.fn(),
+  value: vi.fn(),
 });
 
 describe('VideoPlayer', () => {

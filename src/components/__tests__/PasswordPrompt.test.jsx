@@ -19,7 +19,7 @@ import PasswordPrompt from '../PasswordPrompt.jsx';
 
 describe('PasswordPrompt', () => {
   it('renders the password prompt and calls onCorrectPassword on submit', async () => {
-    const onCorrectPassword = jest.fn();
+    const onCorrectPassword = vi.fn();
     render(<PasswordPrompt onCorrectPassword={onCorrectPassword} />);
 
     const passwordInput = screen.getByPlaceholderText('Enter admin key');

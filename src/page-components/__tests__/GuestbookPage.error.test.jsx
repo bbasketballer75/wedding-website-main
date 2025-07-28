@@ -3,8 +3,8 @@ import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import GuestbookPage from '../GuestbookPage.jsx';
 import * as api from '../../services/api.js';
 
-jest.spyOn(api, 'getGuestbookEntries').mockResolvedValue({ data: [] });
-jest.spyOn(api, 'createGuestbookEntry').mockImplementation(({ message }) => {
+vi.spyOn(api, 'getGuestbookEntries').mockResolvedValue({ data: [] });
+vi.spyOn(api, 'createGuestbookEntry').mockImplementation(({ message }) => {
   if (!message.trim()) {
     return Promise.reject(new Error('Message is required.'));
   }

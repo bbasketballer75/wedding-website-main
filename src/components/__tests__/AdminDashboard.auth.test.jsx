@@ -5,7 +5,7 @@ import * as api from '../../services/api.js';
 
 describe('AdminDashboard Unauthorized Access', () => {
   beforeAll(() => {
-    jest.spyOn(api, 'getAllAlbumMedia').mockRejectedValue({
+    vi.spyOn(api, 'getAllAlbumMedia').mockRejectedValue({
       response: { data: { message: 'Could not fetch media. Is the admin key correct?' } },
     });
   });

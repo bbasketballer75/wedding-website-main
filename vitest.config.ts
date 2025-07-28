@@ -9,7 +9,7 @@ export default defineConfig({
 });
         test: {
           environment: 'jsdom',
-          setupFiles: ['src/setupTests.js'],
+    setupFiles: './src/setupTests.js'
           // Exclude story files from regular tests
           exclude: ['src/**/*.stories.?(m)[jt]s?(x)', 'node_modules/**'],
           include: ['src/**/*.test.?(m)[jt]s?(x)'],

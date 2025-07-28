@@ -49,3 +49,10 @@ storybook-static
 
 # Local Netlify folder
 .netlify
+
+# VSCode Anthropic config
+.vscode/anthropic-config.json
+
+# Copilot and Anthropic context/config files
+.copilot_context.txt
+.vscode/.copilot_context.txt

@@ -22,7 +22,7 @@ jobs:
       - name: Install backend dependencies
         run: cd backend && npm ci
       - name: Run frontend tests
-        run: npm test -- --coverage --runInBand
+        run: npm test -- --coverage
       - name: Run backend tests
         run: cd backend && npm test -- --coverage --runInBand
       - name: Debug GCP_SERVICE_ACCOUNT_JSON_BASE64

@@ -4,10 +4,9 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: './src/setupTests.js',
-    // Add other Vitest config as needed
-  },
-      {
+    setupFiles: './src/setupTests.js'
+  }
+});
         test: {
           environment: 'jsdom',
           setupFiles: ['src/setupTests.js'],

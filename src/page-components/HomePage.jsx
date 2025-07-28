@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import VideoPlayer from '../components/VideoPlayer';
-import { getVideoUrl } from '../services/api';
+// import VideoPlayer from '../components/VideoPlayer';
+
 import './HomePage.css';
 
 const HomePage = () => {
-  const videoSrc = getVideoUrl();
-
   return (
     <div className="home-page">
       <header className="hero-section text-center">
@@ -20,8 +18,20 @@ const HomePage = () => {
       <main>
         <section className="video-section text-center">
           <h2 className="section-title">Our Wedding Video</h2>
-          <div className="video-container">
-            <VideoPlayer src={videoSrc} />
+          <div className="video-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div
+              className="embed-responsive embed-responsive-16by9"
+              style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0 }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/ZOIRb_ghdh0"
+                title="Austin & Jordyn Wedding Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              ></iframe>
+            </div>
           </div>
         </section>
 

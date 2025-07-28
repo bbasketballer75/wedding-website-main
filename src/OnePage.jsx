@@ -32,9 +32,24 @@ const OnePage = () => {
         <section id="wedding-party" aria-label="Wedding Party" role="region">
           {/* <WeddingPartyPage onePage /> */}
         </section>
-        {/* 4. Main Wedding Video Section with Custom Player */}
+        {/* 4. Main Wedding Video Section - YouTube Embed */}
         <section id="main-wedding-video" aria-label="Main Wedding Video" role="region">
-          {/* <CustomYouTubePlayer /> */}
+          <h2 className="section-title">Our Wedding Video</h2>
+          <div className="video-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div
+              className="embed-responsive embed-responsive-16by9"
+              style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0 }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/ZOIRb_ghdh0"
+                title="Austin & Jordyn Wedding Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+              ></iframe>
+            </div>
+          </div>
         </section>
         {/* 5. Album - Engagement Photos Only */}
         <section id="engagement-album" aria-label="Engagement Album" role="region">
@@ -45,17 +60,17 @@ const OnePage = () => {
           {/* <MemoryWall /> */}
         </section>
         {/* 7. Guestbook & Map side by side (landscape) */}
-        <section id="guestbook-map" aria-label="Guestbook and Map" role="region" style={{ display: 'flex', flexDirection: 'row', gap: '2rem' }}>
-          <div style={{ flex: 1 }}>
-            {/* <GuestbookPage onePage /> */}
-          </div>
-          <div style={{ flex: 1 }}>
-            {/* <MapPage onePage /> */}
-          </div>
+        <section
+          id="guestbook-map"
+          aria-label="Guestbook and Map"
+          role="region"
+          style={{ display: 'flex', flexDirection: 'row', gap: '2rem' }}
+        >
+          <div style={{ flex: 1 }}>{/* <GuestbookPage onePage /> */}</div>
+          <div style={{ flex: 1 }}>{/* <MapPage onePage /> */}</div>
         </section>
         {/* 8. Stay in Touch - Contact info */}
         <StayInTouchSection />
-      </main>
       </main>
     </div>
   );

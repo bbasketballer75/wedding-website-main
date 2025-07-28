@@ -31,11 +31,6 @@ describe('api service', () => {
     expect(result).toBeInstanceOf(Promise);
   });
 
-  it('getVideoUrl returns a string', () => {
-    const result = api.getVideoUrl();
-    expect(typeof result).toBe('string');
-  });
-
   it('getAllAlbumMedia returns a promise', () => {
     const result = api.getAllAlbumMedia('test-key');
     expect(result).toBeInstanceOf(Promise);

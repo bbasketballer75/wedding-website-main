@@ -2,11 +2,138 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Ask Claude",
       "type": "shell",
-      "label": "Run Jest tests (all features)",
-      "command": "npx jest --coverage --runInBand",
-      "group": "test"
-      // Removed invalid problemMatcher
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\.vscode\\claude-api.ps1",
+        "-prompt",
+        "${input:claudePrompt}",
+        "-contextFile",
+        "${workspaceFolder}\\.copilot_context.txt"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "close": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "env": {
+          "ANTHROPIC_API_KEY": "your-api-key-here",
+          "MAX_TOKENS": "4096"
+        }
+      }
+    },
+    {
+      "label": "Ask Claude (Verbose)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\.vscode\\claude-api.ps1",
+        "-prompt",
+        "${input:claudePrompt}",
+        "-contextFile",
+        "${workspaceFolder}\\.copilot_context.txt",
+        "-verbose"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Claude + Copilot Refactor",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\.vscode\\claude-copilot-bridge.ps1",
+        "-selectedText",
+        "${selectedText}",
+        "-languageId",
+        "${fileExtname}",
+        "-contextFile",
+        "${workspaceFolder}\\.copilot_context.txt"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "claude-refactor"
+      }
+    },
+    {
+      "label": "Update AI Context",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\.vscode\\update-context.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Claude: Web Search",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\.vscode\\claude-api.ps1",
+        "-prompt",
+        "@web ${input:webQuery}",
+        "-contextFile",
+        "${workspaceFolder}\\.copilot_context.txt"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "claudePrompt",
+      "type": "promptString",
+      "description": "Enter prompt for Claude 4 (add @web for live search):",
+      "default": "How can I improve this code for Windows 11?"
+    },
+    {
+      "id": "webQuery",
+      "type": "promptString",
+      "description": "Enter web search query for Claude:",
+      "default": "latest Windows 11 development best practices"
     }
   ]
 }

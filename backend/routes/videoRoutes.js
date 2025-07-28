@@ -1,8 +1,1 @@
-import express from 'express';
-import { streamVideo } from '../controllers/videoController.js';
-
-const router = express.Router();
-
-router.route('/').get(streamVideo);
-
-export default router;
+// Video streaming route removed. The wedding video is now served via YouTube only.

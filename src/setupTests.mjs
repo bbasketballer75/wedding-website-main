@@ -1,7 +1,9 @@
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
 // allows you to do things like:
 // expect(element).toBeInTheDocument();
-require('@testing-library/jest-dom');
+import '@testing-library/jest-dom';
+import jest from 'jest-mock';
+import axios from 'axios';
 jest.mock('axios', () => ({
   get: jest.fn(() => Promise.resolve({ data: [] })), // Return empty array for guestbook entries
   post: jest.fn(() => Promise.resolve({ data: {} })),

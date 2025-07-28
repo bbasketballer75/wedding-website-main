@@ -1,4 +1,5 @@
-module.exports = {
+const config = {
+  extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   transform: {
@@ -20,7 +21,8 @@ module.exports = {
       },
     },
   },
-  setupFiles: ['<rootDir>/jest.setup.js'],
+  setupFiles: ['<rootDir>/jest.setup.cjs'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   collectCoverageFrom: ['src/**/*.{js,jsx}', '!src/index.js', '!src/setupTests.js'],
 };
+export default config;

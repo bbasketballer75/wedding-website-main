@@ -1,6 +1,33 @@
 {
+  // Basic Editor Settings
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Linting Configuration
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "eslint.run": "onSave"
+  "eslint.run": "onSave",
+
+  // AI Integration Enhancements
+  "github.copilot.advanced": {
+    "indexing.enable": true,
+    "agent.mode": "automatic",
+    "context.include": ["**/*.{js,ts,jsx,tsx,json,md}", "!**/node_modules/**"]
+  },
+
+  // Task and File Watching
+  "task.autoDetect": "on",
+  "files.watcherExclude": {
+    "**/.copilot_context.txt": true,
+    "**/node_modules/**": true,
+    "**/.git/**": true
+  },
+
+  // Windows-Specific Optimizations
+  "files.eol": "\r\n",
+  "files.autoGuessEncoding": true,
+  "powershell.codeFormatting.preset": "OTBS",
+  "terminal.integrated.shell.windows": "pwsh.exe"
 }

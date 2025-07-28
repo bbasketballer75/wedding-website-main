@@ -7,7 +7,7 @@ if (typeof globalThis.import.meta === 'undefined') {
 }
 // Polyfill for Node.js globals required by some dependencies
 
-import { TextEncoder, TextDecoder } from 'node:util';
+const { TextEncoder, TextDecoder } = require('util');
 if (typeof global.TextEncoder === 'undefined') {
   global.TextEncoder = TextEncoder;
 }

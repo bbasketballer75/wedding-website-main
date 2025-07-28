@@ -33,10 +33,6 @@ export const logVisit = () => {
   return axios.post(`${API_URL}/map/log-visit`);
 };
 
-export const getVideoUrl = () => {
-  return `${API_URL}/video`;
-};
-
 export const getAllAlbumMedia = (adminKey) => {
   return axios.get(`${API_URL}/album/all`, { headers: { Authorization: `Bearer ${adminKey}` } });
 };

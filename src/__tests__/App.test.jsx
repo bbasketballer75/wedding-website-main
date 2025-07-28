@@ -7,7 +7,6 @@ import App from '../App.jsx';
 // Mock all the service calls
 jest.mock('../services/api.js', () => ({
   logVisit: jest.fn().mockResolvedValue({}),
-  getVideoUrl: jest.fn(() => 'mock-video-url.mp4'),
   getAlbumMedia: jest.fn(() => Promise.resolve({ data: [] })),
 }));
 

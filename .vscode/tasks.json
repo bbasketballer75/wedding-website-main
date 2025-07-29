@@ -81,9 +81,69 @@
       "type": "shell",
       "command": "node",
       "args": [
-        "C:/Users/Austin/Documents/GitHub/servers/dist/filesystem/index.js",
+        "C:/Users/Austin/Documents/GitHub/servers/src/filesystem/dist/index.js",
         "${workspaceFolder}"
       ],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Fetch Server",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "mcp_server_fetch"],
+      "options": {
+        "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/fetch/src"
+      },
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Time Server",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "mcp_server_time"],
+      "options": {
+        "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/time/src"
+      },
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP MongoDB Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["tsx", "C:/Users/Austin/Documents/GitHub/mongodb-mcp-server/src/index.ts"],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {
@@ -156,7 +216,7 @@
       "type": "shell",
       "command": "node",
       "args": [
-        "C:/Users/Austin/Documents/GitHub/servers/dist/memory/index.js",
+        "C:/Users/Austin/Documents/GitHub/servers/src/memory/dist/index.js",
         "${workspaceFolder}"
       ],
       "isBackground": true,
@@ -177,6 +237,9 @@
       "dependsOrder": "parallel",
       "dependsOn": [
         "Start MCP Filesystem Server",
+        "Start MCP Fetch Server",
+        "Start MCP Time Server",
+        "Start MCP MongoDB Server",
         "Start MCP Git Server",
         "Start MCP Playwright Server",
         "Start MCP Sequential Thinking Server",

@@ -6,18 +6,13 @@ vi.mock('../../controllers/albumController.js', () => ({
   moderateMedia: vi.fn(),
 }));
 
-// Mock the middleware
-jest.mock('../../middleware/uploadMiddleware.js', () => ({
-  __esModule: true,
-  default: {
-    array: () => (req, res, next) => {
-      req.files = req.files || [];
-      next();
-    },
-  },
+// Mock the middleware functions
+vi.mock('../../middleware/uploadMiddleware.js', () => ({
+  uploadMedia: (req, res, next) => next(),
 }));
 
-jest.mock('../../middleware/authMiddleware.js', () => ({
+// Mock auth middleware
+vi.mock('../../middleware/authMiddleware.js', () => ({
   protectAdmin: (req, res, next) => {
     if (req.headers.authorization === 'Bearer valid-token') {
       next();
@@ -43,7 +38,7 @@ app.use('/', albumRoutes);
 
 describe('Album Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('GET /', () => {

@@ -14,10 +14,10 @@ beforeAll(async () => {
 
 describe('PhotoGallery', () => {
   beforeEach(() => {
-    mockGetAlbumMedia = jest.fn();
+    mockGetAlbumMedia = vi.fn();
   });
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders loading state initially', () => {
@@ -64,7 +64,7 @@ describe('PhotoGallery', () => {
   });
 
   it('handles API errors gracefully', async () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     mockGetAlbumMedia.mockRejectedValue(new Error('API Error'));
     render(<PhotoGallery refreshKey={0} />);
     await waitFor(() => {

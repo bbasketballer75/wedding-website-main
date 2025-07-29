@@ -6,7 +6,7 @@ import AlbumPage from '../AlbumPage.jsx';
 
 import * as api from '../../services/api.js';
 
-jest.mock('../../services/api.js', () => {
+vi.mock('../../services/api.js', () => {
   return {
     getAlbumMedia: vi.fn(
       () =>
@@ -39,11 +39,11 @@ describe('AlbumPage', () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('shows loading screen and then renders album content', async () => {

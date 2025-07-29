@@ -16,7 +16,7 @@ app.use('/', mapRoutes);
 
 describe('Map Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('GET /locations', () => {

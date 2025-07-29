@@ -20,7 +20,7 @@ app.use('/guestbook', guestbookRoutes);
 
 describe('Guestbook Routes', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('GET /guestbook', () => {

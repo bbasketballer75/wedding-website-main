@@ -19,7 +19,7 @@ describe('UploadForm', () => {
     vi.mocked(uploadMedia).mockReset();
   });
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders the upload form', () => {
@@ -63,7 +63,7 @@ describe('UploadForm', () => {
     fireEvent.change(fileInput, { target: { files: [file] } });
     fireEvent.click(screen.getByRole('button', { name: /upload file/i }));
     await waitFor(() => {
-      expect(jest.mocked(uploadMedia)).toHaveBeenCalledTimes(1);
+      expect(vi.mocked(uploadMedia)).toHaveBeenCalledTimes(1);
       expect(screen.getByRole('status')).toHaveTextContent(
         'Thank you! Your file has been uploaded'
       );
@@ -71,7 +71,7 @@ describe('UploadForm', () => {
   });
 
   it('shows error if uploadMedia throws', async () => {
-    jest.mocked(uploadMedia).mockRejectedValueOnce({
+    vi.mocked(uploadMedia).mockRejectedValueOnce({
       response: { data: { message: 'Server error' } },
     });
     render(<UploadForm />);
@@ -84,7 +84,7 @@ describe('UploadForm', () => {
 
   it('disables input and button while uploading', async () => {
     let resolveUpload;
-    jest.mocked(uploadMedia).mockImplementation(
+    vi.mocked(uploadMedia).mockImplementation(
       () =>
         new Promise((resolve) => {
           resolveUpload = resolve;
@@ -105,8 +105,8 @@ describe('UploadForm', () => {
   });
 
   it('calls onUploadSuccess callback after successful upload', async () => {
-    jest.mocked(uploadMedia).mockResolvedValueOnce();
-    const onUploadSuccess = jest.fn();
+    vi.mocked(uploadMedia).mockResolvedValueOnce();
+    const onUploadSuccess = vi.fn();
     render(<UploadForm onUploadSuccess={onUploadSuccess} />);
     const fileInput = screen.getByLabelText('Select image or video to upload');
     const file = new File(['dummy'], 'photo.jpg', { type: 'image/jpeg' });

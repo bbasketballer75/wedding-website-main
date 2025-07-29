@@ -10,7 +10,7 @@ window.HTMLAudioElement.prototype.load = vi.fn();
 
 describe('MusicPlayer', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('does not render when isEnabled is false', () => {

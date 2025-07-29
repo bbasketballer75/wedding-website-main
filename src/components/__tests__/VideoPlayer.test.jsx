@@ -26,7 +26,7 @@ describe('VideoPlayer', () => {
   };
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders with loading state initially', () => {

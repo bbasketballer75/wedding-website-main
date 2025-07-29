@@ -3,8 +3,8 @@ import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 
 import GuestbookPage from '../GuestbookPage.jsx';
 
-jest.mock('../../services/api.js', () => ({
-  getGuestbookEntries: jest.fn(() =>
+vi.mock('../../services/api.js', () => ({
+  getGuestbookEntries: vi.fn(() =>
     Promise.resolve({
       data: [
         { id: 1, name: 'Alice', message: 'Congrats!' },
@@ -12,8 +12,10 @@ jest.mock('../../services/api.js', () => ({
       ],
     })
   ),
-  postGuestbookEntry: jest.fn(() =>
-    Promise.resolve({ data: { id: 3, name: 'Test User', message: 'Congrats!' } })
+  postGuestbookEntry: vi.fn(() =>
+    Promise.resolve({
+      data: { id: 3, name: 'Charlie', message: 'Have a great day!' },
+    })
   ),
 }));
 

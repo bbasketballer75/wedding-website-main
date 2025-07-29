@@ -11,11 +11,11 @@ beforeAll(() => {
       matches: query.includes('portrait'),
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 });
@@ -40,9 +40,9 @@ describe('OrientationOverlay', () => {
 });
 
 beforeAll(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 afterEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });

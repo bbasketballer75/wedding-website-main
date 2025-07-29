@@ -6,8 +6,8 @@ import App from '../App.jsx';
 
 // Mock all the service calls
 vi.mock('../services/api.js', () => ({
-  logVisit: jest.fn().mockResolvedValue({}),
-  getAlbumMedia: jest.fn(() => Promise.resolve({ data: [] })),
+  logVisit: vi.fn().mockResolvedValue({}),
+  getAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));
 
 // Mock HTMLAudioElement
@@ -23,15 +23,15 @@ describe('App', () => {
     // Mock portrait orientation
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation((query) => ({
         matches: query === '(orientation: portrait)',
         media: query,
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
 
@@ -49,15 +49,15 @@ describe('App', () => {
     // Mock landscape orientation
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation((query) => ({
         matches: query !== '(orientation: portrait)',
         media: query,
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
 
@@ -76,15 +76,15 @@ describe('App', () => {
     // Mock landscape orientation
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: vi.fn().mockImplementation((query) => ({
         matches: query !== '(orientation: portrait)',
         media: query,
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
 

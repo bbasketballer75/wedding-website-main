@@ -4,7 +4,7 @@ import { render, screen, waitFor, act } from '@testing-library/react';
 import MapPage from '../MapPage.jsx';
 
 vi.mock('../../services/api.js', () => ({
-  getMapPins: jest.fn(() =>
+  getMapPins: vi.fn(() =>
     Promise.resolve({
       data: [
         { id: 1, lat: 40.7128, lng: -74.006, label: 'NYC' },

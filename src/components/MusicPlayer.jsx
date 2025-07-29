@@ -21,8 +21,8 @@ const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
   ];
 
   useEffect(() => {
-    if (isEnabled && audioRef.current) {
-      // Auto-start music when enabled
+    if (isEnabled && audioRef.current && typeof window !== 'undefined') {
+      // Auto-start music when enabled (only in browser environment)
       try {
         if (typeof audioRef.current.volume === 'number') {
           audioRef.current.volume = volume;
@@ -30,12 +30,15 @@ const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
         if (typeof audioRef.current.play === 'function') {
           const playPromise = audioRef.current.play();
           if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => {});
+            playPromise.catch(() => {
+              // Ignore play errors (e.g., user interaction required)
+            });
           }
         }
         setIsPlaying(true);
-      } catch {
-        // Ignore errors in test environments
+      } catch (error) {
+        // Ignore errors in test environments or unsupported browsers
+        console.warn('Audio playback not supported in this environment');
       }
     }
   }, [isEnabled, volume]);

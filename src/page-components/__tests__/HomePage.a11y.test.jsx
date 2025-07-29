@@ -9,7 +9,7 @@ expect.extend(toHaveNoViolations);
 describe('HomePage accessibility', () => {
   it('should have no accessibility violations on load', async () => {
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <HomePage />
       </MemoryRouter>
     );

@@ -1,6 +1,9 @@
 import * as api from '../api.js';
 import axios from 'axios';
-jest.mock('axios');
+import { vi } from 'vitest';
+
+// Mock axios for Vitest
+vi.mock('axios');
 
 // Helper to mock axios responses
 const mockAxiosResponse = (data, status = 200) => {
@@ -8,11 +11,11 @@ const mockAxiosResponse = (data, status = 200) => {
 };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 // Mock GET requests
-axios.get.mockImplementation((url) => {
+vi.mocked(axios.get).mockImplementation((url) => {
   if (url.includes('/api/map/locations')) {
     return mockAxiosResponse([{ id: 1, name: 'Venue' }]);
   }
@@ -26,7 +29,7 @@ axios.get.mockImplementation((url) => {
 });
 
 // Mock POST requests
-axios.post.mockImplementation((url, data) => {
+vi.mocked(axios.post).mockImplementation((url, data) => {
   if (url.includes('/api/album/upload')) {
     return mockAxiosResponse({ success: true });
   }

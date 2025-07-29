@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getAlbumMedia } from '../services/api';
 import './PhotoGallery.css';
 
@@ -7,6 +7,13 @@ const PhotoGallery = ({ refreshKey }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
+  const isMountedRef = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     const fetchMedia = async () => {
@@ -14,23 +21,33 @@ const PhotoGallery = ({ refreshKey }) => {
         setIsLoading(true);
         setError(null);
         const response = await getAlbumMedia();
-        setMedia(response.data);
-        setRetryCount(0); // Reset retry count on success
+        
+        // Only update state if component is still mounted
+        if (isMountedRef.current) {
+          setMedia(response.data);
+          setRetryCount(0); // Reset retry count on success
+        }
       } catch (err) {
         console.error('Error fetching album media:', err);
 
-        // More specific error messages based on error type
-        if (err.response?.status === 404) {
-          setError('Album not found. Please check back later.');
-        } else if (err.response?.status >= 500) {
-          setError('Server error. Please try again in a few moments.');
-        } else if (err.code === 'NETWORK_ERROR' || !err.response) {
-          setError('Network connection issue. Please check your internet connection.');
-        } else {
-          setError('Could not fetch the album. Please try again later.');
+        // Only update state if component is still mounted
+        if (isMountedRef.current) {
+          // More specific error messages based on error type
+          if (err.response?.status === 404) {
+            setError('Album not found. Please check back later.');
+          } else if (err.response?.status >= 500) {
+            setError('Server error. Please try again in a few moments.');
+          } else if (err.code === 'NETWORK_ERROR' || !err.response) {
+            setError('Network connection issue. Please check your internet connection.');
+          } else {
+            setError('Could not fetch the album. Please try again later.');
+          }
         }
       } finally {
-        setIsLoading(false);
+        // Only update state if component is still mounted
+        if (isMountedRef.current) {
+          setIsLoading(false);
+        }
       }
     };
 

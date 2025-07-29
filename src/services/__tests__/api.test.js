@@ -1,4 +1,46 @@
 import * as api from '../api.js';
+import axios from 'axios';
+jest.mock('axios');
+
+// Helper to mock axios responses
+const mockAxiosResponse = (data, status = 200) => {
+  return Promise.resolve({ data, status });
+};
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
+// Mock GET requests
+axios.get.mockImplementation((url) => {
+  if (url.includes('/api/map/locations')) {
+    return mockAxiosResponse([{ id: 1, name: 'Venue' }]);
+  }
+  if (url.includes('/api/album')) {
+    return mockAxiosResponse([{ id: 1, url: 'photo.jpg' }]);
+  }
+  if (url.includes('/api/guestbook')) {
+    return mockAxiosResponse([{ id: 1, name: 'Test', message: 'Hello' }]);
+  }
+  return mockAxiosResponse({});
+});
+
+// Mock POST requests
+axios.post.mockImplementation((url, data) => {
+  if (url.includes('/api/album/upload')) {
+    return mockAxiosResponse({ success: true });
+  }
+  if (url.includes('/api/guestbook')) {
+    return mockAxiosResponse({ id: 2, ...(typeof data === 'string' ? JSON.parse(data) : data) });
+  }
+  if (url.includes('/api/album/moderate')) {
+    return mockAxiosResponse({ success: true });
+  }
+  if (url.includes('/api/map/log-visit')) {
+    return mockAxiosResponse({ success: true });
+  }
+  return mockAxiosResponse({});
+});
 
 describe('api service', () => {
   it('getAlbumMedia returns a promise', () => {

@@ -1,4 +1,5 @@
 {
+  // Updated tasks configuration - no more mcp-fetch errors
   "version": "2.0.0",
   "tasks": [
     {
@@ -32,52 +33,6 @@
           "ANTHROPIC_API_KEY": "your-api-key-here",
           "MAX_TOKENS": "4096"
         }
-      }
-    },
-    {
-      "label": "Ask Claude (Verbose)",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\.vscode\\claude-api.ps1",
-        "-prompt",
-        "${input:claudePrompt}",
-        "-contextFile",
-        "${workspaceFolder}\\.copilot_context.txt",
-        "-verbose"
-      ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated"
-      }
-    },
-    {
-      "label": "Claude + Copilot Refactor",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\.vscode\\claude-copilot-bridge.ps1",
-        "-selectedText",
-        "${selectedText}",
-        "-languageId",
-        "${fileExtname}",
-        "-contextFile",
-        "${workspaceFolder}\\.copilot_context.txt"
-      ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "group": "claude-refactor"
       }
     },
     {
@@ -124,8 +79,11 @@
     {
       "label": "Start MCP Filesystem Server",
       "type": "shell",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"],
+      "command": "node",
+      "args": [
+        "C:/Users/Austin/Documents/GitHub/servers/dist/filesystem/index.js",
+        "${workspaceFolder}"
+      ],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {
@@ -196,8 +154,11 @@
     {
       "label": "Start MCP Memory Server",
       "type": "shell",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "command": "node",
+      "args": [
+        "C:/Users/Austin/Documents/GitHub/servers/dist/memory/index.js",
+        "${workspaceFolder}"
+      ],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {

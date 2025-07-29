@@ -120,6 +120,54 @@
         "reveal": "always",
         "panel": "dedicated"
       }
+    },
+    {
+      "label": "Start MCP Filesystem Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"],
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Git Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "${workspaceFolder}"],
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start All MCP Servers",
+      "dependsOrder": "parallel",
+      "dependsOn": ["Start MCP Filesystem Server", "Start MCP Git Server"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
   ],
   "inputs": [

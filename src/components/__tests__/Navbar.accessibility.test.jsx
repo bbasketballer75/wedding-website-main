@@ -6,8 +6,19 @@ import { axe, toHaveNoViolations } from 'jest-axe';
 expect.extend(toHaveNoViolations);
 
 describe('Navbar Accessibility', () => {
-  it.skip('has no accessibility violations', async () => {
-    // Skipped due to JSDOM limitations in jest-axe
+  it('has no accessibility violations', async () => {
+    render(<Navbar onePage={true} />);
+    try {
+      const results = await axe(document.body, {
+        rules: {
+          'color-contrast': { enabled: false },
+          'link-in-text-block': { enabled: false },
+        },
+      });
+      expect(results).toHaveNoViolations();
+    } catch (err) {
+      expect(err).toBeUndefined();
+    }
   });
 
   it('supports keyboard navigation', () => {

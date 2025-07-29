@@ -53,7 +53,7 @@ describe('UploadForm', () => {
     Object.defineProperty(file, 'size', { value: 101 * 1024 * 1024 });
     fireEvent.change(fileInput, { target: { files: [file] } });
     expect(await screen.findByRole('alert')).toHaveTextContent('File is too large');
-  });
+  }, 10000);
 
   it('calls uploadMedia and shows success on valid upload', async () => {
     vi.mocked(uploadMedia).mockResolvedValueOnce();

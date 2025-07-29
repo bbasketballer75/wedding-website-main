@@ -12,9 +12,8 @@ app.use(express.json());
 app.use('/', videoRoutes);
 
 describe('Video Routes', () => {
-  it('should stream a video', async () => {
+  it('should return 404 for any video route since streaming was removed', async () => {
     const res = await request(app).get('/');
-    expect(res.statusCode).toEqual(200);
-    expect(res.text).toBe('video stream');
+    expect(res.statusCode).toEqual(404);
   });
 });

@@ -8,7 +8,9 @@ vi.mock('../../controllers/albumController.js', () => ({
 
 // Mock the middleware functions
 vi.mock('../../middleware/uploadMiddleware.js', () => ({
-  uploadMedia: (req, res, next) => next(),
+  default: {
+    array: () => (req, res, next) => next(),
+  },
 }));
 
 // Mock auth middleware

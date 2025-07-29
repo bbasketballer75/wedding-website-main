@@ -32,6 +32,7 @@
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.23.1",
+    "typescript": "^5.8.3",
     "winston": "^3.17.0"
   },
   "devDependencies": {
@@ -72,7 +73,6 @@
     "prettier": "^3.6.2",
     "storybook": "^9.0.18",
     "tailwindcss": "^4",
-    "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }
 }

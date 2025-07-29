@@ -243,9 +243,49 @@
         "Start MCP Git Server",
         "Start MCP Playwright Server",
         "Start MCP Sequential Thinking Server",
-        "Start MCP Memory Server"
+        "Start MCP Memory Server",
+        "Start Frontend Dev Server",
+        "Start Backend Server"
       ],
       "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "Start Frontend Dev Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "isBackground": true,
+      "options": { "cwd": "${workspaceFolder}" },
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Backend Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "isBackground": true,
+      "options": { "cwd": "${workspaceFolder}/backend" },
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
     }
   ],
   "inputs": [

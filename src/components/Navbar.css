@@ -30,6 +30,10 @@
   align-items: center;
   gap: 1rem;
   transition: var(--transition-smooth);
+  color: #222 !important; /* High contrast for accessibility */
+  background: none;
+  -webkit-text-fill-color: initial;
+  text-shadow: none;
 }
 
 .navbar-brand:hover {

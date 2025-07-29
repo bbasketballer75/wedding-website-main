@@ -23,14 +23,29 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className="navbar navbar-expand-lg navbar-light bg-light"
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="container">
         {onePage ? (
-          <a className="navbar-brand" href="#home" onClick={(e) => handleNavClick(e, 'home')}>
+          <a
+            className="navbar-brand"
+            href="#home"
+            onClick={(e) => handleNavClick(e, 'home')}
+            tabIndex={0}
+            aria-label="Home - Austin & Jordyn Wedding"
+          >
             Austin & Jordyn
           </a>
         ) : (
-          <Link className="navbar-brand" to="/">
+          <Link
+            className="navbar-brand"
+            to="/"
+            tabIndex={0}
+            aria-label="Home - Austin & Jordyn Wedding"
+          >
             Austin & Jordyn
           </Link>
         )}
@@ -46,17 +61,18 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+          <ul className="navbar-nav ms-auto" role="menubar">
+            <li className="nav-item" role="none">
               <NavLink
                 onePage={onePage}
                 href="#home"
                 to="/"
                 label="Home"
                 onClick={(e) => handleNavClick(e, 'home')}
+                aria-current="page"
               />
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="none">
               <NavLink
                 onePage={onePage}
                 href="#album"

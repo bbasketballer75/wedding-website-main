@@ -8,6 +8,10 @@ describe('Navbar accessibility', () => {
   });
 
   it('has no detectable accessibility violations', () => {
-    cy.checkA11y();
+    cy.checkA11y(null, null, (violations) => {
+      if (violations && violations.length > 0) {
+        cy.task('logA11yViolations', violations);
+      }
+    });
   });
 });

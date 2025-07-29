@@ -17,6 +17,25 @@
     "context.include": ["**/*.{js,ts,jsx,tsx,json,md}", "!**/node_modules/**"]
   },
 
+  // Claude Sonnet 4 as default AI model
+  "claude.defaultModel": "claude-3-sonnet-20240229",
+  "claude.preferredModel": "claude-3-sonnet-20240229",
+  "claude.fallbackModel": "claude-3-sonnet-20240229",
+  "claude.forceSonnet": true,
+  "claude.billingEnabled": true,
+  "claude.mcpFullAccess": true,
+  "claude.mcpServers": [
+    "filesystem",
+    "fetch",
+    "time",
+    "mongodb",
+    "git",
+    "playwright",
+    "sequentialthinking",
+    "memory"
+  ],
+  "claude.alwaysUseSonnet": true,
+
   // Task and File Watching
   "task.autoDetect": "on",
   "files.watcherExclude": {

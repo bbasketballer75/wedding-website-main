@@ -4,11 +4,12 @@ import { MemoryRouter } from 'react-router-dom';
 
 const preview: Preview = {
   decorators: [
-    (Story) => React.createElement(
-      MemoryRouter,
-      { future: { v7_startTransition: true, v7_relativeSplatPath: true } },
-      React.createElement(Story)
-    ),
+    (Story) =>
+      React.createElement(
+        MemoryRouter,
+        { future: { v7_startTransition: true, v7_relativeSplatPath: true } },
+        React.createElement(Story)
+      ),
   ],
   parameters: {
     controls: {

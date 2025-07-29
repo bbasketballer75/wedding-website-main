@@ -1,7 +1,11 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // Ignore test files when building
+  // Force legacy Webpack for dev (not Turbopack)
+  experimental: {
+    serverComponentsExternalPackages: ['react-router-dom'],
+    legacyWebpack: true,
+  },
   webpack: (config) => {
     // Ignore test files to prevent them from being treated as pages
     config.resolve.alias = {

@@ -15,23 +15,23 @@ describe('Enhanced Guest Accessibility', () => {
         </MemoryRouter>
       );
     });
-    
+
     // Wait for landing page to load
     await act(async () => {
       await screen.findByText(/thank you/i, {}, { timeout: 2000 });
     });
-    
+
     // Simulate entering the site (click enter button)
     await act(async () => {
       const enterBtn = screen.getByRole('button', { name: /enter wedding site/i });
       enterBtn.click();
     });
-    
+
     // Wait for main site to load
     await act(async () => {
       await screen.findByRole('main', {}, { timeout: 2000 });
     });
-    
+
     // Main ARIA landmarks
     expect(screen.getByRole('main')).toBeInTheDocument();
     expect(screen.getByLabelText(/main content/i)).toBeInTheDocument();
@@ -41,7 +41,7 @@ describe('Enhanced Guest Accessibility', () => {
     await act(async () => {
       render(<PhotoGallery refreshKey={0} />);
     });
-    
+
     // All images should have alt text
     const imgs = screen.queryAllByRole('img');
     imgs.forEach((img) => {
@@ -58,18 +58,18 @@ describe('Enhanced Guest Accessibility', () => {
         </MemoryRouter>
       );
     });
-    
+
     // Wait for landing page to load
     await act(async () => {
       await screen.findByText(/thank you/i, {}, { timeout: 2000 });
     });
-    
+
     // Simulate entering the site (click enter button)
     await act(async () => {
       const enterBtn = screen.getByRole('button', { name: /enter wedding site/i });
       enterBtn.click();
     });
-    
+
     // Wait for skip link to appear
     await act(async () => {
       const skipLink = await screen.findByText(/skip to main content/i, {}, { timeout: 2000 });

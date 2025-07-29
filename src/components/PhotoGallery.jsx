@@ -21,7 +21,7 @@ const PhotoGallery = ({ refreshKey }) => {
         setIsLoading(true);
         setError(null);
         const response = await getAlbumMedia();
-        
+
         // Only update state if component is still mounted
         if (isMountedRef.current) {
           setMedia(response.data);

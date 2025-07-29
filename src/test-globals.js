@@ -40,7 +40,9 @@ vi.mock('../services/api.js', () => ({
   getAlbumMedia: vi.fn().mockResolvedValue({ data: [] }),
   uploadMedia: vi.fn().mockResolvedValue({ data: { success: true } }),
   getGuestbookEntries: vi.fn().mockResolvedValue({ data: [] }),
-  createGuestbookEntry: vi.fn().mockResolvedValue({ data: { id: 1, name: 'Test', message: 'Hello' } }),
+  createGuestbookEntry: vi
+    .fn()
+    .mockResolvedValue({ data: { id: 1, name: 'Test', message: 'Hello' } }),
   getMapLocations: vi.fn().mockResolvedValue({ data: [] }),
   getAllAlbumMedia: vi.fn().mockResolvedValue({ data: [] }),
   moderateMedia: vi.fn().mockResolvedValue({ data: { success: true } }),
@@ -53,7 +55,7 @@ global.document = global.document || {};
 // Set up jsdom environment properly
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: vi.fn().mockImplementation(query => ({
+  value: vi.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,

@@ -9,20 +9,29 @@ type NavLinkProps = {
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
-const NavLink: React.FC<NavLinkProps> = memo(({ onePage, href, to, label, onClick }) => {
-  if (onePage) {
+const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
+  ({ onePage, href, to, label, onClick, ...ariaProps }) => {
+    if (onePage) {
+      return (
+        <a
+          className="nav-link"
+          href={href}
+          onClick={onClick}
+          tabIndex={0}
+          role="menuitem"
+          {...ariaProps}
+        >
+          {label}
+        </a>
+      );
+    }
     return (
-      <a className="nav-link" href={href} onClick={onClick}>
+      <Link className="nav-link" to={to} tabIndex={0} role="menuitem" {...ariaProps}>
         {label}
-      </a>
+      </Link>
     );
   }
-  return (
-    <Link className="nav-link" to={to}>
-      {label}
-    </Link>
-  );
-});
+);
 
 NavLink.displayName = 'NavLink';
 

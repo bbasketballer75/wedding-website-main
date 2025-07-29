@@ -160,7 +160,7 @@ h3 {
 .script-font {
   font-family: var(--font-script);
   font-weight: 500;
-  color: var(--blush);
+  color: #333 !important; /* High contrast for accessibility */
 }
 
 /* Utility Classes */

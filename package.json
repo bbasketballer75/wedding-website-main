@@ -20,6 +20,7 @@
     "chromatic": "npx chromatic --project-token=your-project-token"
   },
   "dependencies": {
+    "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
@@ -44,7 +45,6 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
     "@chromatic-com/storybook": "^4.0.1",
     "@eslint/eslintrc": "^3.3.1",
     "@storybook/addon-a11y": "^9.0.18",

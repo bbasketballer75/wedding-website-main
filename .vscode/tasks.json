@@ -127,9 +127,7 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-filesystem", "${workspaceFolder}"],
       "isBackground": true,
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
+      "runOptions": { "runOn": "folderOpen" },
       "presentation": {
         "echo": true,
         "reveal": "silent",
@@ -147,9 +145,115 @@
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-git", "${workspaceFolder}"],
       "isBackground": true,
-      "runOptions": {
-        "runOn": "folderOpen"
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
       },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Playwright Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Fetch Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "mcp-fetch"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Time Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "mcp-time"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP MongoDB Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "mcp-mongodb"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Sequential Thinking Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Memory Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
       "presentation": {
         "echo": true,
         "reveal": "silent",
@@ -164,10 +268,17 @@
     {
       "label": "Start All MCP Servers",
       "dependsOrder": "parallel",
-      "dependsOn": ["Start MCP Filesystem Server", "Start MCP Git Server"],
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
+      "dependsOn": [
+        "Start MCP Filesystem Server",
+        "Start MCP Git Server",
+        "Start MCP Playwright Server",
+        "Start MCP Fetch Server",
+        "Start MCP Time Server",
+        "Start MCP MongoDB Server",
+        "Start MCP Sequential Thinking Server",
+        "Start MCP Memory Server"
+      ],
+      "runOptions": { "runOn": "folderOpen" }
     }
   ],
   "inputs": [

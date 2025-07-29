@@ -14,6 +14,20 @@ if (typeof window !== 'undefined' && !window.matchMedia) {
   };
 }
 // Vitest/Testing Library setup
+
 import '@testing-library/jest-dom';
+
+// Global teardown: clear all timers and ensure window is defined
+afterEach(() => {
+  // Clear all timeouts/intervals
+  if (typeof jest !== 'undefined' && typeof jest.clearAllTimers === 'function')
+    jest.clearAllTimers();
+  if (typeof vi !== 'undefined' && typeof vi.clearAllTimers === 'function') vi.clearAllTimers();
+});
+
+// Prevent "window is not defined" teardown errors
+if (typeof global.window === 'undefined') {
+  global.window = {};
+}
 
 // If you need to mock axios or fetch, use Vitest's vi.mock in your test files.

@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.8",
+    "@modelcontextprotocol/server-sequential-thinking": "^2025.7.1",
     "axios": "^1.11.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.15.0",

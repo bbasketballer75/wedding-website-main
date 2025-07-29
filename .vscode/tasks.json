@@ -196,8 +196,8 @@
     {
       "label": "Start MCP Sequential Thinking Server",
       "type": "shell",
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": "node",
+      "args": ["C:/Users/Austin/Documents/GitHub/servers/src/sequentialthinking/dist/index.js"],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {

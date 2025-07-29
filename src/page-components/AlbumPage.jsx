@@ -9,14 +9,22 @@ const AlbumPage = () => {
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      setIsLoading(true);
+  const fetchPhotos = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
       const response = await getAlbumMedia();
       setPhotos(response.data);
+    } catch {
+      setError('Could not load album. Please try again later.');
+    } finally {
       setIsLoading(false);
-    };
+    }
+  };
+
+  useEffect(() => {
     fetchPhotos();
   }, []);
 
@@ -42,7 +50,17 @@ const AlbumPage = () => {
       {(isLoading || isUploading) && (
         <LoadingScreen message={isUploading ? 'Uploading photo...' : 'Loading album...'} />
       )}
-      {!isLoading && !isUploading && (
+      {!isLoading && !isUploading && error && (
+        <div className="error-state">
+          <div className="error-message" role="alert">
+            {error}
+          </div>
+          <button onClick={fetchPhotos} className="btn accent retry-btn">
+            Try Again
+          </button>
+        </div>
+      )}
+      {!isLoading && !isUploading && !error && (
         <>
           <h2 className="section-title">Photo & Video Album</h2>
           <p className="album-subheading">

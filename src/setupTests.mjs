@@ -13,3 +13,14 @@ jest.mock('axios', () => ({
 }));
 // Optionally, mock fetch globally if used
 // global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve({}) }));
+
+// Global teardown: clear all timers and ensure window is defined
+afterEach(() => {
+  if (typeof jest !== 'undefined' && typeof jest.clearAllTimers === 'function')
+    jest.clearAllTimers();
+  if (typeof vi !== 'undefined' && typeof vi.clearAllTimers === 'function') vi.clearAllTimers();
+});
+
+if (typeof global.window === 'undefined') {
+  global.window = {};
+}

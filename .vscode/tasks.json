@@ -143,7 +143,7 @@
       "label": "Start MCP Git Server",
       "type": "shell",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "${workspaceFolder}"],
+      "args": ["-y", "mcp-git", "${workspaceFolder}"],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {
@@ -161,61 +161,7 @@
       "label": "Start MCP Playwright Server",
       "type": "shell",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Fetch Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "mcp-fetch"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Time Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "mcp-time"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP MongoDB Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "mcp-mongodb"],
+      "args": ["-y", "@playwright/mcp"],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {
@@ -272,9 +218,6 @@
         "Start MCP Filesystem Server",
         "Start MCP Git Server",
         "Start MCP Playwright Server",
-        "Start MCP Fetch Server",
-        "Start MCP Time Server",
-        "Start MCP MongoDB Server",
         "Start MCP Sequential Thinking Server",
         "Start MCP Memory Server"
       ],

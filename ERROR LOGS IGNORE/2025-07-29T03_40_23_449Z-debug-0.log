@@ -1,0 +1,36 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.4.2
+2 info using node@v22.17.1
+3 silly config load:file:C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Austin\Downloads\wedding-website\.npmrc
+5 silly config load:file:C:\Users\Austin\.npmrc
+6 silly config load:file:C:\Users\Austin\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm exec mcp-fetch
+8 verbose argv "exec" "--yes" "--" "mcp-fetch"
+9 verbose logfile logs-max:10 dir:C:\Users\Austin\AppData\Local\npm-cache\_logs\2025-07-29T03_40_23_449Z-
+10 verbose logfile C:\Users\Austin\AppData\Local\npm-cache\_logs\2025-07-29T03_40_23_449Z-debug-0.log
+11 silly logfile start cleaning logs, removing 2 files
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 http fetch GET 200 https://registry.npmjs.org/mcp-fetch 504ms (cache miss)
+15 verbose type range
+16 verbose stack mcp-fetch: No versions available for mcp-fetch
+16 verbose stack     at pickManifest (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\npm-pick-manifest\lib\index.js:146:25)
+16 verbose stack     at module.exports (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\npm-pick-manifest\lib\index.js:193:16)
+16 verbose stack     at RegistryFetcher.manifest (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\pacote\lib\registry.js:130:54)
+16 verbose stack     at async getManifest (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\libnpmexec\lib\index.js:28:22)
+16 verbose stack     at async missingFromTree (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\libnpmexec\lib\index.js:63:22)
+16 verbose stack     at async C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\libnpmexec\lib\index.js:185:32
+16 verbose stack     at async Promise.all (index 0)
+16 verbose stack     at async exec (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\node_modules\libnpmexec\lib\index.js:183:3)
+16 verbose stack     at async Npm.exec (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\lib\npm.js:208:9)
+16 verbose stack     at async module.exports (C:\Users\Austin\AppData\Roaming\npm\node_modules\npm\lib\cli\entry.js:67:5)
+17 error code ENOVERSIONS
+18 error No versions available for mcp-fetch
+19 verbose cwd C:\Users\Austin\Downloads\wedding-website
+20 verbose os Windows_NT 10.0.26200
+21 verbose node v22.17.1
+22 verbose npm  v11.4.2
+23 verbose exit 1
+24 verbose code 1
+25 error A complete log of this run can be found in: C:\Users\Austin\AppData\Local\npm-cache\_logs\2025-07-29T03_40_23_449Z-debug-0.log

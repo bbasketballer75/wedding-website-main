@@ -21,9 +21,18 @@ export function getGoogleCredentials() {
   for (const credPath of possiblePaths) {
     try {
       if (fs.existsSync(credPath)) {
-        return JSON.parse(fs.readFileSync(credPath, 'utf-8'));
+        const credentials = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
+        // Check if this is a dummy/placeholder file
+        if (credentials.private_key && credentials.private_key.includes('DUMMY')) {
+          console.warn(
+            `Found service account file at ${credPath}, but it contains placeholder credentials`
+          );
+          continue; // Try next path or fall back to env var
+        }
+        return credentials;
       }
     } catch (error) {
+      console.warn(`Failed to read credentials from ${credPath}:`, error.message);
       // continue to next path
     }
   }
@@ -33,14 +42,19 @@ export function getGoogleCredentials() {
       const decoded = Buffer.from(process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64, 'base64').toString(
         'utf8'
       );
-      return JSON.parse(decoded);
+      const credentials = JSON.parse(decoded);
+      // Validate decoded credentials too
+      if (credentials.private_key && credentials.private_key.includes('DUMMY')) {
+        throw new Error('Environment variable contains placeholder credentials');
+      }
+      return credentials;
     } catch (err) {
       console.error('Failed to decode GCP service account from base64:', err);
       throw new Error('Invalid GCP service account credentials');
     }
   }
-  console.error('Could not load local GCS credentials from any known path.');
-  throw new Error('No Google Cloud credentials found');
+  console.error('Could not load valid GCS credentials from any known path.');
+  throw new Error('No valid Google Cloud credentials found');
 }
 
 /**

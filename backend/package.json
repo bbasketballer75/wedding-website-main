@@ -29,6 +29,7 @@
     "xss": "^1.0.15"
   },
   "devDependencies": {
+    "concurrently": "^9.2.0",
     "jest": "^30.0.5",
     "supertest": "^7.1.3"
   }

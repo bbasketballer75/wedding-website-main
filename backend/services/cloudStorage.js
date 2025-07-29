@@ -14,25 +14,46 @@ const logger = winston.createLogger({
 
 // Initialize Google Cloud Storage with credentials
 let storageConfig = {};
-try {
-  const credentials = getGoogleCredentials();
-  if (credentials) {
-    storageConfig.credentials = credentials;
-  }
-  // In development, Storage SDK will use local file path automatically
-} catch (error) {
-  console.warn('Google Cloud credentials not available:', error.message);
-}
+let storage = null;
 
-const storage = new Storage(storageConfig);
+try {
+  if (process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST) {
+    console.log('Development mode with Firestore emulator - skipping GCS initialization');
+    // Don't initialize storage in emulator mode
+  } else {
+    const credentials = getGoogleCredentials();
+    if (credentials) {
+      storageConfig.credentials = credentials;
+    }
+    storage = new Storage(storageConfig);
+  }
+} catch (error) {
+  console.warn('Google Cloud Storage not available:', error.message);
+  if (process.env.NODE_ENV === 'production') {
+    throw error; // In production, we need GCS to work
+  }
+}
 
 class CloudStorageService {
   constructor() {
-    this.bucketName = process.env.GCS_BUCKET_NAME || 'the-poradas-uploads';
-    if (!this.bucketName) {
-      throw new Error('GCS_BUCKET_NAME environment variable is required');
+    // Check if we're in development mode with emulator
+    if (process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST) {
+      console.log(
+        'CloudStorageService initialized in development/emulator mode - storage operations will be mocked'
+      );
+      this.storage = null;
+      this.bucket = null;
+    } else {
+      if (!storage) {
+        throw new Error('Google Cloud Storage not initialized - check credentials');
+      }
+      this.bucketName = process.env.GCS_BUCKET_NAME || 'the-poradas-uploads';
+      if (!this.bucketName) {
+        throw new Error('GCS_BUCKET_NAME environment variable is required');
+      }
+      this.bucket = storage.bucket(this.bucketName);
     }
-    this.bucket = storage.bucket(this.bucketName);
+
     this.maxRetries = 3;
     this.allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4', '.mov', '.pdf'];
     this.allowedMimeTypes = [
@@ -45,6 +66,13 @@ class CloudStorageService {
       'application/pdf',
     ];
     this.maxBatchConcurrency = 5;
+  }
+
+  // Check if we're in development/emulator mode
+  _isDevMode() {
+    return (
+      process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST && !this.bucket
+    );
   }
 
   // Utility: sanitize filename (prevent path traversal)
@@ -79,6 +107,12 @@ class CloudStorageService {
   async generateSignedUploadUrl(filename, contentType, expiresIn = 900) {
     if (!filename || !contentType) throw new Error('Filename and contentType required');
     this.validateFileType(filename, contentType);
+
+    // Development mode - return mock URL
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock upload URL for: ${filename}`);
+      return `http://localhost:3001/mock-upload/${encodeURIComponent(filename)}`;
+    }
     const safeFilename = this.sanitizeFilename(filename);
     const options = {
       version: 'v4',
@@ -105,6 +139,13 @@ class CloudStorageService {
    */
   async generateSignedReadUrl(filename, expiresIn = 3600) {
     if (!filename) throw new Error('Filename required');
+
+    // Development mode - return mock URL
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock read URL for: ${filename}`);
+      return `http://localhost:3001/mock-file/${encodeURIComponent(filename)}`;
+    }
+
     const safeFilename = this.sanitizeFilename(filename);
     const options = {
       version: 'v4',
@@ -123,6 +164,13 @@ class CloudStorageService {
    */
   async deleteFile(filename) {
     if (!filename) throw new Error('Filename required');
+
+    // Development mode - just log
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock delete file: ${filename}`);
+      return;
+    }
+
     const safeFilename = this.sanitizeFilename(filename);
     return this._withRetry(async () => {
       await this.bucket.file(safeFilename).delete();
@@ -137,6 +185,13 @@ class CloudStorageService {
    */
   async fileExists(filename) {
     if (!filename) return false;
+
+    // Development mode - always return false (no files exist)
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock file exists check for: ${filename} - returning false`);
+      return false;
+    }
+
     const safeFilename = this.sanitizeFilename(filename);
     return this._withRetry(
       async () => {
@@ -155,6 +210,12 @@ class CloudStorageService {
    * @returns {Promise<Array>} List of file metadata
    */
   async listFiles(prefix = '', maxResults = 100) {
+    // Development mode - return empty list
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock list files with prefix: ${prefix} - returning empty list`);
+      return [];
+    }
+
     const safePrefix = prefix ? this.sanitizeFilename(prefix) : '';
     return this._withRetry(
       async () => {
@@ -179,6 +240,13 @@ class CloudStorageService {
    */
   async batchDeleteFiles(filenames = []) {
     if (!Array.isArray(filenames) || filenames.length === 0) return [];
+
+    // Development mode - just log
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock batch delete files:`, filenames);
+      return filenames.map((filename) => ({ filename, success: true, error: null }));
+    }
+
     const results = [];
     let idx = 0;
     const next = async () => {

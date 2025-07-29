@@ -30,12 +30,18 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Firebase debug logs
+firebase-debug.log*
+firestore-debug.log*
+
 # env files (can opt-in for committing if needed)
 .env*
 
 # Google Cloud service account keys
 gcp-service-account.json
 **/gcp-service-account.json
+gcs-key.json
+**/gcs-key.json
 
 # vercel
 .vercel

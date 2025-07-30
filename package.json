@@ -45,6 +45,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
     "axios": "^1.11.0",
+    "babel-plugin-istanbul": "^7.0.0",
     "cypress-axe": "^1.6.0",
     "date-fns": "^4.1.0",
     "eslint": "^9.32.0",

@@ -10,6 +10,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Clear .next directory
+        run: rm -rf .next
+      - name: Build Next.js app
+        run: npm run build
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:

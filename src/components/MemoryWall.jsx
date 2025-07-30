@@ -81,28 +81,43 @@ const MemoryWall = () => {
     <section className="memorywall-section">
       <h2 className="memorywall-title">Memory Wall & Photo Booth</h2>
       <form className="memorywall-form" onSubmit={handleSubmit}>
+        <label htmlFor="memory-name" className="sr-only">
+          Your Name (optional)
+        </label>
         <input
+          id="memory-name"
           type="text"
           name="name"
           placeholder="Your Name (optional)"
           value={form.name}
           onChange={handleChange}
           disabled={submitting}
+          aria-label="Your Name (optional)"
         />
+        <label htmlFor="memory-message" className="sr-only">
+          Share a memory or message
+        </label>
         <textarea
+          id="memory-message"
           name="message"
           placeholder="Share a memory or message..."
           value={form.message}
           onChange={handleChange}
           required
           disabled={submitting}
+          aria-label="Share a memory or message"
         />
+        <label htmlFor="memory-image" className="sr-only">
+          Upload an image
+        </label>
         <input
+          id="memory-image"
           type="file"
           name="image"
           accept="image/*"
           onChange={handleChange}
           disabled={submitting}
+          aria-label="Upload an image"
         />
         {preview && (
           <picture>

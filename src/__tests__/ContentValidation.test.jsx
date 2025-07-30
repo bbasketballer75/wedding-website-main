@@ -17,6 +17,7 @@ describe('Guest Content Experience', () => {
       'Share your favorite memory or a message for the couple!'
     );
     fireEvent.change(textarea, {
+      // Intentional XSS test payload - img tag without alt is expected here for security testing
       target: { value: '<img src=x onerror=alert(1) /> <script>alert(1)</script>' },
     });
     fireEvent.click(screen.getByRole('button', { name: /sign|post|submit/i }));

@@ -3,7 +3,9 @@ import axios from 'axios';
 const API_URL =
   typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_URL
     ? process.env.REACT_APP_API_URL
-    : 'https://www.theporadas.com/api';
+    : (() => {
+        throw new Error('REACT_APP_API_URL environment variable must be set');
+      })();
 
 export const getAlbumMedia = () => {
   return axios.get(`${API_URL}/album`);

@@ -27,14 +27,14 @@ Set these in your Netlify environment:
 
 ```
 NODE_ENV=production
-GCS_BUCKET_NAME=the-poradas-uploads
+GCS_BUCKET_NAME=your-bucket-name
 GOOGLE_APPLICATION_CREDENTIALS=./config/gcp-service-account.json
-SESSION_SECRET=theporadas2025weddingsitesecret123!
-ADMIN_KEY=admin2025theporadas
-BASE_URL=https://www.theporadas.com
-API_URL=https://www.theporadas.com/api
-REACT_APP_API_URL=https://www.theporadas.com/api
-REACT_APP_BASE_URL=https://www.theporadas.com
+SESSION_SECRET=your-session-secret-here
+ADMIN_KEY=your-admin-key-here
+BASE_URL=https://your-domain.com
+API_URL=https://your-domain.com/api
+REACT_APP_API_URL=https://your-domain.com/api
+REACT_APP_BASE_URL=https://your-domain.com
 ```
 
 ### Domain Setup

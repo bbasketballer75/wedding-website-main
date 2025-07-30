@@ -7,6 +7,7 @@ import LandingPage from './components/LandingPage';
 import MusicPlayer from './components/MusicPlayer';
 import NotificationBanner from './components/NotificationBanner';
 import OrientationOverlay from './components/OrientationOverlay';
+import Navbar from './components/Navbar';
 import './App.css';
 
 // Code splitting: Lazy load heavy components
@@ -19,6 +20,9 @@ function App() {
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [notification, setNotification] = useState('');
   const location = useLocation();
+  
+  // Determine if we're on the OnePage route
+  const isOnePage = location.pathname === '/';
 
   useEffect(() => {
     setLoading(true);
@@ -48,6 +52,7 @@ function App() {
         {!loading && showLanding && <LandingPage onEnter={handleEnter} />}
         {!loading && !showLanding && (
           <>
+            <Navbar onePage={isOnePage} />
             <NotificationBanner message={notification} onClose={() => setNotification('')} />
             <MusicPlayer isEnabled={musicEnabled} position="bottom-left" />
             <Suspense fallback={<LoadingScreen message="Loading page..." />}>

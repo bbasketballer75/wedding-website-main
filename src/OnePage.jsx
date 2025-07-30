@@ -1,6 +1,5 @@
 import React, { useEffect, Suspense } from 'react';
 import { setupSectionFadeIn } from './scrollFadeIn';
-import Navbar from './components/Navbar';
 import ThankYouSection from './components/ThankYouSection';
 import LoadingScreen from './components/LoadingScreen';
 import './App.css';
@@ -19,7 +18,6 @@ const OnePage = () => {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <Navbar onePage />
       <main className="onepage-main" id="main-content" role="main" aria-label="Main content">
         {/* 1. Thank You Section - Welcome message (play intro video after landing page and before showing this section) */}
         <ThankYouSection />

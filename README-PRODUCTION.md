@@ -28,14 +28,17 @@ Set these in your Netlify environment:
 ```
 NODE_ENV=production
 GCS_BUCKET_NAME=your-bucket-name
-GOOGLE_APPLICATION_CREDENTIALS=your-gcp-credentials-path
+GCP_PROJECT_ID=your-gcp-project-id
+GCP_PRIVATE_KEY=your-gcp-private-key
+GCP_CLIENT_EMAIL=your-gcp-client-email
 SESSION_SECRET=your-session-secret-here
 ADMIN_KEY=your-admin-key-here
-BASE_URL=https://example.com
-API_URL=https://your-domain.com/api
-REACT_APP_API_URL=https://your-domain.com/api
-REACT_APP_BASE_URL=https://your-domain.com
+REACT_APP_API_URL=https://example.com/api
+REACT_APP_BASE_URL=https://example.com
+SENTRY_DSN=your-sentry-dsn-url
 ```
+
+**Note:** The optimized GCP approach uses individual environment variables instead of a large base64-encoded JSON file to stay under AWS Lambda's 4KB environment variable limit.
 
 ### Domain Setup
 

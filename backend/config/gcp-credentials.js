@@ -36,7 +36,27 @@ export function getGoogleCredentials() {
       // continue to next path
     }
   }
-  // If not found, fallback to env var (for CI/CD or production)
+  // If not found, try individual environment variables (smaller footprint)
+  if (process.env.GCP_PROJECT_ID && process.env.GCP_PRIVATE_KEY && process.env.GCP_CLIENT_EMAIL) {
+    try {
+      const credentials = {
+        type: 'service_account',
+        project_id: process.env.GCP_PROJECT_ID,
+        private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        client_email: process.env.GCP_CLIENT_EMAIL,
+        client_id: process.env.GCP_CLIENT_ID || '',
+        auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+        token_uri: 'https://oauth2.googleapis.com/token',
+        auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+        client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${encodeURIComponent(process.env.GCP_CLIENT_EMAIL)}`,
+      };
+      return credentials;
+    } catch (err) {
+      console.error('Failed to construct GCP credentials from environment variables:', err);
+    }
+  }
+
+  // Fallback to base64 (keep for backward compatibility but prefer the above)
   if (process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64) {
     try {
       const decoded = Buffer.from(process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64, 'base64').toString(

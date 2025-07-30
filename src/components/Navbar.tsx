@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import NavLink from './NavLink';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import './Navbar.css';
 
 type NavbarProps = {
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
         ) : (
           <Link
             className="navbar-brand"
-            to="/"
+            href="/"
             tabIndex={0}
             aria-label="Home - Austin & Jordyn Wedding"
           >
@@ -66,7 +66,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#home"
-                to="/"
                 label="Home"
                 onClick={(e) => handleNavClick(e, 'home')}
                 aria-current="page"
@@ -76,7 +75,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#album"
-                to="/album"
                 label="Album"
                 onClick={(e) => handleNavClick(e, 'album')}
               />
@@ -85,7 +83,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#guestbook"
-                to="/guestbook"
                 label="Guestbook"
                 onClick={(e) => handleNavClick(e, 'guestbook')}
               />
@@ -94,7 +91,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#map"
-                to="/map"
                 label="Map"
                 onClick={(e) => handleNavClick(e, 'map')}
               />
@@ -103,7 +99,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#family"
-                to="/family-tree"
                 label="Family Tree"
                 onClick={(e) => handleNavClick(e, 'family')}
               />
@@ -112,7 +107,6 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               <NavLink
                 onePage={onePage}
                 href="#party"
-                to="/wedding-party"
                 label="Wedding Party"
                 onClick={(e) => handleNavClick(e, 'party')}
               />

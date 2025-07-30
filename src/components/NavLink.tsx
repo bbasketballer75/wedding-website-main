@@ -1,16 +1,15 @@
 import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 type NavLinkProps = {
   onePage?: boolean;
   href: string;
-  to: string;
   label: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
 const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
-  ({ onePage, href, to, label, onClick, ...ariaProps }) => {
+  ({ onePage, href, label, onClick, ...ariaProps }) => {
     if (onePage) {
       return (
         <a className="nav-link" href={href} onClick={onClick} tabIndex={0} {...ariaProps}>
@@ -19,7 +18,7 @@ const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
       );
     }
     return (
-      <Link className="nav-link" to={to} tabIndex={0} {...ariaProps}>
+      <Link className="nav-link" href={href} tabIndex={0} {...ariaProps}>
         {label}
       </Link>
     );

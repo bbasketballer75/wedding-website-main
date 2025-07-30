@@ -1,46 +1,37 @@
-// Mock Firebase for tests
-import { vi } from 'vitest';
-
-// Mock Firebase Admin
-vi.mock('firebase-admin', () => ({
-  default: {
-    apps: [],
-    initializeApp: vi.fn(),
-    credential: {
-      cert: vi.fn(),
-    },
-    firestore: vi.fn(() => ({
-      collection: vi.fn(() => ({
-        add: vi.fn(),
-        doc: vi.fn(() => ({
-          get: vi.fn(),
-          set: vi.fn(),
-          update: vi.fn(),
-          delete: vi.fn(),
-        })),
-        where: vi.fn(() => ({
-          get: vi.fn(),
-        })),
-        orderBy: vi.fn(() => ({
-          get: vi.fn(),
-        })),
-        limit: vi.fn(() => ({
-          get: vi.fn(),
-        })),
+// Jest mock setup for backend tests
+jest.mock('firebase-admin', () => ({
+  apps: [],
+  initializeApp: jest.fn(),
+  credential: {
+    cert: jest.fn(),
+  },
+  firestore: jest.fn(() => ({
+    collection: jest.fn(() => ({
+      add: jest.fn(),
+      doc: jest.fn(() => ({
+        get: jest.fn(),
+        set: jest.fn(),
+        update: jest.fn(),
+        delete: jest.fn(),
+      })),
+      where: jest.fn(() => ({
+        get: jest.fn(),
+      })),
+      orderBy: jest.fn(() => ({
+        get: jest.fn(),
+      })),
+      limit: jest.fn(() => ({
+        get: jest.fn(),
       })),
     })),
-  },
+  })),
 }));
 
-// Mock GCP credentials
-vi.mock('../config/gcp-credentials.js', () => ({
-  getGoogleCredentials: vi.fn(() => null),
+jest.mock('../config/gcp-credentials.js', () => ({
+  getGoogleCredentials: jest.fn(() => null),
 }));
 
-// Mock cloud storage
-vi.mock('../services/cloudStorage.js', () => ({
-  default: {
-    uploadToGCS: vi.fn(),
-    deleteFromGCS: vi.fn(),
-  },
+jest.mock('../services/cloudStorage.js', () => ({
+  uploadToGCS: jest.fn(),
+  deleteFromGCS: jest.fn(),
 }));

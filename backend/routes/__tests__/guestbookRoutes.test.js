@@ -1,18 +1,19 @@
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
-import guestbookRoutes from '../guestbookRoutes.js';
 
-// Mock the controller functions
-vi.mock('../../controllers/guestbookController.js', () => ({
-  getGuestbookEntries: vi.fn(),
-  createGuestbookEntry: vi.fn(),
-  validateGuestbookEntry: vi.fn((req, res, next) => next()), // Mock middleware
+// ESM-safe mocking for guestbookController
+const getGuestbookEntriesMock = jest.fn();
+const createGuestbookEntryMock = jest.fn();
+const validateGuestbookEntryMock = jest.fn((req, res, next) => next());
+await jest.unstable_mockModule('../../controllers/guestbookController.js', () => ({
+  getGuestbookEntries: getGuestbookEntriesMock,
+  createGuestbookEntry: createGuestbookEntryMock,
+  validateGuestbookEntry: validateGuestbookEntryMock,
 }));
 
-import {
-  getGuestbookEntries,
-  createGuestbookEntry,
-} from '../../controllers/guestbookController.js';
+import * as guestbookController from '../../controllers/guestbookController.js';
+import guestbookRoutes from '../guestbookRoutes.js';
 
 const app = express();
 app.use(express.json());
@@ -20,12 +21,16 @@ app.use('/guestbook', guestbookRoutes);
 
 describe('Guestbook Routes', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
+    getGuestbookEntriesMock.mockReset();
+    createGuestbookEntryMock.mockReset();
+    validateGuestbookEntryMock.mockReset();
+    validateGuestbookEntryMock.mockImplementation((req, res, next) => next());
   });
 
   describe('GET /guestbook', () => {
     it('should fetch guestbook entries successfully', async () => {
-      getGuestbookEntries.mockImplementation((req, res) =>
+      getGuestbookEntriesMock.mockImplementation((req, res) =>
         res.status(200).json([{ message: 'Test Entry', name: 'Test User' }])
       );
 
@@ -35,7 +40,7 @@ describe('Guestbook Routes', () => {
     });
 
     it('should handle server errors', async () => {
-      getGuestbookEntries.mockImplementation((req, res) =>
+      getGuestbookEntriesMock.mockImplementation((req, res) =>
         res.status(500).json({ message: 'Server error' })
       );
 
@@ -48,7 +53,7 @@ describe('Guestbook Routes', () => {
   describe('POST /guestbook', () => {
     it('should create a new guestbook entry', async () => {
       const newEntry = { name: 'John Doe', message: 'Great wedding!' };
-      createGuestbookEntry.mockImplementation((req, res) =>
+      createGuestbookEntryMock.mockImplementation((req, res) =>
         res.status(201).json({ ...newEntry, timestamp: new Date() })
       );
 
@@ -60,7 +65,7 @@ describe('Guestbook Routes', () => {
     });
 
     it('should handle missing message', async () => {
-      createGuestbookEntry.mockImplementation((req, res) =>
+      createGuestbookEntryMock.mockImplementation((req, res) =>
         res.status(400).json({ message: 'A message is required to sign the guestbook.' })
       );
 
@@ -71,7 +76,7 @@ describe('Guestbook Routes', () => {
     });
 
     it('should handle empty message', async () => {
-      createGuestbookEntry.mockImplementation((req, res) =>
+      createGuestbookEntryMock.mockImplementation((req, res) =>
         res.status(400).json({ message: 'A message is required to sign the guestbook.' })
       );
 
@@ -81,7 +86,7 @@ describe('Guestbook Routes', () => {
     });
 
     it('should handle server errors during creation', async () => {
-      createGuestbookEntry.mockImplementation((req, res) =>
+      createGuestbookEntryMock.mockImplementation((req, res) =>
         res.status(500).json({ message: 'Database error' })
       );
 

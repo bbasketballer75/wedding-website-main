@@ -1,13 +1,17 @@
-// Mock the controller functions
-vi.mock('../../controllers/mapController.js', () => ({
-  getLocations: vi.fn(),
-  logVisit: vi.fn(),
-}));
-
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
+
+// ESM-safe mocking for mapController
+const getLocationsMock = jest.fn();
+const logVisitMock = jest.fn();
+await jest.unstable_mockModule('../../controllers/mapController.js', () => ({
+  getLocations: getLocationsMock,
+  logVisit: logVisitMock,
+}));
+
+import * as mapController from '../../controllers/mapController.js';
 import mapRoutes from '../mapRoutes.js';
-import { getLocations, logVisit } from '../../controllers/mapController.js';
 
 const app = express();
 app.set('trust proxy', 1);
@@ -16,7 +20,9 @@ app.use('/', mapRoutes);
 
 describe('Map Routes', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
+    getLocationsMock.mockReset();
+    logVisitMock.mockReset();
   });
 
   describe('GET /locations', () => {
@@ -25,7 +31,8 @@ describe('Map Routes', () => {
         { city: 'New York', country: 'US', lat: 40.7128, lon: -74.006 },
         { city: 'London', country: 'UK', lat: 51.5074, lon: -0.1278 },
       ];
-      getLocations.mockImplementation((req, res) => res.status(200).json(mockLocations));
+
+      getLocationsMock.mockImplementation((req, res) => res.status(200).json(mockLocations));
 
       const res = await request(app).get('/locations');
       expect(res.statusCode).toEqual(200);
@@ -33,7 +40,7 @@ describe('Map Routes', () => {
     });
 
     it('should handle empty locations', async () => {
-      getLocations.mockImplementation((req, res) => res.status(200).json([]));
+      getLocationsMock.mockImplementation((req, res) => res.status(200).json([]));
 
       const res = await request(app).get('/locations');
       expect(res.statusCode).toEqual(200);
@@ -41,7 +48,7 @@ describe('Map Routes', () => {
     });
 
     it('should handle server errors', async () => {
-      getLocations.mockImplementation((req, res) =>
+      getLocationsMock.mockImplementation((req, res) =>
         res.status(500).json({ message: 'Database error' })
       );
 
@@ -61,7 +68,7 @@ describe('Map Routes', () => {
         longitude: -74.006,
         timestamp: new Date(),
       };
-      logVisit.mockImplementation((req, res) => res.status(201).json(mockVisit));
+      logVisitMock.mockImplementation((req, res) => res.status(201).json(mockVisit));
 
       const res = await request(app).post('/log-visit').set('x-forwarded-for', '192.168.1.1');
 
@@ -70,7 +77,7 @@ describe('Map Routes', () => {
     });
 
     it('should handle recent visit (rate limiting)', async () => {
-      logVisit.mockImplementation((req, res) =>
+      logVisitMock.mockImplementation((req, res) =>
         res.status(200).json({ message: 'Visit already logged recently.' })
       );
 
@@ -81,7 +88,7 @@ describe('Map Routes', () => {
     });
 
     it('should handle geolocation failure', async () => {
-      logVisit.mockImplementation((req, res) =>
+      logVisitMock.mockImplementation((req, res) =>
         res.status(500).json({ message: 'Could not determine location.' })
       );
 
@@ -100,7 +107,7 @@ describe('Map Routes', () => {
         longitude: -81.8,
         timestamp: new Date(),
       };
-      logVisit.mockImplementation((req, res) => res.status(201).json(mockVisit));
+      logVisitMock.mockImplementation((req, res) => res.status(201).json(mockVisit));
 
       const res = await request(app).post('/log-visit').set('x-forwarded-for', '127.0.0.1');
 
@@ -116,7 +123,7 @@ describe('Map Routes', () => {
         longitude: -81.8,
         timestamp: new Date(),
       };
-      logVisit.mockImplementation((req, res) => res.status(201).json(mockVisit));
+      logVisitMock.mockImplementation((req, res) => res.status(201).json(mockVisit));
 
       const res = await request(app).post('/log-visit');
       expect(res.statusCode).toEqual(201);

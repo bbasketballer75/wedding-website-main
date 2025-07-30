@@ -1,9 +1,7 @@
+import { jest } from '@jest/globals';
 import { getGuestbookEntries, createGuestbookEntry } from '../guestbookController.js';
 import GuestbookEntry from '../../models/GuestbookEntry.firestore.js';
 
-vi.mock('../../models/GuestbookEntry.firestore.js');
-
-// describe('Guestbook Controller', () => {
 let mockReq, mockRes;
 
 beforeEach(() => {
@@ -11,10 +9,11 @@ beforeEach(() => {
     body: {},
   };
   mockRes = {
-    json: vi.fn().mockReturnThis(),
-    status: vi.fn().mockReturnThis(),
+    json: jest.fn().mockReturnThis(),
+    status: jest.fn().mockReturnThis(),
   };
-  vi.clearAllMocks();
+  GuestbookEntry.findAll = jest.fn();
+  jest.clearAllMocks();
 });
 
 describe('getGuestbookEntries', () => {
@@ -45,7 +44,7 @@ describe('createGuestbookEntry', () => {
       id: '507f1f77bcf86cd799439011',
       timestamp: new Date(),
     };
-    const saveSpy = vi.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
+    const saveSpy = jest.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
     mockReq.body = entryData;
 
     await createGuestbookEntry(mockReq, mockRes);
@@ -68,7 +67,7 @@ describe('createGuestbookEntry', () => {
     };
 
     mockReq.body = entryData;
-    const saveSpy = vi.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
+    const saveSpy = jest.spyOn(GuestbookEntry.prototype, 'save').mockResolvedValue(mockEntry);
 
     await createGuestbookEntry(mockReq, mockRes);
 
@@ -83,7 +82,7 @@ describe('createGuestbookEntry', () => {
     mockReq.body = { name: 'John Doe', message: '' };
 
     // Mock the error throwing by setting up next function
-    const mockNext = vi.fn();
+    const mockNext = jest.fn();
 
     try {
       await createGuestbookEntry(mockReq, mockRes, mockNext);
@@ -97,7 +96,7 @@ describe('createGuestbookEntry', () => {
   it('should reject whitespace-only message', async () => {
     mockReq.body = { name: 'John Doe', message: '   ' };
 
-    const mockNext = vi.fn();
+    const mockNext = jest.fn();
 
     try {
       await createGuestbookEntry(mockReq, mockRes, mockNext);
@@ -111,9 +110,9 @@ describe('createGuestbookEntry', () => {
   it('should handle database creation errors', async () => {
     mockReq.body = { name: 'John Doe', message: 'Great wedding!' };
 
-    vi.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(new Error('Database error'));
+    jest.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(new Error('Database error'));
 
-    const mockNext = vi.fn();
+    const mockNext = jest.fn();
 
     try {
       await createGuestbookEntry(mockReq, mockRes, mockNext);
@@ -129,9 +128,9 @@ describe('createGuestbookEntry', () => {
     const validationError = new Error('Validation failed');
     validationError.name = 'ValidationError';
 
-    vi.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(validationError);
+    jest.spyOn(GuestbookEntry.prototype, 'save').mockRejectedValue(validationError);
 
-    const mockNext = vi.fn();
+    const mockNext = jest.fn();
 
     try {
       await createGuestbookEntry(mockReq, mockRes, mockNext);
@@ -142,4 +141,3 @@ describe('createGuestbookEntry', () => {
     expect(mockNext).toHaveBeenCalledWith(expect.any(Error));
   });
 });
-// });

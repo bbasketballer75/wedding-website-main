@@ -1,46 +1,41 @@
-// Mock the controller functions
-vi.mock('../../controllers/albumController.js', () => ({
-  getAlbumMedia: vi.fn(),
-  uploadMedia: vi.fn(),
-  getAllAlbumMedia: vi.fn(),
-  moderateMedia: vi.fn(),
-}));
-
-// Mock the middleware functions
-vi.mock('../../middleware/uploadMiddleware.js', () => ({
-  default: {
-    array: () => (req, res, next) => next(),
-  },
-}));
-
-// Mock auth middleware
-vi.mock('../../middleware/authMiddleware.js', () => ({
-  protectAdmin: (req, res, next) => {
-    if (req.headers.authorization === 'Bearer valid-token') {
-      next();
-    } else {
-      res.status(401).json({ message: 'Not authorized' });
-    }
-  },
-}));
-
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import express from 'express';
-import albumRoutes from '../album.js';
-import {
-  getAlbumMedia,
-  uploadMedia,
-  getAllAlbumMedia,
-  moderateMedia,
-} from '../../controllers/albumController.js';
 
-const app = express();
-app.use(express.json());
-app.use('/', albumRoutes);
+// ESM-compliant mocking: mock before import
+jest.unstable_mockModule('../../controllers/albumController.js', () => ({
+  getAlbumMedia: jest.fn(),
+  uploadMedia: jest.fn(),
+  getAllAlbumMedia: jest.fn(),
+  moderateMedia: jest.fn(),
+}));
+jest.unstable_mockModule('../../middleware/authMiddleware.js', () => ({
+  protectAdmin: jest.fn(),
+}));
+
+let albumController, albumRoutes, app, authMiddleware;
+beforeAll(async () => {
+  albumController = await import('../../controllers/albumController.js');
+  authMiddleware = await import('../../middleware/authMiddleware.js');
+  albumRoutes = (await import('../album.js')).default;
+  app = express();
+  app.use(express.json());
+  app.use('/', albumRoutes);
+});
 
 describe('Album Routes', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
+    // Default: allow all admin routes
+    authMiddleware.protectAdmin.mockImplementation((req, res, next) => {
+      if (req.headers.authorization === 'Bearer valid-token') {
+        return next();
+      } else if (req.headers.authorization === 'Bearer invalid-token') {
+        res.status(401).json({ message: 'Not authorized' });
+      } else {
+        res.status(401).json({ message: 'Not authorized' });
+      }
+    });
   });
 
   describe('GET /', () => {
@@ -50,7 +45,9 @@ describe('Album Routes', () => {
         { filename: 'test.jpg', approved: true, timestamp: now },
         { filename: 'test2.jpg', approved: true, timestamp: now },
       ];
-      getAlbumMedia.mockImplementation((req, res) => res.status(200).json(mockMedia));
+      albumController.getAlbumMedia.mockImplementation((req, res) =>
+        res.status(200).json(mockMedia)
+      );
 
       const res = await request(app).get('/');
       expect(res.statusCode).toEqual(200);
@@ -58,7 +55,7 @@ describe('Album Routes', () => {
     });
 
     it('should handle server errors when fetching media', async () => {
-      getAlbumMedia.mockImplementation((req, res) =>
+      albumController.getAlbumMedia.mockImplementation((req, res) =>
         res.status(500).json({ message: 'Server error fetching media.' })
       );
 
@@ -70,7 +67,7 @@ describe('Album Routes', () => {
 
   describe('POST /upload', () => {
     it('should upload media successfully', async () => {
-      uploadMedia.mockImplementation((req, res) =>
+      albumController.uploadMedia.mockImplementation((req, res) =>
         res.status(201).json({
           message: 'All files uploaded successfully and are pending review.',
           files: [{ filename: 'uploaded.jpg' }],
@@ -86,7 +83,7 @@ describe('Album Routes', () => {
     });
 
     it('should handle no files uploaded', async () => {
-      uploadMedia.mockImplementation((req, res) =>
+      albumController.uploadMedia.mockImplementation((req, res) =>
         res.status(400).json({ message: 'Please upload one or more files.' })
       );
 
@@ -96,7 +93,7 @@ describe('Album Routes', () => {
     });
 
     it('should handle file processing errors', async () => {
-      uploadMedia.mockImplementation((req, res) =>
+      albumController.uploadMedia.mockImplementation((req, res) =>
         res.status(207).json({
           message: 'Some files were processed with errors.',
           uploadedFiles: [],
@@ -119,7 +116,9 @@ describe('Album Routes', () => {
         { filename: 'test.jpg', approved: false },
         { filename: 'test2.jpg', approved: true },
       ];
-      getAllAlbumMedia.mockImplementation((req, res) => res.status(200).json(mockMedia));
+      albumController.getAllAlbumMedia.mockImplementation((req, res) =>
+        res.status(200).json(mockMedia)
+      );
 
       const res = await request(app).get('/all').set('Authorization', 'Bearer valid-token');
 
@@ -142,7 +141,7 @@ describe('Album Routes', () => {
 
   describe('POST /moderate (Admin)', () => {
     it('should approve media with valid token', async () => {
-      moderateMedia.mockImplementation((req, res) =>
+      albumController.moderateMedia.mockImplementation((req, res) =>
         res.status(200).json({ message: 'Media has been approved.' })
       );
 
@@ -156,7 +155,7 @@ describe('Album Routes', () => {
     });
 
     it('should reject media with valid token', async () => {
-      moderateMedia.mockImplementation((req, res) =>
+      albumController.moderateMedia.mockImplementation((req, res) =>
         res.status(200).json({ message: 'Media has been rejected and deleted.' })
       );
 
@@ -170,7 +169,7 @@ describe('Album Routes', () => {
     });
 
     it('should handle photo not found', async () => {
-      moderateMedia.mockImplementation((req, res) =>
+      albumController.moderateMedia.mockImplementation((req, res) =>
         res.status(404).json({ message: 'Photo not found.' })
       );
 

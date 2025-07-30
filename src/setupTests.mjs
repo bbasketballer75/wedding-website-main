@@ -3,7 +3,7 @@
 // expect(element).toBeInTheDocument();
 import '@testing-library/jest-dom';
 import jest from 'jest-mock';
-import axios from 'axios';
+
 jest.mock('axios', () => ({
   get: jest.fn(() => Promise.resolve({ data: [] })), // Return empty array for guestbook entries
   post: jest.fn(() => Promise.resolve({ data: {} })),

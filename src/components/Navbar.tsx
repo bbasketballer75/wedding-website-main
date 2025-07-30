@@ -61,8 +61,8 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto" role="menubar">
-            <li className="nav-item" role="none">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#home"
@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
                 aria-current="page"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#album"

@@ -13,20 +13,13 @@ const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
   ({ onePage, href, to, label, onClick, ...ariaProps }) => {
     if (onePage) {
       return (
-        <a
-          className="nav-link"
-          href={href}
-          onClick={onClick}
-          tabIndex={0}
-          role="menuitem"
-          {...ariaProps}
-        >
+        <a className="nav-link" href={href} onClick={onClick} tabIndex={0} {...ariaProps}>
           {label}
         </a>
       );
     }
     return (
-      <Link className="nav-link" to={to} tabIndex={0} role="menuitem" {...ariaProps}>
+      <Link className="nav-link" to={to} tabIndex={0} {...ariaProps}>
         {label}
       </Link>
     );

@@ -1,8 +1,9 @@
 import { defineConfig } from 'cypress';
 
 export default defineConfig({
+  projectId: 'm7s6t6',
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3002',
 
     setupNodeEvents(on, config) {
       // Register logA11yViolations task for a11y debugging
@@ -15,9 +16,14 @@ export default defineConfig({
               console.log(
                 `A11Y Violation: ${v.id} - ${v.help}\nImpact: ${v.impact}\nDescription: ${v.description}\nHelp: ${v.helpUrl}`
               );
-              v.nodes.forEach((node, idx) => {
-                console.log(`  Node ${idx + 1}:`, node);
-              });
+              v.nodes.forEach(
+                (
+                  node: { html: string; target: string[]; failureSummary?: string },
+                  idx: number
+                ) => {
+                  console.log(`  Node ${idx + 1}:`, node);
+                }
+              );
             });
           }
           return null;

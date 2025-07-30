@@ -19,11 +19,13 @@ describe('Navbar', () => {
         <Navbar />
       </MemoryRouter>
     );
-    expect(screen.getByRole('link', { name: /Home/i })).toBeInTheDocument();
+    // Test specific navigation links (not the brand)
+    expect(screen.getByRole('link', { name: /^Home$/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Family Tree/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Album/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Guestbook/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Map/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Wedding Party/i })).toBeInTheDocument();
   });
 
   it('opens and closes mobile menu', () => {

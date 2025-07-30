@@ -15,7 +15,7 @@ export default defineConfig({
       '.next/**/*',
       '*.config.js',
       '*.config.ts',
-      'netlify/**/*'
+      'netlify/**/*',
     ],
     include: ['src/**/*.test.{js,jsx,ts,tsx}'],
   },

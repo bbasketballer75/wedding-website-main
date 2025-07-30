@@ -24,9 +24,9 @@ describe('GuestbookPage', () => {
     await act(async () => {
       render(<GuestbookPage />);
     });
-    // Wait for heading and messages to appear
+    // Wait for heading and messages to appear (look for specific heading level)
     await waitFor(() =>
-      expect(screen.getByRole('heading', { name: /Guestbook/i })).toBeInTheDocument()
+      expect(screen.getByRole('heading', { level: 2, name: /Guestbook/i })).toBeInTheDocument()
     );
     expect(screen.getByText('Congrats!')).toBeInTheDocument();
     expect(screen.getByText('Best wishes!')).toBeInTheDocument();

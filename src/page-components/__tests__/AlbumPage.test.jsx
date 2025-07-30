@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
 import AlbumPage from '../AlbumPage.jsx';
 
 import * as api from '../../services/api.js';
@@ -30,11 +29,7 @@ vi.mock('../../services/api.js', () => {
 describe('AlbumPage', () => {
   const renderWithRouter = async (component) => {
     await act(async () => {
-      render(
-        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          {component}
-        </MemoryRouter>
-      );
+      render(component);
     });
   };
 

@@ -1,18 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { MemoryRouter } from 'react-router-dom';
 import GuestbookPage from '../GuestbookPage.jsx';
 
 expect.extend(toHaveNoViolations);
 
 describe('GuestbookPage accessibility', () => {
   it('should have no accessibility violations on load', async () => {
-    const { container } = render(
-      <MemoryRouter>
-        <GuestbookPage />
-      </MemoryRouter>
-    );
+    const { container } = render(<GuestbookPage />);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

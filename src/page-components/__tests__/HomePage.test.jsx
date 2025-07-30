@@ -1,22 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
 import HomePage from '../HomePage.jsx';
 
 describe('HomePage', () => {
-  const renderWithRouter = (component) => {
-    return render(<MemoryRouter>{component}</MemoryRouter>);
-  };
-
   it('renders welcome message and main CTA', () => {
-    renderWithRouter(<HomePage />);
+    render(<HomePage />);
     expect(screen.getByRole('heading', { name: /Austin & Jordyn/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /View Album/i })).toBeInTheDocument();
   });
 
   it('displays welcome message and navigation elements', () => {
-    renderWithRouter(<HomePage />);
+    render(<HomePage />);
 
     // Should have some welcoming content
     const homeContainer = document.querySelector('.home-page');
@@ -24,7 +19,7 @@ describe('HomePage', () => {
   });
 
   it('has proper accessibility structure', () => {
-    renderWithRouter(<HomePage />);
+    render(<HomePage />);
 
     // Main heading should be present and accessible
     const mainHeading = screen.getByRole('heading', { level: 1 });
@@ -37,12 +32,12 @@ describe('HomePage', () => {
 
   it('renders without errors', () => {
     expect(() => {
-      renderWithRouter(<HomePage />);
+      render(<HomePage />);
     }).not.toThrow();
   });
 
   it('applies correct CSS classes', () => {
-    renderWithRouter(<HomePage />);
+    render(<HomePage />);
 
     const homeContainer = document.querySelector('.home-page');
     expect(homeContainer).toBeInTheDocument();
@@ -50,7 +45,7 @@ describe('HomePage', () => {
   });
 
   it('is responsive and mobile-friendly', () => {
-    renderWithRouter(<HomePage />);
+    render(<HomePage />);
 
     const homeContainer = document.querySelector('.home-page');
     expect(homeContainer).toBeInTheDocument();

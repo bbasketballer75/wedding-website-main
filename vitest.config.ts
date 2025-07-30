@@ -1,6 +1,10 @@
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  esbuild: {
+    jsx: 'automatic',
+    target: 'node14',
+  },
   test: {
     environment: 'jsdom',
     globals: true,

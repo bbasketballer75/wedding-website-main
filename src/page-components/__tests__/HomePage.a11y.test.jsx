@@ -1,18 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { MemoryRouter } from 'react-router-dom';
 import HomePage from '../HomePage.jsx';
 
 expect.extend(toHaveNoViolations);
 
 describe('HomePage accessibility', () => {
   it('should have no accessibility violations on load', async () => {
-    const { container } = render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <HomePage />
-      </MemoryRouter>
-    );
+    const { container } = render(<HomePage />);
     try {
       const results = await axe(container, {
         rules: {

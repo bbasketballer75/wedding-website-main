@@ -10,6 +10,42 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onSave",
 
+  // React/Next.js Development (Enhanced with new extensions)
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
+
+  // TailwindCSS IntelliSense Configuration
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "html": "HTML",
+    "typescript": "typescript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["className\\s*:\\s*['\"`]([^'\"`]*)['\"`]"]
+  ],
+
+  // Accessibility Enhancements
+  "accessibility.defaultLinter": "axe",
+  "accessibility.runOnSave": true,
+  "accessibility.highlightViolations": true,
+
+  // Error Lens Configuration (Inline Error Display)
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
+  "errorLens.gutterIconsEnabled": true,
+  "errorLens.statusBarIconsEnabled": true,
+
+  // Firebase Integration
+  "firebase.hosting.source": ".next",
+  "firebase.firestore.indexes": true,
+  "firebase.functions.source": "backend",
+
   // AI Integration Enhancements
   "github.copilot.advanced": {
     "indexing.enable": true,

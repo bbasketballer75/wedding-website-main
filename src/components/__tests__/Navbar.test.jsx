@@ -1,39 +1,26 @@
 import React from 'react';
-import { MemoryRouter, BrowserRouter } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Navbar from '../Navbar.tsx';
 
 describe('Navbar', () => {
   it('renders logo and tagline', () => {
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>
-    );
+    render(<Navbar />);
     expect(screen.getByText(/Austin & Jordyn/i)).toBeInTheDocument();
   });
 
   it('renders all navigation links', () => {
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>
-    );
-    // Test specific navigation links (not the brand)
-    expect(screen.getByRole('link', { name: /^Home$/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Family Tree/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Album/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Guestbook/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Map/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Wedding Party/i })).toBeInTheDocument();
+    render(<Navbar />);
+    // Test specific navigation links as menu items (not links)
+    expect(screen.getByRole('menuitem', { name: /^Home$/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Family Tree/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Album/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Guestbook/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Map/i })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: /Wedding Party/i })).toBeInTheDocument();
   });
 
   it('opens and closes mobile menu', () => {
-    render(
-      <MemoryRouter>
-        <Navbar />
-      </MemoryRouter>
-    );
+    render(<Navbar />);
     const toggle = screen.getByLabelText(/Toggle navigation/i);
     fireEvent.click(toggle);
     expect(screen.getByRole('navigation')).toBeVisible();
@@ -42,11 +29,7 @@ describe('Navbar', () => {
   });
 
   it('renders the navbar with brand and links', () => {
-    render(
-      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <Navbar />
-      </BrowserRouter>
-    );
+    render(<Navbar />);
     // Check for the brand name
     expect(screen.getByText('Austin & Jordyn')).toBeInTheDocument();
     // Check for a few links

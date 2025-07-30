@@ -63,63 +63,133 @@ const GuestbookPage = () => {
       {isLoading && <LoadingScreen message="Loading guestbook..." />}
       {!isLoading && (
         <>
-          <h2 className="section-title">Guestbook</h2>
+          <h2 id="guestbook-title" className="section-title">
+            Guestbook
+          </h2>
           <p className="guestbook-subheading">
             Leave a message or share your favorite memory from our wedding day. We love reading your
             stories!
           </p>
-          <form className="guestbook-form" onSubmit={handleSubmit}>
-            <label className="label" htmlFor="name">
-              Name (optional)
-            </label>
-            <input
-              className="input"
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              maxLength={100}
-              placeholder="Your name"
-              autoComplete="off"
-            />
-            <label className="label" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              className="textarea"
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              maxLength={500}
-              placeholder="Share your favorite memory or a message for the couple!"
-              required
-            />
+          <form
+            className="guestbook-form"
+            onSubmit={handleSubmit}
+            aria-labelledby="guestbook-title"
+            noValidate
+          >
+            <fieldset>
+              <legend className="sr-only">Add a guestbook entry</legend>
+              <div className="input-group">
+                <label className="label" htmlFor="guestbook-name">
+                  Name (optional)
+                </label>
+                <input
+                  className="input"
+                  id="guestbook-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  maxLength={100}
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-describedby="name-help"
+                />
+                <div id="name-help" className="sr-only">
+                  Optional field for your name, up to 100 characters
+                </div>
+              </div>
+              <div className="input-group">
+                <label className="label" htmlFor="guestbook-message">
+                  Message *
+                </label>
+                <textarea
+                  className="textarea"
+                  id="guestbook-message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  maxLength={500}
+                  placeholder="Share your favorite memory or a message for the couple!"
+                  required
+                  aria-required="true"
+                  aria-describedby="message-help"
+                  aria-invalid={formError ? 'true' : 'false'}
+                  rows={4}
+                />
+                <div id="message-help" className="input-description">
+                  Required field. Share your thoughts, up to 500 characters.
+                </div>
+              </div>
+            </fieldset>
             {formError && (
-              <div className="form-error" role="alert">
+              <div className="form-error" role="alert" aria-live="assertive">
                 {formError}
               </div>
             )}
             {success && (
-              <div className="form-success" role="status">
+              <div className="form-success" role="status" aria-live="polite">
                 {success}
               </div>
             )}
-            <button className="button" type="submit" disabled={isSubmitting}>
-              Sign Guestbook
+            <button
+              className="button"
+              type="submit"
+              disabled={isSubmitting}
+              aria-describedby={isSubmitting ? 'submit-status' : undefined}
+            >
+              {isSubmitting ? 'Signing...' : 'Sign Guestbook'}
             </button>
-          </form>
-          <div className="messages">
-            {entries.length === 0 ? (
-              <div className="empty-state">No messages yet. Be the first to share a memory!</div>
-            ) : (
-              entries.map((entry, index) => (
-                <div className="message" key={entry._id || entry.timestamp || index}>
-                  <div className="message-name">{entry.name || 'Anonymous'}</div>
-                  <div className="message-text">{entry.message}</div>
-                </div>
-              ))
+            {isSubmitting && (
+              <div id="submit-status" className="sr-only" aria-live="polite">
+                Submitting your guestbook entry, please wait...
+              </div>
             )}
-          </div>
+          </form>
+          <section
+            className="messages"
+            aria-labelledby="entries-title"
+            role="log"
+            aria-live="polite"
+          >
+            <h3 id="entries-title" className="sr-only">
+              Guestbook Entries
+            </h3>
+            {entries.length === 0 ? (
+              <div className="empty-state" role="status">
+                No messages yet. Be the first to share a memory!
+              </div>
+            ) : (
+              <>
+                <div className="sr-only" aria-live="polite">
+                  {entries.length} guestbook {entries.length === 1 ? 'entry' : 'entries'} available
+                </div>
+                {entries.map((entry, index) => (
+                  <article
+                    className="message"
+                    key={entry._id || entry.timestamp || index}
+                    role="article"
+                    aria-labelledby={`entry-${index}-author`}
+                  >
+                    <div
+                      id={`entry-${index}-author`}
+                      className="message-name"
+                      aria-label="Message from"
+                    >
+                      {entry.name || 'Anonymous Guest'}
+                    </div>
+                    <div className="message-text" aria-label="Message content">
+                      {entry.message}
+                    </div>
+                    <time
+                      className="message-date sr-only"
+                      dateTime={entry.timestamp}
+                      aria-label="Posted on"
+                    >
+                      {new Date(entry.timestamp).toLocaleDateString()}
+                    </time>
+                  </article>
+                ))}
+              </>
+            )}
+          </section>
         </>
       )}
     </div>

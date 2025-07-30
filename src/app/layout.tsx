@@ -1,33 +1,49 @@
-import type { Metadata } from 'next';
-import { structuredData } from './structured-data';
+import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
+import { weddingStructuredData, websiteStructuredData } from './structured-data';
 
 export const metadata: Metadata = {
-  title: 'Austin & Jordyn - Wedding Website',
-  description: 'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories',
-  keywords:
-    'Austin Jordyn wedding, wedding photos, wedding memories, guestbook, wedding celebration',
-  authors: [{ name: 'Austin & Jordyn Porada' }],
+  title: {
+    default: 'Austin & Jordyn - Wedding Website',
+    template: '%s | Austin & Jordyn',
+  },
+  description:
+    'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories from our special day',
+  keywords: [
+    'wedding',
+    'Austin Porada',
+    'Jordyn Porada',
+    'wedding photos',
+    'guestbook',
+    'celebration',
+  ],
+  authors: [{ name: 'Austin Porada' }, { name: 'Jordyn Porada' }],
   creator: 'Austin & Jordyn Porada',
-  publisher: 'Austin & Jordyn Porada',
+  publisher: 'The Poradas',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
+  },
+  metadataBase: new URL('https://theporadas.com'),
+  alternates: {
+    canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://theporadas.com',
     title: 'Austin & Jordyn - Wedding Website',
-    description: 'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories',
-    siteName: 'The Poradas Wedding',
+    description:
+      'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories from our special day',
+    siteName: 'Austin & Jordyn Wedding',
     images: [
       {
-        url: 'https://theporadas.com/images/engagement/PoradaProposal-11.webp',
+        url: '/images/landing-bg.jpg',
         width: 1200,
         height: 630,
-        alt: 'Austin & Jordyn Wedding Photo',
+        alt: 'Austin & Jordyn Wedding',
       },
     ],
   },
@@ -35,7 +51,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Austin & Jordyn - Wedding Website',
     description: 'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories',
-    images: ['https://theporadas.com/images/engagement/PoradaProposal-11.webp'],
+    images: ['/images/landing-bg.jpg'],
   },
   robots: {
     index: true,
@@ -49,8 +65,19 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Add your Google Search Console verification
+    google: 'your-google-verification-code',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#9caf88' },
+    { media: '(prefers-color-scheme: dark)', color: '#7a8b6c' },
+  ],
 };
 
 export default function RootLayout({
@@ -61,9 +88,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
+          id="wedding-structured-data"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(weddingStructuredData),
+          }}
+        />
+        <Script
+          id="website-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
+          }}
         />
       </head>
       <body className="antialiased">{children}</body>

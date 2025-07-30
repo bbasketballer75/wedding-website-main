@@ -1,18 +1,7 @@
 import {withSentryConfig} from '@sentry/nextjs';
 import type { NextConfig } from 'next';
-import withBundleAnalyzer from '@next/bundle-analyzer';
-
-const bundleAnalyzer = withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
 
 const nextConfig: NextConfig = {
-  // Image optimization
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-  },
   // Force legacy Webpack for dev (not Turbopack)
   serverExternalPackages: ['react-router-dom'],
   webpack: (config) => {
@@ -22,14 +11,9 @@ const nextConfig: NextConfig = {
     };
     return config;
   },
-  // Experimental features for better performance
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['@fontsource/roboto'],
-  },
 };
 
-export default bundleAnalyzer(withSentryConfig(nextConfig, {
+export default withSentryConfig(nextConfig, {
 // For all available options, see:
 // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
@@ -59,4 +43,4 @@ disableLogger: true,
 // https://docs.sentry.io/product/crons/
 // https://vercel.com/docs/cron-jobs
 automaticVercelMonitors: true,
-}));
+});

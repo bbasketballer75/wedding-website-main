@@ -1,6 +1,10 @@
 // Global test mocks for network requests
 import { vi } from 'vitest';
 
+// Set up environment variables for tests
+process.env.REACT_APP_API_URL = 'http://localhost:3001/api';
+process.env.NODE_ENV = 'test';
+
 // Mock window.HTMLMediaElement.prototype.play for MusicPlayer tests
 Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
   writable: true,

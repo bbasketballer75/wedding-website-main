@@ -1,25 +1,77 @@
-export const structuredData = {
+// Structured data for Austin & Jordyn's wedding website
+export const weddingStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Event',
-  name: "Austin & Jordyn's Wedding",
-  description: 'Join us in celebrating the wedding of Austin & Jordyn Porada',
-  image: 'https://theporadas.com/images/engagement/PoradaProposal-11.webp',
-  url: 'https://theporadas.com',
-  organizer: {
-    '@type': 'Person',
-    name: 'Austin & Jordyn Porada',
-  },
+  name: 'Austin & Jordyn Wedding',
+  description: 'Celebrate with Austin & Jordyn - Wedding photos, guestbook, and memories',
+  startDate: '2024-08-17T15:00:00',
+  endDate: '2024-08-17T23:00:00',
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: {
     '@type': 'Place',
-    name: 'Wedding Venue', // Update with actual venue
+    name: 'Wedding Venue',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'City', // Update with actual city
-      addressRegion: 'State', // Update with actual state
+      addressLocality: 'Wedding Location',
+      addressRegion: 'State',
       addressCountry: 'US',
     },
   },
-  startDate: '2024-01-01', // Update with actual wedding date
-  eventStatus: 'https://schema.org/EventScheduled',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  organizer: [
+    {
+      '@type': 'Person',
+      name: 'Austin Porada',
+    },
+    {
+      '@type': 'Person',
+      name: 'Jordyn Porada',
+    },
+  ],
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+};
+
+export const websiteStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Austin & Jordyn Wedding Website',
+  description: "Wedding photos, guestbook, and memories from Austin & Jordyn's special day",
+  url: 'https://theporadas.com',
+  author: [
+    {
+      '@type': 'Person',
+      name: 'Austin Porada',
+    },
+    {
+      '@type': 'Person',
+      name: 'Jordyn Porada',
+    },
+  ],
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://theporadas.com/#guestbook',
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+export const photoGalleryStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Austin & Jordyn Wedding Photos',
+  description: "Photo gallery from Austin & Jordyn's wedding celebration",
+  author: [
+    {
+      '@type': 'Person',
+      name: 'Austin Porada',
+    },
+    {
+      '@type': 'Person',
+      name: 'Jordyn Porada',
+    },
+  ],
 };

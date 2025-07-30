@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://theporadas.com';
@@ -7,35 +7,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/album`,
+      url: `${baseUrl}/#album`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/guestbook`,
+      url: `${baseUrl}/#guestbook`,
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 0.8,
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/map`,
+      url: `${baseUrl}/#family`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/family-tree`,
+      url: `${baseUrl}/#party`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/wedding-party`,
+      url: `${baseUrl}/#map`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,

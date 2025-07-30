@@ -1,20 +1,20 @@
 {
-  "name": "Austin & Jordyn's Wedding",
-  "short_name": "Wedding",
+  "name": "Austin & Jordyn's Wedding Website",
+  "short_name": "The Poradas",
+  "description": "Austin & Jordyn's wedding celebration. Share memories, photos, and guest messages!",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#b48eae",
-  "description": "Austin & Jordyn's wedding celebration. Share memories, photos, and more!",
+  "theme_color": "#9caf88",
   "orientation": "portrait-primary",
   "scope": "/",
-  "lang": "en",
-  "categories": ["lifestyle", "social"],
+  "lang": "en-US",
+  "categories": ["lifestyle", "photo", "social"],
   "screenshots": [
     {
-      "src": "/images/engagement/PoradaProposal-11.webp",
+      "src": "/images/landing-bg.jpg",
       "sizes": "1200x630",
-      "type": "image/webp",
+      "type": "image/jpeg",
       "form_factor": "wide"
     }
   ],
@@ -26,30 +26,14 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/images/engagement/PoradaProposal-11.webp",
+      "src": "/images/rings/PoradaProposal-255.webp",
       "sizes": "192x192",
       "type": "image/webp"
     },
     {
-      "src": "/images/engagement/PoradaProposal-11.webp",
+      "src": "/images/rings/PoradaProposal-286.webp",
       "sizes": "512x512",
       "type": "image/webp"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Photo Album",
-      "short_name": "Album",
-      "description": "View wedding photos",
-      "url": "/album",
-      "icons": [{"src": "/favicon.svg", "sizes": "96x96"}]
-    },
-    {
-      "name": "Guestbook",
-      "short_name": "Guestbook",
-      "description": "Leave a message",
-      "url": "/guestbook",
-      "icons": [{"src": "/favicon.svg", "sizes": "96x96"}]
     }
   ]
 }

@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+/* Import existing CSS files */
+@import '../index.css';
+@import '../App.css';
+@import '../accessibility.css';
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

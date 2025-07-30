@@ -12,9 +12,6 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
 
-  // Force legacy Webpack for dev (not Turbopack)
-  serverExternalPackages: ['react-router-dom'],
-
   // Image optimization
   images: {
     formats: ['image/webp', 'image/avif'],

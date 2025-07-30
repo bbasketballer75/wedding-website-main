@@ -27,7 +27,7 @@ const OnePage = () => {
       <Suspense fallback={<LoadingScreen message="Loading navigation..." />}>
         <Navbar onePage />
       </Suspense>
-      <main className="onepage-main" id="main-content" role="main" aria-label="Main content">
+      <main className="onepage-main" id="main-content" aria-label="Main content">
         {/* 1. Thank You Section - Welcome message (play intro video after landing page and before showing this section) */}
         <Suspense fallback={<LoadingScreen message="Loading content..." />}>
           <ThankYouSection />
@@ -38,7 +38,7 @@ const OnePage = () => {
           <WeddingHighlightsSection />
         </Suspense>
         {/* 2. Family Tree - Parent videos (with photos of me and jordyn above the parents) */}
-        <section id="family-tree" aria-labelledby="family-tree-title" role="region">
+        <section id="family-tree" aria-labelledby="family-tree-title">
           <h2 id="family-tree-title" className="sr-only">
             Family Tree
           </h2>
@@ -48,7 +48,7 @@ const OnePage = () => {
         </section>
 
         {/* 3. Wedding Party - Bridesmaids & groomsmen */}
-        <section id="wedding-party" aria-labelledby="wedding-party-title" role="region">
+        <section id="wedding-party" aria-labelledby="wedding-party-title">
           <h2 id="wedding-party-title" className="sr-only">
             Wedding Party
           </h2>
@@ -57,14 +57,13 @@ const OnePage = () => {
           </Suspense>
         </section>
         {/* 4. Main Wedding Video Section - YouTube Embed */}
-        <section id="main-wedding-video" aria-labelledby="video-title" role="region">
+        <section id="main-wedding-video" aria-labelledby="video-title">
           <h2 id="video-title" className="section-title">
             Our Wedding Video
           </h2>
           <div
             className="video-container"
             style={{ maxWidth: '800px', margin: '0 auto' }}
-            role="group"
             aria-label="Wedding video player"
           >
             <div
@@ -79,7 +78,6 @@ const OnePage = () => {
                 allowFullScreen
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                 aria-label="Wedding video embedded from YouTube"
-                tabIndex="0"
               ></iframe>
             </div>
             <p className="video-description sr-only">
@@ -89,7 +87,7 @@ const OnePage = () => {
           </div>
         </section>
         {/* 5. Album - Engagement Photos Only */}
-        <section id="engagement-album" aria-labelledby="engagement-album-title" role="region">
+        <section id="engagement-album" aria-labelledby="engagement-album-title">
           <h2 id="engagement-album-title" className="sr-only">
             Engagement Photo Album
           </h2>
@@ -99,7 +97,7 @@ const OnePage = () => {
         </section>
 
         {/* 6. Memory Wall - Guest uploads */}
-        <section id="memory-wall" aria-labelledby="memory-wall-title" role="region">
+        <section id="memory-wall" aria-labelledby="memory-wall-title">
           <h2 id="memory-wall-title" className="sr-only">
             Memory Wall
           </h2>
@@ -111,22 +109,21 @@ const OnePage = () => {
         <section
           id="guestbook-map"
           aria-labelledby="guestbook-map-title"
-          role="region"
           style={{ display: 'flex', flexDirection: 'row', gap: '2rem' }}
         >
           <h2 id="guestbook-map-title" className="sr-only">
             Guestbook and Map
           </h2>
-          <div style={{ flex: 1 }} role="complementary" aria-label="Guestbook section">
+          <aside style={{ flex: 1 }} aria-label="Guestbook section">
             <Suspense fallback={<LoadingScreen message="Loading guestbook..." />}>
               <GuestbookPage onePage />
             </Suspense>
-          </div>
-          <div style={{ flex: 1 }} role="complementary" aria-label="Map section">
+          </aside>
+          <aside style={{ flex: 1 }} aria-label="Map section">
             <Suspense fallback={<LoadingScreen message="Loading map..." />}>
               <MapPage onePage />
             </Suspense>
-          </div>
+          </aside>
         </section>
         {/* 8. Stay in Touch - Contact info */}
         <Suspense fallback={<LoadingScreen message="Loading contact section..." />}>

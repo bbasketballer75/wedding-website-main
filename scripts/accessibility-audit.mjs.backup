@@ -230,22 +230,30 @@ function generateReport() {
 
   Object.entries(ACCESSIBILITY_CHECKLIST).forEach(([check, details]) => {
     const status = details.status;
-
-    let icon;
-    if (status === 'pass') {
-      icon = '✅';
-    } else if (status === 'fail') {
-      icon = '❌';
-    } else if (status === 'manual-check-required') {
-      icon = '🔍';
-    } else {
-      icon = '⚠️';
-    }
+    const icon =
+      status === 'pass'
+        ? '✅'
+        : getStatusIcon(status);
 
     console.log(`${icon} ${check}`);
     console.log(`   ${details.description}`);
     console.log(`   Status: ${status.toUpperCase()}\n`);
   });
+}
+
+/**
+ * Get status icon for accessibility check result
+ */
+function getStatusIcon(status) {
+  switch (status) {
+    case 'fail':
+      return '❌';
+    case 'manual-check-required':
+      return '🔍';
+    default:
+      return '⚠️';
+  }
+}
 
   // Report specific issues
   if (imageIssues.length > 0) {

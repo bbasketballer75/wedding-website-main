@@ -19,8 +19,8 @@ const GuestbookPage = () => {
       try {
         const response = await getGuestbookEntries();
         setEntries(response.data);
-      } catch {
-        // Could not load guestbook entries. Please try again later.
+      } catch (error) {
+        console.error('Failed to load guestbook entries:', error);
       } finally {
         setIsLoading(false);
       }
@@ -28,10 +28,7 @@ const GuestbookPage = () => {
     fetchEntries();
   }, []);
 
-  // Add handleSubmit function if missing
   const handleSubmit = async (e) => {
-    // eslint-disable-next-line no-console
-    // ...existing code...
     e.preventDefault();
     setFormError(null);
     setSuccess(null);
@@ -39,8 +36,6 @@ const GuestbookPage = () => {
     try {
       if (!message.trim()) {
         setFormError('Message is required.');
-        // eslint-disable-next-line no-console
-        // ...existing code...
         setIsSubmitting(false);
         return;
       }
@@ -125,7 +120,7 @@ const GuestbookPage = () => {
               </div>
             )}
             {success && (
-              <div className="form-success" role="status" aria-live="polite">
+              <div className="form-success" aria-live="polite">
                 {success}
               </div>
             )}
@@ -153,9 +148,7 @@ const GuestbookPage = () => {
               Guestbook Entries
             </h3>
             {entries.length === 0 ? (
-              <div className="empty-state" role="status">
-                No messages yet. Be the first to share a memory!
-              </div>
+              <div className="empty-state">No messages yet. Be the first to share a memory!</div>
             ) : (
               <>
                 <div className="sr-only" aria-live="polite">
@@ -165,7 +158,6 @@ const GuestbookPage = () => {
                   <article
                     className="message"
                     key={entry._id || entry.timestamp || index}
-                    role="article"
                     aria-labelledby={`entry-${index}-author`}
                   >
                     <div

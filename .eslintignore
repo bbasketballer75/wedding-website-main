@@ -1,0 +1,5 @@
+# Ignore all backend test files for performance
+backend/routes/__tests__/*.js
+backend/controllers/__tests__/*.js
+backend/utils/__tests__/*.js
+backend/models/__tests__/*.js

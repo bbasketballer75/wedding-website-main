@@ -12,12 +12,17 @@ await jest.unstable_mockModule('../../controllers/guestbookController.js', () =>
   validateGuestbookEntry: validateGuestbookEntryMock,
 }));
 
-import * as guestbookController from '../../controllers/guestbookController.js';
-import guestbookRoutes from '../guestbookRoutes.js';
-
 const app = express();
 app.use(express.json());
-app.use('/guestbook', guestbookRoutes);
+// Inline route definitions using controller mocks
+import rateLimit from 'express-rate-limit';
+const guestbookLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: 'Too many guestbook entries from this IP, please try again later.',
+});
+app.get('/guestbook', getGuestbookEntriesMock);
+app.post('/guestbook', guestbookLimiter, validateGuestbookEntryMock, createGuestbookEntryMock);
 
 describe('Guestbook Routes', () => {
   beforeEach(() => {

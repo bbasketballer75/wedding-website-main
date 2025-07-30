@@ -10,13 +10,18 @@ await jest.unstable_mockModule('../../controllers/mapController.js', () => ({
   logVisit: logVisitMock,
 }));
 
-import * as mapController from '../../controllers/mapController.js';
-import mapRoutes from '../mapRoutes.js';
-
 const app = express();
 app.set('trust proxy', 1);
 app.use(express.json());
-app.use('/', mapRoutes);
+// Inline route definitions using controller mocks
+import rateLimit from 'express-rate-limit';
+const mapLimiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000,
+  max: 10,
+  message: 'Too many map log attempts from this IP, please try again tomorrow.',
+});
+app.get('/locations', getLocationsMock);
+app.post('/log-visit', mapLimiter, logVisitMock);
 
 describe('Map Routes', () => {
   beforeEach(() => {

@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GCP_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON_BASE64 }}
+      REACT_APP_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
+      NEXT_PUBLIC_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
+      # Sentry configuration for CI
+      SENTRY_DISABLE_TELEMETRY: true
+      SENTRY_SUPPRESS_UPLOAD_WARNINGS: true
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -34,3 +39,5 @@ jobs:
           else
             echo "GCP_SERVICE_ACCOUNT_JSON_BASE64 is set. Length: ${#GCP_SERVICE_ACCOUNT_JSON_BASE64}"
           fi
+      - name: Build application
+        run: npm run build

@@ -48,5 +48,8 @@
   "files.eol": "\r\n",
   "files.autoGuessEncoding": true,
   "powershell.codeFormatting.preset": "OTBS",
-  "terminal.integrated.shell.windows": "pwsh.exe"
+  "terminal.integrated.shell.windows": "pwsh.exe",
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  }
 }

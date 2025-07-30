@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 type NavLinkProps = {
   onePage?: boolean;
@@ -19,7 +19,7 @@ const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
       );
     }
     return (
-      <Link className="nav-link" to={to} tabIndex={0} {...ariaProps}>
+      <Link className="nav-link" href={to} tabIndex={0} {...ariaProps}>
         {label}
       </Link>
     );

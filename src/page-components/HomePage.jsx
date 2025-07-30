@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 // import VideoPlayer from '../components/VideoPlayer';
 
 import './HomePage.css';
@@ -77,7 +77,7 @@ const HomePage = () => {
                     <p className="card-text">
                       View photos from our special day and upload your own memories.
                     </p>
-                    <Link to="/album" className="btn btn-primary">
+                    <Link href="/album" className="btn btn-primary">
                       View Album
                     </Link>
                   </div>
@@ -88,7 +88,7 @@ const HomePage = () => {
                   <div className="card-body">
                     <h3 className="card-title">Digital Guestbook</h3>
                     <p className="card-text">Leave us a message to commemorate the occasion.</p>
-                    <Link to="/guestbook" className="btn btn-primary">
+                    <Link href="/guestbook" className="btn btn-primary">
                       Sign Guestbook
                     </Link>
                   </div>
@@ -101,7 +101,7 @@ const HomePage = () => {
                     <p className="card-text">
                       See where all of our wonderful guests are joining from.
                     </p>
-                    <Link to="/map" className="btn btn-primary">
+                    <Link href="/map" className="btn btn-primary">
                       View Map
                     </Link>
                   </div>

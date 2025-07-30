@@ -65,12 +65,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
         <div id="nav-help" className="sr-only">
           Navigation menu with links to different sections of the wedding website
         </div>
-        <nav
-          className="collapse navbar-collapse"
-          id="navbarNav"
-          aria-label="Main navigation"
-          role="navigation"
-        >
+        <div className="collapse navbar-collapse" id="navbarNav" aria-labelledby="nav-help">
           <ul className="navbar-nav ms-auto" role="menubar">
             <li className="nav-item" role="none">
               <NavLink
@@ -91,20 +86,22 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
                 role="menuitem"
               />
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="none">
               <NavLink
                 onePage={onePage}
                 href="#guestbook"
                 label="Guestbook"
                 onClick={(e) => handleNavClick(e, 'guestbook')}
+                role="menuitem"
               />
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="none">
               <NavLink
                 onePage={onePage}
                 href="#map"
                 label="Map"
                 onClick={(e) => handleNavClick(e, 'map')}
+                role="menuitem"
               />
             </li>
             <li className="nav-item" role="none">
@@ -126,12 +123,12 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
               />
             </li>
           </ul>
-        </nav>
+        </div>
       </div>
     </nav>
   );
-
-  Navbar.displayName = 'Navbar';
 });
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;

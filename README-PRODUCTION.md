@@ -28,10 +28,10 @@ Set these in your Netlify environment:
 ```
 NODE_ENV=production
 GCS_BUCKET_NAME=your-bucket-name
-GOOGLE_APPLICATION_CREDENTIALS=./config/gcp-service-account.json
+GOOGLE_APPLICATION_CREDENTIALS=your-gcp-credentials-path
 SESSION_SECRET=your-session-secret-here
 ADMIN_KEY=your-admin-key-here
-BASE_URL=https://your-domain.com
+BASE_URL=https://example.com
 API_URL=https://your-domain.com/api
 REACT_APP_API_URL=https://your-domain.com/api
 REACT_APP_BASE_URL=https://your-domain.com
@@ -82,4 +82,4 @@ Access the admin dashboard at `/admin` with the admin key to:
 
 ---
 
-🎉 **Live at: https://www.theporadas.com** 🎉
+🎉 **Live at: https://example.com** 🎉

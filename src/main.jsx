@@ -1,13 +1,2 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import './index.css'; // Assuming you have a global CSS file
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+// This file is no longer needed in a Next.js application.
+// Next.js handles its own entry points and bootstrapping.

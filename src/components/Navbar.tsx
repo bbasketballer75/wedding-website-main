@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 import NavLink from './NavLink';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import './Navbar.css';
 
 type NavbarProps = {
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
         ) : (
           <Link
             className="navbar-brand"
-            to="/"
+            href="/"
             tabIndex={0}
             aria-label="Home - Austin & Jordyn Wedding"
           >

@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   // Force legacy Webpack for dev (not Turbopack)
-  serverExternalPackages: ['react-router-dom'],
+  // serverExternalPackages: ['react-router-dom'], // Removed since we're not using react-router-dom anymore
 
   // Image optimization
   images: {

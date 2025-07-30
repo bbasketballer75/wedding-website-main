@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import ErrorBoundary from './components/ErrorBoundary';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { logVisit } from './services/api';
 import LoadingScreen from './components/LoadingScreen';
 import OrientationOverlay from './components/OrientationOverlay';
@@ -9,13 +9,11 @@ import './App.css';
 import './accessibility.css';
 
 // Code splitting: Lazy load heavy components
-const OnePage = React.lazy(() => import('./OnePage'));
-const AdminPage = React.lazy(() => import('./page-components/AdminPage'));
 const LandingPage = React.lazy(() => import('./components/LandingPage'));
 const MusicPlayer = React.lazy(() => import('./components/MusicPlayer'));
 const NotificationBanner = React.lazy(() => import('./components/NotificationBanner'));
 
-function App() {
+function App({ children }) {
   const [loading, setLoading] = useState(true);
   const [showLanding, setShowLanding] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(false);
@@ -50,7 +48,7 @@ function App() {
     </a>
   );
   const [notification, setNotification] = useState('');
-  const location = useLocation();
+  const location = usePathname();
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +65,7 @@ function App() {
     setLoading(true);
     const timeout = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timeout);
-  }, [location.pathname]);
+  }, [location]);
 
   // Handler for entering the site from the landing page
   const handleEnter = () => {
@@ -95,12 +93,7 @@ function App() {
             <Suspense fallback={null}>
               <MusicPlayer isEnabled={musicEnabled} position="bottom-left" />
             </Suspense>
-            <Suspense fallback={<LoadingScreen message="Loading page..." />}>
-              <Routes>
-                <Route path="/" element={<OnePage />} />
-                <Route path="/admin" element={<AdminPage />} />
-              </Routes>
-            </Suspense>
+            {children}
           </main>
         )}
       </div>

@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
+import '../App.css';
+import '../accessibility.css';
+import App from '../App';
 import { weddingStructuredData, websiteStructuredData } from './structured-data';
 
 export const metadata: Metadata = {
@@ -103,7 +106,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <App>{children}</App>
+      </body>
     </html>
   );
 }

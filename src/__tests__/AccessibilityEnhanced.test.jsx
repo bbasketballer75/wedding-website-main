@@ -1,7 +1,7 @@
 // Accessibility Deep-Dive Test
 
 import React from 'react';
-import { render, screen, act, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import PhotoGallery from '../components/PhotoGallery.jsx';
 import Navbar from '../components/Navbar';

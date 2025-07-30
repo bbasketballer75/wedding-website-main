@@ -66,60 +66,54 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
           Navigation menu with links to different sections of the wedding website
         </div>
         <div className="collapse navbar-collapse" id="navbarNav" aria-labelledby="nav-help">
-          <ul className="navbar-nav ms-auto" role="menubar">
-            <li className="nav-item" role="none">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#home"
                 label="Home"
                 onClick={(e) => handleNavClick(e, 'home')}
                 aria-current="page"
-                role="menuitem"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#album"
                 label="Album"
                 onClick={(e) => handleNavClick(e, 'album')}
-                role="menuitem"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#guestbook"
                 label="Guestbook"
                 onClick={(e) => handleNavClick(e, 'guestbook')}
-                role="menuitem"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#map"
                 label="Map"
                 onClick={(e) => handleNavClick(e, 'map')}
-                role="menuitem"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#family"
                 label="Family Tree"
                 onClick={(e) => handleNavClick(e, 'family')}
-                role="menuitem"
               />
             </li>
-            <li className="nav-item" role="none">
+            <li className="nav-item">
               <NavLink
                 onePage={onePage}
                 href="#party"
                 label="Wedding Party"
                 onClick={(e) => handleNavClick(e, 'party')}
-                role="menuitem"
               />
             </li>
           </ul>

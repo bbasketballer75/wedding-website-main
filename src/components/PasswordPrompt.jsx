@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './PasswordPrompt.css';
 
 const PasswordPrompt = ({ onCorrectPassword }) => {
@@ -36,6 +37,11 @@ const PasswordPrompt = ({ onCorrectPassword }) => {
       </form>
     </div>
   );
+};
+
+// PropTypes for validation
+PasswordPrompt.propTypes = {
+  onCorrectPassword: PropTypes.func.isRequired,
 };
 
 export default PasswordPrompt;

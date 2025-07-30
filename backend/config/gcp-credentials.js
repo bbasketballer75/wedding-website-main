@@ -13,68 +13,129 @@ import path from 'path';
  * In production: decodes from base64 environment variable
  */
 export function getGoogleCredentials() {
-  // Try both possible local paths for tests and dev
+  // Try local file paths first
+  const fileCredentials = tryLocalCredentialFiles();
+  if (fileCredentials) {
+    return fileCredentials;
+  }
+
+  // Try environment variables
+  const envCredentials = tryEnvironmentVariables();
+  if (envCredentials) {
+    return envCredentials;
+  }
+
+  // Try base64 fallback
+  const base64Credentials = tryBase64Credentials();
+  if (base64Credentials) {
+    return base64Credentials;
+  }
+
+  console.error('Could not load valid GCS credentials from any known path.');
+  throw new Error('No valid Google Cloud credentials found');
+}
+
+/**
+ * Try to load credentials from local JSON files
+ */
+function tryLocalCredentialFiles() {
   const possiblePaths = [
     path.join(process.cwd(), 'backend', 'config', 'gcs-key.json'),
     path.join(process.cwd(), 'config', 'gcs-key.json'),
   ];
+
   for (const credPath of possiblePaths) {
-    try {
-      if (fs.existsSync(credPath)) {
-        const credentials = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
-        // Check if this is a dummy/placeholder file
-        if (credentials.private_key && credentials.private_key.includes('DUMMY')) {
-          console.warn(
-            `Found service account file at ${credPath}, but it contains placeholder credentials`
-          );
-          continue; // Try next path or fall back to env var
-        }
-        return credentials;
-      }
-    } catch (error) {
-      console.warn(`Failed to read credentials from ${credPath}:`, error.message);
-      // continue to next path
+    const credentials = readCredentialFile(credPath);
+    if (credentials) {
+      return credentials;
     }
   }
-  // If not found, try individual environment variables (smaller footprint)
-  if (process.env.GCP_PROJECT_ID && process.env.GCP_PRIVATE_KEY && process.env.GCP_CLIENT_EMAIL) {
-    try {
-      const credentials = {
-        type: 'service_account',
-        project_id: process.env.GCP_PROJECT_ID,
-        private_key: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
-        client_email: process.env.GCP_CLIENT_EMAIL,
-        client_id: process.env.GCP_CLIENT_ID || '',
-        auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-        token_uri: 'https://oauth2.googleapis.com/token',
-        auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-        client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${encodeURIComponent(process.env.GCP_CLIENT_EMAIL)}`,
-      };
-      return credentials;
-    } catch (err) {
-      console.error('Failed to construct GCP credentials from environment variables:', err);
+  return null;
+}
+
+/**
+ * Read and validate a credential file
+ */
+function readCredentialFile(credPath) {
+  try {
+    if (!fs.existsSync(credPath)) {
+      return null;
     }
+
+    const credentials = JSON.parse(fs.readFileSync(credPath, 'utf-8'));
+
+    if (isDummyCredentials(credentials)) {
+      console.warn(
+        `Found service account file at ${credPath}, but it contains placeholder credentials`
+      );
+      return null;
+    }
+
+    return credentials;
+  } catch (error) {
+    console.warn(`Failed to read credentials from ${credPath}:`, error.message);
+    return null;
+  }
+}
+
+/**
+ * Try to construct credentials from individual environment variables
+ */
+function tryEnvironmentVariables() {
+  const { GCP_PROJECT_ID, GCP_PRIVATE_KEY, GCP_CLIENT_EMAIL, GCP_CLIENT_ID } = process.env;
+
+  if (!GCP_PROJECT_ID || !GCP_PRIVATE_KEY || !GCP_CLIENT_EMAIL) {
+    return null;
   }
 
-  // Fallback to base64 (keep for backward compatibility but prefer the above)
-  if (process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64) {
-    try {
-      const decoded = Buffer.from(process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64, 'base64').toString(
-        'utf8'
-      );
-      const credentials = JSON.parse(decoded);
-      // Validate decoded credentials too
-      if (credentials.private_key && credentials.private_key.includes('DUMMY')) {
-        throw new Error('Environment variable contains placeholder credentials');
-      }
-      return credentials;
-    } catch (err) {
-      console.error('Failed to decode GCP service account from base64:', err);
-      throw new Error('Invalid GCP service account credentials');
-    }
+  try {
+    return {
+      type: 'service_account',
+      project_id: GCP_PROJECT_ID,
+      private_key: GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      client_email: GCP_CLIENT_EMAIL,
+      client_id: GCP_CLIENT_ID || '',
+      auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_uri: 'https://oauth2.googleapis.com/token',
+      auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+      client_x509_cert_url: `https://www.googleapis.com/robot/v1/metadata/x509/${encodeURIComponent(GCP_CLIENT_EMAIL)}`,
+    };
+  } catch (err) {
+    console.error('Failed to construct GCP credentials from environment variables:', err);
+    return null;
   }
-  console.error('Could not load valid GCS credentials from any known path.');
-  throw new Error('No valid Google Cloud credentials found');
+}
+
+/**
+ * Try to decode credentials from base64 environment variable
+ */
+function tryBase64Credentials() {
+  if (!process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64) {
+    return null;
+  }
+
+  try {
+    const decoded = Buffer.from(process.env.GCP_SERVICE_ACCOUNT_JSON_BASE64, 'base64').toString(
+      'utf8'
+    );
+    const credentials = JSON.parse(decoded);
+
+    if (isDummyCredentials(credentials)) {
+      throw new Error('Environment variable contains placeholder credentials');
+    }
+
+    return credentials;
+  } catch (err) {
+    console.error('Failed to decode GCP service account from base64:', err);
+    throw new Error('Invalid GCP service account credentials');
+  }
+}
+
+/**
+ * Check if credentials contain dummy/placeholder values
+ */
+function isDummyCredentials(credentials) {
+  return credentials.private_key && credentials.private_key.includes('DUMMY');
 }
 
 /**

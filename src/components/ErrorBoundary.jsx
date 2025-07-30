@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 
 class ErrorBoundary extends React.Component {
@@ -41,12 +42,12 @@ class ErrorBoundary extends React.Component {
 
   handleRetry = () => {
     if (this.state.retryCount < 3) {
-      this.setState({
+      this.setState((prevState) => ({
         hasError: false,
         error: null,
         errorInfo: null,
-        retryCount: this.state.retryCount + 1,
-      });
+        retryCount: prevState.retryCount + 1,
+      }));
     } else {
       // Redirect to home page after 3 retries
       window.location.href = '/';
@@ -112,5 +113,10 @@ class ErrorBoundary extends React.Component {
     return this.props.children;
   }
 }
+
+// PropTypes for validation
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default ErrorBoundary;

@@ -43,7 +43,7 @@ Write-Host "`n🧪 RUNNING COMPREHENSIVE TESTS..." -ForegroundColor Yellow
 # Run all tests
 Write-Host "Running full test suite..." -ForegroundColor Cyan
 try {
-    $testResult = npm test 2>&1
+    npm test 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ All tests passing" -ForegroundColor Green
     } else {

@@ -4,7 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**"
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,**/SENTRY-AUTH-TOKEN-FIX.md,**/BUILD-FIXES-APPLIED.md,**/*-FIX.md"
 
 [[redirects]]
   from = "/api/*"

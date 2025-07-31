@@ -91,7 +91,7 @@ Route (app)                    Size     First Load JS
 Make sure your Netlify environment variables include:
 
 ```bash
-SENTRY_AUTH_TOKEN=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
+SENTRY_AUTH_TOKEN=your-sentry-build-token-here
 ```
 
 ### **Verification Steps:**

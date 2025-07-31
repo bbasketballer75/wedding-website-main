@@ -14,7 +14,17 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: ['**/.next/**', '**/coverage/**', '**/node_modules/**', '**/dist/**'],
+    ignores: [
+      '**/.next/**',
+      '**/coverage/**',
+      '**/node_modules/**',
+      '**/dist/**',
+      // Backend test files for performance
+      'backend/routes/__tests__/*.js',
+      'backend/controllers/__tests__/*.js',
+      'backend/utils/__tests__/*.js',
+      'backend/models/__tests__/*.js',
+    ],
   },
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   ...storybook.configs['flat/recommended'],

@@ -66,13 +66,13 @@ select:focus,
 
 /* Keyboard navigation helpers */
 [role='button']:focus {
-  background-color: #f0f8ff;
+  background-color: var(--sage-mist);
   cursor: pointer;
 }
 
 /* Video controls focus */
 iframe:focus {
-  outline: 3px solid #005fcc;
+  outline: 3px solid var(--sage-deep);
   outline-offset: 4px;
 }
 
@@ -123,8 +123,8 @@ iframe:focus {
 /* Enhanced error state styling */
 .error,
 [aria-invalid='true'] {
-  border: 2px solid #d32f2f !important;
-  background-color: #ffeaea !important;
+  border: 2px solid var(--blush-deep) !important;
+  background-color: var(--blush-whisper) !important;
 }
 
 /* Live region announcements */

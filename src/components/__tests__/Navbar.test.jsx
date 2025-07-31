@@ -10,13 +10,13 @@ describe('Navbar', () => {
 
   it('renders all navigation links', () => {
     render(<Navbar />);
-    // Test specific navigation links as menu items (not links)
-    expect(screen.getByRole('menuitem', { name: /^Home$/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /Family Tree/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /Album/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /Guestbook/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /Map/i })).toBeInTheDocument();
-    expect(screen.getByRole('menuitem', { name: /Wedding Party/i })).toBeInTheDocument();
+    // Test specific navigation links as links (not menu items after accessibility cleanup)
+    expect(screen.getByRole('link', { name: /^Home$/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Family Tree/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Album/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Guestbook/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Map/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Wedding Party/i })).toBeInTheDocument();
   });
 
   it('opens and closes mobile menu', () => {

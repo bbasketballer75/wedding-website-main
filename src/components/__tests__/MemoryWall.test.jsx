@@ -96,6 +96,6 @@ describe('MemoryWall', () => {
     fireEvent.change(fileInput, { target: { files: [file] } });
 
     // Should show preview image
-    expect(screen.getByAltText('Preview')).toBeInTheDocument();
+    expect(screen.getByAltText('Preview of uploaded memory')).toBeInTheDocument();
   });
 });

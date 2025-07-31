@@ -130,6 +130,39 @@ export default function RootLayout({
       <body
         className={`antialiased ${cormorantGaramond.variable} ${inter.variable} ${allura.variable}`}
       >
+        {/* Skip Navigation Links for Accessibility */}
+        <a
+          href="#main-content"
+          className="skip-link"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            zIndex: 999,
+            padding: '8px 16px',
+            background: 'var(--sage-green)',
+            color: 'white',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+          }}
+        >
+          Skip to main content
+        </a>
+        <a
+          href="#navigation"
+          className="skip-link"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            zIndex: 999,
+            padding: '8px 16px',
+            background: 'var(--sage-green)',
+            color: 'white',
+            textDecoration: 'none',
+            fontWeight: 'bold',
+          }}
+        >
+          Skip to navigation
+        </a>
         {children}
       </body>
     </html>

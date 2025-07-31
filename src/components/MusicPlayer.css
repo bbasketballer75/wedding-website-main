@@ -85,7 +85,7 @@
 }
 
 .track-artist {
-  color: #b3b3b3;
+  color: var(--slate);
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
@@ -95,7 +95,7 @@
 .minimize-button {
   background: transparent;
   border: none;
-  color: #b3b3b3;
+  color: var(--slate);
   font-size: 16px;
   cursor: pointer;
   padding: 0;
@@ -118,7 +118,7 @@
   align-items: center;
   gap: 8px;
   font-size: 11px;
-  color: #b3b3b3;
+  color: var(--slate);
 }
 
 .progress-bar {

@@ -57,12 +57,13 @@
     "date-fns": "^4.1.0",
     "eslint": "^9.32.0",
     "eslint-config-next": "^15.4.4",
-    "framer-motion": "^11.15.0",
+    "eslint-plugin-storybook": "^9.0.18",
+    "framer-motion": "^12.23.12",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",
     "leaflet": "^1.9.4",
-    "lucide-react": "^0.534.0",
-    "next": "15.4.3",
+    "lucide-react": "^0.535.0",
+    "next": "^15.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
@@ -70,8 +71,7 @@
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3",
     "web-vitals": "^5.0.3",
-    "winston": "^3.17.0",
-    "eslint-plugin-storybook": "^9.0.18"
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",

@@ -89,7 +89,9 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://browser.sentry-cdn.com https://js.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: *.googleusercontent.com *.googleapis.com; connect-src 'self' https://*.sentry.io https://storage.googleapis.com https://firestore.googleapis.com; frame-src 'none'; object-src 'none'; base-uri 'self';",
+              process.env.NODE_ENV === 'development'
+                ? "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://browser.sentry-cdn.com https://js.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: *.googleusercontent.com *.googleapis.com; connect-src 'self' http://localhost:3001 https://*.sentry.io https://storage.googleapis.com https://firestore.googleapis.com; frame-src 'self' https://www.youtube.com; object-src 'none'; base-uri 'self';"
+                : "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://browser.sentry-cdn.com https://js.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: *.googleusercontent.com *.googleapis.com; connect-src 'self' https://*.sentry.io https://storage.googleapis.com https://firestore.googleapis.com; frame-src 'none'; object-src 'none'; base-uri 'self';",
           },
         ],
       },

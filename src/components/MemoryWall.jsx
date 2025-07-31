@@ -125,7 +125,7 @@ const MemoryWall = () => {
             <source srcSet={preview} type="image/jpeg" />
             <img
               src={preview}
-              alt="Preview"
+              alt="Preview of uploaded memory"
               className="memorywall-preview"
               loading="lazy"
               width="400"
@@ -151,7 +151,11 @@ const MemoryWall = () => {
                   <source srcSet={mem.image} type="image/jpeg" />
                   <img
                     src={mem.image}
-                    alt="Memory"
+                    alt={
+                      mem.message
+                        ? `Shared memory: ${mem.message.substring(0, 50)}...`
+                        : 'Shared wedding memory'
+                    }
                     className="memorywall-img"
                     loading="lazy"
                     width="400"

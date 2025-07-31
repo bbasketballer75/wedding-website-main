@@ -18,7 +18,7 @@ const getApiUrl = () => {
     const hostname = window.location.hostname;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
       // Return local backend URL for development
-      return 'http://localhost:8080/api';
+      return 'http://localhost:3001/api';
     }
   }
 

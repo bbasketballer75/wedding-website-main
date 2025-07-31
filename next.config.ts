@@ -135,6 +135,9 @@ export default bundleAnalyzer(
     org: 'friendly-city',
     project: 'wedding-website',
 
+    // Sentry Auth Token for source map uploads
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+
     // Only print logs for uploading source maps in CI
     silent: !process.env.CI,
 

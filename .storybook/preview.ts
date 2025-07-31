@@ -1,13 +1,18 @@
 import type { Preview } from '@storybook/nextjs-vite';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 
 const preview: Preview = {
   decorators: [
     (Story) =>
       React.createElement(
-        MemoryRouter,
-        { future: { v7_startTransition: true, v7_relativeSplatPath: true } },
+        'div',
+        {
+          style: {
+            fontFamily: 'system-ui, -apple-system, sans-serif',
+            minHeight: '100vh',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          },
+        },
         React.createElement(Story)
       ),
   ],
@@ -49,15 +54,6 @@ const preview: Preview = {
       ],
     },
   },
-  // Global decorators for consistent styling
-  decorators: [
-    (Story) =>
-      React.createElement(
-        'div',
-        { style: { margin: '3em', fontFamily: 'Arial, sans-serif' } },
-        React.createElement(Story)
-      ),
-  ],
 };
 
 export default preview;

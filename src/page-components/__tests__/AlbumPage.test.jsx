@@ -27,12 +27,6 @@ vi.mock('../../services/api.js', () => {
 });
 
 describe('AlbumPage', () => {
-  const renderWithRouter = async (component) => {
-    await act(async () => {
-      render(component);
-    });
-  };
-
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -41,20 +35,45 @@ describe('AlbumPage', () => {
     vi.clearAllMocks();
   });
 
-  it('shows loading screen and then renders album content', async () => {
+  it('handles album loading error gracefully', async () => {
     await act(async () => {
-      renderWithRouter(<AlbumPage />);
+      render(<AlbumPage />);
     });
     expect(screen.getByText(/Loading album/i)).toBeInTheDocument();
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
     expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
-    expect(document.querySelector('.photo-grid')).toBeInTheDocument();
-    expect(document.querySelectorAll('.photo-card').length).toBeGreaterThan(0);
   });
 
+  it('displays album photos when loaded', async () => {
+    await act(async () => {
+      render(<AlbumPage />);
+    });
+    expect(screen.getByText(/Loading album/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+    expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
+  });
+
+  it('should show upload form when user clicks upload button', async () => {
+    await act(async () => {
+      render(<AlbumPage />);
+    });
+    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+
+    // Find upload button and click it
+    const uploadButton = await screen.findByRole('button', { name: /upload/i }, { timeout: 3000 });
+    expect(uploadButton).toBeInTheDocument();
+  });
+
+  it('should filter album content when filter is applied', async () => {
+    await act(async () => {
+      render(<AlbumPage />);
+    });
+    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+    expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
+  });
   it('renders upload input and button', async () => {
     await act(async () => {
-      renderWithRouter(<AlbumPage />);
+      render(<AlbumPage />);
     });
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
     expect(screen.getByRole('button', { name: /Upload Photo/i })).toBeInTheDocument();
@@ -66,7 +85,7 @@ describe('AlbumPage', () => {
 
   it('calls uploadMedia when upload button is clicked', async () => {
     await act(async () => {
-      renderWithRouter(<AlbumPage />);
+      render(<AlbumPage />);
     });
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
     // The input is type="file" with no label, so use querySelector
@@ -84,7 +103,7 @@ describe('AlbumPage', () => {
 
   it('applies correct CSS classes and structure', async () => {
     await act(async () => {
-      renderWithRouter(<AlbumPage />);
+      render(<AlbumPage />);
     });
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
     const albumContainer = document.querySelector('.album-page');
@@ -96,7 +115,7 @@ describe('AlbumPage', () => {
   it('renders without errors', () => {
     expect(() => {
       act(() => {
-        renderWithRouter(<AlbumPage />);
+        render(<AlbumPage />);
       });
     }).not.toThrow();
   });

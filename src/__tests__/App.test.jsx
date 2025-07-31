@@ -54,8 +54,8 @@ describe('App (Next.js Home Page)', () => {
     // Should have skip link
     expect(screen.getByText('Skip to main content')).toBeInTheDocument();
 
-    // Should have loading state or app container
-    expect(screen.getByRole('status')).toBeInTheDocument();
+    // Should have main content area
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 
   test('renders app container with proper class', () => {
@@ -73,7 +73,7 @@ describe('App (Next.js Home Page)', () => {
     const skipLink = screen.getByText('Skip to main content');
     expect(skipLink).toHaveAttribute('href', '#main-content');
 
-    // Should have loading status for screen readers
-    expect(screen.getByRole('status')).toBeInTheDocument();
+    // Should have main navigation
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 });

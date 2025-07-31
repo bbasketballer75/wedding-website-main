@@ -1,52 +1,59 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* 🎨 Import Premium Design System */
+@import './styles/premium-design-system.css';
+
+/* Legacy font import for backward compatibility */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Wedding Color Palette */
-  --sage-green: #9caf88;
-  --sage-green-dark: #7a8b6c;
-  --sage-green-light: #b5c4a7;
-  --sage-green-pale: #e8efdb;
+  /* 🎨 Enhanced Wedding Color Palette - Building on Premium Design System */
+  /* Legacy color variables for backward compatibility */
+  --sage-green: var(--sage-primary);
+  --sage-green-dark: var(--sage-deep);
+  --sage-green-light: var(--sage-soft);
+  --sage-green-pale: var(--sage-whisper);
 
-  --blush: #f4c2c2;
-  --blush-dark: #e8a5a5;
-  --blush-light: #f9d7d7;
-  --blush-pale: #fdf2f2;
+  --blush: var(--blush-primary);
+  --blush-dark: var(--blush-deep);
+  --blush-light: var(--blush-soft);
+  --blush-pale: var(--blush-whisper);
 
-  --eucalyptus: #c8d5b9;
-  --eucalyptus-dark: #a9b896;
-  --eucalyptus-light: #dde6cf;
+  --eucalyptus: var(--eucalyptus-primary);
+  --eucalyptus-dark: var(--eucalyptus-deep);
+  --eucalyptus-light: var(--eucalyptus-soft);
 
-  --cream: #faf8f5;
-  --ivory: #fffdf8;
-  --soft-gray: #f5f5f5;
-  --charcoal: #444444;
-  --warm-white: #fefefe;
+  --cream: var(--champagne);
+  --ivory: var(--pearl);
+  --soft-gray: var(--dove);
+  --charcoal: var(--charcoal);
+  --warm-white: var(--pearl);
 
-  /* Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-script: 'Dancing Script', cursive;
-  --font-body: 'Poppins', sans-serif;
+  /* Enhanced Typography - Using Premium System */
+  --font-heading: var(--font-display);
+  --font-script: var(--font-script);
+  --font-body: var(--font-body);
 
-  /* Spacing & Layout */
-  --border-radius: 12px;
-  --border-radius-large: 20px;
-  --shadow-soft: 0 4px 20px rgba(156, 175, 136, 0.15);
-  --shadow-medium: 0 8px 32px rgba(156, 175, 136, 0.2);
-  --shadow-large: 0 16px 64px rgba(156, 175, 136, 0.25);
+  /* Enhanced Spacing & Layout */
+  --border-radius: var(--radius-md);
+  --border-radius-large: var(--radius-xl);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-medium: var(--shadow-medium);
+  --shadow-large: var(--shadow-large);
 
-  /* Animations */
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Premium Animations */
+  --transition-smooth: all var(--duration-normal) var(--ease-out);
+  --transition-bounce: all var(--duration-slow) var(--ease-bounce);
 
+  /* Apply Premium Typography */
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   font-weight: 400;
   color-scheme: light;
   color: var(--charcoal);
-  background: linear-gradient(135deg, var(--ivory) 0%, var(--blush-pale) 100%);
+  background: var(--gradient-ethereal);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -62,13 +69,26 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    var(--ivory) 0%,
-    var(--blush-pale) 50%,
-    var(--sage-green-pale) 100%
-  );
+  background: var(--gradient-ethereal);
   background-attachment: fixed;
+  /* Enhanced with premium backdrop effects */
+  position: relative;
+}
+
+/* ✨ Premium Background Effects */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(143, 168, 118, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(232, 180, 184, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(184, 209, 166, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Loading Animation */

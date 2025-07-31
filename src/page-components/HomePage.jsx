@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import './HomePage.css';
+import './HomePage-premium.css';
 
 const HomePage = () => {
   return (

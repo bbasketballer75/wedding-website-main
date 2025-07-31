@@ -1,4 +1,7 @@
-/* Skip to content accessibility link */
+/* 🎨 Import Premium Design System */
+@import './styles/premium-design-system.css';
+
+/* ✨ Enhanced Skip to Content Link */
 .skip-link {
   position: absolute;
   left: -999px;
@@ -7,32 +10,37 @@
   height: 1px;
   overflow: hidden;
   z-index: 10000;
-  background: #4f46e5;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: left 0.2s;
+  background: var(--sage-primary);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+  font-weight: 500;
+  transition: all var(--duration-fast) var(--ease-out);
+  box-shadow: var(--shadow-large);
 }
 .skip-link:focus {
-  left: 16px;
-  top: 16px;
+  left: var(--space-4);
+  top: var(--space-4);
   width: auto;
   height: auto;
-  outline: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.12);
+  outline: 2px solid white;
+  box-shadow: var(--shadow-xl);
+  transform: scale(1.05);
 }
-/* One-page section styling */
+
+/* 🎭 Enhanced Section Styling */
 section {
   min-height: 80vh;
-  padding: 4rem 0 3rem 0;
+  padding: var(--space-16) 0 var(--space-12) 0;
   scroll-margin-top: 80px;
   position: relative;
   opacity: 0;
   transform: translateY(40px);
   transition:
-    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity var(--duration-slower) var(--ease-out),
+    transform var(--duration-slower) var(--ease-out);
 }
 
 section.visible {
@@ -53,19 +61,13 @@ section.visible {
 
 .app-container {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    var(--ivory) 0%,
-    var(--blush-pale) 30%,
-    var(--sage-green-pale) 70%,
-    var(--eucalyptus-light) 100%
-  );
+  background: var(--gradient-ethereal);
   background-attachment: fixed;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Beautiful decorative elements */
+/* ✨ Premium Decorative Elements */
 .app-container::before {
   content: '';
   position: fixed;
@@ -73,13 +75,15 @@ section.visible {
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle,
-    transparent 20%,
-    rgba(156, 175, 136, 0.03) 50%,
-    transparent 70%
+  background: conic-gradient(
+    from 45deg,
+    transparent 0deg,
+    rgba(143, 168, 118, 0.02) 90deg,
+    transparent 180deg,
+    rgba(232, 180, 184, 0.02) 270deg,
+    transparent 360deg
   );
-  animation: float 6s ease-in-out infinite;
+  animation: float var(--duration-slower) ease-in-out infinite;
   pointer-events: none;
   z-index: 1;
 }
@@ -94,7 +98,7 @@ section.visible {
   background: radial-gradient(
     circle,
     transparent 20%,
-    rgba(244, 194, 194, 0.03) 50%,
+    rgba(184, 209, 166, 0.03) 50%,
     transparent 70%
   );
   animation: float 8s ease-in-out infinite reverse;

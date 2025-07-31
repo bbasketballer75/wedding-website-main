@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "deploy:prod": "netlify deploy --prod",
-    "dev": "set NEXT_DEV_SERVER_ENGINE=webpack && next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "build:analyze": "set ANALYZE=true && npm run build",
     "bundle:analyze": "npx webpack-bundle-analyzer .next/static/chunks/*.js",

@@ -2,15 +2,22 @@
 
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-// Note: This test needs to be updated for Next.js App Router structure
-// import App from '../App.jsx'; // Deprecated - using Next.js App Router now
+import HomePage from '../page-components/HomePage';
+
+// Mock Next.js router for testing
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
+  usePathname: () => '/',
+}));
 
 describe('Complete Guest Journey', () => {
-  it.skip('should allow a guest to view album, sign guestbook, and explore wedding party - NEEDS UPDATE FOR NEXT.JS', async () => {
-    // TODO: Update this test for Next.js App Router
-    // render(
-    //   <HomePage />
-    // );
+  it('should allow a guest to view album, sign guestbook, and explore wedding party', async () => {
+    render(<HomePage />);
 
     // Wait for landing page and enter site
     const enterButton = await screen.findByRole(

@@ -46,12 +46,28 @@ if (fs.existsSync(reportFile)) {
     const performanceScore = Math.round(categories.performance.score * 100);
     const accessibilityScore = Math.round(categories.accessibility.score * 100);
 
-    console.log(
-      `✅ Performance Score: ${performanceScore}/100 ${performanceScore >= 90 ? '(Excellent!)' : performanceScore >= 75 ? '(Good)' : '(Needs improvement)'}`
-    );
-    console.log(
-      `✅ Accessibility Score: ${accessibilityScore}/100 ${accessibilityScore >= 95 ? '(Excellent!)' : accessibilityScore >= 80 ? '(Good)' : '(Needs improvement)'}`
-    );
+    // Determine performance status
+    let performanceStatus;
+    if (performanceScore >= 90) {
+      performanceStatus = '(Excellent!)';
+    } else if (performanceScore >= 75) {
+      performanceStatus = '(Good)';
+    } else {
+      performanceStatus = '(Needs improvement)';
+    }
+
+    // Determine accessibility status
+    let accessibilityStatus;
+    if (accessibilityScore >= 95) {
+      accessibilityStatus = '(Excellent!)';
+    } else if (accessibilityScore >= 80) {
+      accessibilityStatus = '(Good)';
+    } else {
+      accessibilityStatus = '(Needs improvement)';
+    }
+
+    console.log(`✅ Performance Score: ${performanceScore}/100 ${performanceStatus}`);
+    console.log(`✅ Accessibility Score: ${accessibilityScore}/100 ${accessibilityStatus}`);
 
     // Check specific audits
     const nextGenFormats = audits['modern-image-formats'];

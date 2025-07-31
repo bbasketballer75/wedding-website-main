@@ -8,7 +8,6 @@ const GuestbookPage = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // const [error, setError] = useState(null);
   const [formError, setFormError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);

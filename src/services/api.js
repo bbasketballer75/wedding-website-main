@@ -12,6 +12,16 @@ const getApiUrl = () => {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
+  // Check if we're in local development by looking for local backend
+  if (typeof window !== 'undefined') {
+    // Try to detect if local backend is running
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      // Return local backend URL for development
+      return 'http://localhost:8080/api';
+    }
+  }
+
   // Fallback for production
   if (typeof window !== 'undefined') {
     return 'https://wedding-backend.netlify.app/.netlify/functions';

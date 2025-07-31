@@ -13,6 +13,36 @@ import '../accessibility.css';
 const OnePage = React.lazy(() => import('../OnePage'));
 const LandingPage = React.lazy(() => import('../components/LandingPage'));
 const MusicPlayer = React.lazy(() => import('../components/MusicPlayer'));
+
+// Skip link component for accessibility
+const SkipLink = () => (
+  <a
+    href="#main-content"
+    className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-2 focus:bg-blue-600 focus:text-white focus:underline"
+    style={{
+      position: 'absolute',
+      left: '-9999px',
+      width: '1px',
+      height: '1px',
+      overflow: 'hidden',
+    }}
+    onFocus={(e) => {
+      e.target.style.position = 'static';
+      e.target.style.width = 'auto';
+      e.target.style.height = 'auto';
+      e.target.style.overflow = 'visible';
+    }}
+    onBlur={(e) => {
+      e.target.style.position = 'absolute';
+      e.target.style.left = '-9999px';
+      e.target.style.width = '1px';
+      e.target.style.height = '1px';
+      e.target.style.overflow = 'hidden';
+    }}
+  >
+    Skip to main content
+  </a>
+);
 const NotificationBanner = React.lazy(() => import('../components/NotificationBanner'));
 
 function HomePage() {
@@ -20,36 +50,6 @@ function HomePage() {
   const [showLanding, setShowLanding] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(false);
   const [notification, setNotification] = useState('');
-
-  // Skip link component for accessibility
-  const SkipLink = () => (
-    <a
-      href="#main-content"
-      className="skip-link sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-2 focus:bg-blue-600 focus:text-white focus:underline"
-      style={{
-        position: 'absolute',
-        left: '-9999px',
-        width: '1px',
-        height: '1px',
-        overflow: 'hidden',
-      }}
-      onFocus={(e) => {
-        e.target.style.position = 'static';
-        e.target.style.width = 'auto';
-        e.target.style.height = 'auto';
-        e.target.style.overflow = 'visible';
-      }}
-      onBlur={(e) => {
-        e.target.style.position = 'absolute';
-        e.target.style.left = '-9999px';
-        e.target.style.width = '1px';
-        e.target.style.height = '1px';
-        e.target.style.overflow = 'hidden';
-      }}
-    >
-      Skip to main content
-    </a>
-  );
 
   useEffect(() => {
     // Initialize Web Vitals monitoring for production

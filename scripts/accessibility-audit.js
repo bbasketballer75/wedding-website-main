@@ -230,14 +230,17 @@ function generateReport() {
 
   Object.entries(ACCESSIBILITY_CHECKLIST).forEach(([check, details]) => {
     const status = details.status;
-    const icon =
-      status === 'pass'
-        ? '✅'
-        : status === 'fail'
-          ? '❌'
-          : status === 'manual-check-required'
-            ? '🔍'
-            : '⚠️';
+
+    let icon;
+    if (status === 'pass') {
+      icon = '✅';
+    } else if (status === 'fail') {
+      icon = '❌';
+    } else if (status === 'manual-check-required') {
+      icon = '🔍';
+    } else {
+      icon = '⚠️';
+    }
 
     console.log(`${icon} ${check}`);
     console.log(`   ${details.description}`);

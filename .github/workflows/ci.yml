@@ -10,7 +10,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     env:
-      GCP_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON_BASE64 }}
+      GCP_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON_BASE64 || '' }}
       REACT_APP_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
       NEXT_PUBLIC_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
       # Sentry configuration for CI

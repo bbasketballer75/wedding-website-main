@@ -247,23 +247,7 @@
   line-height: 1.6;
 }
 
-.btn-primary {
-  background: var(--sage-green);
-  border: none;
-  border-radius: var(--border-radius);
-  padding: 0.75rem 1.5rem;
-  font-family: var(--font-body);
-  font-weight: 500;
-  transition: var(--transition-bounce);
-  box-shadow: var(--shadow-soft);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--sage-green-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
+/* .btn-primary styles moved to premium-design-system.css to avoid duplication */
 
 /* Responsive Design */
 @media (max-width: 768px) {

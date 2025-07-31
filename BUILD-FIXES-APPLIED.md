@@ -134,9 +134,10 @@ Route (app)                    Size     First Load JS
 
 #### 🔧 **Optional Optimizations:**
 
-1. **Sentry Auth Token**: Set `SENTRY_AUTH_TOKEN` for error monitoring
-2. **Bundle Analysis**: Run `npm run build:analyze` to check bundle size
-3. **Performance Testing**: Run Lighthouse audit on built site
+1. **Sentry Auth Token**: Implemented conditional Sentry configuration to eliminate warnings when `SENTRY_AUTH_TOKEN` is not available
+2. **Bundle Analyzer Dependency**: Moved `@next/bundle-analyzer` from devDependencies to dependencies for Netlify production builds
+3. **Bundle Analysis**: Run `npm run build:analyze` to check bundle size
+4. **Performance Testing**: Run Lighthouse audit on built site
 
 ### **Summary:**
 

@@ -38,6 +38,7 @@
     "@fontsource/roboto": "^5.0.15",
     "@googlemaps/js-api-loader": "^1.16.8",
     "@modelcontextprotocol/server-sequential-thinking": "^2025.7.1",
+    "@next/bundle-analyzer": "^15.4.5",
     "@sentry/nextjs": "^9.43.0",
     "@storybook/addon-a11y": "^9.0.18",
     "@storybook/addon-actions": "^9.0.8",
@@ -74,7 +75,6 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
     "@eslint/eslintrc": "^3.3.1",
-    "@next/bundle-analyzer": "^15.4.5",
     "@storybook/testing-library": "^0.2.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

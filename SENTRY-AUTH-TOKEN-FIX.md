@@ -16,38 +16,41 @@ Please set the `authToken` option. You can find information on how to generate a
 
 ### **Solutions Applied:**
 
-#### 1. **Added Auth Token to Main Environment File** ✅
-
-**File:** `.env.local`
-
-```bash
-# Sentry Build Plugin Auth Token (for source map uploads)
-SENTRY_AUTH_TOKEN=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
-```
-
-#### 2. **Updated Next.js Sentry Configuration** ✅
+#### 1. **Conditional Sentry Configuration** ✅
 
 **File:** `next.config.ts`
 
+The core fix was to conditionally apply Sentry configuration only when the auth token is available:
+
 ```typescript
-withSentryConfig(nextConfig, {
-  org: 'friendly-city',
-  project: 'wedding-website',
+// Apply bundle analyzer and Sentry config
+const finalConfig = bundleAnalyzer(nextConfig);
 
-  // Sentry Auth Token for source map uploads
-  authToken: process.env.SENTRY_AUTH_TOKEN,
-
-  silent: !process.env.CI,
-  // ... other config
-});
+// Only apply Sentry config if auth token is available
+export default process.env.SENTRY_AUTH_TOKEN
+  ? withSentryConfig(finalConfig, {
+      org: 'friendly-city',
+      project: 'wedding-website',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      silent: !process.env.CI,
+      // ... other config
+    })
+  : finalConfig;
 ```
 
-#### 3. **Cleared Build Cache** ✅
+This approach:
 
-- Removed `.next` directory to ensure clean build
-- Resolved any cached configuration issues
+- ✅ Eliminates warnings when `SENTRY_AUTH_TOKEN` is not set
+- ✅ Enables full Sentry functionality when the token is available
+- ✅ Works in both CI/CD and local development environments
 
 ### **Results:**
+
+✅ **Build Success**: No more Sentry auth token warnings during builds  
+✅ **Conditional Configuration**: Sentry only applied when auth token is present  
+✅ **CI/CD Compatible**: Works in GitHub Actions without requiring token  
+✅ **Production Ready**: Full Sentry functionality when token is configured  
+✅ **No Breaking Changes**: Existing functionality preserved
 
 #### ✅ **Build Status:**
 

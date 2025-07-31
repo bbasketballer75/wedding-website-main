@@ -5,9 +5,6 @@ html {
 /* 🎨 Import Premium Design System */
 @import './styles/premium-design-system.css';
 
-/* Legacy font import for backward compatibility */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap');
-
 :root {
   /* 🎨 Enhanced Wedding Color Palette - Building on Premium Design System */
   /* Legacy color variables for backward compatibility */

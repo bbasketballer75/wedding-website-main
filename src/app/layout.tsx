@@ -1,7 +1,31 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import './globals.css';
 import { weddingStructuredData, websiteStructuredData } from './structured-data';
+
+// Configure premium wedding fonts
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body',
+  display: 'swap',
+});
+
+const allura = Allura({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-script',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -103,7 +127,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body
+        className={`antialiased ${cormorantGaramond.variable} ${inter.variable} ${allura.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

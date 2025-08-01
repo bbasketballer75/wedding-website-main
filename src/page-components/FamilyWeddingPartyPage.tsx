@@ -137,34 +137,32 @@ const FamilyWeddingPartyPage: React.FC = () => {
           {/* Bride's Parents */}
           <div className="family-side bride-side">
             <div className="side-header">
-              <h4 className="side-title">Jordyn's Parents</h4>
+              <h4 className="side-title">Jordyn&apos;s Parents</h4>
               <div className="side-decoration bride-decoration"></div>
             </div>
             <div className="family-grid">
               {PARENT_VIDEOS.filter((parent) => parent.side === 'bride').map((parent, index) => (
-                <div
+                <button
                   key={parent.name}
                   className={`family-member-card family-member-card-clickable ${isVisible ? 'animate-in' : ''}`}
                   style={{
                     animationDelay: `${index * 200}ms`,
                     background: parent.background,
                   }}
-                  tabIndex={0}
-                  role="button"
                   aria-label={`Play video for ${parent.display}`}
                   onClick={() => setModalVideo(parent.video)}
-                  onKeyDown={(e) =>
-                    (e.key === 'Enter' || e.key === ' ') && setModalVideo(parent.video)
-                  }
                   onMouseEnter={() => setHoveredCard(parent.name)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div className="card-inner">
                     <div className="family-member-image-container">
-                      <img
+                      <Image
                         src={parent.image}
                         alt={parent.display}
                         className="family-member-image"
+                        width={200}
+                        height={200}
+                        sizes="(max-width: 768px) 150px, 200px"
                       />
                       <div className="image-overlay">
                         <span className="family-member-play-btn" aria-hidden="true">
@@ -177,13 +175,15 @@ const FamilyWeddingPartyPage: React.FC = () => {
                     <div className="family-member-content">
                       <h5 className="family-member-name">{parent.display}</h5>
                       <p className="family-member-relation">{parent.relation}</p>
-                      <blockquote className="family-member-quote">"{parent.quote}"</blockquote>
+                      <blockquote className="family-member-quote">
+                        &ldquo;{parent.quote}&rdquo;
+                      </blockquote>
                     </div>
                   </div>
                   {hoveredCard === parent.name && (
                     <div className="card-glow" aria-hidden="true"></div>
                   )}
-                </div>
+                </button>
               ))}
             </div>
           </div>
@@ -191,34 +191,32 @@ const FamilyWeddingPartyPage: React.FC = () => {
           {/* Groom's Parents */}
           <div className="family-side groom-side">
             <div className="side-header">
-              <h4 className="side-title">Austin's Parents</h4>
+              <h4 className="side-title">Austin&apos;s Parents</h4>
               <div className="side-decoration groom-decoration"></div>
             </div>
             <div className="family-grid">
               {PARENT_VIDEOS.filter((parent) => parent.side === 'groom').map((parent, index) => (
-                <div
+                <button
                   key={parent.name}
                   className={`family-member-card family-member-card-clickable ${isVisible ? 'animate-in' : ''}`}
                   style={{
                     animationDelay: `${(index + 2) * 200}ms`,
                     background: parent.background,
                   }}
-                  tabIndex={0}
-                  role="button"
                   aria-label={`Play video for ${parent.display}`}
                   onClick={() => setModalVideo(parent.video)}
-                  onKeyDown={(e) =>
-                    (e.key === 'Enter' || e.key === ' ') && setModalVideo(parent.video)
-                  }
                   onMouseEnter={() => setHoveredCard(parent.name)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
                   <div className="card-inner">
                     <div className="family-member-image-container">
-                      <img
+                      <Image
                         src={parent.image}
                         alt={parent.display}
                         className="family-member-image"
+                        width={200}
+                        height={200}
+                        sizes="(max-width: 768px) 150px, 200px"
                       />
                       <div className="image-overlay">
                         <span className="family-member-play-btn" aria-hidden="true">
@@ -231,13 +229,15 @@ const FamilyWeddingPartyPage: React.FC = () => {
                     <div className="family-member-content">
                       <h5 className="family-member-name">{parent.display}</h5>
                       <p className="family-member-relation">{parent.relation}</p>
-                      <blockquote className="family-member-quote">"{parent.quote}"</blockquote>
+                      <blockquote className="family-member-quote">
+                        &ldquo;{parent.quote}&rdquo;
+                      </blockquote>
                     </div>
                   </div>
                   {hoveredCard === parent.name && (
                     <div className="card-glow" aria-hidden="true"></div>
                   )}
-                </div>
+                </button>
               ))}
             </div>
           </div>

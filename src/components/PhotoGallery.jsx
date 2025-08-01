@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { getAlbumMedia } from '../services/api';
 import './PhotoGallery.css';
 
@@ -71,10 +72,10 @@ const PhotoGallery = ({ refreshKey }) => {
 
   if (isLoading) {
     return (
-      <div className="loading-container" role="status" aria-live="polite">
+      <output className="loading-container" aria-live="polite">
         <div className="loading-spinner" aria-hidden="true"></div>
         <p>Loading album...</p>
-      </div>
+      </output>
     );
   }
 
@@ -90,11 +91,11 @@ const PhotoGallery = ({ refreshKey }) => {
   }
 
   return (
-    <div className="photo-gallery" role="main" aria-label="Wedding photo gallery">
+    <main className="photo-gallery" aria-label="Wedding photo gallery">
       {media.length === 0 ? (
-        <div className="empty-state" role="status">
+        <output className="empty-state">
           <p>The album is currently empty. Be the first to contribute!</p>
-        </div>
+        </output>
       ) : (
         <>
           <h2 className="sr-only">{media.length} wedding photos and videos</h2>
@@ -110,7 +111,7 @@ const PhotoGallery = ({ refreshKey }) => {
                     <source srcSet={`/${item.filepath}`} type="image/jpeg" />
                     <img
                       src={`/${item.filepath}`}
-                      alt={`Wedding photo ${index + 1}, uploaded ${new Date(item.timestamp).toLocaleDateString()}`}
+                      alt={`Wedding memory ${index + 1}, uploaded ${new Date(item.timestamp).toLocaleDateString()}`}
                       loading="lazy"
                       width="400"
                       height="300"
@@ -149,8 +150,16 @@ const PhotoGallery = ({ refreshKey }) => {
           </div>
         </>
       )}
-    </div>
+    </main>
   );
+};
+
+PhotoGallery.propTypes = {
+  refreshKey: PropTypes.number,
+};
+
+PhotoGallery.defaultProps = {
+  refreshKey: 0,
 };
 
 export default PhotoGallery;

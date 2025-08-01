@@ -5,19 +5,25 @@
 import * as Sentry from '@sentry/nextjs';
 
 export function register() {
+  // Only initialize Sentry if DSN is available
+  if (!process.env.SENTRY_DSN) {
+    console.log('Sentry DSN not found - skipping Sentry initialization for development');
+    return;
+  }
+
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     // Server-side Sentry initialization
     Sentry.init({
       dsn: process.env.SENTRY_DSN,
 
       // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-      tracesSampleRate: 1,
+      tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1,
 
       // Enable logs to be sent to Sentry
-      enableLogs: true,
+      enableLogs: process.env.NODE_ENV === 'production',
 
       // Setting this option to true will print useful information to the console while you're setting up Sentry.
-      debug: false,
+      debug: process.env.NODE_ENV === 'development',
 
       // Enable automatic instrumentation of Node.js modules
       integrations: [
@@ -35,13 +41,13 @@ export function register() {
       dsn: process.env.SENTRY_DSN,
 
       // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-      tracesSampleRate: 1,
+      tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1,
 
       // Enable logs to be sent to Sentry
-      enableLogs: true,
+      enableLogs: process.env.NODE_ENV === 'production',
 
       // Setting this option to true will print useful information to the console while you're setting up Sentry.
-      debug: false,
+      debug: process.env.NODE_ENV === 'development',
     });
   }
 }
@@ -60,6 +66,17 @@ export async function onRequestError(
     routeType: 'render' | 'route' | 'middleware' | 'action';
   }
 ) {
-  // Capture the error with Sentry, including request context
-  Sentry.captureRequestError(err, request, context);
+  // Only capture error with Sentry if DSN is available
+  if (process.env.SENTRY_DSN) {
+    Sentry.captureRequestError(err, request, context);
+  } else {
+    // Fallback to console logging in development
+    console.error('Request Error:', {
+      error: err,
+      path: request.path,
+      method: request.method,
+      routePath: context.routePath,
+      routeType: context.routeType,
+    });
+  }
 }

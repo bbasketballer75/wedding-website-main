@@ -6,6 +6,10 @@
   "scripts": {
     "deploy:prod": "netlify deploy --prod",
     "dev": "cross-env PORT=3001 next dev --turbopack",
+    "dev:start": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1",
+    "dev:clean": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Clean",
+    "dev:force": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Force",
+    "dev:validate": "node scripts/validate-dev-env.mjs",
     "dev:full": "npm run dev:emulator & npm run dev:backend & npm run dev",
     "dev:emulator": "firebase emulators:start --only firestore",
     "dev:backend": "cd backend && cross-env NODE_ENV=development FIRESTORE_EMULATOR_HOST=localhost:8082 PORT=3002 npm start",

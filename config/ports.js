@@ -13,11 +13,11 @@
  */
 
 export const PORTS = {
-  // Frontend (Next.js)
-  FRONTEND: 3005,
+  // Frontend (Next.js) - Dynamic port detection
+  FRONTEND: process.env.PORT || process.env.FRONTEND_PORT || 3001,
 
   // Backend (Express API)
-  BACKEND: 3002,
+  BACKEND: process.env.BACKEND_PORT || 3002,
 
   // Firebase Emulator
   FIRESTORE_EMULATOR: 8082,
@@ -39,10 +39,18 @@ export const HOSTS = {
 export const CORS_ORIGINS = [
   `http://${HOSTS.LOCAL}:${PORTS.FRONTEND}`,
   `http://${HOSTS.LOCAL}:3000`, // Fallback for default Next.js port
+  `http://${HOSTS.LOCAL}:3001`, // Current dev server port
+  `http://${HOSTS.LOCAL}:3001`, // Common dev server port
+  `http://${HOSTS.LOCAL}:3005`, // Alternative dev server port
   `http://${HOSTS.LOCAL}:${PORTS.STORYBOOK}`, // For Storybook integration
   'https://www.theporadas.com',
   'https://theporadas.com',
 ];
+
+// Dynamic CORS origins - adds current PORT if different
+if (process.env.PORT && !CORS_ORIGINS.includes(`http://${HOSTS.LOCAL}:${process.env.PORT}`)) {
+  CORS_ORIGINS.push(`http://${HOSTS.LOCAL}:${process.env.PORT}`);
+}
 
 /**
  * Get the API base URL based on environment
@@ -59,3 +67,4 @@ export function getFirestoreEmulatorHost() {
 }
 
 export default PORTS;
+

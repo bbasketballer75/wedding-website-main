@@ -6,11 +6,17 @@
   NODE_VERSION = "20"
   SECRETS_SCAN_OMIT_PATHS = ".netlify/.next/cache/**,**/SENTRY-AUTH-TOKEN-FIX.md,**/BUILD-FIXES-APPLIED.md,**/*-FIX.md"
 
+# Netlify Functions configuration
+[functions]
+  external_node_modules = ["sharp"]
+
+# API routes redirects
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
 
+# Next.js catch-all redirect (must be last)
 [[redirects]]
   from = "/*"
   to = "/index.html"

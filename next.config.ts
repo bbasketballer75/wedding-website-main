@@ -20,6 +20,8 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Disable optimization for Netlify static hosting
+    unoptimized: process.env.NODE_ENV === 'production',
   },
 
   webpack: (config, { dev, isServer }) => {

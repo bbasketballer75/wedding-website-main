@@ -26,7 +26,7 @@ function Stop-ProcessOnPort {
         foreach ($processId in $processes) {
             try {
                 Write-Host "⚡ Stopping process $processId on port $Port..." -ForegroundColor Red
-                taskkill /f /pid $processId 2>$null
+                Stop-Process -Id $processId -Force -ErrorAction SilentlyContinue
             } catch {
                 Write-Host "⚠️  Could not stop process $processId" -ForegroundColor Yellow
             }

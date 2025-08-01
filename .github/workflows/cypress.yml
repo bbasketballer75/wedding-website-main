@@ -30,8 +30,7 @@ jobs:
           start: npm start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 120
-          record: ${{ secrets.CYPRESS_RECORD_KEY != '' && true || false }}
-          parallel: ${{ secrets.CYPRESS_RECORD_KEY != '' && true || false }}
+          record: false
+          parallel: false
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

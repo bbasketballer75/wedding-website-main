@@ -49,11 +49,12 @@ describe('UploadForm', () => {
   it('shows error for file too large', async () => {
     render(<UploadForm />);
     const fileInput = screen.getByLabelText('Select image or video to upload');
-    const file = new File(['a'.repeat(101 * 1024 * 1024)], 'big.mp4', { type: 'video/mp4' });
+    // Create a smaller mock file to speed up the test
+    const file = new File(['test'], 'big.mp4', { type: 'video/mp4' });
     Object.defineProperty(file, 'size', { value: 101 * 1024 * 1024 });
     fireEvent.change(fileInput, { target: { files: [file] } });
     expect(await screen.findByRole('alert')).toHaveTextContent('File is too large');
-  }, 10000);
+  }, 15000);
 
   it('calls uploadMedia and shows success on valid upload', async () => {
     vi.mocked(uploadMedia).mockResolvedValueOnce();

@@ -27,7 +27,7 @@ const getApiUrl = () => {
 
   // Fallback for production
   if (typeof window !== 'undefined') {
-    return 'https://wedding-backend.netlify.app/.netlify/functions';
+    return `${window.location.origin}/api`;
   }
 
   // During build time, return empty string to avoid build errors

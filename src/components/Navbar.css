@@ -3,11 +3,12 @@
   backdrop-filter: blur(15px);
   box-shadow: 0 2px 20px rgba(156, 175, 136, 0.15);
   border-bottom: 1px solid rgba(156, 175, 136, 0.1);
-  padding: 1rem 0;
+  padding: 0.5rem 0; /* Reduced from 1rem to 0.5rem */
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: var(--transition-smooth);
+  min-height: 60px; /* Set a smaller minimum height */
 }
 
 .navbar.scrolled {
@@ -18,10 +19,11 @@
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem; /* Reduced from 2rem to 1rem */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 50px; /* Set a smaller container height */
 }
 
 .navbar-brand {

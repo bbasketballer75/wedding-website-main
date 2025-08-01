@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import { setupSectionFadeIn } from '../scrollFadeIn';
 import Navbar from '../components/Navbar';
 import ThankYouSection from '../components/ThankYouSection';
-import WeddingHighlightsSection from '../components/WeddingHighlightsSection';
 import LoadingScreen from '../components/LoadingScreen';
 import '../App.css';
 
@@ -14,36 +13,20 @@ const MemoryWall = dynamic(() => import('../components/MemoryWall'), {
   loading: () => <LoadingScreen message="Loading Memory Wall..." />,
   ssr: false,
 });
-const KeepsakesSection = dynamic(() => import('../components/KeepsakesSection'), {
-  loading: () => <LoadingScreen message="Loading Keepsakes..." />,
-  ssr: false,
-});
-const TimelineSection = dynamic(() => import('../components/TimelineSection'), {
-  loading: () => <LoadingScreen message="Loading Timeline..." />,
-  ssr: false,
-});
-const StayInTouchSection = dynamic(() => import('../components/StayInTouchSection'), {
-  loading: () => <LoadingScreen message="Loading Stay in Touch..." />,
-  ssr: false,
-});
 const AlbumPage = dynamic(() => import('../page-components/AlbumPage'), {
-  loading: () => <LoadingScreen message="Loading Album..." />,
+  loading: () => <LoadingScreen message="Loading Engagement & Album..." />,
   ssr: false,
 });
 const GuestbookPage = dynamic(() => import('../page-components/GuestbookPage'), {
   loading: () => <LoadingScreen message="Loading Guestbook..." />,
   ssr: false,
 });
-const MapPage = dynamic(() => import('../page-components/MapPage'), {
-  loading: () => <LoadingScreen message="Loading Map..." />,
+const FamilyWeddingPartyPage = dynamic(() => import('../page-components/FamilyWeddingPartyPage'), {
+  loading: () => <LoadingScreen message="Loading Family & Wedding Party..." />,
   ssr: false,
 });
-const FamilyTreePage = dynamic(() => import('../page-components/FamilyTreePage'), {
-  loading: () => <LoadingScreen message="Loading Family Tree..." />,
-  ssr: false,
-});
-const WeddingPartyPage = dynamic(() => import('../page-components/WeddingPartyPage'), {
-  loading: () => <LoadingScreen message="Loading Wedding Party..." />,
+const StayInTouchSection = dynamic(() => import('../components/StayInTouchSection'), {
+  loading: () => <LoadingScreen message="Loading Stay in Touch..." />,
   ssr: false,
 });
 
@@ -62,62 +45,31 @@ export default function Home() {
         {/* Hero Section */}
         <ThankYouSection />
 
-        {/* Wedding Highlights - Always visible */}
-        <WeddingHighlightsSection />
-
-        {/* Memory Wall - Lazy loaded */}
+        {/* Memory Wall & Photo Booth */}
         <Suspense fallback={<LoadingScreen message="Loading Memory Wall..." />}>
           <section id="memorywall" aria-label="Memory Wall and Photo Booth">
             <MemoryWall />
           </section>
         </Suspense>
 
-        {/* Keepsakes - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Keepsakes..." />}>
-          <section id="keepsakes" aria-label="Downloadable Keepsakes">
-            <KeepsakesSection />
-          </section>
-        </Suspense>
-
-        {/* Timeline - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Timeline..." />}>
-          <section id="timeline" aria-label="Wedding Day Timeline">
-            <TimelineSection />
-          </section>
-        </Suspense>
-
-        {/* Album - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Album..." />}>
-          <section id="album" aria-label="Photo Album">
+        {/* Engagement & Photo Album */}
+        <Suspense fallback={<LoadingScreen message="Loading Engagement & Album..." />}>
+          <section id="album" aria-label="Engagement & Photo Album">
             <AlbumPage />
           </section>
         </Suspense>
 
-        {/* Guestbook - Lazy loaded */}
+        {/* Guestbook */}
         <Suspense fallback={<LoadingScreen message="Loading Guestbook..." />}>
           <section id="guestbook" aria-label="Guestbook">
             <GuestbookPage />
           </section>
         </Suspense>
 
-        {/* Map - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Map..." />}>
-          <section id="map" aria-label="Venue Map">
-            <MapPage />
-          </section>
-        </Suspense>
-
-        {/* Family Tree - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Family..." />}>
-          <section id="family" aria-label="Family Tree">
-            <FamilyTreePage />
-          </section>
-        </Suspense>
-
-        {/* Wedding Party - Lazy loaded */}
-        <Suspense fallback={<LoadingScreen message="Loading Wedding Party..." />}>
-          <section id="party" aria-label="Wedding Party">
-            <WeddingPartyPage />
+        {/* Family Tree & Wedding Party Combined */}
+        <Suspense fallback={<LoadingScreen message="Loading Family & Wedding Party..." />}>
+          <section id="family-party" aria-label="Family Tree & Wedding Party">
+            <FamilyWeddingPartyPage />
           </section>
         </Suspense>
 

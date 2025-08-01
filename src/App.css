@@ -720,3 +720,164 @@ section.visible {
     align-items: center;
   }
 }
+
+/* ✨ FAMILY & WEDDING PARTY COMBINED SECTION */
+.family-wedding-party-page {
+  background: linear-gradient(
+    to bottom,
+    var(--pearl) 0%,
+    var(--champagne) 50%,
+    var(--sage-whisper) 100%
+  );
+  padding: var(--space-20) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-16);
+  border-bottom: 2px solid var(--sage-whisper);
+}
+
+.tab-button {
+  padding: var(--space-4) var(--space-8);
+  background: transparent;
+  border: none;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--charcoal);
+  cursor: pointer;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: all var(--duration-normal) var(--ease-out);
+  position: relative;
+  bottom: -2px;
+}
+
+.tab-button:hover {
+  background: var(--sage-whisper);
+  transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: white;
+  color: var(--sage-primary);
+  border-bottom: 2px solid white;
+  box-shadow: var(--shadow-medium);
+}
+
+.tab-content {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
+  box-shadow: var(--shadow-large);
+  min-height: 400px;
+}
+
+.subsection-title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--sage-deep);
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.content-description {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  color: var(--charcoal);
+  margin-bottom: var(--space-12);
+  line-height: var(--leading-relaxed);
+}
+
+.family-grid,
+.wedding-party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.family-branch,
+.party-side {
+  text-align: center;
+}
+
+.branch-title,
+.side-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--blush-primary);
+  margin-bottom: var(--space-6);
+}
+
+.family-members,
+.party-members {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.family-member,
+.party-member {
+  background: var(--sage-whisper);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.family-member:hover,
+.party-member:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.member-photo-placeholder {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+}
+
+.family-member h5,
+.party-member h5 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--sage-deep);
+  margin-bottom: var(--space-2);
+}
+
+.family-member p,
+.party-member p {
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+/* Responsive adjustments for family section */
+@media (max-width: 768px) {
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .tab-button {
+    width: 200px;
+  }
+
+  .family-grid,
+  .wedding-party-grid {
+    grid-template-columns: 1fr;
+  }
+}

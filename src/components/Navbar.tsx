@@ -81,8 +81,16 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <li className="nav-item">
               <NavLink
                 onePage={onePage}
+                href="#memorywall"
+                label="Memory Wall"
+                onClick={(e) => handleNavClick(e, 'memorywall')}
+              />
+            </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
                 href="#album"
-                label="Album"
+                label="Engagement"
                 onClick={(e) => handleNavClick(e, 'album')}
               />
             </li>
@@ -97,25 +105,9 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <li className="nav-item">
               <NavLink
                 onePage={onePage}
-                href="#map"
-                label="Map"
-                onClick={(e) => handleNavClick(e, 'map')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#family"
-                label="Family Tree"
-                onClick={(e) => handleNavClick(e, 'family')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#party"
-                label="Wedding Party"
-                onClick={(e) => handleNavClick(e, 'party')}
+                href="#family-party"
+                label="Our People"
+                onClick={(e) => handleNavClick(e, 'family-party')}
               />
             </li>
           </ul>

@@ -185,4 +185,5 @@ window.addEventListener('scroll', () => {
   }
 });
 
-export default analytics;
+// Make analytics available globally
+window.analytics = analytics;

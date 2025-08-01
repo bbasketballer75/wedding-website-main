@@ -161,9 +161,7 @@ export default function RootLayout({
         </a>
         <ServiceWorkerRegistration />
         <Script src="/analytics.js" strategy="afterInteractive" />
-        <Script id="performance-monitor" strategy="afterInteractive">
-          {`import('../utils/performanceMonitor.js');`}
-        </Script>
+        <Script src="/utils/performanceMonitor.js" strategy="afterInteractive" />
         {children}
       </body>
     </html>

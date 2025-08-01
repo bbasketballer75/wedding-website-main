@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Map from '../components/Map'; // New import
+import { TileLayer, Marker, Popup } from 'react-leaflet'; // MapContainer removed
 import { getMapLocations as getPins } from '../services/api';
 import LoadingScreen from '../components/LoadingScreen';
 import './MapPage.css';
@@ -52,7 +53,7 @@ const MapPage = () => {
               {error}
             </div>
           ) : (
-            <MapContainer
+            <Map
               center={[20, 0]}
               zoom={2}
               // onClick={handleMapClick}
@@ -68,7 +69,7 @@ const MapPage = () => {
                   <Popup>{pin.label || 'Guest'}</Popup>
                 </Marker>
               ))}
-            </MapContainer>
+            </Map>
           )}
         </>
       )}

@@ -1,9 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import dynamic from 'next/dynamic';
 import { getMapLocations as getPins } from '../services/api';
 import LoadingScreen from '../components/LoadingScreen';
 import './MapPage.css';
 import 'leaflet/dist/leaflet.css';
+
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Popup),
+  { ssr: false }
+);
 
 const MapPage = () => {
   const [pins, setPins] = useState([]);

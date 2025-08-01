@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "deploy:prod": "netlify deploy --prod",
-    "dev": "set PORT=3005 && next dev --turbopack",
+    "dev": "set PORT=3001 && next dev --turbopack",
     "dev:full": "npm run dev:emulator & npm run dev:backend & npm run dev",
     "dev:emulator": "firebase emulators:start --only firestore",
     "dev:backend": "cd backend && set NODE_ENV=development && set FIRESTORE_EMULATOR_HOST=localhost:8082 && set PORT=3002 && npm start",

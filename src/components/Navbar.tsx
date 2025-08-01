@@ -110,6 +110,14 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
                 onClick={(e) => handleNavClick(e, 'family-party')}
               />
             </li>
+            <li className="nav-item">
+              <NavLink
+                onePage={onePage}
+                href="#map"
+                label="Map"
+                onClick={(e) => handleNavClick(e, 'map')}
+              />
+            </li>
           </ul>
         </div>
       </div>

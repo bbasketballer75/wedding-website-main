@@ -803,9 +803,9 @@ section.visible {
 .family-grid,
 .wedding-party-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--space-8);
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -866,6 +866,160 @@ section.visible {
 
 /* Responsive adjustments for family section */
 @media (max-width: 768px) {
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .tab-button {
+    width: 200px;
+  }
+
+  .family-grid,
+  .wedding-party-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ✨ COUPLE SECTION STYLES */
+.couple-section {
+  margin: var(--space-16) 0;
+  text-align: center;
+}
+
+.couple-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-12);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.couple-member {
+  text-align: center;
+}
+
+.couple-image-container {
+  margin-bottom: var(--space-4);
+}
+
+.couple-image {
+  border-radius: 50%;
+  border: 6px solid var(--sage-primary);
+  box-shadow: var(--shadow-xl);
+  transition: transform var(--duration-normal) var(--ease-out);
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.couple-image:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-2xl);
+}
+
+.couple-name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--sage-deep);
+  margin-bottom: var(--space-2);
+}
+
+.couple-title {
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.couple-heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ✨ PARENTS AND WEDDING PARTY SECTION STYLES */
+.parents-section,
+.wedding-party-section {
+  margin: var(--space-20) 0;
+}
+
+.party-subheading {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--sage-deep);
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.party-member-card {
+  text-align: center;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-medium);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.party-member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-large);
+}
+
+.party-member-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+
+.party-member-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--sage-deep);
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments for couple and party sections */
+@media (max-width: 768px) {
+  .couple-container {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .couple-heart {
+    order: -1;
+    margin-bottom: var(--space-4);
+  }
+
+  .party-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+  }
+
   .tab-navigation {
     flex-direction: column;
     align-items: center;

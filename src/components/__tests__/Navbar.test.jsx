@@ -16,6 +16,7 @@ describe('Navbar', () => {
     expect(screen.getByRole('link', { name: /Engagement/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Guestbook/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Our People/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Map/i })).toBeInTheDocument();
   });
 
   it('opens and closes mobile menu', () => {
@@ -35,5 +36,6 @@ describe('Navbar', () => {
     expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('Engagement')).toBeInTheDocument();
     expect(screen.getByText('Guestbook')).toBeInTheDocument();
+    expect(screen.getByText('Map')).toBeInTheDocument();
   });
 });

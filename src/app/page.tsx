@@ -25,6 +25,10 @@ const FamilyWeddingPartyPage = dynamic(() => import('../page-components/FamilyWe
   loading: () => <LoadingScreen message="Loading Family & Wedding Party..." />,
   ssr: false,
 });
+const MapPage = dynamic(() => import('../page-components/MapPage'), {
+  loading: () => <LoadingScreen message="Loading Map..." />,
+  ssr: false,
+});
 const StayInTouchSection = dynamic(() => import('../components/StayInTouchSection'), {
   loading: () => <LoadingScreen message="Loading Stay in Touch..." />,
   ssr: false,
@@ -70,6 +74,13 @@ export default function Home() {
         <Suspense fallback={<LoadingScreen message="Loading Family & Wedding Party..." />}>
           <section id="family-party" aria-label="Family Tree & Wedding Party">
             <FamilyWeddingPartyPage />
+          </section>
+        </Suspense>
+
+        {/* Map */}
+        <Suspense fallback={<LoadingScreen message="Loading Map..." />}>
+          <section id="map" aria-label="Wedding Venue Map">
+            <MapPage />
           </section>
         </Suspense>
 

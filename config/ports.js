@@ -44,8 +44,9 @@ export const CORS_ORIGINS = [
   `http://${HOSTS.LOCAL}:3005`, // Alternative dev server port
   `http://${HOSTS.LOCAL}:${PORTS.STORYBOOK}`, // For Storybook integration
   'https://www.theporadas.com',
-  'https://theporadas.com',,
-  "http://localhost:3001"
+  'https://theporadas.com',
+  ,
+  'http://localhost:3001',
 ];
 
 // Dynamic CORS origins - adds current PORT if different
@@ -68,5 +69,3 @@ export function getFirestoreEmulatorHost() {
 }
 
 export default PORTS;
-
-

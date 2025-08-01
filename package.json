@@ -25,6 +25,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "fix:all": "npm run lint:fix && npm run format",
+    "fix:pre-commit": "node scripts/pre-commit-fix.mjs",
     "test": "npm run test:frontend && npm run test:backend",
     "test:frontend": "vitest run",
     "test:backend": "cd backend && npm test",

@@ -34,7 +34,7 @@ async function installLighthouse() {
 
 // Available functions for manual testing (uncomment in main() to use):
 
-async function startLocalServer() {
+async function _startLocalServer() {
   console.log('🚀 Starting local production server...');
 
   // Build first
@@ -61,7 +61,7 @@ async function startLocalServer() {
   }
 }
 
-async function runLighthouseAudit(url) {
+async function _runLighthouseAudit(url) {
   // Available for manual testing
   console.log('\n🔍 RUNNING LIGHTHOUSE AUDIT');
   console.log('============================\n');

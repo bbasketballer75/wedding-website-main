@@ -29,6 +29,7 @@ Your wedding website demonstrates **outstanding code quality** with proper acces
   - **Compliance**: Meets WCAG 2.1 AA standards
 
 - **Navbar.tsx (Lines 79-124)**: ✅ **Properly Implemented**
+
   ```jsx
   <NavLink role="menuitem" />
   ```

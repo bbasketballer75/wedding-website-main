@@ -6,13 +6,14 @@
  */
 
 import fs from 'fs';
+// This script is for local testing and contains utility functions for future use
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const execAsync = promisify(exec);
 
 console.log('🔍 LIGHTHOUSE AUDIT & MANUAL TESTING SUITE');
@@ -36,7 +37,7 @@ async function installLighthouse() {
   }
 }
 
-async function startLocalServer() {
+async function _startLocalServer() {
   console.log('🚀 Starting local production server...');
 
   // Build first
@@ -63,7 +64,7 @@ async function startLocalServer() {
   }
 }
 
-async function runLighthouseAudit(url) {
+async function _runLighthouseAudit(url) {
   console.log('\n🔍 RUNNING LIGHTHOUSE AUDIT');
   console.log('============================\n');
 

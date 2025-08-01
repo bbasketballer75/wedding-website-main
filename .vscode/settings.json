@@ -34,12 +34,7 @@
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.acceptSuggestionOnEnter": "smart",
   // Enhanced Linting Configuration
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onSave",
   "eslint.codeAction.showDocumentation": {
     "enable": true
@@ -88,28 +83,12 @@
     "typescript": "typescript"
   },
   "tailwindCSS.experimental.classRegex": [
-    [
-      "clsx\\(([^)]*)\\)",
-      "(?:'|\"|`)([^']*)(?:'|\"|`)"
-    ],
-    [
-      "className\\s*:\\s*['\"`]([^'\"`]*)['\"`]"
-    ],
-    [
-      "class\\s*:\\s*['\"`]([^'\"`]*)['\"`]"
-    ],
-    [
-      "tw`([^`]*)`",
-      "'([^']*)'"
-    ],
-    [
-      "tw\\.[^`]+`([^`]*)`",
-      "'([^']*)'"
-    ],
-    [
-      "styled\\.[^`]+`([^`]*)`",
-      "'([^']*)'"
-    ]
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["className\\s*:\\s*['\"`]([^'\"`]*)['\"`]"],
+    ["class\\s*:\\s*['\"`]([^'\"`]*)['\"`]"],
+    ["tw`([^`]*)`", "'([^']*)'"],
+    ["tw\\.[^`]+`([^`]*)`", "'([^']*)'"],
+    ["styled\\.[^`]+`([^`]*)`", "'([^']*)'"]
   ],
   "tailwindCSS.experimental.configFile": null,
   "tailwindCSS.experimental.showPixelEquivalents": true,
@@ -126,11 +105,7 @@
   "accessibility.runOnSave": true,
   "accessibility.highlightViolations": true,
   // Error Lens Configuration (Inline Error Display)
-  "errorLens.enabledDiagnosticLevels": [
-    "error",
-    "warning",
-    "info"
-  ],
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
   "errorLens.gutterIconsEnabled": true,
   "errorLens.statusBarIconsEnabled": true,
   // Firebase Integration
@@ -141,10 +116,7 @@
   "github.copilot.advanced": {
     "indexing.enable": true,
     "agent.mode": "automatic",
-    "context.include": [
-      "**/*.{js,ts,jsx,tsx,json,md}",
-      "!**/node_modules/**"
-    ],
+    "context.include": ["**/*.{js,ts,jsx,tsx,json,md}", "!**/node_modules/**"],
     "debug.useNodeFetcher": true,
     "length": 8000,
     "temperature": 0.1,
@@ -261,15 +233,11 @@
   "sonarlint.rules": {
     "css:S4662": "off"
   },
-  // PowerShell Analysis Configuration  
+  // PowerShell Analysis Configuration
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
   // Stylelint Configuration
-  "stylelint.validate": [
-    "css",
-    "scss",
-    "sass"
-  ],
+  "stylelint.validate": ["css", "scss", "sass"],
   "stylelint.customSyntax": "postcss-scss",
   // Search and File Explorer Enhancements (PREVIEW FEATURES!)
   "search.exclude": {

@@ -26,10 +26,6 @@ const StayInTouchSection = dynamic(() => import('../components/StayInTouchSectio
   loading: () => <LoadingScreen message="Loading Stay in Touch..." />,
   ssr: false,
 });
-const HomePage = dynamic(() => import('../page-components/HomePage'), {
-  loading: () => <LoadingScreen message="Loading Home..." />,
-  ssr: false,
-});
 const AlbumPage = dynamic(() => import('../page-components/AlbumPage'), {
   loading: () => <LoadingScreen message="Loading Album..." />,
   ssr: false,
@@ -63,38 +59,70 @@ export default function Home() {
       </a>
       <Navbar onePage />
       <main className="onepage-main" id="main-content" role="main" aria-label="Main content">
+        {/* Hero Section */}
         <ThankYouSection />
+
+        {/* Wedding Highlights - Always visible */}
         <WeddingHighlightsSection />
-        <Suspense fallback={<LoadingScreen message="Loading section..." />}>
+
+        {/* Memory Wall - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Memory Wall..." />}>
           <section id="memorywall" aria-label="Memory Wall and Photo Booth">
             <MemoryWall />
           </section>
+        </Suspense>
+
+        {/* Keepsakes - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Keepsakes..." />}>
           <section id="keepsakes" aria-label="Downloadable Keepsakes">
             <KeepsakesSection />
           </section>
+        </Suspense>
+
+        {/* Timeline - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Timeline..." />}>
           <section id="timeline" aria-label="Wedding Day Timeline">
             <TimelineSection />
           </section>
-          <section id="home" aria-label="Home">
-            <HomePage />
-          </section>
-          <section id="album" aria-label="Album">
+        </Suspense>
+
+        {/* Album - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Album..." />}>
+          <section id="album" aria-label="Photo Album">
             <AlbumPage />
           </section>
+        </Suspense>
+
+        {/* Guestbook - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Guestbook..." />}>
           <section id="guestbook" aria-label="Guestbook">
             <GuestbookPage />
           </section>
-          <section id="map" aria-label="Map">
+        </Suspense>
+
+        {/* Map - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Map..." />}>
+          <section id="map" aria-label="Venue Map">
             <MapPage />
           </section>
+        </Suspense>
+
+        {/* Family Tree - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Family..." />}>
           <section id="family" aria-label="Family Tree">
             <FamilyTreePage />
           </section>
+        </Suspense>
+
+        {/* Wedding Party - Lazy loaded */}
+        <Suspense fallback={<LoadingScreen message="Loading Wedding Party..." />}>
           <section id="party" aria-label="Wedding Party">
             <WeddingPartyPage />
           </section>
-          <StayInTouchSection />
         </Suspense>
+
+        {/* Stay in Touch - Always visible at bottom */}
+        <StayInTouchSection />
       </main>
     </div>
   );

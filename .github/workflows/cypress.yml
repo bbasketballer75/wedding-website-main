@@ -18,21 +18,28 @@ jobs:
         run: npm run build
       - name: Verify build output
         run: ls -la .next
-      - name: Cleanup any existing processes
+      - name: Comprehensive port cleanup
         run: |
-          # Kill any existing processes on port 3000
-          pkill -f "npm start" || true
-          pkill -f "next start" || true
-          # Force kill processes using port 3000
-          lsof -ti:3000 | xargs kill -9 2>/dev/null || true
-          # Wait for port to be fully freed
-          timeout=10
-          while [ $timeout -gt 0 ] && lsof -ti:3000 >/dev/null 2>&1; do
-            echo "Waiting for port 3000 to be freed... ($timeout seconds remaining)"
+          # Kill any existing Node.js processes
+          pkill -f node || true
+          pkill -f npm || true
+          pkill -f next || true
+          # Force kill any processes using port 3000
+          sudo lsof -ti:3000 | xargs sudo kill -9 2>/dev/null || true
+          # Wait for port to be completely freed
+          for i in {1..30}; do
+            if ! lsof -ti:3000 >/dev/null 2>&1; then
+              echo "Port 3000 is free"
+              break
+            fi
+            echo "Waiting for port 3000 to be freed... attempt $i/30"
             sleep 1
-            timeout=$((timeout - 1))
           done
-          echo "Port 3000 cleanup complete"
+          # Final verification
+          if lsof -ti:3000 >/dev/null 2>&1; then
+            echo "WARNING: Port 3000 still in use"
+            lsof -ti:3000 | xargs sudo kill -9 2>/dev/null || true
+          fi
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -47,7 +54,8 @@ jobs:
         if: always()
         run: |
           # Ensure all test processes are cleaned up
-          pkill -f "npm start" || true
-          pkill -f "next start" || true
-          lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+          pkill -f node || true
+          pkill -f npm || true
+          pkill -f next || true
+          sudo lsof -ti:3000 | xargs sudo kill -9 2>/dev/null || true
           echo "Test cleanup complete"

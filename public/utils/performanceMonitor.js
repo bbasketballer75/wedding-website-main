@@ -63,8 +63,8 @@ class PerformanceMonitor {
 
       try {
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-      } catch (e) {
-        console.log('LCP observer not supported');
+      } catch (error) {
+        console.warn('LCP observer not supported:', error.message);
       }
 
       // Track FID
@@ -80,8 +80,8 @@ class PerformanceMonitor {
 
       try {
         fidObserver.observe({ entryTypes: ['first-input'] });
-      } catch (e) {
-        console.log('FID observer not supported');
+      } catch (error) {
+        console.warn('FID observer not supported:', error.message);
       }
 
       // Track CLS
@@ -101,8 +101,8 @@ class PerformanceMonitor {
 
       try {
         clsObserver.observe({ entryTypes: ['layout-shift'] });
-      } catch (e) {
-        console.log('CLS observer not supported');
+      } catch (error) {
+        console.warn('CLS observer not supported:', error.message);
       }
     }
   }
@@ -173,8 +173,8 @@ class PerformanceMonitor {
 
       try {
         observer.observe({ entryTypes: ['longtask'] });
-      } catch (e) {
-        console.log('Long task observer not supported');
+      } catch (error) {
+        console.warn('Long task observer not supported:', error.message);
       }
     }
   }

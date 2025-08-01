@@ -16,7 +16,9 @@ const MapPage = () => {
         const response = await getPins();
         setPins(response.data);
       } catch {
-        setError('Could not load map pins. Please try again later.');
+        setError(
+          "We can't load the love map right now, but we know your heart traveled far to be with us! Please try again in a moment."
+        );
       } finally {
         setIsLoading(false);
       }
@@ -26,11 +28,15 @@ const MapPage = () => {
 
   return (
     <div className="map-page">
-      {isLoading && <LoadingScreen message="Loading map..." />}
+      {isLoading && <LoadingScreen message="Mapping all the love that traveled to be with us..." />}
       {!isLoading && (
         <>
-          <h2 className="section-title">Visitor Map</h2>
-          <p className="subheading">See where our guests are joining from!</p>
+          <h2 className="section-title">Love Traveled Far & Wide</h2>
+          <p className="subheading">
+            Our hearts are amazed by the distances our friends and family traveled to celebrate with
+            us! See the beautiful map of love that shows where our wonderful guests came from to
+            share in our special day.
+          </p>
           {error ? (
             <div className="error-message" role="alert">
               {error}
@@ -50,10 +56,10 @@ const MapPage = () => {
                 margin: '20px 0',
               }}
             >
-              <h3 style={{ marginBottom: '20px' }}>Interactive Map</h3>
+              <h3 style={{ marginBottom: '20px' }}>Our Guest Love Map</h3>
               <div style={{ textAlign: 'center' }}>
-                <p>🌍 World Map with Guest Locations</p>
-                <p>📍 {pins.length} pins from our wonderful guests</p>
+                <p>🌍 Celebrating love from around the world</p>
+                <p>📍 {pins.length} beautiful places our loved ones call home</p>
                 <div style={{ marginTop: '20px' }}>
                   {pins.length > 0 && (
                     <div>

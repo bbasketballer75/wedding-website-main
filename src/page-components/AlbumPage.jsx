@@ -18,7 +18,7 @@ const AlbumPage = () => {
       const response = await getAlbumMedia();
       setPhotos(response.data);
     } catch {
-      setError('Could not load album. Please try again later.');
+      setError("We couldn't load our photo collection right now. Please try again in a moment!");
     } finally {
       setIsLoading(false);
     }
@@ -48,7 +48,13 @@ const AlbumPage = () => {
   return (
     <div className="album-page">
       {(isLoading || isUploading) && (
-        <LoadingScreen message={isUploading ? 'Uploading photo...' : 'Loading album...'} />
+        <LoadingScreen
+          message={
+            isUploading
+              ? 'Adding your memory to our collection...'
+              : 'Loading our beautiful memories...'
+          }
+        />
       )}
       {!isLoading && !isUploading && error && (
         <div className="error-state">
@@ -62,14 +68,15 @@ const AlbumPage = () => {
       )}
       {!isLoading && !isUploading && !error && (
         <>
-          <h2 className="section-title">Photo & Video Album</h2>
+          <h2 className="section-title">Our Memory Collection</h2>
           <p className="album-subheading">
-            Share your favorite moments! Upload your photos and videos from the wedding, or browse
-            memories from others below.
+            This is where our wedding day lives on forever! Browse through professional photos,
+            candid moments, and behind-the-scenes magic. We'd love for you to add your own photos
+            and videos to help us see our special day through your eyes.
           </p>
           <div className="upload-section">
             <label htmlFor="album-upload-input" className="visually-hidden">
-              Upload your wedding photo or video
+              Share a photo or video from our wedding day
             </label>
             <input
               id="album-upload-input"
@@ -78,12 +85,15 @@ const AlbumPage = () => {
               aria-label="Upload your wedding photo or video"
             />
             <button onClick={handleUpload} className="btn accent">
-              Upload Photo
+              Add Your Memory! 📸
             </button>
           </div>
           <div className="photo-grid">
             {photos.length === 0 ? (
-              <div className="empty-state">No media yet. Be the first to upload!</div>
+              <div className="empty-state">
+                This collection is just waiting for your beautiful memories! Be the first to share a
+                photo or video from our special day.
+              </div>
             ) : (
               photos.map((photo) => (
                 <div key={photo._id} className="photo-card">

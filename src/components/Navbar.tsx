@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             data-track="navbar-home"
           >
             <span className="navbar-logo">Austin & Jordyn</span>
-            <span className="navbar-tagline">Our Wedding Celebration</span>
+            <span className="navbar-tagline">Celebrating Our Forever</span>
           </a>
         ) : (
           <Link
@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             data-track="navbar-home"
           >
             <span className="navbar-logo">Austin & Jordyn</span>
-            <span className="navbar-tagline">Our Wedding Celebration</span>
+            <span className="navbar-tagline">Celebrating Our Forever</span>
           </Link>
         )}
 

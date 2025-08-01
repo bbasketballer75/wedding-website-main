@@ -58,9 +58,11 @@ const FamilyTreePage = () => {
   return (
     <div className="family-tree-page">
       <div className="family-tree-header">
-        <h2 className="section-title">Our Beloved Families</h2>
+        <h2 className="section-title">The Hearts Behind Our Love Story</h2>
         <p className="section-subtitle">
-          The incredible people who shaped our hearts and brought us to this moment of love
+          Meet the extraordinary people who raised us, shaped our values, and taught us what true
+          love looks like. Their wisdom, support, and endless love brought us to this beautiful
+          moment in our lives.
         </p>
       </div>
 
@@ -68,25 +70,24 @@ const FamilyTreePage = () => {
         {/* Bride's Side */}
         <div className="family-side bride-side">
           <div className="side-header">
-            <h3 className="side-title">Jordyn's Family</h3>
+            <h3 className="side-title">Jordyn's Loving Family</h3>
             <div className="side-decoration bride-decoration"></div>
           </div>
           <div className="family-grid">
             {PARENT_VIDEOS.filter((parent) => parent.side === 'bride').map((parent, index) => (
-              <div
+              <button
                 key={parent.name}
                 className={`family-member-card family-member-card-clickable ${isVisible ? 'animate-in' : ''}`}
                 style={{
                   animationDelay: `${index * 200}ms`,
                   background: parent.background,
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
                 }}
-                tabIndex={0}
-                role="button"
+                type="button"
                 aria-label={`Play video for ${parent.display}`}
                 onClick={() => setModalVideo(parent.video)}
-                onKeyDown={(e) =>
-                  (e.key === 'Enter' || e.key === ' ') && setModalVideo(parent.video)
-                }
                 onMouseEnter={() => setHoveredCard(parent.name)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
@@ -110,7 +111,7 @@ const FamilyTreePage = () => {
                 {hoveredCard === parent.name && (
                   <div className="card-glow" aria-hidden="true"></div>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -133,25 +134,24 @@ const FamilyTreePage = () => {
         {/* Groom's Side */}
         <div className="family-side groom-side">
           <div className="side-header">
-            <h3 className="side-title">Austin's Family</h3>
+            <h3 className="side-title">Austin's Loving Family</h3>
             <div className="side-decoration groom-decoration"></div>
           </div>
           <div className="family-grid">
             {PARENT_VIDEOS.filter((parent) => parent.side === 'groom').map((parent, index) => (
-              <div
+              <button
                 key={parent.name}
                 className={`family-member-card family-member-card-clickable ${isVisible ? 'animate-in' : ''}`}
                 style={{
                   animationDelay: `${(index + 2) * 200}ms`,
                   background: parent.background,
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
                 }}
-                tabIndex={0}
-                role="button"
+                type="button"
                 aria-label={`Play video for ${parent.display}`}
                 onClick={() => setModalVideo(parent.video)}
-                onKeyDown={(e) =>
-                  (e.key === 'Enter' || e.key === ' ') && setModalVideo(parent.video)
-                }
                 onMouseEnter={() => setHoveredCard(parent.name)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
@@ -175,7 +175,7 @@ const FamilyTreePage = () => {
                 {hoveredCard === parent.name && (
                   <div className="card-glow" aria-hidden="true"></div>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </div>

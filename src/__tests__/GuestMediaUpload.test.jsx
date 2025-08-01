@@ -28,14 +28,18 @@ describe('Guest Media Upload Experience', () => {
   it('should show upload progress for large files', async () => {
     render(<AlbumPage />);
     const fileInput = await screen.findByLabelText(/upload your wedding photo or video/i);
-    const uploadBtn = screen.getByRole('button', { name: /upload photo/i });
+    const uploadBtn = screen.getByRole('button', { name: /Add Your Memory!/i });
     const file = new File([new ArrayBuffer(5 * 1024 * 1024)], 'large.jpg', { type: 'image/jpeg' });
     fireEvent.change(fileInput, { target: { files: [file] } });
     fireEvent.click(uploadBtn);
     // Should show uploading state
-    expect(await screen.findByText(/uploading photo/i)).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByText(/uploading photo/i)).not.toBeInTheDocument(), {
-      timeout: 2000,
-    });
+    expect(await screen.findByText(/Adding your memory to our collection/i)).toBeInTheDocument();
+    await waitFor(
+      () =>
+        expect(screen.queryByText(/Adding your memory to our collection/i)).not.toBeInTheDocument(),
+      {
+        timeout: 2000,
+      }
+    );
   });
 });

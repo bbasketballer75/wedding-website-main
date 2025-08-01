@@ -53,7 +53,7 @@ describe('GuestbookPage', () => {
       screen.getByPlaceholderText(/Share a favorite memory, marriage advice, or just say hello!/i),
       { target: { value: 'Congrats!' } }
     );
-    fireEvent.click(screen.getByRole('button', { name: /Sign/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Share Your Heart/i }));
     // Should show new entry or success message (depends on implementation)
     // expect(screen.getByText(/Congrats!/i)).toBeInTheDocument();
   });

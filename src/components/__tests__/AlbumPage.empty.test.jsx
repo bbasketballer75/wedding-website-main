@@ -10,7 +10,9 @@ describe('AlbumPage Empty State', () => {
   it('shows empty state when no media is available', async () => {
     render(<AlbumPage />);
     await waitFor(() =>
-      expect(screen.getByText(/No media yet. Be the first to upload!/i)).toBeInTheDocument()
+      expect(
+        screen.getByText(/This collection is just waiting for your beautiful memories!/i)
+      ).toBeInTheDocument()
     );
   });
 });

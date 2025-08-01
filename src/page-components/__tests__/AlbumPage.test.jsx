@@ -39,18 +39,22 @@ describe('AlbumPage', () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    expect(screen.getByText(/Loading album/i)).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
-    expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
+    expect(screen.getByText(/Loading our beautiful memories/i)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
+    expect(screen.getByRole('heading', { name: 'Our Memory Collection' })).toBeInTheDocument();
   });
 
   it('displays album photos when loaded', async () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    expect(screen.getByText(/Loading album/i)).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
-    expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
+    expect(screen.getByText(/Loading our beautiful memories/i)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
+    expect(screen.getByRole('heading', { name: 'Our Memory Collection' })).toBeInTheDocument();
   });
 
   it('should show upload form when user clicks upload button', async () => {
@@ -72,14 +76,18 @@ describe('AlbumPage', () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
     expect(screen.getByRole('heading', { name: 'Our Memory Collection' })).toBeInTheDocument();
   });
   it('renders upload input and button', async () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
     expect(screen.getByRole('button', { name: /Add Your Memory/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Add Your Memory/i })).toBeInTheDocument();
     // The input is type="file" with no label, so use querySelector
@@ -91,9 +99,11 @@ describe('AlbumPage', () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
-    // The input is type="file" with no label, so use querySelector
-    const fileInput = document.querySelector('input[type="file"]');
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
+    // The input is type="file" with id and aria-label, so use the proper selector
+    const fileInput = screen.getByLabelText(/Upload your wedding photo or video/i);
     const file = new File(['dummy'], 'test.jpg', { type: 'image/jpeg' });
     await act(async () => {
       fireEvent.change(fileInput, { target: { files: [file] } });
@@ -109,11 +119,14 @@ describe('AlbumPage', () => {
     await act(async () => {
       render(<AlbumPage />);
     });
-    await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument()
+    );
     const albumContainer = document.querySelector('.album-page');
     expect(albumContainer).toBeInTheDocument();
     expect(albumContainer).toHaveClass('album-page');
-    expect(document.querySelector('.photo-grid')).toBeInTheDocument();
+    const photoGrid = document.querySelector('.photo-grid');
+    expect(photoGrid).toBeInTheDocument();
   });
 
   it('renders without errors', () => {

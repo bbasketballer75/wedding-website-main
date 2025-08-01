@@ -15,10 +15,13 @@ describe('Guest Performance Experience', () => {
     }));
     const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
-    await screen.findByText(/loading album/i, {}, { timeout: 2500 });
-    await waitFor(() => expect(screen.queryByText(/loading album/i)).not.toBeInTheDocument(), {
-      timeout: 2500,
-    });
+    await screen.findByText(/Loading our beautiful memories/i, {}, { timeout: 2500 });
+    await waitFor(
+      () => expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument(),
+      {
+        timeout: 2500,
+      }
+    );
   });
 
   it('should handle network failures gracefully', async () => {
@@ -30,6 +33,10 @@ describe('Guest Performance Experience', () => {
     const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
     // Wait for error message to appear
-    await screen.findByText(/could not load album/i, {}, { timeout: 2500 });
+    await screen.findByText(
+      /We couldn't load our photo collection right now/i,
+      {},
+      { timeout: 2500 }
+    );
   });
 });

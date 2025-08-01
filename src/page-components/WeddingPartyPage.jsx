@@ -25,9 +25,18 @@ const WeddingPartyPage = () => {
 
   return (
     <div className="wedding-party-page">
-      <h2 className="section-title">The Wedding Party</h2>
+      <h2 className="section-title">Our Amazing Wedding Party</h2>
+      <p className="section-subtitle">
+        These incredible souls stood by our side on the most important day of our lives. Our hearts
+        are full of gratitude for their friendship, love, and support - not just on our wedding day,
+        but throughout our entire journey together.
+      </p>
       <div className="party-section">
-        <h3 className="subheading">Bridesmaids</h3>
+        <h3 className="subheading">The Beautiful Bridesmaids</h3>
+        <p className="party-description">
+          Jordyn's chosen sisters - the women who have laughed with her, cried with her, and
+          celebrated every milestone along the way.
+        </p>
         <div className="party-grid">
           {bridesmaids.map((member) => (
             <div key={member.name} className="party-member-card">
@@ -46,7 +55,11 @@ const WeddingPartyPage = () => {
         </div>
       </div>
       <div className="party-section">
-        <h3 className="subheading">Groomsmen</h3>
+        <h3 className="subheading">The Handsome Groomsmen</h3>
+        <p className="party-description">
+          Austin's chosen brothers - the guys who have been there through thick and thin, ready with
+          a joke, a helping hand, or an epic adventure at a moment's notice.
+        </p>
         <div className="party-grid">
           {groomsmen.map((member) => (
             <div key={member.name} className="party-member-card">

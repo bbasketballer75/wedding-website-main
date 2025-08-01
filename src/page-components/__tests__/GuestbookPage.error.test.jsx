@@ -29,7 +29,9 @@ describe('GuestbookPage Error States', () => {
     // eslint-disable-next-line no-console
     // ...existing code...
     await waitFor(() => {
-      expect(screen.getByText(/Message is required/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/We need a message from you to add to our guestbook/i)
+      ).toBeInTheDocument();
     });
   });
 });

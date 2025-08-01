@@ -34,19 +34,23 @@ const GuestbookPage = () => {
     setIsSubmitting(true);
     try {
       if (!message.trim()) {
-        setFormError('Message is required.');
+        setFormError(
+          "We need a message from you to add to our guestbook! Share what's in your heart."
+        );
         setIsSubmitting(false);
         return;
       }
       await createGuestbookEntry({ name, message });
-      setSuccess('Thank you for signing our guestbook!');
+      setSuccess(
+        'Your beautiful message has been added to our guestbook! Thank you for sharing your heart with us. ❤️'
+      );
       setMessage('');
       setName('');
       // Refresh entries
       const response = await getGuestbookEntries();
       setEntries(response.data);
     } catch {
-      setFormError('Could not submit your message. Please try again.');
+      setFormError("Oops! We couldn't save your message right now. Please try again in a moment!");
     } finally {
       setIsSubmitting(false);
     }
@@ -54,15 +58,16 @@ const GuestbookPage = () => {
 
   return (
     <div className="guestbook-page">
-      {isLoading && <LoadingScreen message="Loading guestbook..." />}
+      {isLoading && <LoadingScreen message="Loading all the wonderful messages..." />}
       {!isLoading && (
         <>
           <h2 id="guestbook-title" className="section-title">
-            Guestbook
+            Our Digital Guestbook
           </h2>
           <p className="guestbook-subheading">
-            Leave a message or share your favorite memory from our wedding day. We love reading your
-            stories!
+            Your words mean the world to us! Share a favorite memory from our wedding day, some
+            heartfelt marriage advice, a funny story, or simply let us know you were here. Every
+            message becomes a treasured keepsake in our love story.
           </p>
           <form
             className="guestbook-form"
@@ -101,7 +106,7 @@ const GuestbookPage = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={500}
-                  placeholder="Share your favorite memory or a message for the couple!"
+                  placeholder="Share a favorite memory, marriage advice, or just say hello!"
                   required
                   aria-required="true"
                   aria-describedby="message-help"
@@ -109,7 +114,7 @@ const GuestbookPage = () => {
                   rows={4}
                 />
                 <div id="message-help" className="input-description">
-                  Required field. Share your thoughts, up to 500 characters.
+                  Share what's in your heart - memories, advice, or just a sweet message for us!
                 </div>
               </div>
             </fieldset>
@@ -129,7 +134,7 @@ const GuestbookPage = () => {
               disabled={isSubmitting}
               aria-describedby={isSubmitting ? 'submit-status' : undefined}
             >
-              {isSubmitting ? 'Signing...' : 'Sign Guestbook'}
+              {isSubmitting ? 'Adding Your Message...' : 'Share Your Heart ❤️'}
             </button>
             {isSubmitting && (
               <div id="submit-status" className="sr-only" aria-live="polite">

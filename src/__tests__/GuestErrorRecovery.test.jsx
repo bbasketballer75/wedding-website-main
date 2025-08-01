@@ -21,7 +21,11 @@ describe('Guest Error Recovery', () => {
     const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
     // Wait for error message
-    const errorEl = await screen.findByText(/could not load album/i, {}, { timeout: 2500 });
+    const errorEl = await screen.findByText(
+      /We couldn't load our photo collection right now/i,
+      {},
+      { timeout: 2500 }
+    );
     expect(errorEl).toBeInTheDocument();
     const retryBtn = screen.getByRole('button', { name: /try again/i });
     fireEvent.click(retryBtn);
@@ -44,13 +48,18 @@ describe('Guest Error Recovery', () => {
     const { default: MapPageReloaded } = await import('../page-components/MapPage.jsx');
     const { unmount } = render(<MapPageReloaded />);
     // Wait for error message(s)
-    const errorEls = await screen.findAllByText(/could not load map pins/i, {}, { timeout: 2500 });
+    const errorEls = await screen.findAllByText(
+      /We can't load the love map right now/i,
+      {},
+      { timeout: 2500 }
+    );
     expect(errorEls.length).toBeGreaterThan(0);
     // Unmount and render new instance to simulate retry
     unmount();
     render(<MapPageReloaded />);
     await waitFor(
-      () => expect(screen.queryByText(/could not load map pins/i)).not.toBeInTheDocument(),
+      () =>
+        expect(screen.queryByText(/We can't load the love map right now/i)).not.toBeInTheDocument(),
       { timeout: 2500 }
     );
   });

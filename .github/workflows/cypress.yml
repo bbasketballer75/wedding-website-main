@@ -16,11 +16,20 @@ jobs:
         run: rm -rf .next
       - name: Build Next.js app
         run: npm run build
+      - name: Verify build output
+        run: ls -la .next
+      - name: Test start command locally
+        run: |
+          npm start &
+          sleep 5
+          curl -f http://localhost:3000 || (echo "Server failed to start" && exit 1)
+          pkill -f "npm start" || true
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           start: npm start
           wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
           record: ${{ secrets.CYPRESS_RECORD_KEY != '' && true || false }}
           parallel: ${{ secrets.CYPRESS_RECORD_KEY != '' && true || false }}
         env:

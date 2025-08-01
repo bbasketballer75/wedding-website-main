@@ -3,7 +3,7 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   projectId: 'm7s6t6',
   e2e: {
-    baseUrl: 'http://localhost:3001',
+    baseUrl: 'http://localhost:3000',
 
     setupNodeEvents(on, config) {
       // Register logA11yViolations task for a11y debugging

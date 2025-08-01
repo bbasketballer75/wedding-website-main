@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import dynamic from 'next/dynamic';
 import { getMapLocations as getPins } from '../services/api';
 import LoadingScreen from '../components/LoadingScreen';
 import './MapPage.css';
-import 'leaflet/dist/leaflet.css';
+
+const Map = dynamic(() => import('../components/Map'), {
+  loading: () => <p>Loading map...</p>,
+  ssr: false,
+});
 
 const MapPage = () => {
   const [pins, setPins] = useState([]);
@@ -52,23 +56,7 @@ const MapPage = () => {
               {error}
             </div>
           ) : (
-            <MapContainer
-              center={[20, 0]}
-              zoom={2}
-              // onClick={handleMapClick}
-              className="map-container"
-              aria-label="World map showing guest locations"
-            >
-              <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
-                // ...existing code...
-              />
-              {pins.map((pin, idx) => (
-                <Marker key={idx} position={[pin.lat, pin.lng]}>
-                  <Popup>{pin.label || 'Guest'}</Popup>
-                </Marker>
-              ))}
-            </MapContainer>
+            <Map pins={pins} />
           )}
         </>
       )}

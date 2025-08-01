@@ -60,7 +60,11 @@ describe('AlbumPage', () => {
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
 
     // Find upload button and click it
-    const uploadButton = await screen.findByRole('button', { name: /upload/i }, { timeout: 3000 });
+    const uploadButton = await screen.findByRole(
+      'button',
+      { name: /Add Your Memory/i },
+      { timeout: 3000 }
+    );
     expect(uploadButton).toBeInTheDocument();
   });
 
@@ -69,15 +73,15 @@ describe('AlbumPage', () => {
       render(<AlbumPage />);
     });
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
-    expect(screen.getByRole('heading', { name: 'Photo & Video Album' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Our Memory Collection' })).toBeInTheDocument();
   });
   it('renders upload input and button', async () => {
     await act(async () => {
       render(<AlbumPage />);
     });
     await waitFor(() => expect(screen.queryByText(/Loading album/i)).not.toBeInTheDocument());
-    expect(screen.getByRole('button', { name: /Upload Photo/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Upload Photo/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Add Your Memory/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Add Your Memory/i })).toBeInTheDocument();
     // The input is type="file" with no label, so use querySelector
     const fileInput = document.querySelector('input[type="file"]');
     expect(fileInput).toBeInTheDocument();
@@ -94,7 +98,7 @@ describe('AlbumPage', () => {
     await act(async () => {
       fireEvent.change(fileInput, { target: { files: [file] } });
     });
-    const uploadButton = screen.getByRole('button', { name: /Upload Photo/i });
+    const uploadButton = screen.getByRole('button', { name: /Add Your Memory/i });
     await act(async () => {
       fireEvent.click(uploadButton);
     });

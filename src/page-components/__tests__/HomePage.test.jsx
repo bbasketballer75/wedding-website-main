@@ -7,7 +7,7 @@ describe('HomePage', () => {
   it('renders welcome message and main CTA', () => {
     render(<HomePage />);
     expect(screen.getByRole('heading', { name: /Austin & Jordyn/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /View Album/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Browse Memories/i })).toBeInTheDocument();
   });
 
   it('displays welcome message and navigation elements', () => {

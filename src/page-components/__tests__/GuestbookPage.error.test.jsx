@@ -17,7 +17,7 @@ describe('GuestbookPage Error States', () => {
     await screen.findByPlaceholderText('Your name');
     fireEvent.change(screen.getByPlaceholderText('Your name'), { target: { value: 'Test User' } });
     const textarea = screen.getByPlaceholderText(
-      'Share your favorite memory or a message for the couple!'
+      'Share a favorite memory, marriage advice, or just say hello!'
     );
     fireEvent.change(textarea, { target: { value: '' } });
     // eslint-disable-next-line no-console

@@ -39,7 +39,7 @@ describe('GuestbookPage', () => {
     await waitFor(() => expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument());
     expect(screen.getByPlaceholderText(/Your Name/i)).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Share your favorite memory or a message for the couple!/i)
+      screen.getByPlaceholderText(/Share a favorite memory, marriage advice, or just say hello!/i)
     ).toBeInTheDocument();
   });
 
@@ -50,7 +50,7 @@ describe('GuestbookPage', () => {
     await waitFor(() => expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument());
     fireEvent.change(screen.getByPlaceholderText(/Your Name/i), { target: { value: 'Test User' } });
     fireEvent.change(
-      screen.getByPlaceholderText(/Share your favorite memory or a message for the couple!/i),
+      screen.getByPlaceholderText(/Share a favorite memory, marriage advice, or just say hello!/i),
       { target: { value: 'Congrats!' } }
     );
     fireEvent.click(screen.getByRole('button', { name: /Sign/i }));

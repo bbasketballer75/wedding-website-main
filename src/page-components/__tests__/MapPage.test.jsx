@@ -20,7 +20,7 @@ describe('MapPage', () => {
       render(<MapPage />);
     });
     // If error, check for error message
-    expect(screen.getByRole('alert')).toHaveTextContent(/Could not load map pins/i);
+    expect(screen.getByRole('alert')).toHaveTextContent(/We can't load the love map right now/i);
   });
 
   it('renders map container', async () => {

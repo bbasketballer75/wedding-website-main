@@ -15,8 +15,8 @@ Write-Host ""
 $issues = @()
 $fixes = @()
 
-# Function to log issues and fixes
-function Log-Issue {
+# Function to log issues and fixes (using approved PowerShell verbs)
+function Write-Issue {
     param($Type, $Description, $Action = "")
     $global:issues += @{Type = $Type; Description = $Description; Action = $Action }
     
@@ -28,7 +28,7 @@ function Log-Issue {
     }
 }
 
-function Log-Fix {
+function Write-Fix {
     param($Description)
     $global:fixes += $Description
     Write-Host "✅ $Description" -ForegroundColor Green
@@ -38,77 +38,77 @@ function Log-Fix {
 Write-Host "🔍 Checking ESLint issues..." -ForegroundColor Blue
 
 try {
-    $lintOutput = npm run lint 2>&1
+    npm run lint 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        Log-Issue "ESLint" "Found linting issues" "Running auto-fix"
+        Write-Issue "ESLint" "Found linting issues" "Running auto-fix"
         
         if (-not $DryRun) {
             npm run lint:fix
-            Log-Fix "ESLint auto-fix applied"
+            Write-Fix "ESLint auto-fix applied"
         }
     } else {
-        Log-Fix "No ESLint issues found"
+        Write-Fix "No ESLint issues found"
     }
 } catch {
-    Log-Issue "ESLint" "Failed to run ESLint check" "Manual intervention needed"
+    Write-Issue "ESLint" "Failed to run ESLint check" "Manual intervention needed"
 }
 
 # 2. Test Issues
 Write-Host "🧪 Running tests..." -ForegroundColor Blue
 
 try {
-    $frontendTests = npx vitest run --reporter=basic 2>&1
+    npx vitest run --reporter=basic 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        Log-Fix "Frontend tests passing"
+        Write-Fix "Frontend tests passing"
     } else {
-        Log-Issue "Tests" "Frontend tests failing" "Check test output"
+        Write-Issue "Tests" "Frontend tests failing" "Check test output"
     }
 } catch {
-    Log-Issue "Tests" "Failed to run frontend tests" "Check test configuration"
+    Write-Issue "Tests" "Failed to run frontend tests" "Check test configuration"
 }
 
 try {
-    $backendTests = Set-Location backend; npm test 2>&1; Set-Location ..
+    Set-Location backend; npm test 2>&1 | Out-Null; Set-Location ..
     if ($LASTEXITCODE -eq 0) {
-        Log-Fix "Backend tests passing"
+        Write-Fix "Backend tests passing"
     } else {
-        Log-Issue "Tests" "Backend tests failing" "Check test output"
+        Write-Issue "Tests" "Backend tests failing" "Check test output"
     }
 } catch {
-    Log-Issue "Tests" "Failed to run backend tests" "Check test configuration"
+    Write-Issue "Tests" "Failed to run backend tests" "Check test configuration"
 }
 
 # 3. Build Issues
 Write-Host "🏗️  Checking build..." -ForegroundColor Blue
 
 try {
-    $buildOutput = npm run build 2>&1
+    npm run build 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        Log-Fix "Build successful"
+        Write-Fix "Build successful"
     } else {
-        Log-Issue "Build" "Build failing" "Check build configuration"
+        Write-Issue "Build" "Build failing" "Check build configuration"
     }
 } catch {
-    Log-Issue "Build" "Failed to run build" "Check build scripts"
+    Write-Issue "Build" "Failed to run build" "Check build scripts"
 }
 
 # 4. Security Issues
 Write-Host "🔒 Checking security..." -ForegroundColor Blue
 
 try {
-    $auditOutput = npm audit --audit-level moderate 2>&1
+    npm audit --audit-level moderate 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        Log-Fix "No security vulnerabilities found"
+        Write-Fix "No security vulnerabilities found"
     } else {
-        Log-Issue "Security" "Security vulnerabilities found" "Run npm audit fix"
+        Write-Issue "Security" "Security vulnerabilities found" "Run npm audit fix"
         
         if (-not $DryRun) {
             npm audit fix --force
-            Log-Fix "Security vulnerabilities fixed"
+            Write-Fix "Security vulnerabilities fixed"
         }
     }
 } catch {
-    Log-Issue "Security" "Failed to run security audit" "Check npm configuration"
+    Write-Issue "Security" "Failed to run security audit" "Check npm configuration"
 }
 
 # 5. Accessibility Issues
@@ -116,36 +116,36 @@ Write-Host "♿ Checking accessibility..." -ForegroundColor Blue
 
 try {
     if (Test-Path "scripts/accessibility-audit.mjs") {
-        $a11yOutput = node scripts/accessibility-audit.mjs 2>&1
+        node scripts/accessibility-audit.mjs 2>&1 | Out-Null
         if ($LASTEXITCODE -eq 0) {
-            Log-Fix "Accessibility audit passed"
+            Write-Fix "Accessibility audit passed"
         } else {
-            Log-Issue "Accessibility" "Accessibility issues found" "Check audit report"
+            Write-Issue "Accessibility" "Accessibility issues found" "Check audit report"
         }
     } else {
-        Log-Issue "Accessibility" "Accessibility audit script not found" "Create audit script"
+        Write-Issue "Accessibility" "Accessibility audit script not found" "Create audit script"
     }
 } catch {
-    Log-Issue "Accessibility" "Failed to run accessibility audit" "Check audit configuration"
+    Write-Issue "Accessibility" "Failed to run accessibility audit" "Check audit configuration"
 }
 
 # 6. Code Formatting
 Write-Host "💅 Checking code formatting..." -ForegroundColor Blue
 
 try {
-    $formatCheck = npm run format:check 2>&1
+    npm run format:check 2>&1 | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        Log-Fix "Code formatting is correct"
+        Write-Fix "Code formatting is correct"
     } else {
-        Log-Issue "Formatting" "Code formatting issues found" "Running auto-format"
+        Write-Issue "Formatting" "Code formatting issues found" "Running auto-format"
         
         if (-not $DryRun) {
             npm run format
-            Log-Fix "Code formatting applied"
+            Write-Fix "Code formatting applied"
         }
     }
 } catch {
-    Log-Issue "Formatting" "Failed to check code formatting" "Check prettier configuration"
+    Write-Issue "Formatting" "Failed to check code formatting" "Check prettier configuration"
 }
 
 # 7. Environment Issues
@@ -156,9 +156,9 @@ $nodeVersion = node --version
 if ($nodeVersion -match "v(\d+)\.") {
     $majorVersion = [int]$matches[1]
     if ($majorVersion -ge 18) {
-        Log-Fix "Node.js version $nodeVersion is compatible"
+        Write-Fix "Node.js version $nodeVersion is compatible"
     } else {
-        Log-Issue "Environment" "Node.js version $nodeVersion is outdated" "Upgrade to Node.js 18+"
+        Write-Issue "Environment" "Node.js version $nodeVersion is outdated" "Upgrade to Node.js 18+"
     }
 }
 
@@ -172,9 +172,9 @@ $requiredFiles = @(
 
 foreach ($file in $requiredFiles) {
     if (Test-Path $file) {
-        Log-Fix "Required file $file exists"
+        Write-Fix "Required file $file exists"
     } else {
-        Log-Issue "Environment" "Missing required file: $file" "Create missing file"
+        Write-Issue "Environment" "Missing required file: $file" "Create missing file"
     }
 }
 

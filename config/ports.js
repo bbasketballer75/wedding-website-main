@@ -45,7 +45,6 @@ export const CORS_ORIGINS = [
   `http://${HOSTS.LOCAL}:${PORTS.STORYBOOK}`, // For Storybook integration
   'https://www.theporadas.com',
   'https://theporadas.com',
-  ,
   'http://localhost:3001',
 ];
 

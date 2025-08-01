@@ -193,8 +193,8 @@
   },
   "files.associations": {
     "*.env.*": "dotenv",
-    "*.config.*": "json",
-    "package.json": "json"
+    "package.json": "json",
+    "*.json": "json"
   },
   "files.experimental.agentMode.autoSave": true,
   "files.experimental.agentMode.smartBackup": true,

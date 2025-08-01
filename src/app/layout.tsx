@@ -116,7 +116,7 @@ export default function RootLayout({
         {/* Enhanced Structured Data for SEO */}
         {getHomepageStructuredData().map((data, index) => (
           <Script
-            key={index}
+            key={`structured-data-${data['@type'] || 'schema'}-${index}`}
             id={`structured-data-${index}`}
             type="application/ld+json"
             dangerouslySetInnerHTML={generateStructuredDataScript(data)}

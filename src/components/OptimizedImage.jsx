@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Advanced Image Component with lazy loading, blur placeholder, and error handling
@@ -148,3 +149,22 @@ export function preloadImages(imageSrcs) {
     document.head.appendChild(link);
   });
 }
+
+// PropTypes validation
+OptimizedImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  priority: PropTypes.bool,
+  sizes: PropTypes.arrayOf(PropTypes.number),
+  onLoad: PropTypes.func,
+  onError: PropTypes.func,
+};
+
+OptimizedImage.defaultProps = {
+  className: '',
+  priority: false,
+  sizes: undefined,
+  onLoad: undefined,
+  onError: undefined,
+};

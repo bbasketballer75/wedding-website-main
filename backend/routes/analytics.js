@@ -244,7 +244,8 @@ router.post(
       // For high-severity alerts, you could send notifications here
       if (severity === 'high') {
         console.warn(`High-severity performance alert: ${type}`, data);
-        // TODO: Send notification to monitoring service (Slack, email, etc.)
+        // Future enhancement: Integrate with notification services (Slack, email, SMS)
+        // This could include webhook integrations for real-time monitoring alerts
       }
 
       res.json({

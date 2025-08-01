@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 import app from './app.js';
 import logger from './config/logger.js';
+import { PORTS } from '../config/ports.js';
 
 // MongoDB removed: now using Google Firestore
 // connectDB(); // No longer needed
 
 const server = http.createServer(app);
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || PORTS.BACKEND;
 
 server.on('error', (error) => {
   if (error.syscall !== 'listen') {

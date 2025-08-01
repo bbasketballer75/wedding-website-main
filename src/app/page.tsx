@@ -1,7 +1,6 @@
 'use client';
-import React from 'react';
+import React, { useEffect, Suspense } from 'react';
 
-import { useEffect, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { setupSectionFadeIn } from '../scrollFadeIn';
 import Navbar from '../components/Navbar';
@@ -67,31 +66,31 @@ export default function Home() {
         <ThankYouSection />
         <WeddingHighlightsSection />
         <Suspense fallback={<LoadingScreen message="Loading section..." />}>
-          <section id="memorywall" aria-label="Memory Wall and Photo Booth" role="region">
+          <section id="memorywall" aria-label="Memory Wall and Photo Booth">
             <MemoryWall />
           </section>
-          <section id="keepsakes" aria-label="Downloadable Keepsakes" role="region">
+          <section id="keepsakes" aria-label="Downloadable Keepsakes">
             <KeepsakesSection />
           </section>
-          <section id="timeline" aria-label="Wedding Day Timeline" role="region">
+          <section id="timeline" aria-label="Wedding Day Timeline">
             <TimelineSection />
           </section>
-          <section id="home" aria-label="Home" role="region">
+          <section id="home" aria-label="Home">
             <HomePage />
           </section>
-          <section id="album" aria-label="Album" role="region">
+          <section id="album" aria-label="Album">
             <AlbumPage />
           </section>
-          <section id="guestbook" aria-label="Guestbook" role="region">
+          <section id="guestbook" aria-label="Guestbook">
             <GuestbookPage />
           </section>
-          <section id="map" aria-label="Map" role="region">
+          <section id="map" aria-label="Map">
             <MapPage />
           </section>
-          <section id="family" aria-label="Family Tree" role="region">
+          <section id="family" aria-label="Family Tree">
             <FamilyTreePage />
           </section>
-          <section id="party" aria-label="Wedding Party" role="region">
+          <section id="party" aria-label="Wedding Party">
             <WeddingPartyPage />
           </section>
           <StayInTouchSection />

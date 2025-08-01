@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './MemoryWall.css';
 
 // Placeholder for uploaded memories
@@ -26,6 +26,9 @@ const MemoryWall = () => {
   const [form, setForm] = useState({ name: '', message: '', image: null });
   const [preview, setPreview] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // Generate a stable user ID for this session
+  const userIdRef = useRef(`user-${Date.now()}-${Math.random()}`);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -59,22 +62,77 @@ const MemoryWall = () => {
     }, 800);
   };
 
-  // Emoji reactions logic
+  // Emoji reactions logic - one reaction per photo per guest
   const emojis = ['❤️', '😂', '🥰', '🎉', '👏', '😍'];
+  const [userReactions, setUserReactions] = useState({}); // Track user's reactions per memory
+
   const handleReact = (id, emoji) => {
-    setMemories((prev) =>
-      prev.map((mem) =>
-        mem.id === id
-          ? {
-              ...mem,
-              reactions: {
-                ...mem.reactions,
-                [emoji]: (mem.reactions?.[emoji] || 0) + 1,
-              },
-            }
-          : mem
-      )
-    );
+    const memoryKey = `${id}-${userIdRef.current}`;
+
+    // Check if user already reacted to this memory with this emoji
+    const currentUserReaction = userReactions[memoryKey];
+
+    if (currentUserReaction === emoji) {
+      // User clicked same emoji again - remove reaction
+      setUserReactions((prev) => ({
+        ...prev,
+        [memoryKey]: null,
+      }));
+
+      setMemories((prev) =>
+        prev.map((mem) =>
+          mem.id === id
+            ? {
+                ...mem,
+                reactions: {
+                  ...mem.reactions,
+                  [emoji]: Math.max((mem.reactions?.[emoji] || 0) - 1, 0),
+                },
+              }
+            : mem
+        )
+      );
+    } else {
+      // Remove previous reaction if exists
+      if (currentUserReaction) {
+        setMemories((prev) =>
+          prev.map((mem) =>
+            mem.id === id
+              ? {
+                  ...mem,
+                  reactions: {
+                    ...mem.reactions,
+                    [currentUserReaction]: Math.max(
+                      (mem.reactions?.[currentUserReaction] || 0) - 1,
+                      0
+                    ),
+                  },
+                }
+              : mem
+          )
+        );
+      }
+
+      // Add new reaction
+      setUserReactions((prev) => ({
+        ...prev,
+        [memoryKey]: emoji,
+      }));
+
+      setMemories((prev) =>
+        prev.map((mem) =>
+          mem.id === id
+            ? {
+                ...mem,
+                reactions: {
+                  ...mem.reactions,
+                  [emoji]: (mem.reactions?.[emoji] || 0) + 1,
+                },
+              }
+            : mem
+        )
+      );
+    }
   };
 
   return (
@@ -167,18 +225,24 @@ const MemoryWall = () => {
             </picture>
             <div className="memorywall-msg">{mem.message}</div>
             <div className="memorywall-reactions">
-              {emojis.map((emoji) => (
-                <button
-                  key={emoji}
-                  className="memorywall-emoji-btn"
-                  onClick={() => handleReact(mem.id, emoji)}
-                  aria-label={`React with ${emoji}`}
-                  type="button"
-                >
-                  {emoji}{' '}
-                  <span className="memorywall-emoji-count">{mem.reactions?.[emoji] || ''}</span>
-                </button>
-              ))}
+              {emojis.map((emoji) => {
+                const memoryKey = `${mem.id}-${userIdRef.current}`;
+                const isActive = userReactions[memoryKey] === emoji;
+
+                return (
+                  <button
+                    key={emoji}
+                    className={`memorywall-emoji-btn ${isActive ? 'active' : ''}`}
+                    onClick={() => handleReact(mem.id, emoji)}
+                    aria-label={`React with ${emoji}`}
+                    aria-pressed={isActive}
+                    type="button"
+                  >
+                    {emoji}{' '}
+                    <span className="memorywall-emoji-count">{mem.reactions?.[emoji] || ''}</span>
+                  </button>
+                );
+              })}
             </div>
             <div className="memorywall-meta">
               <span>{mem.name}</span> <span>{mem.date}</span>

@@ -1,6 +1,10 @@
 import axios from 'axios';
+import { getApiBaseUrl } from '../../config/ports.js';
 
-// Handle API URL for different environments
+/**
+ * Determine the API URL based on environment
+ * @returns {string} The API URL for requests
+ */
 const getApiUrl = () => {
   // During build time (SSG), API_URL might not be available
   if (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_URL) {
@@ -12,13 +16,12 @@ const getApiUrl = () => {
     return process.env.NEXT_PUBLIC_API_URL;
   }
 
-  // Check if we're in local development by looking for local backend
+  // Check if we're in local development
   if (typeof window !== 'undefined') {
-    // Try to detect if local backend is running
     const hostname = window.location.hostname;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      // Return local backend URL for development
-      return 'http://localhost:3001/api';
+      // Return local backend URL for development using port config
+      return getApiBaseUrl();
     }
   }
 

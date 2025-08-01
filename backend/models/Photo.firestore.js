@@ -1,4 +1,4 @@
-import db from '../config/firestore.js';
+import dbPromise from '../config/firestore.js';
 
 class Photo {
   constructor(data) {
@@ -40,6 +40,7 @@ class Photo {
       throw new Error(errors.join(' '));
     }
 
+    const db = await dbPromise;
     const docRef = await db.collection('photos').add({
       filename: this.filename,
       filepath: this.filepath,
@@ -59,6 +60,7 @@ class Photo {
 
   // Get all approved photos
   static async findApproved() {
+    const db = await dbPromise;
     const snapshot = await db
       .collection('photos')
       .where('approved', '==', true)
@@ -73,6 +75,7 @@ class Photo {
 
   // Get all photos (for admin)
   static async findAll() {
+    const db = await dbPromise;
     const snapshot = await db.collection('photos').orderBy('timestamp', 'desc').get();
 
     return snapshot.docs.map((doc) => ({
@@ -83,6 +86,7 @@ class Photo {
 
   // Find by ID
   static async findById(id) {
+    const db = await dbPromise;
     const doc = await db.collection('photos').doc(id).get();
 
     if (!doc.exists) {
@@ -97,12 +101,14 @@ class Photo {
 
   // Update approval status
   static async updateApproval(id, approved) {
+    const db = await dbPromise;
     await db.collection('photos').doc(id).update({ approved });
     return true;
   }
 
   // Delete photo
   static async deleteById(id) {
+    const db = await dbPromise;
     await db.collection('photos').doc(id).delete();
 
     return true;

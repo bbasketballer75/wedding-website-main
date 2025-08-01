@@ -9,6 +9,7 @@ import specs from './config/swagger.js';
 import winston from 'winston';
 import xss from 'xss';
 import { fileURLToPath } from 'url';
+import { CORS_ORIGINS, PORTS } from '../config/ports.js';
 
 // Import routes
 import guestbookRoutes from './routes/guestbookRoutes.js';
@@ -70,14 +71,25 @@ app.use(
         scriptSrc: ["'self'"],
         imgSrc: ["'self'", 'data:', 'https:'],
         mediaSrc: ["'self'"],
-        connectSrc: ["'self'", 'https://api.ip-api.com', 'https://maps.googleapis.com'],
+        connectSrc: [
+          "'self'",
+          `http://localhost:${PORTS.BACKEND}`,
+          `http://localhost:${PORTS.FRONTEND}`,
+          'https://api.ip-api.com',
+          'https://maps.googleapis.com',
+        ],
       },
     },
   })
 );
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: CORS_ORIGINS,
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(
   express.json({
     limit: '10mb',

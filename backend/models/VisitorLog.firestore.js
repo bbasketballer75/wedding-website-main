@@ -1,4 +1,4 @@
-import db from '../config/firestore.js';
+import dbPromise from '../config/firestore.js';
 
 class VisitorLog {
   constructor(data) {
@@ -44,6 +44,7 @@ class VisitorLog {
       throw new Error(errors.join(' '));
     }
 
+    const db = await dbPromise;
     const docRef = await db.collection('visitorLogs').add({
       ip_address: this.ip_address,
       latitude: this.latitude,
@@ -59,6 +60,7 @@ class VisitorLog {
 
   // Get all visitor logs
   static async findAll() {
+    const db = await dbPromise;
     const snapshot = await db.collection('visitorLogs').orderBy('timestamp', 'desc').get();
 
     return snapshot.docs.map((doc) => ({
@@ -69,6 +71,7 @@ class VisitorLog {
 
   // Find by IP address
   static async findByIP(ip_address) {
+    const db = await dbPromise;
     const snapshot = await db
       .collection('visitorLogs')
       .where('ip_address', '==', ip_address)
@@ -83,6 +86,7 @@ class VisitorLog {
 
   // Get visitor stats
   static async getStats() {
+    const db = await dbPromise;
     const snapshot = await db.collection('visitorLogs').get();
     const logs = snapshot.docs.map((doc) => doc.data());
 
@@ -102,6 +106,7 @@ class VisitorLog {
 
   // Delete by ID
   static async deleteById(id) {
+    const db = await dbPromise;
     await db.collection('visitorLogs').doc(id).delete();
 
     return true;

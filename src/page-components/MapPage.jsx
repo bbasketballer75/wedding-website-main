@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { getMapLocations as getPins } from '../services/api';
 import LoadingScreen from '../components/LoadingScreen';
 import './MapPage.css';
-import 'leaflet/dist/leaflet.css';
 
 const MapPage = () => {
   const [pins, setPins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [success, setSuccess] = useState(null);
 
   useEffect(() => {
     const fetchPins = async () => {
@@ -27,19 +24,6 @@ const MapPage = () => {
     fetchPins();
   }, []);
 
-  // Optionally allow users to add a pin by clicking the map (disabled by default for privacy)
-  // const handleMapClick = async (e) => {
-  //   const { lat, lng } = e.latlng;
-  //   try {
-  //     await addPin({ lat, lng });
-  //     setSuccess('Your visit has been logged!');
-  //     const response = await getPins();
-  //     setPins(response.data);
-  //   } catch (err) {
-  //     setError('Could not log your visit.');
-  //   }
-  // };
-
   return (
     <div className="map-page">
       {isLoading && <LoadingScreen message="Loading map..." />}
@@ -52,23 +36,48 @@ const MapPage = () => {
               {error}
             </div>
           ) : (
-            <MapContainer
-              center={[20, 0]}
-              zoom={2}
-              // onClick={handleMapClick}
-              className="map-container"
-              aria-label="World map showing guest locations"
+            <div
+              className="simple-map-container"
+              style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                height: '400px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                color: 'white',
+                borderRadius: '8px',
+                margin: '20px 0',
+              }}
             >
-              <TileLayer
-                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png"
-                // ...existing code...
-              />
-              {pins.map((pin, idx) => (
-                <Marker key={idx} position={[pin.lat, pin.lng]}>
-                  <Popup>{pin.label || 'Guest'}</Popup>
-                </Marker>
-              ))}
-            </MapContainer>
+              <h3 style={{ marginBottom: '20px' }}>Interactive Map</h3>
+              <div style={{ textAlign: 'center' }}>
+                <p>🌍 World Map with Guest Locations</p>
+                <p>📍 {pins.length} pins from our wonderful guests</p>
+                <div style={{ marginTop: '20px' }}>
+                  {pins.length > 0 && (
+                    <div>
+                      <h4>Locations:</h4>
+                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                        {pins.slice(0, 5).map((pin, idx) => (
+                          <li key={`${pin.lat}-${pin.lng}-${idx}`} style={{ margin: '5px 0' }}>
+                            📍 {pin.label || `Location ${idx + 1}`}
+                          </li>
+                        ))}
+                        {pins.length > 5 && (
+                          <li style={{ fontStyle: 'italic' }}>
+                            ... and {pins.length - 5} more locations
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                <p style={{ marginTop: '20px', fontSize: '14px', opacity: 0.8 }}>
+                  Interactive map functionality will be restored soon
+                </p>
+              </div>
+            </div>
           )}
         </>
       )}

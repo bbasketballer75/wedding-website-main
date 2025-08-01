@@ -1,5 +1,6 @@
 import admin from 'firebase-admin';
 import { getGoogleCredentials } from './gcp-credentials.js';
+import { getFirestoreEmulatorHost } from '../../config/ports.js';
 
 /**
  * Initialize Firebase Admin with appropriate configuration for the environment
@@ -11,8 +12,9 @@ function createFirebaseConfig() {
   };
 
   // Emulator mode for development
-  if (process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST) {
-    console.log('Using Firestore Emulator at:', process.env.FIRESTORE_EMULATOR_HOST);
+  const emulatorHost = process.env.FIRESTORE_EMULATOR_HOST || getFirestoreEmulatorHost();
+  if (process.env.NODE_ENV === 'development' && emulatorHost) {
+    console.log('Using Firestore Emulator at:', emulatorHost);
     return baseConfig;
   }
 

@@ -2,9 +2,13 @@
   "name": "wedding-website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "deploy:prod": "netlify deploy --prod",
-    "dev": "next dev --turbopack",
+    "dev": "set PORT=3005 && next dev --turbopack",
+    "dev:full": "npm run dev:emulator & npm run dev:backend & npm run dev",
+    "dev:emulator": "firebase emulators:start --only firestore",
+    "dev:backend": "cd backend && set NODE_ENV=development && set FIRESTORE_EMULATOR_HOST=localhost:8082 && set PORT=3002 && npm start",
     "build": "next build",
     "build:analyze": "set ANALYZE=true && npm run build",
     "bundle:analyze": "npx webpack-bundle-analyzer .next/static/chunks/*.js",
@@ -27,8 +31,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=your-project-token",
-    "emulator": "firebase emulators:start --only firestore",
-    "dev:full": "concurrently \"npm run emulator\" \"npm run dev\" \"cd backend && npm start\""
+    "emulator": "firebase emulators:start --only firestore"
   },
   "dependencies": {
     "@babel/core": "^7.28.0",

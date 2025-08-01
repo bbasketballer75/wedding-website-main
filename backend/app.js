@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import { CORS_ORIGINS, PORTS } from '../config/ports.js';
 
 // Import routes
+import healthRoutes from './routes/healthRoutes.js';
 import guestbookRoutes from './routes/guestbookRoutes.js';
 import albumRoutes from './routes/album.js';
 import videoRoutes from './routes/videoRoutes.js';
@@ -127,10 +128,6 @@ app.use(
   })
 );
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Backend is running!' });
-});
-
 // API Documentation
 app.use(
   '/api-docs',
@@ -143,6 +140,7 @@ app.use(
 );
 
 // Mount routers
+app.use('/api/health', healthRoutes);
 app.use('/api/guestbook', guestbookRoutes);
 app.use('/api/album', albumRoutes);
 app.use('/api/video', videoRoutes);

@@ -7,10 +7,11 @@ type NavLinkProps = {
   label: string;
   role?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  'data-track'?: string;
 };
 
 const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
-  ({ onePage, href, label, role, onClick, ...ariaProps }) => {
+  ({ onePage, href, label, role, onClick, 'data-track': dataTrack, ...ariaProps }) => {
     if (onePage) {
       return (
         <a
@@ -19,6 +20,7 @@ const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
           onClick={onClick}
           tabIndex={0}
           role={role}
+          data-track={dataTrack || `nav-${label.toLowerCase().replace(/\s+/g, '-')}`}
           {...ariaProps}
         >
           {label}
@@ -26,7 +28,14 @@ const NavLink: React.FC<NavLinkProps & React.AriaAttributes> = memo(
       );
     }
     return (
-      <Link className="nav-link" href={href} tabIndex={0} role={role} {...ariaProps}>
+      <Link
+        className="nav-link"
+        href={href}
+        tabIndex={0}
+        role={role}
+        data-track={dataTrack || `nav-${label.toLowerCase().replace(/\s+/g, '-')}`}
+        {...ariaProps}
+      >
         {label}
       </Link>
     );

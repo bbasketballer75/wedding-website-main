@@ -24,13 +24,8 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
   );
 
   return (
-    <nav
-      id="navigation"
-      className="navbar navbar-expand-lg navbar-light bg-light"
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div className="container">
+    <nav id="navigation" className="navbar" role="navigation" aria-label="Main navigation">
+      <div className="navbar-container">
         {onePage ? (
           <a
             className="navbar-brand"
@@ -38,8 +33,10 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             onClick={(e) => handleNavClick(e, 'home')}
             tabIndex={0}
             aria-label="Home - Austin & Jordyn Wedding"
+            data-track="navbar-home"
           >
-            Austin & Jordyn
+            <span className="navbar-logo">Austin & Jordyn</span>
+            <span className="navbar-tagline">Our Wedding Celebration</span>
           </a>
         ) : (
           <Link
@@ -47,79 +44,76 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             href="/"
             tabIndex={0}
             aria-label="Home - Austin & Jordyn Wedding"
+            data-track="navbar-home"
           >
-            Austin & Jordyn
+            <span className="navbar-logo">Austin & Jordyn</span>
+            <span className="navbar-tagline">Our Wedding Celebration</span>
           </Link>
         )}
+
         <button
-          className="navbar-toggler"
+          className="navbar-toggle"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
           aria-label="Toggle navigation menu"
-          aria-describedby="nav-help"
+          onClick={() => {
+            const nav = document.querySelector('.navbar-nav');
+            nav?.classList.toggle('open');
+          }}
         >
-          <span className="navbar-toggler-icon" aria-hidden="true"></span>
-          <span className="sr-only">Toggle navigation</span>
+          <span className="navbar-toggle-icon">☰</span>
         </button>
-        <div id="nav-help" className="sr-only">
-          Navigation menu with links to different sections of the wedding website
-        </div>
-        <div className="collapse navbar-collapse" id="navbarNav" aria-labelledby="nav-help">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#home"
-                label="Home"
-                onClick={(e) => handleNavClick(e, 'home')}
-                aria-current="page"
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#memorywall"
-                label="Memory Wall"
-                onClick={(e) => handleNavClick(e, 'memorywall')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#album"
-                label="Engagement"
-                onClick={(e) => handleNavClick(e, 'album')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#guestbook"
-                label="Guestbook"
-                onClick={(e) => handleNavClick(e, 'guestbook')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#family-party"
-                label="Our People"
-                onClick={(e) => handleNavClick(e, 'family-party')}
-              />
-            </li>
-            <li className="nav-item">
-              <NavLink
-                onePage={onePage}
-                href="#map"
-                label="Map"
-                onClick={(e) => handleNavClick(e, 'map')}
-              />
-            </li>
-          </ul>
-        </div>
+
+        <ul className="navbar-nav">
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#home"
+              label="Home"
+              onClick={(e) => handleNavClick(e, 'home')}
+              aria-current="page"
+            />
+          </li>
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#memorywall"
+              label="Memory Wall"
+              onClick={(e) => handleNavClick(e, 'memorywall')}
+            />
+          </li>
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#album"
+              label="Engagement"
+              onClick={(e) => handleNavClick(e, 'album')}
+            />
+          </li>
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#guestbook"
+              label="Guestbook"
+              onClick={(e) => handleNavClick(e, 'guestbook')}
+            />
+          </li>
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#family-party"
+              label="Our People"
+              onClick={(e) => handleNavClick(e, 'family-party')}
+            />
+          </li>
+          <li className="navbar-nav-item">
+            <NavLink
+              onePage={onePage}
+              href="#map"
+              label="Map"
+              onClick={(e) => handleNavClick(e, 'map')}
+            />
+          </li>
+        </ul>
       </div>
     </nav>
   );

@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import './globals.css';
-import { weddingStructuredData, websiteStructuredData } from './structured-data';
+import { getHomepageStructuredData, generateStructuredDataScript } from '../utils/structuredData';
+import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
 
 // Configure premium wedding fonts
 const cormorantGaramond = Cormorant_Garamond({
@@ -112,20 +113,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script
-          id="wedding-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(weddingStructuredData),
-          }}
-        />
-        <Script
-          id="website-structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteStructuredData),
-          }}
-        />
+        {/* Enhanced Structured Data for SEO */}
+        {getHomepageStructuredData().map((data, index) => (
+          <Script
+            key={index}
+            id={`structured-data-${index}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={generateStructuredDataScript(data)}
+          />
+        ))}
       </head>
       <body
         className={`antialiased ${cormorantGaramond.variable} ${inter.variable} ${allura.variable}`}
@@ -163,6 +159,11 @@ export default function RootLayout({
         >
           Skip to navigation
         </a>
+        <ServiceWorkerRegistration />
+        <Script src="/analytics.js" strategy="afterInteractive" />
+        <Script id="performance-monitor" strategy="afterInteractive">
+          {`import('../utils/performanceMonitor.js');`}
+        </Script>
         {children}
       </body>
     </html>

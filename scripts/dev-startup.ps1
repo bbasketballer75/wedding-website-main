@@ -45,34 +45,35 @@ function Update-CorsConfiguration {
     
     $portsFile = "config\ports.js"
     if (Test-Path $portsFile) {
-        $content = Get-Content $portsFile -Raw
-        
-        # Update frontend port in CORS origins if it's not already there
-        if ($content -notmatch "localhost:$FrontendPort") {
-            $newOrigin = "  ``http://`${HOSTS.LOCAL}:$FrontendPort``, // Current dev server port"
-            $content = $content -replace "(// Current dev server port.*\n|// Fallback for default Next\.js port.*\n)", "$&$newOrigin`n"
+        try {
+            $content = Get-Content $portsFile -Raw
             
-            # Remove duplicate entries
-            $lines = $content -split "`n"
-            $uniqueLines = @()
-            $seenOrigins = @()
-            
-            foreach ($line in $lines) {
-                if ($line -match "localhost:(\d+)") {
-                    $port = $Matches[1]
-                    if ($port -notin $seenOrigins) {
-                        $seenOrigins += $port
-                        $uniqueLines += $line
+            # Check if the current frontend port is already in the CORS origins
+            if ($content -notmatch "localhost:$FrontendPort") {
+                # Read the current config to ensure we're adding to the right place
+                $frontendOrigin = "http://localhost:$FrontendPort"
+                
+                # Simple approach: ensure the current port is in the CORS_ORIGINS array
+                if ($content -match 'CORS_ORIGINS\s*=\s*\[([^\]]*)\]') {
+                    $originsBlock = $Matches[1]
+                    if ($originsBlock -notmatch "localhost:$FrontendPort") {
+                        # Add the new origin to the array
+                        $newOriginsBlock = $originsBlock.TrimEnd() + ",`n  `"$frontendOrigin`""
+                        $content = $content -replace 'CORS_ORIGINS\s*=\s*\[([^\]]*)\]', "CORS_ORIGINS = [$newOriginsBlock`n]"
+                        Set-Content -Path $portsFile -Value $content -Encoding UTF8
+                        Write-Host "✅ CORS configuration updated with port $FrontendPort" -ForegroundColor Green
+                    } else {
+                        Write-Host "✅ CORS already includes port $FrontendPort" -ForegroundColor Green
                     }
-                } else {
-                    $uniqueLines += $line
                 }
+            } else {
+                Write-Host "✅ CORS already includes port $FrontendPort" -ForegroundColor Green
             }
-            
-            $content = $uniqueLines -join "`n"
-            Set-Content -Path $portsFile -Value $content -Encoding UTF8
-            Write-Host "✅ CORS configuration updated with port $FrontendPort" -ForegroundColor Green
+        } catch {
+            Write-Host "⚠️  Could not update CORS configuration: $($_.Exception.Message)" -ForegroundColor Yellow
         }
+    } else {
+        Write-Host "⚠️  CORS configuration file not found: $portsFile" -ForegroundColor Yellow
     }
 }
 

@@ -18,6 +18,8 @@ import albumRoutes from './routes/album.js';
 import videoRoutes from './routes/videoRoutes.js';
 import mapRoutes from './routes/mapRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import analyticsRoutes from './routes/analytics.js';
+import visitorsRoutes from './routes/visitors.js';
 import { errorHandler } from './utils/errorHandler.js';
 
 // Get __dirname equivalent in ESM
@@ -146,6 +148,8 @@ app.use('/api/album', albumRoutes);
 app.use('/api/video', videoRoutes);
 app.use('/api/map', mapRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/visitors', visitorsRoutes);
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({

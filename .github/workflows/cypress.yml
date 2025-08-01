@@ -18,12 +18,21 @@ jobs:
         run: npm run build
       - name: Verify build output
         run: ls -la .next
-      - name: Test start command locally
+      - name: Cleanup any existing processes
         run: |
-          npm start &
-          sleep 5
-          curl -f http://localhost:3000 || (echo "Server failed to start" && exit 1)
+          # Kill any existing processes on port 3000
           pkill -f "npm start" || true
+          pkill -f "next start" || true
+          # Force kill processes using port 3000
+          lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+          # Wait for port to be fully freed
+          timeout=10
+          while [ $timeout -gt 0 ] && lsof -ti:3000 >/dev/null 2>&1; do
+            echo "Waiting for port 3000 to be freed... ($timeout seconds remaining)"
+            sleep 1
+            timeout=$((timeout - 1))
+          done
+          echo "Port 3000 cleanup complete"
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -34,3 +43,11 @@ jobs:
           parallel: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cleanup after tests
+        if: always()
+        run: |
+          # Ensure all test processes are cleaned up
+          pkill -f "npm start" || true
+          pkill -f "next start" || true
+          lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+          echo "Test cleanup complete"

@@ -94,7 +94,7 @@ class PerformanceMonitor {
         const duration = endTime - startTime;
 
         // Track API response times
-        if (url.includes('/api/')) {
+        if (typeof url === 'string' && url.includes('/api/')) {
           this.metrics.apiResponseTimes[url] = duration;
 
           if (duration > this.thresholds.apiResponseTime) {

@@ -97,8 +97,17 @@ app.use(
   express.json({
     limit: '10mb',
     verify: (req, res, buf) => {
-      // Sanitize all incoming JSON
-      req.body = JSON.parse(xss(buf.toString()));
+      try {
+        // Sanitize all incoming JSON safely
+        const rawBody = buf.toString();
+        // Only process if it's valid JSON
+        const parsed = JSON.parse(rawBody);
+        req.body = JSON.parse(xss(JSON.stringify(parsed)));
+      } catch (jsonError) {
+        // Log the error and let express handle invalid JSON
+        logger.warn('JSON parsing error during sanitization:', jsonError.message);
+        // Don't modify req.body, let express handle the error naturally
+      }
     },
   })
 );

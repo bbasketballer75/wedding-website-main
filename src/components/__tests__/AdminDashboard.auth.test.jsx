@@ -14,8 +14,6 @@ describe('AdminDashboard Unauthorized Access', () => {
     await act(async () => {
       render(<AdminDashboard adminKey={null} />);
     });
-    expect(await screen.findByRole('alert')).toHaveTextContent(
-      /Could not fetch media. Is the admin key correct?/i
-    );
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Invalid admin key/i);
   });
 });

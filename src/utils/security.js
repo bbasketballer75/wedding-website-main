@@ -11,20 +11,27 @@ export const securityMiddleware = {
 
   // Content validation
   validateUpload: (file) => {
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/quicktime'];
+    if (!file || typeof file !== 'object') {
+      throw new Error('Invalid file object');
+    }
 
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/quicktime'];
     const maxSize = 100 * 1024 * 1024; // 100MB
 
-    if (!allowedTypes.includes(file.mimetype)) {
+    if (!file.mimetype || !allowedTypes.includes(file.mimetype)) {
       throw new Error('Invalid file type');
     }
 
-    if (file.size > maxSize) {
+    if (!file.size || file.size > maxSize) {
       throw new Error('File too large');
     }
 
-    // Additional security: Check file headers
-    return validateFileHeaders(file);
+    // Additional security: Basic file validation
+    if (!file.originalname || typeof file.originalname !== 'string') {
+      throw new Error('Invalid filename');
+    }
+
+    return true;
   },
 
   // CSRF protection
@@ -38,11 +45,18 @@ export const securityMiddleware = {
 
   // Input sanitization
   sanitizeInput: (input) => {
+    if (typeof input !== 'string') {
+      return '';
+    }
     // Remove potentially dangerous characters
     return input
       .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       .replace(/javascript:/gi, '')
-      .replace(/on\w+\s*=/gi, '');
+      .replace(/on\w+\s*=/gi, '')
+      .replace(/data:/gi, '')
+      .replace(/vbscript:/gi, '')
+      .trim()
+      .substring(0, 1000); // Limit input length
   },
 };
 

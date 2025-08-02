@@ -99,11 +99,9 @@ export default process.env.SENTRY_AUTH_TOKEN
       // Disabled for Netlify to reduce function size
       widenClientFileUpload: false,
 
+      // Note: tunnelRoute is not supported with static export
       // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
-      // This can increase your server load as well as your hosting bill.
-      // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
-      // side errors will fail.
-      tunnelRoute: '/monitoring',
+      // tunnelRoute is disabled for static export compatibility
 
       // Automatically tree-shake Sentry logger statements to reduce bundle size
       disableLogger: true,
@@ -112,6 +110,6 @@ export default process.env.SENTRY_AUTH_TOKEN
       // See the following for more information:
       // https://docs.sentry.io/product/crons/
       // https://vercel.com/docs/cron-jobs
-      automaticVercelMonitors: true,
+      automaticVercelMonitors: false, // Disabled for static export
     })
   : finalConfig;

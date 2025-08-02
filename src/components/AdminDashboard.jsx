@@ -12,14 +12,28 @@ const AdminDashboard = ({ adminKey }) => {
 
   useEffect(() => {
     const fetchAllMedia = async () => {
+      if (!adminKey || typeof adminKey !== 'string') {
+        setError('Invalid admin key');
+        setIsLoading(false);
+        return;
+      }
+
       try {
         setIsLoading(true);
         setError(null);
         const response = await getAllAlbumMedia(adminKey);
-        setMedia(response.data);
+        if (response && response.data) {
+          setMedia(response.data);
+        } else {
+          setError('Invalid response from server');
+        }
       } catch (err) {
-        setError(err.response?.data?.message || 'Could not fetch media. Is the admin key correct?');
-        // ...existing code...
+        const errorMessage =
+          err.response?.data?.message ||
+          err.message ||
+          'Could not fetch media. Is the admin key correct?';
+        setError(errorMessage);
+        console.error('Failed to fetch media:', err);
       } finally {
         setIsLoading(false);
       }
@@ -29,6 +43,11 @@ const AdminDashboard = ({ adminKey }) => {
 
   const handleModeration = useCallback(
     async (photoId, isApproved) => {
+      if (!photoId || typeof photoId !== 'string') {
+        setError('Invalid photo ID');
+        return;
+      }
+
       setModAction((prev) => ({ ...prev, [photoId]: 'pending' }));
       setSuccess(null);
       try {
@@ -40,8 +59,12 @@ const AdminDashboard = ({ adminKey }) => {
         setSuccess(isApproved ? 'Media approved.' : 'Media denied and removed.');
       } catch (err) {
         setModAction((prev) => ({ ...prev, [photoId]: 'error' }));
-        setError('Failed to update status. Please try again.');
-        // ...existing code...
+        const errorMessage =
+          err.response?.data?.message ||
+          err.message ||
+          'Failed to update status. Please try again.';
+        setError(errorMessage);
+        console.error('Moderation failed:', err);
       }
     },
     [adminKey]
@@ -49,7 +72,7 @@ const AdminDashboard = ({ adminKey }) => {
 
   if (isLoading)
     return (
-      <div className="loading" role="status" aria-live="polite">
+      <div className="loading" aria-live="polite">
         Loading submissions...
       </div>
     );
@@ -63,12 +86,12 @@ const AdminDashboard = ({ adminKey }) => {
   return (
     <div className="admin-dashboard" aria-label="Admin moderation dashboard">
       {success && (
-        <div className="form-success" role="status">
+        <div className="form-success" aria-live="polite">
           {success}
         </div>
       )}
       {media.length === 0 ? (
-        <div className="empty-state" role="status">
+        <div className="empty-state" aria-live="polite">
           No submissions to moderate.
         </div>
       ) : (

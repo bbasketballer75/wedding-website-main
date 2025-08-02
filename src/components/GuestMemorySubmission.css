@@ -149,19 +149,19 @@
 }
 
 /* File input styling */
-.form-group input[type="file"] {
+.form-group input[type='file'] {
   padding: var(--space-2, 0.5rem);
   border: 2px dashed var(--sage-soft);
   background: var(--sage-whisper);
   cursor: pointer;
 }
 
-.form-group input[type="file"]:focus {
+.form-group input[type='file']:focus {
   border-color: var(--sage-primary);
   border-style: solid;
 }
 
-.form-group input[type="file"]:hover {
+.form-group input[type='file']:hover {
   border-color: var(--sage-primary);
   background: var(--blush-mist);
 }
@@ -256,7 +256,7 @@
   font-family: var(--font-body);
 }
 
-.checkbox-label input[type="checkbox"] {
+.checkbox-label input[type='checkbox'] {
   width: auto;
   margin: 0;
   flex-shrink: 0;
@@ -347,8 +347,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive design */
@@ -439,7 +443,7 @@
     color: var(--pearl);
   }
 
-  .form-group input[type="file"] {
+  .form-group input[type='file'] {
     background: var(--midnight);
   }
 

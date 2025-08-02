@@ -103,16 +103,14 @@ router.post('/', memoryRateLimit, upload.array('photos', 5), memoryValidation, a
       });
     }
 
-    const {
-      guestName,
-      email,
-      relationshipToBride,
-      relationshipToGroom,
-      memoryTitle,
-      memoryText,
-      favoriteMemoryType,
-      sharePublicly,
-    } = req.body;
+    // Extract basic guest information
+    const { guestName, email } = req.body;
+
+    // Extract relationship information
+    const { relationshipToBride, relationshipToGroom } = req.body;
+
+    // Extract memory content
+    const { memoryTitle, memoryText, favoriteMemoryType, sharePublicly } = req.body;
 
     // Process uploaded photos
     const photoUrls = [];

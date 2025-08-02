@@ -60,3 +60,12 @@ Object.defineProperty(window.HTMLMediaElement.prototype, 'load', {
   writable: true,
   value: jest.fn(),
 });
+
+// Mock IntersectionObserver for lazy loading tests
+global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+  // Simulate intersection for testing
+  triggerIntersection: (entries) => callback(entries),
+}));

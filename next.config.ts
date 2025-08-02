@@ -8,9 +8,16 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  // Static export for optimal Netlify hosting
+  output: 'export',
+  trailingSlash: true,
+
   // Performance optimizations
   compress: true,
   poweredByHeader: false,
+
+  // Disable source maps in production for Netlify (reduces bundle size)
+  productionBrowserSourceMaps: false,
 
   // Image optimization
   images: {
@@ -20,8 +27,8 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Disable optimization for Netlify static hosting
-    unoptimized: process.env.NODE_ENV === 'production',
+    // Disable optimization for static export
+    unoptimized: true,
   },
 
   webpack: (config, { dev, isServer }) => {
@@ -61,73 +68,7 @@ const nextConfig: NextConfig = {
     return config;
   },
 
-  // Security and performance headers
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-          // Content Security Policy
-          {
-            key: 'Content-Security-Policy',
-            value:
-              process.env.NODE_ENV === 'development'
-                ? "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://browser.sentry-cdn.com https://js.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: *.googleusercontent.com *.googleapis.com; connect-src 'self' http://localhost:3002 http://localhost:5000 https://*.sentry.io https://storage.googleapis.com https://firestore.googleapis.com https://wedding-backend.netlify.app; frame-src 'self' https://www.youtube.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self';"
-                : "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://browser.sentry-cdn.com https://js.sentry-cdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https: *.googleusercontent.com *.googleapis.com; connect-src 'self' https://*.sentry.io https://storage.googleapis.com https://firestore.googleapis.com https://wedding-backend.netlify.app; worker-src 'self' blob:; frame-src 'none'; object-src 'none'; base-uri 'self';",
-          },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/(favicon.ico|robots.txt|sitemap.xml)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400', // 1 day
-          },
-        ],
-      },
-    ];
-  },
-
-  // SEO redirects
-  async redirects() {
-    return [
-      {
-        source: '/home',
-        destination: '/',
-        permanent: true,
-      },
-    ];
-  },
+  // Note: Custom headers and redirects are handled in netlify.toml for static export
 };
 
 // Apply bundle analyzer and Sentry config
@@ -155,7 +96,8 @@ export default process.env.SENTRY_AUTH_TOKEN
       // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
       // Upload a larger set of source maps for prettier stack traces (increases build time)
-      widenClientFileUpload: true,
+      // Disabled for Netlify to reduce function size
+      widenClientFileUpload: false,
 
       // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
       // This can increase your server load as well as your hosting bill.

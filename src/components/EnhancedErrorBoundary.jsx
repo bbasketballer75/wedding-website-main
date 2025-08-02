@@ -1,9 +1,21 @@
-import * as Sentry from '@sentry/nextjs';
-import React from 'react';
+'use client';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// Lazy import Sentry to avoid build issues
+let Sentry = null;
+try {
+  // Only import Sentry in browser environment
+  if (typeof window !== 'undefined') {
+    Sentry = require('@sentry/nextjs');
+  }
+} catch (error) {
+  console.warn('Sentry not available:', error);
+}
+
 // Enhanced error boundary with context
-export class EnhancedErrorBoundary extends React.Component {
+export class EnhancedErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, errorInfo: null };
@@ -15,24 +27,25 @@ export class EnhancedErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     // Enhanced error reporting with user context
-    Sentry.withScope((scope) => {
-      scope.setTag('component', this.props.componentName || 'Unknown');
-      scope.setLevel('error');
-      scope.setContext('errorInfo', errorInfo);
-      scope.setContext('userAgent', navigator.userAgent);
-      scope.setContext('timestamp', new Date().toISOString());
-
-      // Add wedding-specific context
-      scope.setContext('weddingContext', {
-        currentPage: window.location.pathname,
-        userInteraction: this.props.lastUserAction,
-        sessionDuration: Date.now() - this.props.sessionStart,
+    if (Sentry && Sentry.withScope) {
+      Sentry.withScope((scope) => {
+        scope.setTag('component', this.props.componentName || 'Unknown');
+        scope.setLevel('error');
+        scope.setContext('errorInfo', {
+          componentStack: errorInfo.componentStack,
+          sessionStart: this.props.sessionStart,
+          timestamp: new Date().toISOString(),
+        });
+        scope.setContext('props', {
+          componentName: this.props.componentName,
+          fallbackMessage: this.props.fallbackMessage,
+        });
+        Sentry.captureException(error);
       });
-
-      Sentry.captureException(error);
-    });
-
-    this.setState({ errorInfo });
+    } else {
+      // Fallback logging when Sentry is not available
+      console.error('Error in component:', this.props.componentName || 'Unknown', error, errorInfo);
+    }
   }
 
   render() {
@@ -60,12 +73,12 @@ export class EnhancedErrorBoundary extends React.Component {
 EnhancedErrorBoundary.propTypes = {
   children: PropTypes.node.isRequired,
   componentName: PropTypes.string,
-  lastUserAction: PropTypes.string,
+  fallbackMessage: PropTypes.string,
   sessionStart: PropTypes.number,
 };
 
 EnhancedErrorBoundary.defaultProps = {
   componentName: 'Unknown',
-  lastUserAction: null,
+  fallbackMessage: 'Something went wrong',
   sessionStart: Date.now(),
 };

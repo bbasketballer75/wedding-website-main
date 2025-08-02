@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Suspense } from 'react';
-import ErrorBoundary from '../../components/ErrorBoundary';
+import { EnhancedErrorBoundary } from '../../components/EnhancedErrorBoundary';
 import LoadingScreen from '../../components/LoadingScreen';
 
 // Code splitting: Lazy load admin page
@@ -9,11 +9,11 @@ const AdminPage = React.lazy(() => import('../../page-components/AdminPage'));
 
 function AdminPageRoute() {
   return (
-    <ErrorBoundary>
+    <EnhancedErrorBoundary componentName="AdminPage">
       <Suspense fallback={<LoadingScreen message="Loading admin dashboard..." />}>
         <AdminPage />
       </Suspense>
-    </ErrorBoundary>
+    </EnhancedErrorBoundary>
   );
 }
 

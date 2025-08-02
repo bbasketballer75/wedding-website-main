@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import './globals.css';
 import { getHomepageStructuredData, generateStructuredDataScript } from '../utils/structuredData';
 import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
+import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
 
 // Configure premium wedding fonts
 const cormorantGaramond = Cormorant_Garamond({
@@ -162,7 +163,9 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <Script src="/analytics.js" strategy="afterInteractive" />
         <Script src="/utils/performanceMonitor.js" strategy="afterInteractive" />
-        {children}
+        <EnhancedErrorBoundary componentName="RootLayout" sessionStart={Date.now()}>
+          {children}
+        </EnhancedErrorBoundary>
       </body>
     </html>
   );

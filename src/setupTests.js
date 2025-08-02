@@ -30,4 +30,29 @@ if (typeof global.window === 'undefined') {
   global.window = {};
 }
 
+// Mock IntersectionObserver for lazy loading components
+if (typeof global.IntersectionObserver === 'undefined') {
+  global.IntersectionObserver = class IntersectionObserver {
+    constructor(callback, options) {
+      this.callback = callback;
+      this.options = options;
+    }
+
+    observe() {
+      // Immediately trigger intersection for testing
+      setTimeout(() => {
+        this.callback([{ isIntersecting: true }]);
+      }, 0);
+    }
+
+    unobserve() {
+      // Mock implementation
+    }
+
+    disconnect() {
+      // Mock implementation
+    }
+  };
+}
+
 // If you need to mock axios or fetch, use Vitest's vi.mock in your test files.

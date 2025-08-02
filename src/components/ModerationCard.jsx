@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 const MediaPreview = memo(({ item }) => {
   if (item.mimetype.startsWith('image/')) {
@@ -24,10 +25,9 @@ const MediaPreview = memo(({ item }) => {
 });
 
 const ModerationCard = memo(({ item, modAction, handleModeration }) => (
-  <div
+  <section
     key={item._id}
     className={`moderation-card ${item.approved ? 'is-approved' : 'is-pending'}`}
-    tabIndex={0}
     aria-label={`Submission by ${item.uploadedBy}, status: ${item.approved ? 'approved' : 'pending'}`}
   >
     <div className="media-preview">
@@ -69,7 +69,27 @@ const ModerationCard = memo(({ item, modAction, handleModeration }) => (
         </span>
       )}
     </div>
-  </div>
+  </section>
 ));
+
+MediaPreview.propTypes = {
+  item: PropTypes.shape({
+    mimetype: PropTypes.string.isRequired,
+    filepath: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+ModerationCard.propTypes = {
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    approved: PropTypes.bool.isRequired,
+    uploadedBy: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    mimetype: PropTypes.string.isRequired,
+    filepath: PropTypes.string.isRequired,
+  }).isRequired,
+  modAction: PropTypes.objectOf(PropTypes.string).isRequired,
+  handleModeration: PropTypes.func.isRequired,
+};
 
 export default ModerationCard;

@@ -18,7 +18,7 @@ $fixes = @()
 # Function to log issues and fixes (using approved PowerShell verbs)
 function Write-Issue {
     param($Type, $Description, $Action = "")
-    $global:issues += @{Type = $Type; Description = $Description; Action = $Action }
+    $global:issues += @{Get-Content = $Type; Description = $Description; Action = $Action }
     
     if ($Verbose) {
         Write-Host "⚠️  [$Type] $Description" -ForegroundColor Yellow

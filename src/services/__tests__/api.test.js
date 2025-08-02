@@ -1,6 +1,6 @@
-import * as api from '../api.js';
 import axios from 'axios';
 import { vi } from 'vitest';
+import * as api from '../api.js';
 
 // Mock axios for Vitest
 vi.mock('axios');

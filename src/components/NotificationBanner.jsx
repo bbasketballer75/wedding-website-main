@@ -1,16 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './NotificationBanner.css';
 
 const NotificationBanner = ({ message, onClose }) => {
   if (!message) return null;
   return (
-    <div className="notification-banner" role="status" aria-live="polite">
+    <output className="notification-banner" aria-live="polite">
       <span>{message}</span>
       <button className="notification-close" onClick={onClose} aria-label="Close notification">
         ×
       </button>
-    </div>
+    </output>
   );
+};
+
+NotificationBanner.propTypes = {
+  message: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default NotificationBanner;

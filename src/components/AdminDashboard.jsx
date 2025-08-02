@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { getAllAlbumMedia, moderateMedia } from '../services/api';
 import ModerationCard from './ModerationCard';
 import './AdminDashboard.css';
@@ -106,6 +107,10 @@ const AdminDashboard = ({ adminKey }) => {
       )}
     </div>
   );
+};
+
+AdminDashboard.propTypes = {
+  adminKey: PropTypes.string.isRequired,
 };
 
 export default AdminDashboard;

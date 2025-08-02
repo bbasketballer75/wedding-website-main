@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
-import NavLink from './NavLink';
 import Link from 'next/link';
+import NavLink from './NavLink';
 import './Navbar.css';
 import './Navbar-premium.css';
 

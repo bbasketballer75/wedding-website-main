@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { uploadMedia } from '../services/api';
 import './UploadForm.css';
 
@@ -105,11 +106,7 @@ const UploadForm = ({ onUploadSuccess }) => {
           {isUploading ? 'Uploading...' : 'Upload File'}
         </button>
       </form>
-      {message && (
-        <p className="success-message" role="status">
-          {message}
-        </p>
-      )}
+      {message && <output className="success-message">{message}</output>}
       {error && (
         <p className="error-message" role="alert">
           {error}
@@ -117,6 +114,10 @@ const UploadForm = ({ onUploadSuccess }) => {
       )}
     </div>
   );
+};
+
+UploadForm.propTypes = {
+  onUploadSuccess: PropTypes.func.isRequired,
 };
 
 export default UploadForm;

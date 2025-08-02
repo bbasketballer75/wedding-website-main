@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './MusicPlayer.css';
 
 const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
@@ -37,8 +38,9 @@ const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
         }
         setIsPlaying(true);
       } catch (error) {
-        // Ignore errors in test environments or unsupported browsers
-        console.warn('Audio playback not supported in this environment');
+        // Handle errors in test environments or unsupported browsers
+        console.warn('Audio playback not supported in this environment', error.message);
+        setIsPlaying(false);
       }
     }
   }, [isEnabled, volume]);
@@ -88,7 +90,9 @@ const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
 
   return (
     <div className={`music-player ${position} ${isMinimized ? 'minimized' : ''}`}>
-      <audio ref={audioRef} src={playlist[currentTrack]?.src} preload="metadata" />
+      <audio ref={audioRef} src={playlist[currentTrack]?.src} preload="metadata">
+        <track kind="captions" src="" label="No captions available" default />
+      </audio>
 
       {isMinimized ? (
         <button
@@ -166,6 +170,11 @@ const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
       )}
     </div>
   );
+};
+
+MusicPlayer.propTypes = {
+  isEnabled: PropTypes.bool,
+  position: PropTypes.oneOf(['bottom-right', 'bottom-left', 'top-right', 'top-left']),
 };
 
 export default MusicPlayer;

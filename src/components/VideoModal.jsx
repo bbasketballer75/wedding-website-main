@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import './VideoModal.css';
 
 function VideoModal({ videoUrl, onClose }) {
@@ -47,23 +48,21 @@ function VideoModal({ videoUrl, onClose }) {
     return () => window.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
-  // Click outside to close
-  const handleOverlayClick = (e) => {
-    if (e.target.classList.contains('video-modal-overlay')) onClose();
-  };
-
   // Hide spinner when iframe loads
   const handleIframeLoad = () => setLoading(false);
 
   return (
-    <div
+    <dialog
       className="video-modal-overlay fade-in"
-      onClick={handleOverlayClick}
+      aria-labelledby="video-modal-title"
       aria-modal="true"
-      role="dialog"
+      open
       ref={modalRef}
     >
       <div className="video-modal-content scale-in">
+        <h2 id="video-modal-title" className="sr-only">
+          Video Player
+        </h2>
         <button
           className="video-modal-close"
           onClick={onClose}
@@ -73,7 +72,9 @@ function VideoModal({ videoUrl, onClose }) {
           ×
         </button>
         {loading && (
-          <div className="video-modal-spinner loading-spinner" aria-label="Loading video" />
+          <output className="video-modal-spinner loading-spinner" aria-live="polite">
+            <span className="sr-only">Loading video</span>
+          </output>
         )}
         <iframe
           src={videoUrl + '?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0'}
@@ -84,11 +85,15 @@ function VideoModal({ videoUrl, onClose }) {
           className="video-modal-iframe"
           style={loading ? { visibility: 'hidden' } : {}}
           onLoad={handleIframeLoad}
-          tabIndex={0}
         />
       </div>
-    </div>
+    </dialog>
   );
 }
+
+VideoModal.propTypes = {
+  videoUrl: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 
 export default VideoModal;

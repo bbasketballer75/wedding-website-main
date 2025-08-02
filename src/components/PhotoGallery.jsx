@@ -72,10 +72,10 @@ const PhotoGallery = ({ refreshKey }) => {
 
   if (isLoading) {
     return (
-      <output className="loading-container" aria-live="polite">
+      <div className="loading-container" aria-live="polite">
         <div className="loading-spinner" aria-hidden="true"></div>
         <p>Loading album...</p>
-      </output>
+      </div>
     );
   }
 
@@ -93,9 +93,9 @@ const PhotoGallery = ({ refreshKey }) => {
   return (
     <main className="photo-gallery" aria-label="Wedding photo gallery">
       {media.length === 0 ? (
-        <output className="empty-state">
+        <div className="empty-state">
           <p>The album is currently empty. Be the first to contribute!</p>
-        </output>
+        </div>
       ) : (
         <>
           <h2 className="sr-only">{media.length} wedding photos and videos</h2>

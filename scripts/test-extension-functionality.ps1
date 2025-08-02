@@ -185,9 +185,9 @@ if (Get-ChildItem -Recurse -Filter "*.js" | Select-String -Pattern "axe|accessib
 # Test GitHub integration
 Write-Host "`n4. GitHub Integration:" -ForegroundColor Yellow
 if (Test-Path ".github/workflows/ci.yml") {
-    Write-Host "  ✅ CI/CD workflow configured" -ForegroundColor Green
+    Write-Host "  ✅ CI/Set-Location workflow configured" -ForegroundColor Green
 } else {
-    Write-Host "  ❌ CI/CD workflow missing" -ForegroundColor Red
+    Write-Host "  ❌ CI/Set-Location workflow missing" -ForegroundColor Red
 }
 
 Write-Host "`n=== RECOMMENDATIONS ===" -ForegroundColor Cyan

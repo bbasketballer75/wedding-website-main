@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './VideoPlayer.css';
 
 const VideoPlayer = ({ src, title = 'Wedding Video' }) => {
@@ -52,10 +53,10 @@ const VideoPlayer = ({ src, title = 'Wedding Video' }) => {
   return (
     <div className="video-container">
       {isLoading && (
-        <div className="video-loading" role="status" aria-live="polite">
+        <output className="video-loading" aria-live="polite">
           <div className="loading-spinner"></div>
           <p>Loading video...</p>
-        </div>
+        </output>
       )}
       <video
         ref={videoRef}
@@ -70,7 +71,7 @@ const VideoPlayer = ({ src, title = 'Wedding Video' }) => {
       >
         <source src={src} type="video/mp4" />
         <p>
-          Your browser doesn&apos;t support HTML video.
+          Your browser doesn&apos;t support HTML video.{' '}
           <a href={src} download>
             Download the video
           </a>{' '}
@@ -85,6 +86,11 @@ const VideoPlayer = ({ src, title = 'Wedding Video' }) => {
       </div>
     </div>
   );
+};
+
+VideoPlayer.propTypes = {
+  src: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 export default VideoPlayer;

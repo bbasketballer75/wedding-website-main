@@ -2,8 +2,6 @@
 
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import AlbumPage from '../page-components/AlbumPage.jsx';
-import MapPage from '../page-components/MapPage.jsx';
 
 describe('Guest Error Recovery', () => {
   it('should recover from temporary network issues in album', async () => {

@@ -1,13 +1,17 @@
 {
-  // Enhanced Editor Settings (WITH AGENT MODE AUTOMATION!)
+  // Enhanced Editor Settings (WITH COMPREHENSIVE AUTO-FIXING!)
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
+    "source.fixAll.sonarjs": "explicit",
+    "source.fixAll.powershell": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit",
     "source.fixAll": "explicit",
-    "source.addMissingImports": "explicit"
+    "source.addMissingImports": "explicit",
+    "source.removeUnusedImports": "explicit",
+    "source.convertImports": "explicit"
   },
   "editor.inlayHints.enabled": "on",
   "editor.bracketPairColorization.enabled": true,
@@ -233,9 +237,15 @@
   "sonarlint.rules": {
     "css:S4662": "off"
   },
-  // PowerShell Analysis Configuration
+  // PowerShell Analysis Configuration (ENHANCED)
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
+  "powershell.codeFormatting.autoCorrectAliases": true,
+  "powershell.codeFormatting.avoidSemicolonsAsLineTerminators": true,
+  "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
+  "powershell.codeFormatting.useConstantStrings": true,
+  "powershell.codeFormatting.useCorrectCasing": true,
+  "powershell.integratedConsole.focusConsoleOnExecute": false,
   // Stylelint Configuration
   "stylelint.validate": ["css", "scss", "sass"],
   "stylelint.customSyntax": "postcss-scss",

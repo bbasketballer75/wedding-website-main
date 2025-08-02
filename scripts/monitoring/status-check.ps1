@@ -50,7 +50,7 @@ if ($frontendOk -and $backendOk) {
         Write-Host "To start frontend: npm run dev" -ForegroundColor Cyan
     }
     if (-not $backendOk) {
-        Write-Host "To start backend:  cd backend && npm start" -ForegroundColor Cyan
+        Write-Host "To start backend:  Set-Location backend && npm start" -ForegroundColor Cyan
     }
     Write-Host ""
     Write-Host "Or use: .\\start-dev-with-monitor.ps1" -ForegroundColor Magenta

@@ -1,0 +1,42 @@
+{
+  "recommendations": [
+    // Core Development
+    "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // Code Quality & Auto-fixing
+    "sonarsource.sonarlint-vscode",
+    "ms-vscode.powershell",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+
+    // React/Next.js Development
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "zignd.html-css-class-completion",
+
+    // Testing & Debugging
+    "ms-vscode.vscode-json",
+    "ms-playwright.playwright",
+    "hbenl.vscode-test-explorer",
+
+    // Git & Collaboration
+    "eamodio.gitlens",
+    "ms-vscode.vscode-github-issue-notebooks",
+
+    // Productivity
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "ms-vscode.notepadplusplus-keybindings",
+
+    // Documentation
+    "yzhang.markdown-all-in-one",
+    "bierner.markdown-mermaid",
+
+    // Performance & Monitoring
+    "ms-vscode.vscode-js-profile-flame"
+  ],
+  "unwantedRecommendations": ["ms-vscode.vscode-typescript-tslint-plugin"]
+}

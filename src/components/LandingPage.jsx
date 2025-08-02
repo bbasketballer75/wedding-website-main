@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './LandingPage.css';
 
 const LandingPage = ({ onEnter }) => {
@@ -29,7 +30,7 @@ const LandingPage = ({ onEnter }) => {
               width="1000"
               height="600"
               style={{ maxWidth: '100%', height: 'auto' }}
-              fetchpriority="high"
+              fetchPriority="high"
             />
           </picture>
         </div>
@@ -45,6 +46,10 @@ const LandingPage = ({ onEnter }) => {
       </div>
     </div>
   );
+};
+
+LandingPage.propTypes = {
+  onEnter: PropTypes.func.isRequired,
 };
 
 export default LandingPage;

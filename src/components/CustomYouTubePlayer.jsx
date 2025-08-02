@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import './CustomYouTubePlayer.css';
 
 const CustomYouTubePlayer = ({ videoId = 'ZOIRb_ghdh0' }) => {
@@ -47,7 +48,7 @@ const CustomYouTubePlayer = ({ videoId = 'ZOIRb_ghdh0' }) => {
   }, []);
 
   const initPlayer = () => {
-    const newPlayer = new window.YT.Player(playerRef.current, {
+    const playerInstance = new window.YT.Player(playerRef.current, {
       videoId: videoId,
       width: '100%',
       height: '100%',
@@ -71,6 +72,7 @@ const CustomYouTubePlayer = ({ videoId = 'ZOIRb_ghdh0' }) => {
         },
       },
     });
+    return playerInstance;
   };
 
   const startTimeUpdater = (playerInstance) => {
@@ -153,10 +155,10 @@ const CustomYouTubePlayer = ({ videoId = 'ZOIRb_ghdh0' }) => {
       <div className="chapters-list">
         <h3>Wedding Video Chapters</h3>
         <div className="chapters-grid">
-          {chapters.map((chapter, index) => (
+          {chapters.map((chapter) => (
             <button
-              key={index}
-              className={`chapter-item ${index === activeChapter ? 'active' : ''}`}
+              key={`chapter-${chapter.time}-${chapter.title}`}
+              className={`chapter-item ${chapters.findIndex((c) => c.time === chapter.time) === activeChapter ? 'active' : ''}`}
               onClick={() => handleChapterClick(chapter.time)}
             >
               <span className="chapter-time">{formatTime(chapter.time)}</span>
@@ -167,6 +169,10 @@ const CustomYouTubePlayer = ({ videoId = 'ZOIRb_ghdh0' }) => {
       </div>
     </div>
   );
+};
+
+CustomYouTubePlayer.propTypes = {
+  videoId: PropTypes.string,
 };
 
 export default CustomYouTubePlayer;

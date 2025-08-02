@@ -1,10 +1,9 @@
 // Content Validation Test
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import GuestbookPage from '../page-components/GuestbookPage.jsx';
-import * as api from '../services/api.js';
 
 describe('Guest Content Experience', () => {
   it('should sanitize and validate guestbook entries', async () => {

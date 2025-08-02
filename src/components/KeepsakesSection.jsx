@@ -23,8 +23,11 @@ const KeepsakesSection = () => (
   <section id="keepsakes" className="keepsakes-section">
     <h2 className="keepsakes-title">Downloadable Keepsakes</h2>
     <div className="keepsakes-grid">
-      {keepsakes.map((item, idx) => (
-        <div className="keepsake-card" key={idx}>
+      {keepsakes.map((item) => (
+        <div
+          className="keepsake-card"
+          key={`keepsake-${item.title.replace(/\s+/g, '-').toLowerCase()}`}
+        >
           <h3 className="keepsake-title">{item.title}</h3>
           <p className="keepsake-desc">{item.description}</p>
           <a href={item.file} download className="keepsake-download-btn">

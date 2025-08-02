@@ -329,8 +329,8 @@
   }
 
   .image-error {
-    background: #2a2a2a;
-    border-color: #444;
-    color: #ccc;
+    background: var(--midnight);
+    border-color: var(--charcoal);
+    color: var(--dove);
   }
 }

@@ -46,17 +46,17 @@ input:focus,
 textarea:focus,
 select:focus,
 [tabindex]:focus {
-  outline: 3px solid #005fcc;
+  outline: 3px solid var(--sage-primary);
   outline-offset: 2px;
   box-shadow:
-    0 0 0 1px #fff,
-    0 0 0 4px #005fcc;
+    0 0 0 1px var(--pearl),
+    0 0 0 4px var(--sage-primary);
 }
 
 /* Focus styles for gallery images */
 .gallery-image:focus,
 .highlight-image:focus {
-  outline: 3px solid #005fcc;
+  outline: 3px solid var(--sage-primary);
   outline-offset: 4px;
   transform: scale(1.02);
   transition:
@@ -78,7 +78,7 @@ iframe:focus {
 
 /* Navigation focus improvements */
 .nav-link:focus {
-  background-color: rgba(0, 95, 204, 0.1);
+  background-color: rgba(143, 168, 118, 0.1);
   border-radius: 4px;
   padding: 4px 8px;
   margin: -4px -8px;

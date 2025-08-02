@@ -3,6 +3,7 @@
 ## 🎯 Immediate Actions (Today)
 
 ### 1. Replace PhotoGallery Component
+
 ```bash
 # Backup current component
 cp src/components/PhotoGallery.jsx src/components/PhotoGallery.backup.jsx
@@ -15,7 +16,9 @@ cp src/styles/PhotoGalleryEnhanced.css src/components/PhotoGallery.css
 ```
 
 ### 2. Update Layout Integration
+
 Add to `src/app/layout.tsx`:
+
 ```tsx
 import { featureManager } from '../services/featureManager';
 import { privacyManager } from '../services/privacyManager';
@@ -28,6 +31,7 @@ useEffect(() => {
 ```
 
 ### 3. Test Integration
+
 ```bash
 npm run test:frontend
 npm run build

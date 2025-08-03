@@ -18,7 +18,9 @@ const AlbumPage = () => {
       const response = await getAlbumMedia();
       setPhotos(response.data);
     } catch {
-      setError("We couldn't load our photo collection right now. Please try again in a moment!");
+      setError(
+        'Our photo sanctuary is temporarily resting. Please return in a moment to view our treasures!'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -51,8 +53,8 @@ const AlbumPage = () => {
         <LoadingScreen
           message={
             isUploading
-              ? 'Adding your memory to our collection...'
-              : 'Loading our beautiful memories...'
+              ? 'Weaving your treasure into our collection...'
+              : 'Illuminating our gallery of cherished moments...'
           }
         />
       )}
@@ -68,31 +70,32 @@ const AlbumPage = () => {
       )}
       {!isLoading && !isUploading && !error && (
         <>
-          <h2 className="section-title">Our Memory Collection</h2>
+          <h2 className="section-title">Gallery of Eternal Moments</h2>
           <p className="album-subheading">
-            This is where our wedding day lives on forever! Browse through professional photos,
-            candid moments, and behind-the-scenes magic. We'd love for you to add your own photos
-            and videos to help us see our special day through your eyes.
+            This sacred collection holds the essence of our love story forever! Explore the poetry
+            of our wedding day through professional portraits, spontaneous laughter, and
+            behind-the-scenes enchantment. We would be honored for you to contribute your own
+            captured memories and help us see our celebration through your loving eyes.
           </p>
           <div className="upload-section">
             <label htmlFor="album-upload-input" className="visually-hidden">
-              Share a photo or video from our wedding day
+              Contribute a treasured moment from our celebration
             </label>
             <input
               id="album-upload-input"
               type="file"
               onChange={handleFileChange}
-              aria-label="Upload your wedding photo or video"
+              aria-label="Share your captured wedding magic - photo or video"
             />
             <button onClick={handleUpload} className="btn accent">
-              Add Your Memory! 📸
+              Gift Your Memory ✨
             </button>
           </div>
           <div className="photo-grid">
             {photos.length === 0 ? (
               <div className="empty-state">
-                This collection is just waiting for your beautiful memories! Be the first to share a
-                photo or video from our special day.
+                This sacred gallery awaits your beautiful treasures! Be the first to grace our
+                collection with a precious moment from our celebration.
               </div>
             ) : (
               photos.map((photo) => (

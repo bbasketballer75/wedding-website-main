@@ -137,7 +137,7 @@ const MemoryWall = () => {
 
   return (
     <section className="memorywall-section">
-      <h2 className="memorywall-title">Memory Wall & Photo Booth</h2>
+      <h2 className="memorywall-title">Tapestry of Cherished Moments</h2>
       <form className="memorywall-form" onSubmit={handleSubmit}>
         <label htmlFor="memory-name" className="sr-only">
           Your Name (optional)
@@ -146,7 +146,7 @@ const MemoryWall = () => {
           id="memory-name"
           type="text"
           name="name"
-          placeholder="Your Name (optional)"
+          placeholder="Your name (if you wish to sign)"
           value={form.name}
           onChange={handleChange}
           disabled={submitting}
@@ -158,7 +158,7 @@ const MemoryWall = () => {
         <textarea
           id="memory-message"
           name="message"
-          placeholder="Share a memory or message..."
+          placeholder="Share a treasured memory or heartfelt message..."
           value={form.message}
           onChange={handleChange}
           required
@@ -193,7 +193,7 @@ const MemoryWall = () => {
           </picture>
         )}
         <button type="submit" disabled={submitting || !form.message}>
-          {submitting ? 'Posting...' : 'Post Memory'}
+          {submitting ? 'Weaving into our tapestry...' : 'Add to Our Story'}
         </button>
       </form>
       <div className="memorywall-grid">

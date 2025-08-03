@@ -10,27 +10,27 @@ import '../App.css';
 
 // Dynamically load heavy components with SSR disabled for client-side optimizations
 const MemoryWall = dynamic(() => import('../components/MemoryWall'), {
-  loading: () => <LoadingScreen message="Loading Memory Wall..." />,
+  loading: () => <LoadingScreen message="Illuminating precious memories..." />,
   ssr: false,
 });
 const AlbumPage = dynamic(() => import('../page-components/AlbumPage'), {
-  loading: () => <LoadingScreen message="Loading Engagement & Album..." />,
+  loading: () => <LoadingScreen message="Unveiling our engagement enchantment..." />,
   ssr: false,
 });
 const GuestbookPage = dynamic(() => import('../page-components/GuestbookPage'), {
-  loading: () => <LoadingScreen message="Loading Guestbook..." />,
+  loading: () => <LoadingScreen message="Opening our sacred memory book..." />,
   ssr: false,
 });
 const FamilyWeddingPartyPage = dynamic(() => import('../page-components/FamilyWeddingPartyPage'), {
-  loading: () => <LoadingScreen message="Loading Family & Wedding Party..." />,
+  loading: () => <LoadingScreen message="Introducing our beloved circle of love..." />,
   ssr: false,
 });
 const MapPage = dynamic(() => import('../page-components/MapPage'), {
-  loading: () => <LoadingScreen message="Loading Map..." />,
+  loading: () => <LoadingScreen message="Revealing our magical celebration venues..." />,
   ssr: false,
 });
 const StayInTouchSection = dynamic(() => import('../components/StayInTouchSection'), {
-  loading: () => <LoadingScreen message="Loading Stay in Touch..." />,
+  loading: () => <LoadingScreen message="Preparing ways to stay connected..." />,
   ssr: false,
 });
 
@@ -50,7 +50,7 @@ export default function Home() {
         <ThankYouSection />
 
         {/* Memory Wall & Photo Booth */}
-        <Suspense fallback={<LoadingScreen message="Loading Memory Wall..." />}>
+        <Suspense fallback={<LoadingScreen message="Unveiling cherished moments..." />}>
           <section id="memorywall" aria-label="Memory Wall and Photo Booth">
             <MemoryWall />
           </section>

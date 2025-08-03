@@ -12,18 +12,20 @@ const StayInTouchSection: React.FC = () => {
       <div className="container">
         <header className="stay-in-touch-header">
           <h2 className="section-title">
-            <span className="script-text">Stay in Touch</span>
+            <span className="script-text">Forever Connected</span>
           </h2>
           <p className="section-description">
-            Follow our journey as newlyweds and stay connected with us!
+            Join us as we begin this enchanting new chapter of our love story, and remain forever
+            woven into the fabric of our hearts.
           </p>
         </header>
 
         <div className="contact-grid">
           <div className="contact-card">
-            <h3 className="contact-title">Follow Our Adventures</h3>
+            <h3 className="contact-title">Journey Through Our Adventures</h3>
             <p className="contact-description">
-              Keep up with our married life, travels, and new adventures on social media.
+              Witness the beautiful tapestry of our married life as we weave new memories, discover
+              magical places, and create moments of wonder together.
             </p>
             <div className="social-links">
               <a
@@ -44,32 +46,33 @@ const StayInTouchSection: React.FC = () => {
           </div>
 
           <div className="contact-card">
-            <h3 className="contact-title">Send Us Love</h3>
+            <h3 className="contact-title">Send Whispers of Love</h3>
             <p className="contact-description">
-              We&rsquo;d love to hear from you! Send us a note or share your favorite memory from
-              our wedding.
+              Our hearts flutter with joy at every word from you. Share a cherished memory from our
+              celebration, send us blessings for our journey, or simply let love flow through your
+              words.
             </p>
             <a
               href="mailto:hello@theporadas.com"
               className="contact-button"
-              aria-label="Send email to Austin and Jordyn"
+              aria-label="Send a love letter to Austin and Jordyn"
             >
-              💌 Email Us
+              💌 Send Love Letters
             </a>
           </div>
 
           <div className="contact-card">
-            <h3 className="contact-title">Share Your Photos</h3>
+            <h3 className="contact-title">Gift Us Your Captured Magic</h3>
             <p className="contact-description">
-              Did you capture some special moments? We&rsquo;d love to see them! Share your photos
-              with us.
+              Did your lens capture moments of pure enchantment from our celebration? We would be
+              eternally grateful to treasure these precious glimpses through your eyes.
             </p>
             <a
               href="#guestbook"
               className="contact-button"
-              aria-label="Visit the guestbook to share photos"
+              aria-label="Visit the sacred memory book to share photos"
             >
-              📷 Share Photos
+              📷 Share Sacred Moments
             </a>
           </div>
         </div>

@@ -12,7 +12,7 @@ describe('Navbar', () => {
     render(<Navbar />);
     // Test specific navigation links as links (not menu items after accessibility cleanup)
     expect(screen.getByRole('link', { name: /^Home$/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Memory Wall/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Memory Tapestry/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Engagement/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Guestbook/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Our People/i })).toBeInTheDocument();

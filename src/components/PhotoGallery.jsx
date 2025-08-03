@@ -74,7 +74,7 @@ const PhotoGallery = ({ refreshKey }) => {
     return (
       <div className="loading-container" aria-live="polite">
         <div className="loading-spinner" aria-hidden="true"></div>
-        <p>Loading album...</p>
+        <p>Awakening our gallery...</p>
       </div>
     );
   }

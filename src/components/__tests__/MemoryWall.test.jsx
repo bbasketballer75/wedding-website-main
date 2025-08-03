@@ -10,7 +10,7 @@ describe('MemoryWall', () => {
   test('renders memory wall with initial memories', () => {
     render(<MemoryWall />);
 
-    expect(screen.getByText('Memory Wall & Photo Booth')).toBeInTheDocument();
+    expect(screen.getByText('Tapestry of Cherished Moments')).toBeInTheDocument();
     expect(screen.getByText('Such a beautiful day! Congrats!')).toBeInTheDocument();
     expect(screen.getByText('Wishing you a lifetime of happiness!')).toBeInTheDocument();
     expect(screen.getByText('Emily')).toBeInTheDocument();
@@ -20,41 +20,47 @@ describe('MemoryWall', () => {
   test('renders memory form with required fields', () => {
     render(<MemoryWall />);
 
-    expect(screen.getByPlaceholderText('Your Name (optional)')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Share a memory or message...')).toBeInTheDocument();
-    expect(screen.getByText('Post Memory')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Your name (if you wish to sign)')).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText('Share a treasured memory or heartfelt message...')
+    ).toBeInTheDocument();
+    expect(screen.getByText('Add to Our Story')).toBeInTheDocument();
   });
 
   test('submit button is disabled when message is empty', () => {
     render(<MemoryWall />);
 
-    const submitBtn = screen.getByRole('button', { name: /post memory/i });
+    const submitBtn = screen.getByRole('button', { name: /add to our story/i });
     expect(submitBtn).toBeDisabled();
   });
 
   test('submit button is enabled when message is filled', () => {
     render(<MemoryWall />);
 
-    const messageInput = screen.getByPlaceholderText('Share a memory or message...');
+    const messageInput = screen.getByPlaceholderText(
+      'Share a treasured memory or heartfelt message...'
+    );
     fireEvent.change(messageInput, { target: { value: 'Test message' } });
 
-    const submitBtn = screen.getByRole('button', { name: /post memory/i });
+    const submitBtn = screen.getByRole('button', { name: /add to our story/i });
     expect(submitBtn).not.toBeDisabled();
   });
 
   test('can add a new memory', async () => {
     render(<MemoryWall />);
 
-    const nameInput = screen.getByPlaceholderText('Your Name (optional)');
-    const messageInput = screen.getByPlaceholderText('Share a memory or message...');
-    const submitBtn = screen.getByRole('button', { name: /post memory/i });
+    const nameInput = screen.getByPlaceholderText('Your name (if you wish to sign)');
+    const messageInput = screen.getByPlaceholderText(
+      'Share a treasured memory or heartfelt message...'
+    );
+    const submitBtn = screen.getByRole('button', { name: /add to our story/i });
 
     fireEvent.change(nameInput, { target: { value: 'Test User' } });
     fireEvent.change(messageInput, { target: { value: 'Test memory message' } });
     fireEvent.click(submitBtn);
 
-    // Should show "Posting..." during submission
-    expect(screen.getByText('Posting...')).toBeInTheDocument();
+    // Should show "Weaving into our tapestry..." during submission
+    expect(screen.getByText('Weaving into our tapestry...')).toBeInTheDocument();
 
     // Wait for the new memory to appear
     await waitFor(

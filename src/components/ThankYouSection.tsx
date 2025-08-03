@@ -17,20 +17,23 @@ const ThankYouSection: React.FC = () => {
 
           <div className="hero-message">
             <p className="lead-text">
-              From the bottom of our hearts, thank you for being a part of our wedding celebration!
+              From the depths of our souls, we are eternally grateful for your presence at our
+              sacred celebration of love.
             </p>
 
             <p className="body-text">
-              Your love, support, and presence made our day truly unforgettable. We are so grateful
-              for every hug, every dance, every laugh, and every memory shared.
+              Your radiant spirits, warm embraces, and joyful tears transformed our special day into
+              an absolutely enchanting tapestry of love. Each smile, each dance, each whispered
+              blessing became a precious thread woven into the fabric of our hearts.
             </p>
 
             <p className="body-text">
-              We hope you enjoy reliving the moments and sharing your own memories here.
+              We invite you to wander through these cherished moments and add your own beautiful
+              memories to our eternal love story.
             </p>
 
             <div className="signature">
-              <span className="script-signature">With all our love,</span>
+              <span className="script-signature">With endless love and gratitude,</span>
               <span className="names">Austin & Jordyn</span>
             </div>
           </div>

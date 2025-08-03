@@ -35,14 +35,14 @@ const GuestbookPage = () => {
     try {
       if (!message.trim()) {
         setFormError(
-          "We need a message from you to add to our guestbook! Share what's in your heart."
+          'We long to hear the whispers of your heart! Please share a beautiful message with us.'
         );
         setIsSubmitting(false);
         return;
       }
       await createGuestbookEntry({ name, message });
       setSuccess(
-        'Your beautiful message has been added to our guestbook! Thank you for sharing your heart with us. ❤️'
+        'Your exquisite words have been lovingly woven into our memory book! Thank you for blessing us with the poetry of your heart. 💖'
       );
       setMessage('');
       setName('');
@@ -50,7 +50,9 @@ const GuestbookPage = () => {
       const response = await getGuestbookEntries();
       setEntries(response.data);
     } catch {
-      setFormError("Oops! We couldn't save your message right now. Please try again in a moment!");
+      setFormError(
+        'A gentle breeze interrupted our connection! Please try sharing your heart again in just a moment.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -58,16 +60,17 @@ const GuestbookPage = () => {
 
   return (
     <div className="guestbook-page">
-      {isLoading && <LoadingScreen message="Loading all the wonderful messages..." />}
+      {isLoading && <LoadingScreen message="Gathering all the beautiful words and blessings..." />}
       {!isLoading && (
         <>
           <h2 id="guestbook-title" className="section-title">
-            Our Digital Guestbook
+            Our Sacred Memory Book
           </h2>
           <p className="guestbook-subheading">
-            Your words mean the world to us! Share a favorite memory from our wedding day, some
-            heartfelt marriage advice, a funny story, or simply let us know you were here. Every
-            message becomes a treasured keepsake in our love story.
+            Your precious words become golden threads in the tapestry of our love story. Share a
+            cherished memory from our wedding celebration, offer wisdom from your heart, recount a
+            moment that made you smile, or simply leave us a blessing. Each message becomes an
+            eternal keepsake in our journey of love.
           </p>
           <form
             className="guestbook-form"
@@ -106,7 +109,7 @@ const GuestbookPage = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   maxLength={500}
-                  placeholder="Share a favorite memory, marriage advice, or just say hello!"
+                  placeholder="Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!"
                   required
                   aria-required="true"
                   aria-describedby="message-help"
@@ -114,7 +117,8 @@ const GuestbookPage = () => {
                   rows={4}
                 />
                 <div id="message-help" className="input-description">
-                  Share what's in your heart - memories, advice, or just a sweet message for us!
+                  Let your soul speak - we treasure every word, every blessing, every beautiful
+                  thought you share.
                 </div>
               </div>
             </fieldset>
@@ -134,7 +138,7 @@ const GuestbookPage = () => {
               disabled={isSubmitting}
               aria-describedby={isSubmitting ? 'submit-status' : undefined}
             >
-              {isSubmitting ? 'Adding Your Message...' : 'Share Your Heart ❤️'}
+              {isSubmitting ? 'Weaving Your Words into Our Story...' : 'Share Your Heart & Soul 💝'}
             </button>
             {isSubmitting && (
               <div id="submit-status" className="sr-only" aria-live="polite">
@@ -152,7 +156,10 @@ const GuestbookPage = () => {
               Guestbook Entries
             </h3>
             {entries.length === 0 ? (
-              <div className="empty-state">No messages yet. Be the first to share a memory!</div>
+              <div className="empty-state">
+                This sacred space awaits the first beautiful blessing. Will you be the one to begin
+                our memory book?
+              </div>
             ) : (
               <>
                 <div className="sr-only" aria-live="polite">

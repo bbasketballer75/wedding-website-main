@@ -200,17 +200,18 @@ const GuestMemorySubmission = ({
   return (
     <div className="guest-memory-submission">
       <div className="memory-form-header">
-        <h2>Share Your Memory</h2>
+        <h2>Weave Your Thread Into Our Story</h2>
         <p>
-          We'd love to hear your favorite memories, stories, and see your photos from our special
-          day!
+          Your precious memories are the golden threads that complete the tapestry of our love
+          story. Share your treasured moments, heartfelt wishes, and captured memories from our
+          celebration!
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="memory-form" noValidate>
         {/* Guest Information */}
         <fieldset className="form-section">
-          <legend>Guest Information</legend>
+          <legend>Tell Us Who You Are</legend>
 
           <div className="form-group">
             <label htmlFor="guestName" className="required">
@@ -289,11 +290,11 @@ const GuestMemorySubmission = ({
 
         {/* Memory Details */}
         <fieldset className="form-section">
-          <legend>Your Memory</legend>
+          <legend>Share Your Treasured Memory</legend>
 
           <div className="form-group">
             <label htmlFor="favoriteMemoryType" className="required">
-              Memory Type
+              What Kind of Precious Memory?
             </label>
             <select
               id="favoriteMemoryType"
@@ -320,7 +321,7 @@ const GuestMemorySubmission = ({
 
           <div className="form-group">
             <label htmlFor="memoryTitle" className="required">
-              Memory Title
+              A Beautiful Title for Your Memory
             </label>
             <input
               type="text"
@@ -329,7 +330,7 @@ const GuestMemorySubmission = ({
               value={formData.memoryTitle}
               onChange={handleInputChange}
               className={errors.memoryTitle ? 'error' : ''}
-              placeholder="Give your memory a memorable title"
+              placeholder="A poetic title that captures the essence of your memory"
               maxLength="200"
               required
               aria-describedby={errors.memoryTitle ? 'memoryTitle-error' : undefined}
@@ -343,7 +344,7 @@ const GuestMemorySubmission = ({
 
           <div className="form-group">
             <label htmlFor="memoryText" className="required">
-              Your Memory or Message
+              Paint Your Memory in Words
             </label>
             <textarea
               id="memoryText"
@@ -351,7 +352,7 @@ const GuestMemorySubmission = ({
               value={formData.memoryText}
               onChange={handleInputChange}
               className={errors.memoryText ? 'error' : ''}
-              placeholder="Share your favorite memory, story, or heartfelt message..."
+              placeholder="Let your heart speak... share the emotions, laughter, and love you felt during our celebration"
               rows="6"
               maxLength="2000"
               required
@@ -372,10 +373,10 @@ const GuestMemorySubmission = ({
 
         {/* Photo Upload */}
         <fieldset className="form-section">
-          <legend>Photos (Optional)</legend>
+          <legend>Captured Moments (Optional)</legend>
 
           <div className="form-group">
-            <label htmlFor="photos">Upload Photos</label>
+            <label htmlFor="photos">Share Your Captured Magic</label>
             <input
               type="file"
               id="photos"
@@ -388,8 +389,8 @@ const GuestMemorySubmission = ({
               aria-describedby={errors.photos ? 'photos-error' : 'photos-help'}
             />
             <small id="photos-help" className="help-text">
-              You can upload multiple photos (JPEG, PNG, WebP). Max {maxPhotoSize / 1024 / 1024}MB
-              per file.
+              Share the moments you captured through your lens (JPEG, PNG, WebP). Max{' '}
+              {maxPhotoSize / 1024 / 1024}MB per precious photo.
             </small>
             {errors.photos && (
               <span id="photos-error" className="error-message" role="alert">
@@ -400,7 +401,7 @@ const GuestMemorySubmission = ({
 
           {selectedFiles.length > 0 && (
             <div className="selected-files">
-              <h4>Selected Photos:</h4>
+              <h4>Your Selected Treasures:</h4>
               <ul className="file-list">
                 {selectedFiles.map((file, index) => (
                   <li key={`${file.name}-${file.size}-${file.lastModified}`} className="file-item">
@@ -423,7 +424,7 @@ const GuestMemorySubmission = ({
 
         {/* Privacy Settings */}
         <fieldset className="form-section">
-          <legend>Privacy Settings</legend>
+          <legend>How Would You Like to Share?</legend>
 
           <div className="form-group checkbox-group">
             <label className="checkbox-label">
@@ -434,11 +435,11 @@ const GuestMemorySubmission = ({
                 onChange={handleInputChange}
               />
               <span className="checkbox-text">
-                I agree to share this memory publicly on the wedding website
+                Let this beautiful memory grace our public celebration
               </span>
             </label>
             <small className="help-text">
-              Uncheck this if you prefer to share your memory privately with the couple only
+              Uncheck if you prefer to share this precious memory privately with just the couple
             </small>
           </div>
         </fieldset>
@@ -453,14 +454,15 @@ const GuestMemorySubmission = ({
           >
             {isSubmitting ? (
               <>
-                <span className="loading-spinner" aria-hidden="true"></span> Submitting Memory...
+                <span className="loading-spinner" aria-hidden="true"></span> Weaving your memory
+                into our story...
               </>
             ) : (
-              'Share Memory'
+              'Gift Your Memory'
             )}
           </button>
           <small id="submit-help" className="help-text">
-            Your memory will be reviewed before appearing on the site
+            Your treasured memory will be lovingly reviewed before gracing our celebration
           </small>
         </div>
       </form>

@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             data-track="navbar-home"
           >
             <span className="navbar-logo">Austin & Jordyn</span>
-            <span className="navbar-tagline">Celebrating Our Forever</span>
+            <span className="navbar-tagline">A Love Story Written in Eternity</span>
           </a>
         ) : (
           <Link
@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <NavLink
               onePage={onePage}
               href="#memorywall"
-              label="Memory Wall"
+              label="Memory Tapestry"
               onClick={(e) => handleNavClick(e, 'memorywall')}
             />
           </li>
@@ -84,7 +84,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <NavLink
               onePage={onePage}
               href="#album"
-              label="Engagement"
+              label="Love's Journey"
               onClick={(e) => handleNavClick(e, 'album')}
             />
           </li>
@@ -92,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <NavLink
               onePage={onePage}
               href="#guestbook"
-              label="Guestbook"
+              label="Sacred Messages"
               onClick={(e) => handleNavClick(e, 'guestbook')}
             />
           </li>
@@ -100,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <NavLink
               onePage={onePage}
               href="#family-party"
-              label="Our People"
+              label="Our Beloved Circle"
               onClick={(e) => handleNavClick(e, 'family-party')}
             />
           </li>
@@ -108,7 +108,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onePage }) => {
             <NavLink
               onePage={onePage}
               href="#map"
-              label="Map"
+              label="Sacred Places"
               onClick={(e) => handleNavClick(e, 'map')}
             />
           </li>

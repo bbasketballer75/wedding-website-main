@@ -42,7 +42,7 @@ const OnePage = () => {
           <h2 id="family-tree-title" className="sr-only">
             Family Tree
           </h2>
-          <Suspense fallback={<LoadingScreen message="Loading family tree..." />}>
+          <Suspense fallback={<LoadingScreen message="Awakening our family roots..." />}>
             <FamilyTreePage onePage />
           </Suspense>
         </section>
@@ -52,7 +52,7 @@ const OnePage = () => {
           <h2 id="wedding-party-title" className="sr-only">
             Wedding Party
           </h2>
-          <Suspense fallback={<LoadingScreen message="Loading wedding party..." />}>
+          <Suspense fallback={<LoadingScreen message="Revealing our cherished companions..." />}>
             <WeddingPartyPage onePage />
           </Suspense>
         </section>
@@ -91,7 +91,7 @@ const OnePage = () => {
           <h2 id="engagement-album-title" className="sr-only">
             Engagement Photo Album
           </h2>
-          <Suspense fallback={<LoadingScreen message="Loading photo album..." />}>
+          <Suspense fallback={<LoadingScreen message="Illuminating our love story..." />}>
             <AlbumPage onePage engagementOnly />
           </Suspense>
         </section>
@@ -101,7 +101,7 @@ const OnePage = () => {
           <h2 id="memory-wall-title" className="sr-only">
             Memory Wall
           </h2>
-          <Suspense fallback={<LoadingScreen message="Loading memory wall..." />}>
+          <Suspense fallback={<LoadingScreen message="Unveiling cherished moments..." />}>
             <MemoryWall />
           </Suspense>
         </section>
@@ -115,7 +115,9 @@ const OnePage = () => {
             Guestbook and Map
           </h2>
           <aside style={{ flex: 1 }} aria-label="Guestbook section">
-            <Suspense fallback={<LoadingScreen message="Loading guestbook..." />}>
+            <Suspense
+              fallback={<LoadingScreen message="Opening our book of heartfelt wishes..." />}
+            >
               <GuestbookPage onePage />
             </Suspense>
           </aside>

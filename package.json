@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "deploy:prod": "netlify deploy --prod",
+    "deploy:prod": "vercel --prod",
+    "deploy:preview": "vercel",
     "dev": "cross-env PORT=3001 next dev --turbopack",
     "dev:start": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1",
     "dev:clean": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Clean",
@@ -109,6 +110,7 @@
     "prettier": "^3.6.2",
     "sharp": "^0.34.3",
     "storybook": "^9.0.18",
+    "vercel": "^44.7.0",
     "vitest": "^3.2.4",
     "webpack-bundle-analyzer": "^4.10.2"
   }

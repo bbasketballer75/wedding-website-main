@@ -74,3 +74,5 @@ backend/config/service-account*.json
 *.p12
 **/credentials.json
 **/service-account*.json
+
+.vercel

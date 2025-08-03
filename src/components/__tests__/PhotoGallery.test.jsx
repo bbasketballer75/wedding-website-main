@@ -25,16 +25,16 @@ describe('PhotoGallery', () => {
       () => new Promise((resolve) => setTimeout(() => resolve({ data: [] }), 100))
     );
     const { getByText } = render(<PhotoGallery refreshKey={0} />);
-    expect(getByText('Loading album...')).toBeInTheDocument();
+    expect(getByText('Awakening our gallery...')).toBeInTheDocument();
   });
 
   it('renders empty state when no media is available', async () => {
     mockGetAlbumMedia.mockResolvedValue({ data: [] });
     const { queryByText } = render(<PhotoGallery refreshKey={0} />);
     await waitFor(() => {
-      expect(queryByText('Loading album...')).not.toBeInTheDocument();
+      expect(queryByText('Awakening our gallery...')).not.toBeInTheDocument();
     });
-    expect(queryByText('Loading album...')).not.toBeInTheDocument();
+    expect(queryByText('Awakening our gallery...')).not.toBeInTheDocument();
   });
 
   it('renders media items when data is available', async () => {
@@ -68,7 +68,7 @@ describe('PhotoGallery', () => {
     mockGetAlbumMedia.mockRejectedValue(new Error('API Error'));
     render(<PhotoGallery refreshKey={0} />);
     await waitFor(() => {
-      expect(screen.queryByText('Loading album...')).not.toBeInTheDocument();
+      expect(screen.queryByText('Awakening our gallery...')).not.toBeInTheDocument();
     });
     expect(consoleSpy).toHaveBeenCalledWith('Error fetching album media:', expect.any(Error));
     consoleSpy.mockRestore();

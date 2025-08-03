@@ -11,7 +11,9 @@ describe('AlbumPage Empty State', () => {
     render(<AlbumPage />);
     await waitFor(() =>
       expect(
-        screen.getByText(/This collection is just waiting for your beautiful memories!/i)
+        screen.getByText(
+          /This sacred gallery awaits your beautiful treasures! Be the first to grace our collection with a precious moment from our celebration./i
+        )
       ).toBeInTheDocument()
     );
   });

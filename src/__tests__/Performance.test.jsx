@@ -25,7 +25,7 @@ describe('Guest Performance Experience', () => {
     }));
     const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
-    await screen.findByText(/Loading our beautiful memories/i, {}, { timeout: 2500 });
+    await screen.findByText(/Illuminating our gallery/i);
     await waitFor(
       () => expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument(),
       {
@@ -45,7 +45,7 @@ describe('Guest Performance Experience', () => {
     render(<AlbumPageReloaded />);
     // Wait for error message to appear
     await screen.findByText(
-      /We couldn't load our photo collection right now/i,
+      /Our photo sanctuary is temporarily resting. Please return in a moment to view our treasures!/i,
       {},
       { timeout: 2500 }
     );

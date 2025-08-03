@@ -20,7 +20,7 @@ describe('Guest Error Recovery', () => {
     render(<AlbumPageReloaded />);
     // Wait for error message
     const errorEl = await screen.findByText(
-      /We couldn't load our photo collection right now/i,
+      /Our photo sanctuary is temporarily resting. Please return in a moment to view our treasures!/i,
       {},
       { timeout: 2500 }
     );

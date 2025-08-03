@@ -10,7 +10,7 @@ describe('Guest Content Experience', () => {
     render(<GuestbookPage />);
     // Attempt to submit XSS content in placeholder text
     const messageField = await screen.findByPlaceholderText(
-      /Share a favorite memory, marriage advice, or just say hello!/i
+      /Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!/i
     );
     fireEvent.change(messageField, {
       target: { value: '<script>alert("xss")</script>' },

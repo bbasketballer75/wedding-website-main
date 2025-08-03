@@ -17,7 +17,7 @@ describe('GuestbookPage Error States', () => {
     await screen.findByPlaceholderText('Your name');
     fireEvent.change(screen.getByPlaceholderText('Your name'), { target: { value: 'Test User' } });
     const textarea = screen.getByPlaceholderText(
-      'Share a favorite memory, marriage advice, or just say hello!'
+      'Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!'
     );
     fireEvent.change(textarea, { target: { value: '' } });
     // eslint-disable-next-line no-console
@@ -30,7 +30,9 @@ describe('GuestbookPage Error States', () => {
     // ...existing code...
     await waitFor(() => {
       expect(
-        screen.getByText(/We need a message from you to add to our guestbook/i)
+        screen.getByText(
+          /We long to hear the whispers of your heart! Please share a beautiful message with us./i
+        )
       ).toBeInTheDocument();
     });
   });

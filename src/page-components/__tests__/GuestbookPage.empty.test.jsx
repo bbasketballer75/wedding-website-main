@@ -7,7 +7,9 @@ describe('GuestbookPage Empty State', () => {
     render(<GuestbookPage />);
     await waitFor(() =>
       expect(
-        screen.getByText(/No messages yet. Be the first to share a memory!/i)
+        screen.getByText(
+          /This sacred space awaits the first beautiful blessing. Will you be the one to begin our memory book?/i
+        )
       ).toBeInTheDocument()
     );
   });

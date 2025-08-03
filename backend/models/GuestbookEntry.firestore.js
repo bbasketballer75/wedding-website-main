@@ -1,4 +1,4 @@
-import dbPromise from '../config/firestore.js';
+import getDbPromise from '../config/firestore.js';
 
 class GuestbookEntry {
   constructor(data) {
@@ -29,7 +29,7 @@ class GuestbookEntry {
       throw new Error(errors.join(' '));
     }
 
-    const db = await dbPromise;
+    const db = await getDbPromise();
     const docRef = await db.collection('guestbookEntries').add({
       name: this.name,
       message: this.message.trim(),
@@ -42,7 +42,7 @@ class GuestbookEntry {
 
   // Get all entries
   static async findAll() {
-    const db = await dbPromise;
+    const db = await getDbPromise();
     const snapshot = await db.collection('guestbookEntries').orderBy('timestamp', 'desc').get();
 
     return snapshot.docs.map((doc) => ({
@@ -53,7 +53,7 @@ class GuestbookEntry {
 
   // Find by ID
   static async findById(id) {
-    const db = await dbPromise;
+    const db = await getDbPromise();
     const doc = await db.collection('guestbookEntries').doc(id).get();
 
     if (!doc.exists) {
@@ -68,7 +68,7 @@ class GuestbookEntry {
 
   // Delete entry
   static async deleteById(id) {
-    const db = await dbPromise;
+    const db = await getDbPromise();
     await db.collection('guestbookEntries').doc(id).delete();
     return true;
   }

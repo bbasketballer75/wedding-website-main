@@ -534,5 +534,6 @@
   "production.experimental.errorTrackingOptimization": true,
   "production.experimental.securityAuditing": true,
   "search.quickAccess.preserveInput": true,
-  "editor.stickyScroll.maxLineCount": 5
+  "editor.stickyScroll.maxLineCount": 5,
+  "cSpell.words": ["firestore"]
 }

@@ -6,7 +6,7 @@
 import express from 'express';
 import { body, validationResult, param } from 'express-validator';
 import db from '../config/firestore.js';
-import { requireAdminAuth } from '../middleware/auth.js';
+import { protectAdmin as requireAdminAuth } from '../middleware/authMiddleware.js';
 import rateLimit from 'express-rate-limit';
 const router = express.Router();
 

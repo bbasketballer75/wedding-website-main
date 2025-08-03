@@ -174,6 +174,7 @@ class PerformanceMonitor {
 
   async sendMetrics() {
     try {
+      // Try Next.js API route first (will fail in static export)
       await fetch('/api/performance-metrics', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -184,8 +185,24 @@ class PerformanceMonitor {
           url: window.location.href,
         }),
       });
-    } catch (error) {
-      console.warn('Failed to send performance metrics:', error);
+    } catch {
+      // Fallback to backend API or Netlify Functions
+      try {
+        const backendUrl = process.env.REACT_APP_API_URL || window.location.origin;
+        await fetch(`${backendUrl}/api/performance-metrics`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            metrics: this.metrics,
+            timestamp: Date.now(),
+            userAgent: navigator.userAgent,
+            url: window.location.href,
+          }),
+        });
+      } catch (backendError) {
+        // Silently fail - performance monitoring is non-critical
+        console.warn('Failed to send performance metrics:', backendError);
+      }
     }
   }
 

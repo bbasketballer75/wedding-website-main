@@ -127,6 +127,51 @@ class CloudStorageService {
   }
 
   /**
+   * Upload a file buffer directly to Google Cloud Storage
+   * @param {Buffer} buffer - File buffer to upload
+   * @param {string} filename - Name of the file to upload
+   * @param {string} [contentType='image/jpeg'] - MIME type of the file
+   * @returns {Promise<string>} Public URL of the uploaded file
+   */
+  async uploadToGCS(buffer, filename, contentType = 'image/jpeg') {
+    if (!buffer) throw new Error('Buffer required');
+    if (!filename) throw new Error('Filename required');
+
+    // Development mode - return mock URL
+    if (this._isDevMode()) {
+      console.log(`[DEV] Mock upload for: ${filename}`);
+      return `http://localhost:3001/mock-file/${encodeURIComponent(filename)}`;
+    }
+
+    return this._withRetry(async () => {
+      const safeFilename = this.sanitizeFilename(filename);
+      const file = this.bucket.file(safeFilename);
+
+      const stream = file.createWriteStream({
+        metadata: {
+          contentType,
+        },
+      });
+
+      return new Promise((resolve, reject) => {
+        stream.on('error', reject);
+        stream.on('finish', () => {
+          // Make the file public
+          file
+            .makePublic()
+            .then(() => {
+              const publicUrl = `https://storage.googleapis.com/${this.bucketName}/${safeFilename}`;
+              resolve(publicUrl);
+            })
+            .catch(reject);
+        });
+
+        stream.end(buffer);
+      });
+    }, 'uploadToGCS');
+  }
+
+  /**
    * Generate a signed URL for reading a file
    * @param {string} filename - Name of the file to read
    * @returns {Promise<string>} Signed read URL
@@ -298,5 +343,13 @@ class CloudStorageService {
   }
 }
 
-const cloudStorageService = new CloudStorageService();
-export default cloudStorageService;
+let cloudStorageService = null;
+
+function getCloudStorageService() {
+  if (!cloudStorageService) {
+    cloudStorageService = new CloudStorageService();
+  }
+  return cloudStorageService;
+}
+
+export default getCloudStorageService;

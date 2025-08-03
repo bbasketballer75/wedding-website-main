@@ -5,9 +5,9 @@
 
 import express from 'express';
 import { body, validationResult, param, query } from 'express-validator';
-import db from '../config/firestore.js';
-import { requireAdminAuth } from '../middleware/auth.js';
-import { uploadToGCS } from '../services/gcsService.js';
+import getDbPromise from '../config/firestore.js';
+import { protectAdmin as requireAdminAuth } from '../middleware/authMiddleware.js';
+import getCloudStorage from '../services/cloudStorage.js';
 import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import sharp from 'sharp';
@@ -135,7 +135,7 @@ router.post('/', memoryRateLimit, upload.array('photos', 5), memoryValidation, a
           const filename = `memories/${timestamp}-${randomString}.jpg`;
 
           // Upload to Google Cloud Storage
-          const photoUrl = await uploadToGCS(optimizedBuffer, filename);
+          const photoUrl = await getCloudStorage().uploadToGCS(optimizedBuffer, filename);
           photoUrls.push({
             url: photoUrl,
             filename: filename,
@@ -168,6 +168,7 @@ router.post('/', memoryRateLimit, upload.array('photos', 5), memoryValidation, a
     };
 
     // Save to Firestore
+    const db = await getDbPromise();
     const memoryRef = await db.collection('guestMemories').add(memoryData);
 
     res.status(201).json({

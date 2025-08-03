@@ -42,31 +42,18 @@ const MapPage = () => {
               {error}
             </div>
           ) : (
-            <div
-              className="simple-map-container"
-              style={{
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                height: '400px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                color: 'white',
-                borderRadius: '8px',
-                margin: '20px 0',
-              }}
-            >
-              <h3 style={{ marginBottom: '20px' }}>Our Guest Love Map</h3>
-              <div style={{ textAlign: 'center' }}>
+            <div className="simple-map-container">
+              <h3>Our Guest Love Map</h3>
+              <div>
                 <p>🌍 Celebrating love from around the world</p>
                 <p>📍 {pins.length} beautiful places our loved ones call home</p>
-                <div style={{ marginTop: '20px' }}>
+                <div>
                   {pins.length > 0 && (
                     <div>
                       <h4>Locations:</h4>
-                      <ul style={{ listStyle: 'none', padding: 0 }}>
+                      <ul>
                         {pins.slice(0, 5).map((pin, idx) => (
-                          <li key={`${pin.lat}-${pin.lng}-${idx}`} style={{ margin: '5px 0' }}>
+                          <li key={`${pin.lat}-${pin.lng}-${idx}`}>
                             📍 {pin.label || `Location ${idx + 1}`}
                           </li>
                         ))}

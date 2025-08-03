@@ -85,6 +85,13 @@ async function initializeFirebase() {
 }
 
 // Create the singleton promise for database connection
-const dbPromise = initializeFirebase();
+let dbPromise = null;
 
-export default dbPromise;
+function getDbPromise() {
+  if (!dbPromise) {
+    dbPromise = initializeFirebase();
+  }
+  return dbPromise;
+}
+
+export default getDbPromise;

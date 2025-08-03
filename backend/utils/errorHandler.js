@@ -1,4 +1,4 @@
-const errorHandler = (err, req, res) => {
+const errorHandler = (err, req, res, _next) => {
   // If res.statusCode is already set (e.g., in a controller), use that.
   // Otherwise, default to 500 (Internal Server Error).
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;

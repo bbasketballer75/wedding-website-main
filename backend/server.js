@@ -1,6 +1,10 @@
 import http from 'http';
 import dotenv from 'dotenv';
+
+// Load environment variables first before any other imports
 dotenv.config();
+
+// Now import modules that depend on environment variables
 import app from './app.js';
 import logger from './config/logger.js';
 import { PORTS } from '../config/ports.js';

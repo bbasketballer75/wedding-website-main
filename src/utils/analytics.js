@@ -125,6 +125,7 @@ class WeddingAnalytics {
   // Send data to analytics endpoint
   async sendToAnalytics(event, data) {
     try {
+      // Try Next.js API route first (will fail in static export)
       await fetch('/api/analytics', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -135,8 +136,24 @@ class WeddingAnalytics {
           timestamp: Date.now(),
         }),
       });
-    } catch (error) {
-      console.log('Analytics tracking failed:', error);
+    } catch {
+      // Fallback to backend API or Netlify Functions
+      try {
+        const backendUrl = process.env.REACT_APP_API_URL || window.location.origin;
+        await fetch(`${backendUrl}/api/analytics`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event,
+            data,
+            userAgent: navigator.userAgent,
+            timestamp: Date.now(),
+          }),
+        });
+      } catch (backendError) {
+        // Silently fail - analytics is non-critical
+        console.log('Analytics tracking failed:', backendError);
+      }
     }
   }
 

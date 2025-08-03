@@ -4,14 +4,14 @@ import sharp from 'sharp';
 import ffmpeg from 'fluent-ffmpeg';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import Photo from '../models/Photo.firestore.js';
-import cloudStorage from '../services/cloudStorage.js';
+import getCloudStorage from '../services/cloudStorage.js';
 import fs from 'fs/promises'; // Only for temp files
 
 // Configure fluent-ffmpeg to use the binary from the npm package.
 // This avoids the need for a manual ffmpeg installation on the server.
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-// All media will be stored in GCS bucket via cloudStorage.js
+// All media will be stored in GCS bucket via getCloudStorage().js
 
 // Helper function to process a single file and upload to GCS
 const processFile = async (file) => {
@@ -30,7 +30,7 @@ const processFile = async (file) => {
         .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
         .webp({ quality: 80 })
         .toFile(tempWebpPath);
-      await cloudStorage.uploadFile(tempWebpPath, gcsWebpFilename, 'image/webp');
+      await getCloudStorage().uploadFile(tempWebpPath, gcsWebpFilename, 'image/webp');
 
       // Process JPEG
       gcsJpegFilename = `album/img-${uniqueSuffix}.jpg`;
@@ -39,7 +39,7 @@ const processFile = async (file) => {
         .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
         .jpeg({ quality: 80 })
         .toFile(tempJpegPath);
-      await cloudStorage.uploadFile(tempJpegPath, gcsJpegFilename, 'image/jpeg');
+      await getCloudStorage().uploadFile(tempJpegPath, gcsJpegFilename, 'image/jpeg');
 
       // Save both paths in DB (for backward compatibility, keep filename/filepath/mimetype as webp)
       const newMedia = new Photo({
@@ -74,7 +74,7 @@ const processFile = async (file) => {
           .on('error', (err) => reject(new Error(`FFmpeg failed: ${err.message}`)))
           .save(tempOutputPath);
       });
-      await cloudStorage.uploadFile(tempOutputPath, gcsWebpFilename, finalMimetype);
+      await getCloudStorage().uploadFile(tempOutputPath, gcsWebpFilename, finalMimetype);
       const newMedia = new Photo({
         filename: gcsWebpFilename,
         filepath: gcsWebpFilename,
@@ -168,7 +168,9 @@ export const moderateMedia = async (req, res) => {
       if (!photo) return res.status(404).json({ message: 'Photo not found.' });
       await Photo.deleteById(photoId);
       // Delete from GCS
-      await cloudStorage.deleteFile(photo.filename).catch(() => {});
+      await getCloudStorage()
+        .deleteFile(photo.filename)
+        .catch(() => {});
       res.json({ message: 'Media has been rejected and deleted.' });
     }
   } catch (error) {

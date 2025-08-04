@@ -276,21 +276,20 @@
         "-NoProfile",
         "-ExecutionPolicy",
         "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\monitoring\\connection-monitor.ps1",
-        "-LogToFile"
+        "-Command",
+        "while ($true) { try { & '${workspaceFolder}\\scripts\\monitoring\\connection-monitor.ps1' -LogToFile -Quiet; } catch { Write-Host 'Monitor interrupted, restarting...' -ForegroundColor Yellow; Start-Sleep 3; } }"
       ],
       "isBackground": true,
       "runOptions": {
         "runOn": "folderOpen"
       },
       "presentation": {
-        "echo": true,
-        "reveal": "always",
+        "echo": false,
+        "reveal": "silent",
         "focus": false,
-        "panel": "dedicated",
+        "panel": "shared",
         "showReuseMessage": false,
-        "clear": true,
+        "clear": false,
         "group": "monitoring"
       },
       "group": "build",

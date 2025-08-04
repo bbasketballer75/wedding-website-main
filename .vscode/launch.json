@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "name": "Jest Tests (Current File)",
+      "request": "launch",
+      "args": [
+        "--runInBand",
+        "--watchAll=false",
+        "--testNamePattern",
+        "${jest.testNamePattern}",
+        "--runTestsByPath",
+        "${jest.testFile}"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js"
+    },
+    {
+      "type": "node",
+      "name": "Jest Tests (All)",
+      "request": "launch",
+      "args": ["--runInBand", "--watchAll=false"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js"
+    },
+    {
+      "type": "node",
+      "name": "Debug Next.js Dev Server",
+      "request": "launch",
+      "args": ["dev"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next"
+    },
+    {
+      "type": "node",
+      "name": "Debug Backend Server",
+      "request": "launch",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/backend",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "program": "${workspaceFolder}/backend/server.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}

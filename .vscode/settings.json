@@ -131,9 +131,6 @@
   "nextjs-snippets.enableServerActions": true,
   "nextjs-snippets.enableMetadata": true,
   "nextjs-snippets.preferredQuotes": "double",
-
-  // 🧪 JEST TEST RUNNER SETTINGS
-  "jest.jestCommandLine": "npm test",
   "jest.runMode": "watch",
   "jest.autoEnable": true,
   "jest.coverageFormatter": "DefaultFormatter",

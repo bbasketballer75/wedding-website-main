@@ -21,7 +21,7 @@ const config = {
       },
     },
   },
-  setupFiles: ['<rootDir>/jest.setup.cjs'],
+  setupFiles: ['<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   collectCoverageFrom: ['src/**/*.{js,jsx}', '!src/index.js', '!src/setupTests.js'],
 };

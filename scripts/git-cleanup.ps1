@@ -38,14 +38,15 @@ if ($problematicFiles | Where-Object { $_ -match '^backend/coverage/' }) { $dirs
 
 foreach ($dir in $dirs) {
     $count = ($problematicFiles | Where-Object { $_ -match "^$([regex]::Escape($dir))" } | Measure-Object).Count
-    Write-Host "  - $dir ($count files)" -ForegroundColor White
+    Write-Host "  - $dir (${count} files)" -ForegroundColor White
 }
 
 if ($DryRun) {
-    Write-Host "`n🔍 DRY RUN - Would remove these files from git:" -ForegroundColor Cyan
+    Write-Host ''
+    Write-Host 'DRY RUN - Would remove these files from git:' -ForegroundColor Cyan
     $problematicFiles | Select-Object -First 10 | ForEach-Object { Write-Host "  - $_" -ForegroundColor Gray }
     if ($fileCount -gt 10) {
-        Write-Host "  ... and $($fileCount - 10) more files" -ForegroundColor Gray
+        Write-Host "  ... and $(${fileCount} - 10) more files" -ForegroundColor Gray
     }
     Write-Host "`n✅ Dry run complete. Use -Force to apply changes." -ForegroundColor Green
     exit 0
@@ -69,7 +70,7 @@ Write-Host "📦 Creating backup branch: $backupBranch" -ForegroundColor Yellow
 git branch $backupBranch
 
 # Remove files from git tracking
-Write-Host '🗑️  Removing build artifacts from git...' -ForegroundColor Yellow
+Write-Host 'Removing build artifacts from git...' -ForegroundColor Yellow
 
 $batchSize = 100
 $batches = [math]::Ceiling($fileCount / $batchSize)
@@ -150,9 +151,10 @@ Write-Host "  - Created backup branch: $backupBranch" -ForegroundColor White
 Write-Host '  - Optimized git configuration' -ForegroundColor White
 
 Write-Host "`n📝 Next steps:" -ForegroundColor Yellow
-Write-Host "1. Commit the cleanup: git commit -m 'chore: remove build artifacts from git tracking'" -ForegroundColor White
-Write-Host "2. Push to remote: git push origin main" -ForegroundColor White  
-Write-Host "3. Test git performance (should be much faster)" -ForegroundColor White
-Write-Host "4. Delete backup branch when satisfied: git branch -D $backupBranch" -ForegroundColor White
+Write-Host "1. Commit the cleanup: git commit -m `"chore: remove build artifacts from git tracking`"" -ForegroundColor White
+Write-Host '2. Push to remote: git push origin main' -ForegroundColor White  
+Write-Host '3. Test git performance (should be much faster)' -ForegroundColor White
+Write-Host "4. Delete backup branch when satisfied: git branch -D ${backupBranch}" -ForegroundColor White
 
-Write-Host "`n🚀 Git performance should now be significantly improved!" -ForegroundColor Green
+Write-Host ''
+Write-Host 'Git performance should now be significantly improved!' -ForegroundColor Green

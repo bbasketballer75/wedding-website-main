@@ -48,13 +48,13 @@ if ($DryRun) {
     if ($fileCount -gt 10) {
         Write-Host "  ... and $($fileCount - 10) more files" -ForegroundColor Gray
     }
-    Write-Host ""
-    Write-Host "Dry run complete. Use -Force to apply changes." -ForegroundColor Green
+    Write-Host ''
+    Write-Host 'Dry run complete. Use -Force to apply changes.' -ForegroundColor Green
     exit 0
 }
 
 if (-not $Force) {
-    Write-Host ""
+    Write-Host ''
     Write-Host "WARNING: This will remove $fileCount files from git tracking!" -ForegroundColor Yellow
     Write-Host 'This action cannot be undone without git history recovery.' -ForegroundColor Yellow
     $confirm = Read-Host 'Continue? (y/N)'
@@ -64,8 +64,8 @@ if (-not $Force) {
     }
 }
 
-Write-Host ""
-Write-Host "Starting git cleanup..." -ForegroundColor Cyan
+Write-Host ''
+Write-Host 'Starting git cleanup...' -ForegroundColor Cyan
 
 # Create a backup branch
 $backupBranch = "backup-before-cleanup-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
@@ -73,7 +73,7 @@ Write-Host "Creating backup branch: $backupBranch" -ForegroundColor Yellow
 git branch $backupBranch
 
 # Remove files from git tracking
-Write-Host "Removing build artifacts from git..." -ForegroundColor Yellow
+Write-Host 'Removing build artifacts from git...' -ForegroundColor Yellow
 
 $batchSize = 100
 $batches = [math]::Ceiling($fileCount / $batchSize)
@@ -145,8 +145,8 @@ Write-Host 'Git configuration optimized' -ForegroundColor Green
 # Stage the .gitignore changes
 git add .gitignore 2>$null
 
-Write-Host ""
-Write-Host "Git cleanup completed!" -ForegroundColor Green
+Write-Host ''
+Write-Host 'Git cleanup completed!' -ForegroundColor Green
 Write-Host 'Summary:' -ForegroundColor Cyan
 Write-Host "  - Removed $processed build artifacts from git tracking" -ForegroundColor White
 Write-Host '  - Files remain on disk (not deleted)' -ForegroundColor White
@@ -154,8 +154,8 @@ Write-Host '  - Updated .gitignore to prevent future commits' -ForegroundColor W
 Write-Host "  - Created backup branch: $backupBranch" -ForegroundColor White
 Write-Host '  - Optimized git configuration' -ForegroundColor White
 
-Write-Host ""
-Write-Host "Next steps:" -ForegroundColor Yellow
+Write-Host ''
+Write-Host 'Next steps:' -ForegroundColor Yellow
 Write-Host "1. Commit the cleanup: git commit -m `"chore: remove build artifacts from git tracking`"" -ForegroundColor White
 Write-Host '2. Push to remote: git push origin main' -ForegroundColor White  
 Write-Host '3. Test git performance (should be much faster)' -ForegroundColor White

@@ -140,24 +140,6 @@
       "problemMatcher": []
     },
     {
-      "label": "Start MCP MongoDB Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["tsx", "C:/Users/Austin/Documents/GitHub/mongodb-mcp-server/src/index.ts"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
       "label": "Start MCP Git Server",
       "type": "shell",
       "command": "npx",
@@ -239,7 +221,6 @@
         "Start MCP Filesystem Server",
         "Start MCP Fetch Server",
         "Start MCP Time Server",
-        "Start MCP MongoDB Server",
         "Start MCP Git Server",
         "Start MCP Playwright Server",
         "Start MCP Sequential Thinking Server",

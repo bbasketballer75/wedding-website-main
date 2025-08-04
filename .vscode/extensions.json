@@ -1,42 +1,42 @@
 {
   "recommendations": [
-    // Core Development
+    // Core Development - Essential for Next.js + TypeScript
     "ms-vscode.vscode-typescript-next",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
 
-    // Code Quality & Auto-fixing
+    // Code Quality & Security - Required per project instructions
     "sonarsource.sonarlint-vscode",
+    "deque-systems.vscode-axe-linter",
     "ms-vscode.powershell",
-    "streetsidesoftware.code-spell-checker",
-    "usernamehw.errorlens",
 
-    // React/Next.js Development
+    // React/Next.js Development - Essential for this stack
     "bradlc.vscode-tailwindcss",
     "formulahendry.auto-rename-tag",
     "christian-kohler.path-intellisense",
-    "zignd.html-css-class-completion",
 
-    // Testing & Debugging
+    // Performance Optimization - React/Next.js specific
+    "aidenybai.million-lint",
+
+    // Testing & Development Tools
     "ms-vscode.vscode-json",
-    "ms-playwright.playwright",
     "hbenl.vscode-test-explorer",
 
-    // Git & Collaboration
+    // Next.js Specific Development
+    "pulkitgangwar.nextjs-snippets"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-tslint-plugin",
     "eamodio.gitlens",
     "ms-vscode.vscode-github-issue-notebooks",
-
-    // Productivity
-    "ms-vscode.vscode-json",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "zignd.html-css-class-completion",
+    "ms-playwright.playwright",
     "redhat.vscode-yaml",
     "ms-vscode.notepadplusplus-keybindings",
-
-    // Documentation
     "yzhang.markdown-all-in-one",
     "bierner.markdown-mermaid",
-
-    // Performance & Monitoring
     "ms-vscode.vscode-js-profile-flame"
-  ],
-  "unwantedRecommendations": ["ms-vscode.vscode-typescript-tslint-plugin"]
+  ]
 }

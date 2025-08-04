@@ -6,28 +6,28 @@ param(
     [switch]$Force      # Force cleanup without confirmation
 )
 
-Write-Host '🔧 Git Performance Optimization Script' -ForegroundColor Cyan
+Write-Host 'Git Performance Optimization Script' -ForegroundColor Cyan
 Write-Host '=======================================' -ForegroundColor Cyan
 
 # Check if we're in a git repository
 if (-not (Test-Path '.git')) {
-    Write-Host '❌ Error: Not in a git repository!' -ForegroundColor Red
+    Write-Host 'Error: Not in a git repository!' -ForegroundColor Red
     exit 1
 }
 
 # Count current problematic files
-Write-Host '📊 Analyzing repository...' -ForegroundColor Yellow
+Write-Host 'Analyzing repository...' -ForegroundColor Yellow
 $problematicFiles = git ls-files | Where-Object { $_ -match 'node_modules/|\.next/|out/|backend/node_modules/|\.vercel/|coverage/' }
 $fileCount = ($problematicFiles | Measure-Object).Count
 
 Write-Host "Found $fileCount build artifacts committed to git" -ForegroundColor Yellow
 
 if ($fileCount -eq 0) {
-    Write-Host '✅ No build artifacts found in git. Repository is clean!' -ForegroundColor Green
+    Write-Host 'No build artifacts found in git. Repository is clean!' -ForegroundColor Green
     exit 0
 }
 
-Write-Host '📁 Problematic directories found:' -ForegroundColor Yellow
+Write-Host 'Problematic directories found:' -ForegroundColor Yellow
 $dirs = @()
 if ($problematicFiles | Where-Object { $_ -match '^node_modules/' }) { $dirs += 'node_modules/' }
 if ($problematicFiles | Where-Object { $_ -match '^\.next/' }) { $dirs += '.next/' }
@@ -38,7 +38,7 @@ if ($problematicFiles | Where-Object { $_ -match '^backend/coverage/' }) { $dirs
 
 foreach ($dir in $dirs) {
     $count = ($problematicFiles | Where-Object { $_ -match "^$([regex]::Escape($dir))" } | Measure-Object).Count
-    Write-Host "  - $dir (${count} files)" -ForegroundColor White
+    Write-Host "  - $dir ($count files)" -ForegroundColor White
 }
 
 if ($DryRun) {
@@ -46,31 +46,34 @@ if ($DryRun) {
     Write-Host 'DRY RUN - Would remove these files from git:' -ForegroundColor Cyan
     $problematicFiles | Select-Object -First 10 | ForEach-Object { Write-Host "  - $_" -ForegroundColor Gray }
     if ($fileCount -gt 10) {
-        Write-Host "  ... and $(${fileCount} - 10) more files" -ForegroundColor Gray
+        Write-Host "  ... and $($fileCount - 10) more files" -ForegroundColor Gray
     }
-    Write-Host "`n✅ Dry run complete. Use -Force to apply changes." -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Dry run complete. Use -Force to apply changes." -ForegroundColor Green
     exit 0
 }
 
 if (-not $Force) {
-    Write-Host "`n⚠️  WARNING: This will remove $fileCount files from git tracking!" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "WARNING: This will remove $fileCount files from git tracking!" -ForegroundColor Yellow
     Write-Host 'This action cannot be undone without git history recovery.' -ForegroundColor Yellow
     $confirm = Read-Host 'Continue? (y/N)'
     if ($confirm -ne 'y' -and $confirm -ne 'Y') {
-        Write-Host '❌ Operation cancelled.' -ForegroundColor Red
+        Write-Host 'Operation cancelled.' -ForegroundColor Red
         exit 0
     }
 }
 
-Write-Host "`n🧹 Starting git cleanup..." -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Starting git cleanup..." -ForegroundColor Cyan
 
 # Create a backup branch
 $backupBranch = "backup-before-cleanup-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
-Write-Host "📦 Creating backup branch: $backupBranch" -ForegroundColor Yellow
+Write-Host "Creating backup branch: $backupBranch" -ForegroundColor Yellow
 git branch $backupBranch
 
 # Remove files from git tracking
-Write-Host 'Removing build artifacts from git...' -ForegroundColor Yellow
+Write-Host "Removing build artifacts from git..." -ForegroundColor Yellow
 
 $batchSize = 100
 $batches = [math]::Ceiling($fileCount / $batchSize)
@@ -93,10 +96,10 @@ for ($i = 0; $i -lt $batches; $i++) {
     }
 }
 
-Write-Host "✅ Removed $processed files from git tracking" -ForegroundColor Green
+Write-Host "Removed $processed files from git tracking" -ForegroundColor Green
 
 # Update .gitignore to ensure these stay ignored
-Write-Host '📝 Updating .gitignore...' -ForegroundColor Yellow
+Write-Host 'Updating .gitignore...' -ForegroundColor Yellow
 
 $gitignoreContent = Get-Content '.gitignore' -ErrorAction SilentlyContinue
 $gitignoreEntries = @(
@@ -124,37 +127,39 @@ foreach ($entry in $gitignoreEntries) {
 
 if ($needsUpdate) {
     $gitignoreEntries | Add-Content '.gitignore'
-    Write-Host '✅ Updated .gitignore with additional entries' -ForegroundColor Green
+    Write-Host 'Updated .gitignore with additional entries' -ForegroundColor Green
 } else {
-    Write-Host '✅ .gitignore already up to date' -ForegroundColor Green
+    Write-Host '.gitignore already up to date' -ForegroundColor Green
 }
 
 # Configure git for better performance
-Write-Host '⚡ Optimizing git configuration...' -ForegroundColor Yellow
+Write-Host 'Optimizing git configuration...' -ForegroundColor Yellow
 
 # Set git config for better performance
 git config core.preloadindex true
 git config core.fscache true
 git config gc.auto 256
 
-Write-Host '✅ Git configuration optimized' -ForegroundColor Green
+Write-Host 'Git configuration optimized' -ForegroundColor Green
 
 # Stage the .gitignore changes
 git add .gitignore 2>$null
 
-Write-Host "`n🎉 Git cleanup completed!" -ForegroundColor Green
-Write-Host '📊 Summary:' -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Git cleanup completed!" -ForegroundColor Green
+Write-Host 'Summary:' -ForegroundColor Cyan
 Write-Host "  - Removed $processed build artifacts from git tracking" -ForegroundColor White
 Write-Host '  - Files remain on disk (not deleted)' -ForegroundColor White
 Write-Host '  - Updated .gitignore to prevent future commits' -ForegroundColor White
 Write-Host "  - Created backup branch: $backupBranch" -ForegroundColor White
 Write-Host '  - Optimized git configuration' -ForegroundColor White
 
-Write-Host "`n📝 Next steps:" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "1. Commit the cleanup: git commit -m `"chore: remove build artifacts from git tracking`"" -ForegroundColor White
 Write-Host '2. Push to remote: git push origin main' -ForegroundColor White  
 Write-Host '3. Test git performance (should be much faster)' -ForegroundColor White
-Write-Host "4. Delete backup branch when satisfied: git branch -D ${backupBranch}" -ForegroundColor White
+Write-Host "4. Delete backup branch when satisfied: git branch -D $backupBranch" -ForegroundColor White
 
 Write-Host ''
 Write-Host 'Git performance should now be significantly improved!' -ForegroundColor Green

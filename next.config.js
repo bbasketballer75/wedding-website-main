@@ -1,12 +1,12 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
-import type { NextConfig } from 'next';
 
 // Bundle analyzer configuration
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // Static export for optimal Netlify hosting
   output: 'export',
   trailingSlash: true,

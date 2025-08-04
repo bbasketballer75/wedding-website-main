@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import './globals.css';
-import { getHomepageStructuredData, generateStructuredDataScript } from '../utils/structuredData';
 import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
 import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
 
@@ -113,17 +112,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Enhanced Structured Data for SEO */}
-        {getHomepageStructuredData().map((data, index) => (
-          <Script
-            key={`structured-data-${data['@type'] || 'schema'}-${index}`}
-            id={`structured-data-${index}`}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={generateStructuredDataScript(data)}
-          />
-        ))}
-      </head>
+      <head>{/* Enhanced Structured Data for SEO - temporarily disabled */}</head>
       <body
         className={`antialiased ${cormorantGaramond.variable} ${inter.variable} ${allura.variable}`}
       >

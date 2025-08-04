@@ -39,12 +39,67 @@ window.URL.createObjectURL = vi.fn(() => 'mock-url');
 // Mock Next.js dynamic imports to return simple components
 vi.mock('next/dynamic', () => ({
   __esModule: true,
-  default: (fn) => {
+  default: () => {
     const MockComponent = () =>
       React.createElement('div', { 'data-testid': 'mock-component' }, 'Loading...');
     MockComponent.displayName = 'MockedDynamicComponent';
     return MockComponent;
   },
+}));
+
+// Mock all components being imported
+vi.mock('../components/Navbar', () => ({
+  __esModule: true,
+  default: (props) =>
+    React.createElement(
+      'nav',
+      {
+        role: 'navigation',
+        'data-testid': 'navbar',
+      },
+      'Navbar'
+    ),
+}));
+
+vi.mock('../components/ThankYouSection', () => ({
+  __esModule: true,
+  default: () =>
+    React.createElement(
+      'section',
+      {
+        'data-testid': 'thank-you-section',
+      },
+      'Thank You Section'
+    ),
+}));
+
+vi.mock('../components/LoadingScreen', () => ({
+  __esModule: true,
+  default: (props) =>
+    React.createElement(
+      'div',
+      {
+        'data-testid': 'loading-screen',
+      },
+      props?.message || 'Loading...'
+    ),
+}));
+
+vi.mock('../components/StayInTouchSection', () => ({
+  __esModule: true,
+  default: () =>
+    React.createElement(
+      'section',
+      {
+        'data-testid': 'stay-in-touch-section',
+      },
+      'Stay In Touch'
+    ),
+}));
+
+// Mock scroll fade in function
+vi.mock('../scrollFadeIn', () => ({
+  setupSectionFadeIn: vi.fn(),
 }));
 
 describe('App (Next.js Home Page)', () => {

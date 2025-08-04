@@ -6,7 +6,7 @@
   "scripts": {
     "deploy:prod": "vercel --prod",
     "deploy:preview": "vercel",
-    "dev": "cross-env PORT=3001 next dev --turbopack",
+    "dev": "cross-env PORT=3001 next dev",
     "dev:start": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1",
     "dev:clean": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Clean",
     "dev:force": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Force",
@@ -74,7 +74,7 @@
     "jspdf": "^3.0.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.535.0",
-    "next": "^15.4.5",
+    "next": "^14.2.15",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as Sentry from '@sentry/nextjs';
 
 /**
- * Sentry Example API Route for Next.js App Router
- * Demonstrates error reporting and performance monitoring
+ * Example API Route for Next.js App Router
+ * Temporarily disabled Sentry for build troubleshooting
  */
 
 // Configure for static export compatibility
@@ -12,22 +11,18 @@ export const revalidate = false;
 
 export async function GET() {
   try {
-    // Example of successful operation with Sentry transaction
-    return await Sentry.withServerActionInstrumentation('sentry-example-api', async () => {
-      // Simulate some work
-      await new Promise((resolve) => setTimeout(resolve, 100));
+    // Simulate some work
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
-      return NextResponse.json({
-        message: 'Sentry example API is working',
-        timestamp: new Date().toISOString(),
-        environment: process.env.NODE_ENV || 'development',
-      });
+    return NextResponse.json({
+      message: 'Example API is working',
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
     });
   } catch (error) {
-    console.error('Sentry example API error:', error);
-    Sentry.captureException(error);
+    console.error('Example API error:', error);
 
-    return NextResponse.json({ error: 'Sentry example API failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Example API failed' }, { status: 500 });
   }
 }
 
@@ -35,31 +30,24 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Intentional error for testing Sentry error reporting
+    // Intentional error for testing - disabled for build
     if (body.triggerError) {
-      throw new Error('Intentional error for Sentry testing');
+      throw new Error('Intentional error for testing');
     }
 
-    // Test custom event
+    // Test custom event - disabled for build
     if (body.testEvent) {
-      Sentry.addBreadcrumb({
-        message: 'Custom test event',
-        level: 'info',
-        data: body.testEvent,
-      });
-
-      Sentry.captureMessage('Test event from sentry-example-api', 'info');
+      console.log('Test event:', body.testEvent);
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Sentry example processed',
+      message: 'Example API processed',
       received: body,
     });
   } catch (error) {
-    console.error('Sentry example API error:', error);
-    Sentry.captureException(error);
+    console.error('Example API error:', error);
 
-    return NextResponse.json({ error: 'Sentry example API failed' }, { status: 500 });
+    return NextResponse.json({ error: 'Example API failed' }, { status: 500 });
   }
 }

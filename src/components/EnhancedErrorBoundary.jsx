@@ -3,17 +3,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// Lazy import Sentry to avoid build issues
-let Sentry = null;
-try {
-  // Only import Sentry in browser environment
-  if (typeof window !== 'undefined') {
-    Sentry = require('@sentry/nextjs');
-  }
-} catch (error) {
-  console.warn('Sentry not available:', error);
-}
-
 // Enhanced error boundary with context
 export class EnhancedErrorBoundary extends Component {
   constructor(props) {
@@ -26,26 +15,11 @@ export class EnhancedErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Enhanced error reporting with user context
-    if (Sentry && Sentry.withScope) {
-      Sentry.withScope((scope) => {
-        scope.setTag('component', this.props.componentName || 'Unknown');
-        scope.setLevel('error');
-        scope.setContext('errorInfo', {
-          componentStack: errorInfo.componentStack,
-          sessionStart: this.props.sessionStart,
-          timestamp: new Date().toISOString(),
-        });
-        scope.setContext('props', {
-          componentName: this.props.componentName,
-          fallbackMessage: this.props.fallbackMessage,
-        });
-        Sentry.captureException(error);
-      });
-    } else {
-      // Fallback logging when Sentry is not available
-      console.error('Error in component:', this.props.componentName || 'Unknown', error, errorInfo);
-    }
+    // Log error locally without Sentry
+    console.error('Error in component:', this.props.componentName || 'Unknown', error, errorInfo);
+
+    // Store error info for debugging
+    this.setState({ errorInfo });
   }
 
   render() {
@@ -73,12 +47,8 @@ export class EnhancedErrorBoundary extends Component {
 EnhancedErrorBoundary.propTypes = {
   children: PropTypes.node.isRequired,
   componentName: PropTypes.string,
-  fallbackMessage: PropTypes.string,
-  sessionStart: PropTypes.number,
 };
 
 EnhancedErrorBoundary.defaultProps = {
   componentName: 'Unknown',
-  fallbackMessage: 'Something went wrong',
-  sessionStart: Date.now(),
 };

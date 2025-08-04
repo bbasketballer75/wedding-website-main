@@ -6,6 +6,20 @@
   "installCommand": "npm install",
   "devCommand": "npm run dev",
   "regions": ["iad1"],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://www.theporadas.com/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "theporadas.com"
+        }
+      ],
+      "permanent": true,
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

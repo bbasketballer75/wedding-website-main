@@ -76,3 +76,27 @@ backend/config/service-account*.json
 **/service-account*.json
 
 .vercel
+# Build outputs
+.next/
+dist/
+build/
+out/
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel/
+
+# Coverage
+coverage/
+
+# Cache
+.cache/
+.tmp/

@@ -112,3 +112,6 @@ backend/coverage/
 .env.local
 .env.*.local
 connection-monitor.log*
+
+# Million Lint
+.million

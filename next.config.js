@@ -1,3 +1,4 @@
+import MillionLint from '@million/lint';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
 // Bundle analyzer configuration
@@ -77,4 +78,7 @@ const nextConfig = {
 const finalConfig = bundleAnalyzer(nextConfig);
 
 // Only apply Sentry config if auth token is available
-export default finalConfig;
+export default MillionLint.next({
+  enabled: true,
+  rsc: true,
+})(finalConfig);

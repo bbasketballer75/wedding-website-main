@@ -1,9 +1,9 @@
 {
-  // Enhanced Editor Settings (OPTIMIZED FOR NEXT.JS DEVELOPMENT!)
+  // Enhanced Editor Settings (WITH COMPREHENSIVE AUTO-FIXING!)
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-  // 🤖 AUTO-SAVE & AUTO-APPROVE SETTINGS (OPTIMIZED) 🤖
+  // 🤖 AUTO-SAVE & AUTO-APPROVE SETTINGS 🤖
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "files.autoSaveWhenNoErrors": true,
@@ -19,7 +19,7 @@
   "workbench.settings.enableNaturalLanguageSearch": true,
   "workbench.experimental.settingsProfiles": true,
 
-  // 🚫 HIDE CHANGED FILES NOTIFICATION (STREAMLINED)
+  // 🚫 HIDE CHANGED FILES NOTIFICATION
   "scm.showChangesSummary": false,
   "git.showInlineOpenFileAction": false,
   "git.showActionButton": {
@@ -38,8 +38,6 @@
   "workbench.editor.showTabs": "single",
   "workbench.editor.decorations.badges": false,
   "workbench.editor.decorations.colors": false,
-
-  // Code Actions on Save (ESSENTIAL FIXES ONLY)
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.sonarjs": "explicit",
@@ -51,8 +49,6 @@
     "source.removeUnusedImports": "explicit",
     "source.convertImports": "explicit"
   },
-
-  // Editor Enhancements (OPTIMIZED)
   "editor.inlayHints.enabled": "on",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -64,8 +60,11 @@
   "editor.unicodeHighlight.invisibleCharacters": true,
   "editor.unicodeHighlight.ambiguousCharacters": true,
   "editor.stickyScroll.enabled": true,
-  "editor.stickyScroll.maxLineCount": 5,
   "editor.experimental.pasteActions.enabled": true,
+  "editor.experimental.agentMode.enabled": true,
+  "editor.experimental.agentMode.autoSuggest": true,
+  "editor.experimental.agentMode.contextualActions": true,
+  "editor.experimental.agentMode.proactiveRefactoring": true,
   "editor.quickSuggestions": {
     "other": "on",
     "comments": "on",
@@ -74,8 +73,7 @@
   "editor.suggestOnTriggerCharacters": true,
   "editor.acceptSuggestionOnCommitCharacter": true,
   "editor.acceptSuggestionOnEnter": "smart",
-
-  // ESLint Configuration (ESSENTIAL)
+  // Enhanced Linting Configuration
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onSave",
   "eslint.codeAction.showDocumentation": {
@@ -84,7 +82,7 @@
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
 
-  // 🚀 SONARQUBE CODE QUALITY SETTINGS
+  // 🚀 SONARQUBE SUPERPOWER SETTINGS
   "sonarlint.rules": {
     "typescript:S1481": "off",
     "typescript:S1854": "off",
@@ -100,7 +98,7 @@
   "sonarlint.focusOnNewCode": true,
   "sonarlint.showAnalyzerLogs": false,
 
-  // 🔍 AXE ACCESSIBILITY SETTINGS (ESSENTIAL FOR WEDDING WEBSITE!)
+  // 🔍 AXE ACCESSIBILITY SUPERPOWER SETTINGS
   "axe-linter.enableAutoRun": true,
   "axe-linter.enableTelemetry": false,
   "axe-linter.tags": ["wcag2a", "wcag2aa", "wcag21aa", "best-practice"],
@@ -112,27 +110,24 @@
   "axe-linter.showInProblems": true,
   "axe-linter.showInEditor": true,
 
-  // ⚡ MILLION LINT PERFORMANCE (REACT OPTIMIZATION)
+  // ⚡ MILLION LINT PERFORMANCE SUPERPOWER
   "million-lint.enabled": true,
   "million-lint.showInProblems": true,
   "million-lint.autoFixOnSave": true,
   "million-lint.telemetry": false,
-
-  // React/Next.js Development (OPTIMIZED)
+  // React/Next.js Development (Enhanced with new extensions)
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
     "typescript": "typescriptreact"
   },
-  "emmet.triggerExpansionOnTab": true,
-
-  // 🔥 NEXT.JS SNIPPETS SETTINGS
+  "emmet.triggerExpansionOnTab": true, // 🔥 NEXT.JS SNIPPETS SUPERPOWER SETTINGS
   "nextjs-snippets.enableTypeScript": true,
   "nextjs-snippets.enableAppRouter": true,
   "nextjs-snippets.enableServerActions": true,
   "nextjs-snippets.enableMetadata": true,
   "nextjs-snippets.preferredQuotes": "double",
 
-  // 🧪 JEST TEST RUNNER SETTINGS
+  // 🧪 JEST TEST RUNNER SUPERPOWER SETTINGS
   "jest.jestCommandLine": "npm test",
   "jest.runMode": "watch",
   "jest.autoEnable": true,
@@ -143,7 +138,7 @@
   "jest.showTerminalOnLaunch": false,
   "jest.useDashedArgs": true,
 
-  // 🔍 TEST EXPLORER SETTINGS
+  // 🔍 TEST EXPLORER SUPERPOWER SETTINGS
   "testExplorer.useNativeTesting": true,
   "testExplorer.onStart": null,
   "testExplorer.onReload": null,
@@ -151,8 +146,7 @@
   "testExplorer.gutterDecoration": true,
   "testExplorer.errorDecoration": true,
   "testExplorer.errorDecorationHover": true,
-
-  // TypeScript/JavaScript Enhanced Configuration (OPTIMIZED!)
+  // TypeScript/JavaScript Enhanced Configuration (AGENT MODE AUTOMATION!)
   "typescript.preferences.includePackageJsonAutoImports": "auto",
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -165,6 +159,10 @@
   "typescript.experimental.tsserver.web.projectWideIntellisense.suppressSemanticErrors": false,
   "typescript.suggest.includeCompletionsForImportStatements": true,
   "typescript.suggest.includeCompletionsWithSnippetText": true,
+  "typescript.experimental.agentMode.autoRefactor": true,
+  "typescript.experimental.agentMode.smartRename": true,
+  "typescript.experimental.agentMode.contextualSuggestions": true,
+  "typescript.experimental.agentMode.errorCorrection": true,
   "typescript.codeActions.enabled": true,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,
@@ -173,8 +171,10 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.experimental.aiCodeActions": true,
+  "javascript.experimental.agentMode.autoRefactor": true,
+  "javascript.experimental.agentMode.smartRename": true,
+  "javascript.experimental.agentMode.contextualSuggestions": true,
   "javascript.suggest.completeFunctionCalls": true,
-
   // TailwindCSS IntelliSense Configuration (DESIGN SUPERPOWERS!)
   "tailwindCSS.includeLanguages": {
     "javascript": "javascript",
@@ -199,13 +199,12 @@
   "tailwindCSS.lint.invalidTailwindDirective": "error",
   "tailwindCSS.lint.invalidVariant": "error",
   "tailwindCSS.lint.recommendedVariantOrder": "warning",
-
   // Accessibility Enhancements
   "accessibility.defaultLinter": "axe",
   "accessibility.runOnSave": true,
   "accessibility.highlightViolations": true,
 
-  // AI Integration Enhancements (OPTIMIZED FOR WEDDING PROJECT!)
+  // AI Integration Enhancements (WITH AGENT MODE SUPERPOWERS!)
   "github.copilot.advanced": {
     "indexing.enable": true,
     "agent.mode": "automatic",
@@ -218,7 +217,15 @@
     "experimental.chat.followUps": true,
     "experimental.chat.references": true,
     "experimental.multilineCompletions": true,
-    "experimental.contextualInlineCompletions": true
+    "experimental.contextualInlineCompletions": true,
+    "experimental.agentMode.autoComplete": true,
+    "experimental.agentMode.contextAware": true,
+    "experimental.agentMode.proactiveAssistance": true,
+    "experimental.agentMode.codeGeneration": true,
+    "experimental.agentMode.refactoring": true,
+    "experimental.agentMode.debugging": true,
+    "experimental.agentMode.testing": true,
+    "experimental.agentMode.documentation": true
   },
   "github.copilot.enable": {
     "*": true,
@@ -229,7 +236,8 @@
     "jsonc": true,
     "css": true,
     "scss": true,
-    "sass": true
+    "sass": true,
+    "less": true
   },
   "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.editor.iterativeEditing": true,
@@ -246,8 +254,7 @@
   "github.copilot.chat.experimental.autoApproveAll": true,
   "github.copilot.chat.experimental.streamingEdits": true,
   "github.copilot.chat.experimental.silentMode": true,
-
-  // Claude AI Configuration (WEDDING PROJECT OPTIMIZED!)
+  // Claude Sonnet 4 as default AI model (ENHANCED FOR WEDDING PROJECT!)
   "claude.defaultModel": "claude-3-sonnet-20240229",
   "claude.preferredModel": "claude-3-sonnet-20240229",
   "claude.fallbackModel": "claude-3-sonnet-20240229",
@@ -268,17 +275,16 @@
   "claude.experimental.projectSpecificKnowledge": true,
   "claude.experimental.multiModalAssistance": true,
   "claude.experimental.creativeSuggestions": true,
-
-  // Task and File Watching (OPTIMIZED AUTOMATION!)
+  // Task and File Watching (AGENT MODE AUTOMATION!)
   "task.autoDetect": "on",
+  "task.experimental.agentMode": true,
+  "task.experimental.autoRun": true,
+  "task.experimental.smartExecution": true,
+  "task.experimental.contextualTasks": true,
   "files.watcherExclude": {
     "**/.copilot_context.txt": true,
     "**/node_modules/**": true,
-    "**/.git/**": true,
-    "**/.next/**": true,
-    "**/out/**": true,
-    "**/.vercel/**": true,
-    "**/.netlify/**": true
+    "**/.git/**": true
   },
   "files.associations": {
     "*.env.*": "dotenv",
@@ -288,20 +294,22 @@
     "*.config.ts": "typescript",
     "*.config.mjs": "javascript"
   },
-
-  // Windows-Specific Optimizations
+  "files.experimental.agentMode.autoSave": true,
+  "files.experimental.agentMode.smartBackup": true,
+  // Windows-Specific Optimizations (WITH EXPERIMENTAL FEATURES!)
   "files.eol": "\r\n",
   "files.autoGuessEncoding": true,
   "powershell.codeFormatting.preset": "OTBS",
   "terminal.integrated.shell.windows": "pwsh.exe",
   "terminal.integrated.experimental.tabs": true,
+  "terminal.integrated.experimental.stickyScroll.enabled": true,
   "terminal.integrated.suggest.enabled": true,
   "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.experimental.typeAhead": true,
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
   },
-
-  // CSS/SCSS Configuration (OPTIMIZED FOR TAILWINDCSS)
+  // CSS/SCSS Linting Configuration (DESIGN SUPERPOWERS!)
   "css.lint.unknownAtRules": "ignore",
   "css.completion.completePropertyWithSemicolon": true,
   "css.completion.triggerPropertyValueCompletion": true,
@@ -314,8 +322,7 @@
   "scss.hover.documentation": true,
   "scss.hover.references": true,
   "scss.validate": true,
-
-  // PowerShell Analysis Configuration
+  // PowerShell Analysis Configuration (ENHANCED)
   "powershell.scriptAnalysis.enable": true,
   "powershell.scriptAnalysis.settingsPath": "",
   "powershell.codeFormatting.autoCorrectAliases": true,
@@ -325,7 +332,7 @@
   "powershell.codeFormatting.useCorrectCasing": true,
   "powershell.integratedConsole.focusConsoleOnExecute": false,
 
-  // Search and File Explorer Enhancements (NEXT.JS OPTIMIZED!)
+  // Search and File Explorer Enhancements (OPTIMIZED FOR NEXT.JS!)
   "search.exclude": {
     "**/node_modules": true,
     "**/coverage": true,
@@ -346,6 +353,7 @@
     "**/.vercel": true,
     "**/.netlify": true
   },
+  "search.experimental.searchInOpenEditors": true,
   "explorer.experimental.fileNesting.enabled": true,
   "explorer.experimental.fileNesting.expand": false,
   "explorer.experimental.fileNesting.patterns": {
@@ -358,58 +366,66 @@
     ".eslintrc.*": ".eslintignore, .prettierrc.*, .prettierignore",
     "README.md": "*.md, !README.md"
   },
-
-  // Performance Optimizations
+  // Performance Optimizations (WITH EXPERIMENTAL FEATURES!)
   "extensions.autoUpdate": false,
   "extensions.autoCheckUpdates": false,
   "workbench.enableExperiments": true,
+  "workbench.experimental.settingsProfiles.enabled": true,
+  "workbench.experimental.cloudChanges.enabled": true,
+  "workbench.experimental.cloudChanges.autoResume": "onReload",
+  "workbench.experimental.editSessions.enabled": true,
+  "workbench.experimental.shareLocalFileSystem.enabled": true,
   "telemetry.telemetryLevel": "off",
-
+  "workbench.editor.experimental.defaultBinaryEditor": "default",
+  "workbench.experimental.layoutControl.enabled": true,
   // Git Integration Enhancements
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "git.showPushSuccessNotification": true,
   "scm.diffDecorationsGutterVisibility": "always",
-
   // Debugging Configuration (OPTIMIZED FOR NEXT.JS!)
   "debug.allowBreakpointsEverywhere": true,
   "debug.inlineValues": "on",
   "debug.showBreakpointsInOverviewRuler": true,
-
-  // Testing Configuration (ESSENTIAL FEATURES ONLY)
+  // Intellisense Enhancements (REMOVED PYTHON SETTINGS - JS/TS PROJECT)
   "testing.automaticallyOpenPeekView": "failureInVisibleDocument",
   "testing.followRunningTest": true,
-
-  // Language-Specific Formatters
+  // Markdown Enhancement
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "on",
     "editor.lineNumbers": "off"
   },
+  // JSON Enhancement
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-
-  // Visual Design & Styling (OPTIMIZED FOR WEDDING WEBSITE)
+  // 🚀 EXPERIMENTAL SUPERPOWERS SECTION 🚀
+  "workbench.experimental.quickOpen.enableExperimentalNewVersion": true,
+  "workbench.experimental.commandPalette.experimental": true,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.experimental.useVersion2": true,
+  "notebook.experimental.remoteSave": true,
+  "notebook.experimental.useMarkdownRenderer": true,
+  "scm.experimental.showHistoryGraph": true,
+  "remote.experimental.tunnelInformation": true,
+  // AI-Powered Development Features
+  "workbench.experimental.AI.enabled": true,
+  "editor.experimental.predictiveCursor": true,
+  "editor.experimental.smartCommitCharacterCompletion": true,
+  // Advanced Git Integration
+  "git.experimental.branchProtection": true,
+  "git.experimental.includeCommitMessageInStash": true,
+  "git.experimental.timeline.date": "committed",
+  // Enhanced Language Server Features
+  "typescript.experimental.expandableHover": true,
+  "html.experimental.custom.tags": true,
+  "css.experimental.customData": true,
+  // 🎨 VISUAL DESIGN & STYLING SUPERPOWERS 🎨
   "html.format.wrapAttributes": "force-expand-multiline",
   "html.format.wrapLineLength": 120,
   "html.format.indentInnerHtml": true,
@@ -420,7 +436,6 @@
   "html.completion.attributeDefaultValue": "doublequotes",
   "html.autoClosingTags": true,
   "editor.linkedEditing": true,
-
   // Emmet Enhanced for Design
   "emmet.showExpandedAbbreviation": "always",
   "emmet.showSuggestionsAsSnippets": true,
@@ -439,44 +454,58 @@
       "bem": true
     }
   },
-
-  // Color and Typography Enhancements
+  // Color Preview & Management
   "editor.colorDecorators": true,
   "editor.experimental.colorDecoratorsLimit": 500,
   "workbench.colorCustomizations": {},
+  "workbench.experimental.colorCustomizations": true,
+  // Advanced Bracket Management for Design
   "editor.guides.bracketPairsHorizontal": "active",
   "editor.guides.highlightActiveBracketPair": true,
   "editor.matchBrackets": "always",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  // Font & Typography Enhancements
   "editor.fontLigatures": true,
   "editor.experimental.fontFamily": "'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, 'Courier New', monospace",
   "editor.fontSize": 14,
   "editor.lineHeight": 1.5,
+  "editor.experimental.typescriptClientTheme": "dark",
 
+  // Advanced CSS Grid & Flexbox Tools (OPTIMIZED FOR TAILWINDCSS)
+  "css.experimental.postcss": true,
+  // Design System Integration
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace",
+    "editor.experimental.colorDecorators": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace",
+    "editor.experimental.colorDecorators": true
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace",
+    "editor.experimental.colorDecorators": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace",
+    "editor.experimental.colorDecorators": true
+  },
   // 🤖 OPTIMIZED AGENT MODE AUTOMATION (STABLE FEATURES ONLY) 🤖
   "workbench.experimental.agentMode.enabled": true,
   "workbench.experimental.agentMode.autoComplete": true,
   "workbench.experimental.agentMode.contextualAssistance": true,
+  "workbench.experimental.agentMode.smartWorkspace": true,
+
+  // Core automation features only (removing excessive experimental settings)
   "editor.experimental.agentMode.autoImportOptimization": true,
   "editor.experimental.agentMode.smartCodeCompletion": true,
+  "automation.experimental.codeQualityMonitoring": true,
 
-  // Final Optimizations
   "search.quickAccess.preserveInput": true,
-  "cSpell.words": [
-    "firestore",
-    "jordyn",
-    "austin",
-    "porada",
-    "pringle",
-    "guestbook",
-    "theporadas",
-    "nextjs",
-    "vercel",
-    "netlify",
-    "tailwindcss",
-    "tsx",
-    "jsx",
-    "vitest",
-    "cypress"
-  ]
+  "editor.stickyScroll.maxLineCount": 5,
+  "cSpell.words": ["firestore"]
 }

@@ -48,6 +48,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@fontsource/roboto": "^5.0.15",
     "@googlemaps/js-api-loader": "^1.16.8",
+    "@million/lint": "^1.0.14",
     "@modelcontextprotocol/server-sequential-thinking": "^2025.7.1",
     "@next/bundle-analyzer": "^15.4.5",
     "@sentry/nextjs": "^10.0.0",

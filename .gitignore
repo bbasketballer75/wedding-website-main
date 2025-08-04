@@ -100,3 +100,15 @@ coverage/
 # Cache
 .cache/
 .tmp/
+
+# Build artifacts (auto-added by git-cleanup.ps1)
+node_modules/
+.next/
+out/
+backend/node_modules/
+backend/coverage/
+.vercel/
+*.log
+.env.local
+.env.*.local
+connection-monitor.log*

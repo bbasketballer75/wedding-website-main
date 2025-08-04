@@ -116,6 +116,11 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
 }
 
 .photo-item:hover {

@@ -25,14 +25,14 @@ describe('PhotoGallery', () => {
       () => new Promise((resolve) => setTimeout(() => resolve({ data: [] }), 100))
     );
     const { getByText } = render(<PhotoGallery refreshKey={0} />);
-    expect(getByText('Awakening our gallery...')).toBeInTheDocument();
+    expect(getByText('Loading precious memories...')).toBeInTheDocument();
   });
 
   it('renders empty state when no media is available', async () => {
     mockGetAlbumMedia.mockResolvedValue({ data: [] });
     const { queryByText } = render(<PhotoGallery refreshKey={0} />);
     await waitFor(() => {
-      expect(queryByText('Awakening our gallery...')).not.toBeInTheDocument();
+      expect(queryByText('Loading precious memories...')).not.toBeInTheDocument();
     });
     expect(queryByText('Awakening our gallery...')).not.toBeInTheDocument();
   });

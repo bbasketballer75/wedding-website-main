@@ -21,8 +21,8 @@
     "audit:a11y": "node scripts/accessibility-audit.mjs",
     "validate:optimizations": "node scripts/validate-optimizations.mjs",
     "deploy:validate": "node scripts/production-deployment.mjs",
-    "start": "serve out -l 3000",
-    "start:prod": "npm run build && serve out -l 3000",
+    "start": "http-server out -p 3000 -c-1",
+    "start:prod": "npm run build && http-server out -p 3000 -c-1",
     "lint": "next lint",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -102,6 +102,7 @@
     "babel-jest": "^30.0.5",
     "cross-env": "^10.0.0",
     "cypress": "^14.5.3",
+    "http-server": "^14.1.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.5",
     "jest-axe": "^10.0.0",
@@ -109,11 +110,15 @@
     "jsdom": "^26.1.0",
     "playwright": "^1.54.1",
     "prettier": "^3.6.2",
-    "serve": "^14.2.4",
     "sharp": "^0.34.3",
     "storybook": "^9.0.18",
-    "vercel": "^25.2.0",
+    "vercel": "^44.7.2",
     "vitest": "^3.2.4",
     "webpack-bundle-analyzer": "^4.10.2"
+  },
+  "overrides": {
+    "path-to-regexp": "^8.0.0",
+    "undici": "^6.0.0",
+    "esbuild": "^0.25.0"
   }
 }

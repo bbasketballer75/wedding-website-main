@@ -1,22 +1,23 @@
 # 🚀 PRODUCTION DEPLOYMENT GUIDE
 
-## Austin & Jordyn's Wedding Website
+## Austin & Jordyn's Wedding Website - Vercel Deployment
 
 ### 📋 **Pre-Deployment Checklist**
 
 ✅ Production build successful (`npm run build`)  
-✅ All tests passing (152 frontend + 40 backend tests)  
+✅ All tests passing (191 total tests)  
 ✅ Accessibility audit completed  
 ✅ Skip links implemented for screen readers  
+✅ Vercel configuration optimized  
 🔄 Environment variables configured (see below)  
 🔄 Sentry monitoring enabled  
 🔄 Domain DNS configured
 
 ---
 
-## 🔧 **NETLIFY ENVIRONMENT VARIABLES**
+## 🔧 **VERCEL ENVIRONMENT VARIABLES**
 
-Configure these in your Netlify dashboard (Site Settings > Environment Variables):
+Configure these in your Vercel dashboard (Project Settings > Environment Variables):
 
 ### **🔐 Required Production Variables**
 
@@ -42,9 +43,8 @@ NEXT_PUBLIC_SENTRY_DSN=https://your-key@sentry.io/your-project-id
 ADMIN_KEY=your-super-secure-admin-key
 SESSION_SECRET=your-session-encryption-secret-key
 
-# Netlify Build Configuration
+# Vercel Build Configuration
 NODE_VERSION=20
-SECRETS_SCAN_OMIT_PATHS=.netlify/.next/cache/**,**/SENTRY-AUTH-TOKEN-FIX.md,**/BUILD-FIXES-APPLIED.md,**/*-FIX.md
 ```
 
 ### **🌐 Optional Variables (for enhanced features)**
@@ -76,36 +76,37 @@ VERCEL_ANALYTICS_ID=your-analytics-id
    git push origin main
    ```
 
-2. **Connect to Netlify:**
-   - Go to [netlify.com](https://netlify.com)
-   - Click "New site from Git"
-   - Connect your GitHub repository: `wedding-website`
+2. **Connect to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository: `wedding-website`
    - Configure build settings:
-     - Build command: `npm run build`
-     - Publish directory: `.next`
-     - Node version: `20`
+     - Framework Preset: Next.js
+     - Build Command: `npm run build`
+     - Output Directory: `.next`
+     - Node.js Version: `20.x`
 
 3. **Configure Environment Variables:**
-   - Go to Site Settings > Environment Variables
+   - Go to Project Settings > Environment Variables
    - Add all variables from the list above
 
 ### **Option B: Manual Deploy via CLI**
 
-1. **Install Netlify CLI:**
+1. **Install Vercel CLI:**
 
    ```bash
-   npm install -g netlify-cli
+   npm install -g vercel
    ```
 
-2. **Login to Netlify:**
+2. **Login to Vercel:**
 
    ```bash
-   netlify login
+   vercel login
    ```
 
 3. **Deploy:**
    ```bash
-   npm run deploy:prod
+   vercel --prod
    ```
 
 ---
@@ -121,7 +122,7 @@ VERCEL_ANALYTICS_ID=your-analytics-id
 
 ### **2. Configure Sentry Variables**
 
-Add these to Netlify environment variables:
+Add these to Vercel environment variables:
 
 ```bash
 SENTRY_DSN=https://[key]@[org].ingest.sentry.io/[project-id]
@@ -149,13 +150,13 @@ After deployment, check:
    ```
    Type: CNAME
    Name: www
-   Value: your-site-name.netlify.app
+   Value: cname.vercel-dns.com
    ```
 
-2. **Netlify Domain Settings:**
-   - Go to Site Settings > Domain management
+2. **Vercel Domain Settings:**
+   - Go to Project Settings > Domains
    - Add custom domain: `www.theporadas.com`
-   - Enable HTTPS/SSL (automatic via Let's Encrypt)
+   - Enable HTTPS/SSL (automatic)
 
 ---
 
@@ -249,20 +250,20 @@ npx lighthouse https://www.theporadas.com --view
 **Domain Not Resolving:**
 
 - Check DNS propagation (can take 24-48 hours)
-- Verify CNAME record points to netlify.app
-- Check Netlify domain settings
+- Verify CNAME record points to cname.vercel-dns.com
+- Check Vercel domain settings
 
 **Performance Issues:**
 
 - Verify image optimization enabled
-- Check CDN configuration
+- Check Vercel Edge Network configuration
 - Monitor Core Web Vitals in production
 
 ---
 
 ## 📞 **SUPPORT CONTACTS**
 
-- **Netlify Support:** [netlify.com/support](https://netlify.com/support)
+- **Vercel Support:** [vercel.com/support](https://vercel.com/support)
 - **Sentry Docs:** [docs.sentry.io](https://docs.sentry.io)
 - **Next.js Docs:** [nextjs.org/docs](https://nextjs.org/docs)
 
@@ -284,6 +285,7 @@ Once deployed, your wedding website will have:
 
 ---
 
-_Last updated: August 1, 2025_
-_Website: Austin & Jordyn Porada Wedding_
+_Last updated: August 5, 2025_
+_Website: Austin & Jordyn Porada Wedding_  
+_Platform: Vercel_  
 _Status: Production Ready ✅_

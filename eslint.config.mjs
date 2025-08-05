@@ -19,7 +19,7 @@ const eslintConfig = [
       '**/coverage/**',
       '**/node_modules/**',
       '**/dist/**',
-      '**/.netlify/**',
+      '**/.vercel/**',
       '**/public/sw.js',
       '**/public/utils/**',
       '**/public/analytics.js',

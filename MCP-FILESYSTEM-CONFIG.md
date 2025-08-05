@@ -76,8 +76,8 @@ Add these paths to your MCP filesystem server configuration to give AI assistant
 ```json
 {
   "deploymentPaths": [
-    // Netlify Local Config
-    "C:/Users/Austin/.netlify",
+    // Vercel Local Config
+    "C:/Users/Austin/.vercel",
 
     // Vercel Local Config
     "C:/Users/Austin/.vercel",
@@ -110,7 +110,7 @@ Add to your `.vscode/settings.json`:
     "C:/Users/Austin/AppData/Roaming/Code/User",
     "C:/Users/Austin/AppData/Roaming/npm",
     "C:/Users/Austin/.ssh",
-    "C:/Users/Austin/.netlify",
+    "C:/Users/Austin/.vercel",
     "C:/Users/Austin/.vercel",
     "C:/Users/Austin/.firebase",
     "C:/temp"
@@ -157,7 +157,7 @@ $env:MCP_FILESYSTEM_ALLOWED_DIRS = "C:/Users/Austin/Downloads/wedding-website;C:
 2. **Extension Management**: Can analyze and troubleshoot VS Code extensions
 3. **MCP Server Integration**: Access to all your MCP servers for enhanced capabilities
 4. **Development Tools**: Can examine Node.js global packages and configs
-5. **Deployment Debugging**: Access to Netlify, Vercel, Firebase configs
+5. **Deployment Debugging**: Access to Vercel, Firebase configs
 6. **Git Integration**: Can read Git configuration and SSH keys for deployment issues
 7. **Build Debugging**: Access to build outputs and temporary files
 8. **Configuration Files**: Can read and modify all development configuration files
@@ -174,7 +174,7 @@ $env:MCP_FILESYSTEM_ALLOWED_DIRS = "C:/Users/Austin/Downloads/wedding-website;C:
 For your wedding website project, this configuration enables:
 
 - **Code Analysis**: Full access to frontend, backend, and configuration files
-- **Deployment Support**: Can troubleshoot Netlify deployments and environment variables
+- **Deployment Support**: Can troubleshoot Vercel deployments and environment variables
 - **Database Integration**: Access to Firebase/Firestore configuration files
 - **Image Optimization**: Can analyze and optimize photo gallery assets
 - **Performance Monitoring**: Access to build outputs for bundle analysis

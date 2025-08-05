@@ -42,8 +42,8 @@
 🎯 PRODUCTION DEPLOYMENT CHECKLIST
 ==================================
 
-□ NETLIFY DEPLOYMENT:
-  - Follow deployment-guide.txt for setup
+□ VERCEL DEPLOYMENT:
+  - 1. Follow deployment-guide.txt to deploy to Vercel
   - Configure environment variables
   - Set up custom domain (optional)
   - Enable automatic deployments
@@ -117,7 +117,7 @@ MONTHLY REVIEWS:
 ======================
 
 📄 Generated Files:
-  - deployment-guide.txt (Netlify setup)
+  - deployment-guide.txt (Vercel setup)
   - accessibility-testing-guide.txt (A11y testing)
   - web-vitals-monitoring.js (Performance tracking)
   - sentry-monitoring-guide.txt (Error monitoring)

@@ -7,16 +7,16 @@
 
 ## 🎯 DEPLOY NOW - STEP BY STEP
 
-### OPTION 1: Netlify CLI (Fastest)
+### OPTION 1: Vercel CLI (Fastest)
 ```bash
-# 1. Ensure you're logged into Netlify CLI
-netlify login
+# 1. Ensure you're logged into Vercel CLI
+vercel login
 
 # 2. Build production version
 npm run build
 
 # 3. Deploy to production
-netlify deploy --prod --dir=.next
+vercel --prod
 
 # 4. Note the deployment URL for testing
 ```
@@ -28,14 +28,14 @@ git add .
 git commit -m "Production deployment - all optimizations complete"
 git push origin main
 
-# 2. Netlify will auto-deploy from your main branch
-# 3. Check deployment status in Netlify dashboard
+# 2. Vercel will auto-deploy from your main branch
+# 3. Check deployment status in Vercel dashboard
 ```
 
 ## 🔍 POST-DEPLOYMENT VALIDATION
 
 ### IMMEDIATE (First 5 minutes):
-□ **Site loads**: Visit your Netlify URL
+□ **Site loads**: Visit your Vercel URL
 □ **Images display**: Check WebP images load correctly
 □ **Forms work**: Test guestbook submission
 □ **Mobile responsive**: Check on phone/tablet
@@ -43,7 +43,7 @@ git push origin main
 ### PERFORMANCE AUDIT (Next 10 minutes):
 □ **Lighthouse**: Run audit on live URL
    ```bash
-   npm run audit:lighthouse https://your-site.netlify.app
+   npm run audit:lighthouse https://your-site.vercel.app
    ```
 □ **Core Web Vitals**: Check real user metrics
 □ **Bundle size**: Verify optimization in browser dev tools
@@ -53,7 +53,7 @@ git push origin main
 □ **Web Vitals**: Implement real user monitoring script
 □ **Accessibility**: Test with screen reader
 
-## 📊 YOUR NETLIFY CONFIGURATION SUMMARY
+## 📊 YOUR VERCEL CONFIGURATION SUMMARY
 
 ✅ **Environment Variables**: 11/11 configured
    - ADMIN_KEY, SESSION_SECRET (secure scope)
@@ -84,4 +84,4 @@ Your wedding website has:
 **Next Action**: Run one of the deployment options above, then validate with the checklist!
 
 ---
-💡 **Pro Tip**: Your Netlify configuration is optimally set up with proper security scoping and comprehensive monitoring. This is production-enterprise ready!
+💡 **Pro Tip**: Your Vercel configuration is optimally set up with proper security scoping and comprehensive monitoring. This is production-enterprise ready!

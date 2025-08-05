@@ -125,7 +125,7 @@ async function main() {
     console.log('\n📋 LIGHTHOUSE TESTING OPTIONS:');
     console.log('==============================');
     console.log('1. 🌐 Test local server: http://localhost:3000');
-    console.log('2. 🚀 Test live Netlify URL after deployment');
+    console.log('2. 🚀 Test live Vercel URL after deployment');
     console.log('3. 📊 Generate comprehensive reports');
 
     // For manual testing, uncomment below lines:
@@ -137,9 +137,9 @@ async function main() {
 
   console.log('\n🎯 MANUAL TESTING NEXT STEPS:');
   console.log('=============================');
-  console.log('1. 🚀 Deploy to Netlify first using deployment-guide.txt');
+  console.log('1. 🚀 Deploy to Vercel first using deployment-guide.txt');
   console.log('2. 🔍 Run Lighthouse on live URL:');
-  console.log('   lighthouse https://your-site.netlify.app --output=html');
+  console.log('   lighthouse https://your-site.vercel.app --output=html');
   console.log('3. ♿ Follow accessibility-testing-guide.txt');
   console.log('4. 📊 Use web-vitals-monitoring.js in production browser console');
   console.log('5. 🛡️  Monitor with sentry-monitoring-guide.txt');

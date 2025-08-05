@@ -42,44 +42,34 @@ async function deployToProduction() {
   // Build for production
   await runCommand('npm run build', 'Building production bundle');
 
-  // Check if Netlify is configured
-  const netlifyToml = path.join(__dirname, '..', 'netlify.toml');
-  if (!fs.existsSync(netlifyToml)) {
-    console.log('⚠️  netlify.toml not found. Creating basic configuration...');
-    const netlifyConfig = `
-[build]
-  publish = ".next"
-  command = "npm run build"
-
-[build.environment]
-  NODE_VERSION = "18"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[context.production.environment]
-  NODE_ENV = "production"
+  // Check if Vercel is configured
+  const vercelJson = path.join(__dirname, '..', 'vercel.json');
+  if (!fs.existsSync(vercelJson)) {
+    console.log('⚠️  vercel.json not found. Creating basic configuration...');
+    const vercelConfig = `
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev"
+}
 `;
-    fs.writeFileSync(netlifyToml, netlifyConfig);
-    console.log('✅ netlify.toml created');
+    fs.writeFileSync(vercelJson, vercelConfig);
+    console.log('✅ vercel.json created');
   }
 
-  // Initialize Netlify if needed
+  // Initialize Vercel if needed
   try {
-    await runCommand('netlify status', 'Checking Netlify status');
+    await runCommand('vercel --version', 'Checking Vercel CLI');
   } catch {
-    console.log('🔗 Please run "netlify login" and "netlify init" manually to set up deployment');
+    console.log('🔗 Please run "vercel login" manually to set up deployment');
     console.log('   Then run this script again to continue with deployment validation');
     return false;
   }
 
   // Deploy to production
-  const deployResult = await runCommand(
-    'netlify deploy --prod --dir=.next',
-    'Deploying to production'
-  );
+  const deployResult = await runCommand('vercel --prod', 'Deploying to production');
 
   if (deployResult) {
     const urlMatch = deployResult.match(/Website URL:\s*(https?:\/\/[^\s]+)/);
@@ -98,7 +88,7 @@ async function runLighthouseAudit(url) {
   if (!url) {
     console.log('⚠️  No production URL available for Lighthouse audit');
     console.log(
-      '   Please run Lighthouse manually: lighthouse --view https://your-site-url.netlify.app'
+      '   Please run Lighthouse manually: lighthouse --view https://your-site-url.vercel.app'
     );
     return;
   }
@@ -313,7 +303,7 @@ async function generateProductionReport(url) {
 ✅ COMPLETED TASKS:
 ==================
 □ Production build completed
-□ Netlify deployment configured
+□ Vercel deployment configured
 □ Lighthouse audit performed
 □ Web Vitals monitoring active
 □ Accessibility testing checklist provided

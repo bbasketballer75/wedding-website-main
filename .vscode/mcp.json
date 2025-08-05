@@ -1,0 +1,59 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node",
+      "args": ["C:/Users/Austin/Documents/GitHub/servers/src/filesystem/dist/index.js"],
+      "allowedDirectories": [
+        "C:/Users/Austin/Downloads/wedding-website",
+        "C:/Users/Austin/Documents/GitHub/servers",
+        "C:/Users/Austin/Documents/GitHub/mongodb-mcp-server",
+        "C:/Users/Austin/.vscode/extensions",
+        "C:/Users/Austin/AppData/Roaming/Code/User",
+        "C:/Users/Austin/AppData/Roaming/npm",
+        "C:/Users/Austin/.ssh",
+        "C:/Users/Austin/.netlify",
+        "C:/Users/Austin/.vercel",
+        "C:/Users/Austin/.firebase",
+        "C:/Users/Austin/AppData/Roaming/gcloud",
+        "C:/temp",
+        "C:/Users/Austin/AppData/Local/Temp"
+      ],
+      "env": {
+        "MCP_FILESYSTEM_ALLOWED_DIRS": "C:/Users/Austin/Downloads/wedding-website;C:/Users/Austin/Documents/GitHub/servers;C:/Users/Austin/Documents/GitHub/mongodb-mcp-server;C:/Users/Austin/.vscode/extensions;C:/Users/Austin/AppData/Roaming/Code/User;C:/temp"
+      }
+    },
+    "fetch": {
+      "command": "python",
+      "args": ["-m", "mcp_server_fetch"],
+      "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/fetch/src"
+    },
+    "time": {
+      "command": "python",
+      "args": ["-m", "mcp_server_time"],
+      "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/time/src"
+    },
+    "mongodb": {
+      "command": "npx",
+      "args": ["tsx", "C:/Users/Austin/Documents/GitHub/mongodb-mcp-server/src/index.ts"]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "mcp-git", "C:/Users/Austin/Downloads/wedding-website"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"]
+    },
+    "sequentialthinking": {
+      "command": "node",
+      "args": ["C:/Users/Austin/Documents/GitHub/servers/src/sequentialthinking/dist/index.js"]
+    },
+    "memory": {
+      "command": "node",
+      "args": [
+        "C:/Users/Austin/Documents/GitHub/servers/src/memory/dist/index.js",
+        "C:/Users/Austin/Downloads/wedding-website"
+      ]
+    }
+  }
+}

@@ -401,7 +401,7 @@ const GuestMemorySubmission = ({
 
           {selectedFiles.length > 0 && (
             <div className="selected-files">
-              <h4>Your Selected Treasures:</h4>
+              <h3>Your Selected Treasures:</h3>
               <ul className="file-list">
                 {selectedFiles.map((file, index) => (
                   <li key={`${file.name}-${file.size}-${file.lastModified}`} className="file-item">

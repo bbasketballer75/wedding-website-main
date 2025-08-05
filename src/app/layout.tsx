@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
 import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
@@ -152,6 +153,7 @@ export default function RootLayout({
         <ServiceWorkerRegistration />
         <Script src="/analytics.js" strategy="afterInteractive" />
         <Script src="/utils/performanceMonitor.js" strategy="afterInteractive" />
+        <SpeedInsights />
         <EnhancedErrorBoundary componentName="RootLayout" sessionStart={Date.now()}>
           {children}
         </EnhancedErrorBoundary>

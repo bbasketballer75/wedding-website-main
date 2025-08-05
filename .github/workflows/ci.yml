@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GCP_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.GCP_SERVICE_ACCOUNT_JSON_BASE64 || '' }}
-      REACT_APP_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
-      NEXT_PUBLIC_API_URL: 'https://wedding-backend.netlify.app/.netlify/functions'
+      REACT_APP_API_URL: 'https://www.theporadas.com/api'
+      NEXT_PUBLIC_API_URL: 'https://www.theporadas.com/api'
       # Sentry configuration for CI
       SENTRY_DISABLE_TELEMETRY: true
       SENTRY_SUPPRESS_UPLOAD_WARNINGS: true

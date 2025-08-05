@@ -14,6 +14,6 @@ export async function GET() {
     message: 'Analytics API is running',
     timestamp: new Date().toISOString(),
     mode: 'static-export',
-    note: 'Analytics events are handled by Netlify Functions in production',
+    note: 'Analytics events are handled by Vercel Functions in production',
   });
 }

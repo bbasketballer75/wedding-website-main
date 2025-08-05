@@ -1,0 +1,56 @@
+{
+  "servers": {
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "type": "stdio"
+    },
+    "git": {
+      "command": "uvx",
+      "args": ["mcp-server-git"],
+      "type": "stdio"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/Austin/Downloads/wedding-website"
+      ],
+      "type": "stdio"
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "type": "stdio"
+    },
+    "time": {
+      "command": "python",
+      "args": ["-m", "mcp_server_time"],
+      "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/time/src",
+      "type": "stdio"
+    },
+    "sequentialthinking": {
+      "command": "node",
+      "args": ["C:/Users/Austin/Documents/GitHub/servers/src/sequentialthinking/dist/index.js"],
+      "type": "stdio",
+      "env": {
+        "NODE_ENV": "production",
+        "MCP_SERVER_NAME": "sequentialthinking"
+      }
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "type": "stdio",
+      "env": {
+        "BRAVE_API_KEY": "BSAS9aZVHM-uGNa2Cy4CjzeOvIBEkZi"
+      }
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "type": "stdio"
+    }
+  }
+}

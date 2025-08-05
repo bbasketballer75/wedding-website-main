@@ -207,12 +207,21 @@ function generateReport() {
   ACCESSIBILITY_CHECKLIST['Form Labels'].status = formIssues.length === 0 ? 'pass' : 'fail';
 
   // Check for skip links
-  const appPath = path.join(__dirname, '..', 'src', 'App.jsx');
-  if (fs.existsSync(appPath)) {
-    const appContent = fs.readFileSync(appPath, 'utf8');
-    ACCESSIBILITY_CHECKLIST['Skip Links'].status = appContent.includes('skip-link')
+  const skipLinkLayoutPath = path.join(__dirname, '..', 'src', 'app', 'layout.tsx');
+  if (fs.existsSync(skipLinkLayoutPath)) {
+    const layoutContent = fs.readFileSync(skipLinkLayoutPath, 'utf8');
+    ACCESSIBILITY_CHECKLIST['Skip Links'].status = layoutContent.includes('skip-link')
       ? 'pass'
       : 'fail';
+  } else {
+    // Fallback to App.jsx for legacy structure
+    const appPath = path.join(__dirname, '..', 'src', 'App.jsx');
+    if (fs.existsSync(appPath)) {
+      const appContent = fs.readFileSync(appPath, 'utf8');
+      ACCESSIBILITY_CHECKLIST['Skip Links'].status = appContent.includes('skip-link')
+        ? 'pass'
+        : 'fail';
+    }
   }
 
   // Check for language declaration

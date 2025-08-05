@@ -60,7 +60,7 @@ cd backend && npm start
 ### ✅ **Production Ready**
 
 - Live at [www.theporadas.com](https://www.theporadas.com)
-- Netlify deployment with CI/CD
+- Vercel deployment with CI/CD
 - Comprehensive error monitoring with Sentry
 - Performance optimization with Core Web Vitals
 
@@ -127,7 +127,7 @@ npm run test:e2e
 # Production build
 npm run build
 
-# Deploy to Netlify
+# Deploy to Vercel
 npm run deploy:prod
 
 # Deployment checklist
@@ -171,7 +171,7 @@ cat scripts/deployment/DEPLOY-NOW-CHECKLIST.txt
 
 ### **Deployment**
 
-- Netlify with serverless functions
+- Vercel with serverless functions
 - GitHub Actions CI/CD
 - Sentry error monitoring
 - Core Web Vitals tracking

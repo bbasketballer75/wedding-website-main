@@ -1,28 +1,25 @@
 const config = {
-  extensionsToTreatAsEsm: ['.jsx', '.ts', '.tsx'],
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { envName: 'test' }],
-  },
-  moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      'jest-transform-stub',
-  },
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
-  moduleDirectories: ['node_modules', 'src'],
-  transformIgnorePatterns: ['node_modules/(?!(react-leaflet|@react-leaflet|leaflet|bson)/)'],
+  preset: 'default',
+  extensionsToTreatAsEsm: ['.js'],
   globals: {
-    'import.meta': {
-      env: {
-        VITE_API_BASE_URL: 'http://localhost:5000/api',
-        NODE_ENV: 'test',
-      },
+    'ts-jest': {
+      useESM: true,
     },
   },
-  setupFiles: ['<rootDir>/jest.setup.js'],
-  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
-  collectCoverageFrom: ['src/**/*.{js,jsx}', '!src/index.js', '!src/setupTests.js'],
+  moduleNameMapping: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
+  transform: {},
+  testEnvironment: 'node',
+  collectCoverageFrom: [
+    'backend/**/*.js',
+    '!backend/**/__tests__/**',
+    '!backend/**/node_modules/**',
+  ],
+  coverageDirectory: 'backend/coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  testMatch: ['backend/**/__tests__/**/*.test.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
+
 export default config;

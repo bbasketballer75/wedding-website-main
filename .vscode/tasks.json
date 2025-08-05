@@ -100,11 +100,8 @@
     {
       "label": "Start MCP Fetch Server",
       "type": "shell",
-      "command": "python",
-      "args": ["-m", "mcp_server_fetch"],
-      "options": {
-        "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/fetch/src"
-      },
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {
@@ -158,24 +155,6 @@
       "problemMatcher": []
     },
     {
-      "label": "Start MCP Playwright Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
       "label": "Start MCP Sequential Thinking Server",
       "type": "shell",
       "command": "node",
@@ -215,6 +194,42 @@
       "problemMatcher": []
     },
     {
+      "label": "Start MCP Brave Search Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start MCP Puppeteer Server",
+      "type": "shell",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
       "label": "Start All MCP Servers",
       "dependsOrder": "parallel",
       "dependsOn": [
@@ -222,7 +237,6 @@
         "Start MCP Fetch Server",
         "Start MCP Time Server",
         "Start MCP Git Server",
-        "Start MCP Playwright Server",
         "Start MCP Sequential Thinking Server",
         "Start MCP Memory Server",
         "Start Frontend Dev Server",

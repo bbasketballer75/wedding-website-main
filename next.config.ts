@@ -1,4 +1,5 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import MillionLint from '@million/lint';
 import type { NextConfig } from 'next';
 
 // Bundle analyzer configuration
@@ -7,7 +8,7 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // Static export for optimal Netlify hosting
+  // Static export for optimal Vercel hosting
   output: 'export',
   trailingSlash: true,
 
@@ -15,7 +16,7 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
 
-  // Disable source maps in production for Netlify (reduces bundle size)
+  // Disable source maps in production for Vercel (reduces bundle size)
   productionBrowserSourceMaps: false,
 
   // Image optimization
@@ -76,5 +77,5 @@ const nextConfig: NextConfig = {
 // Apply bundle analyzer and Sentry config
 const finalConfig = bundleAnalyzer(nextConfig);
 
-// Only apply Sentry config if auth token is available
-export default finalConfig;
+// Apply Million Lint with RSC support for "use client" components
+export default MillionLint.next({ rsc: true })(finalConfig);

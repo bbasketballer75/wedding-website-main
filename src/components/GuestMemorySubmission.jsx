@@ -401,7 +401,7 @@ const GuestMemorySubmission = ({
 
           {selectedFiles.length > 0 && (
             <div className="selected-files">
-              <h4>Your Selected Treasures:</h4>
+              <h3>Your Selected Treasures:</h3>
               <ul className="file-list">
                 {selectedFiles.map((file, index) => (
                   <li key={`${file.name}-${file.size}-${file.lastModified}`} className="file-item">
@@ -427,9 +427,10 @@ const GuestMemorySubmission = ({
           <legend>How Would You Like to Share?</legend>
 
           <div className="form-group checkbox-group">
-            <label className="checkbox-label">
+            <label htmlFor="sharePublicly" className="checkbox-label">
               <input
                 type="checkbox"
+                id="sharePublicly"
                 name="sharePublicly"
                 checked={formData.sharePublicly}
                 onChange={handleInputChange}

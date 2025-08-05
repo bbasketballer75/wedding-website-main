@@ -16,8 +16,7 @@
           "value": "theporadas.com"
         }
       ],
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     }
   ],
   "rewrites": [

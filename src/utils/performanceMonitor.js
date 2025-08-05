@@ -186,7 +186,7 @@ class PerformanceMonitor {
         }),
       });
     } catch {
-      // Fallback to backend API or Netlify Functions
+      // Fallback to backend API or Vercel Functions
       try {
         const backendUrl = process.env.REACT_APP_API_URL || window.location.origin;
         await fetch(`${backendUrl}/api/performance-metrics`, {

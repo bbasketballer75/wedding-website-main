@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import './globals.css';
 import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
 import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
+import '../utils/skipLinkManager.js';
 
 // Configure premium wedding fonts
 const cormorantGaramond = Cormorant_Garamond({
@@ -117,39 +118,14 @@ export default function RootLayout({
         className={`antialiased ${cormorantGaramond.variable} ${inter.variable} ${allura.variable}`}
       >
         {/* Skip Navigation Links for Accessibility */}
-        <a
-          href="#main-content"
-          className="skip-link"
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            zIndex: 999,
-            padding: '8px 16px',
-            background: 'var(--sage-green)',
-            color: 'white',
-            textDecoration: 'none',
-            fontWeight: 'bold',
-          }}
-        >
+        <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <a
-          href="#navigation"
-          className="skip-link"
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            zIndex: 999,
-            padding: '8px 16px',
-            background: 'var(--sage-green)',
-            color: 'white',
-            textDecoration: 'none',
-            fontWeight: 'bold',
-          }}
-        >
+        <a href="#navigation" className="skip-link">
           Skip to navigation
         </a>
         <ServiceWorkerRegistration />
+        <Script src="/skip-link-enhancement.js" strategy="beforeInteractive" />
         <Script src="/analytics.js" strategy="afterInteractive" />
         <Script src="/utils/performanceMonitor.js" strategy="afterInteractive" />
         <EnhancedErrorBoundary componentName="RootLayout" sessionStart={Date.now()}>

@@ -251,15 +251,38 @@
   "claude.forceSonnet": true,
   "claude.billingEnabled": true,
   "claude.mcpFullAccess": true,
+  "claude.maxToolsPerRequest": 64,
+  "claude.toolRequestLimit": 64,
   "claude.mcpServers": [
+    "sequentialthinking",
     "filesystem",
     "fetch",
     "time",
     "git",
-    "playwright",
-    "sequentialthinking",
-    "memory"
+    "memory",
+    "puppeteer",
+    "brave-search"
   ],
+  "claude.mcpServerEnabled": {
+    "sequentialthinking": true,
+    "filesystem": true,
+    "fetch": true,
+    "time": true,
+    "git": true,
+    "memory": true,
+    "puppeteer": true,
+    "brave-search": true
+  },
+  "claude.mcpServerPriority": {
+    "sequentialthinking": 1,
+    "memory": 2,
+    "filesystem": 3,
+    "git": 4,
+    "fetch": 5,
+    "time": 6,
+    "puppeteer": 7,
+    "brave-search": 8
+  },
   "claude.alwaysUseSonnet": true,
   "claude.experimental.contextEnhancement": true,
   "claude.experimental.projectSpecificKnowledge": true,
@@ -274,8 +297,7 @@
     "**/.git/**": true,
     "**/.next/**": true,
     "**/out/**": true,
-    "**/.vercel/**": true,
-    "**/.netlify/**": true
+    "**/.vercel/**": true
   },
   "files.associations": {
     "*.env.*": "dotenv",
@@ -330,7 +352,6 @@
     "**/dist": true,
     "**/out": true,
     "**/.vercel": true,
-    "**/.netlify": true,
     "**/logs": true,
     "**/*.log": true,
     "**/build": true
@@ -340,8 +361,7 @@
     "**/coverage": true,
     "**/.next": true,
     "**/out": true,
-    "**/.vercel": true,
-    "**/.netlify": true
+    "**/.vercel": true
   },
   "explorer.experimental.fileNesting.enabled": true,
   "explorer.experimental.fileNesting.expand": false,
@@ -469,7 +489,6 @@
     "theporadas",
     "nextjs",
     "vercel",
-    "netlify",
     "tailwindcss",
     "tsx",
     "jsx",

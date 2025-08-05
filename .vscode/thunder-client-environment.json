@@ -6,7 +6,7 @@
   "variables": [
     {
       "name": "LOCAL_API",
-      "value": "http://localhost:5000/api"
+      "value": "http://localhost:3002/api"
     },
     {
       "name": "PROD_API",

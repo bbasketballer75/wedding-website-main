@@ -8,8 +8,12 @@ param(
     [switch]$LogToFile         # log to file for debugging
 )
 
+# Error handling setup
+$ErrorActionPreference = 'SilentlyContinue'
+Set-StrictMode -Version Latest
+
 # Configuration
-$FrontendUrl = 'http://localhost:3001'
+$FrontendUrl = 'http://localhost:3001'  # Next.js dev server port
 $BackendHealthUrl = 'http://localhost:3002/api/health'
 $BackendBaseUrl = 'http://localhost:3002'
 $LogFile = 'connection-monitor.log'
@@ -213,9 +217,15 @@ try {
     }
 } catch [System.Management.Automation.RuntimeException] {
     Write-ColoredOutput 'Monitoring stopped by user.' $Colors.Warning
+    exit 0  # Normal exit when stopped by user
 } catch {
     Write-ColoredOutput "Error in monitoring script: $($_.Exception.Message)" $Colors.Error
-    exit 1
+    if ($LogToFile) {
+        Log-Message "FATAL ERROR: $($_.Exception.Message)"
+    }
+    Write-ColoredOutput 'Monitoring will restart automatically...' $Colors.Info
+    Start-Sleep -Seconds 2  # Brief pause before restart
+    exit 0  # Always exit cleanly to allow restart
 } finally {
     Write-ColoredOutput ''
     Write-ColoredOutput '═══════════════════════════════════════════════════════════════' $Colors.Header

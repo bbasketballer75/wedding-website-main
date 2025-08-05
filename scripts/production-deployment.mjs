@@ -42,28 +42,21 @@ async function deployToProduction() {
   // Build for production
   await runCommand('npm run build', 'Building production bundle');
 
-  // Check if Netlify is configured
-  const netlifyToml = path.join(__dirname, '..', 'netlify.toml');
-  if (!fs.existsSync(netlifyToml)) {
-    console.log('⚠️  netlify.toml not found. Creating basic configuration...');
-    const netlifyConfig = `
-[build]
-  publish = ".next"
-  command = "npm run build"
-
-[build.environment]
-  NODE_VERSION = "18"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[context.production.environment]
-  NODE_ENV = "production"
-`;
-    fs.writeFileSync(netlifyToml, netlifyConfig);
-    console.log('✅ netlify.toml created');
+  // Check if Vercel is configured
+  const vercelJson = path.join(__dirname, '..', 'vercel.json');
+  if (!fs.existsSync(vercelJson)) {
+    console.log('⚠️  vercel.json not found. Creating basic configuration...');
+    const vercelConfig = `{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}`;
+    fs.writeFileSync(vercelJson, vercelConfig);
+    console.log('✅ vercel.json created');
   }
 
   // Initialize Netlify if needed

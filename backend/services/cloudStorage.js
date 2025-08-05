@@ -17,9 +17,9 @@ let storageConfig = {};
 let storage = null;
 
 try {
-  if (process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST) {
-    console.log('Development mode with Firestore emulator - skipping GCS initialization');
-    // Don't initialize storage in emulator mode
+  if (process.env.NODE_ENV === 'development' || process.env.FIRESTORE_EMULATOR_HOST) {
+    console.log('Development mode - GCS operations will be mocked');
+    // Don't initialize storage in development mode
   } else {
     const credentials = getGoogleCredentials();
     if (credentials) {
@@ -32,14 +32,16 @@ try {
   if (process.env.NODE_ENV === 'production') {
     throw error; // In production, we need GCS to work
   }
+  // In development, continue without GCS
+  console.log('Continuing in development mode without GCS...');
 }
 
 class CloudStorageService {
   constructor() {
-    // Check if we're in development mode with emulator
-    if (process.env.NODE_ENV === 'development' && process.env.FIRESTORE_EMULATOR_HOST) {
+    // Check if we're in development mode
+    if (process.env.NODE_ENV === 'development' || process.env.FIRESTORE_EMULATOR_HOST) {
       console.log(
-        'CloudStorageService initialized in development/emulator mode - storage operations will be mocked'
+        'CloudStorageService initialized in development mode - storage operations will be mocked'
       );
       this.storage = null;
       this.bucket = null;

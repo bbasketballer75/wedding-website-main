@@ -11,10 +11,9 @@ export const revalidate = false;
 
 export async function GET() {
   return NextResponse.json({
-    message: 'Performance Metrics API is running',
+    message: 'Performance metrics API is running',
     timestamp: new Date().toISOString(),
     mode: 'static-export',
-    note: 'Performance metrics are handled by Netlify Functions in production',
-    supportedMetrics: ['CLS', 'FID', 'FCP', 'LCP', 'TTFB', 'INP'],
+    note: 'Performance metrics are handled by Vercel Functions in production',
   });
 }

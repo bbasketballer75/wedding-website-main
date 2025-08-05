@@ -2,7 +2,7 @@
 
 /**
  * Post-Deployment Validation Checklist
- * Automated validation after Netlify deployment
+ * Automated validation after Vercel deployment
  */
 
 console.log('🎊 PRODUCTION DEPLOYMENT STATUS');
@@ -12,7 +12,7 @@ console.log('✅ DEPLOYMENT COMPLETED:');
 console.log('========================');
 console.log('✅ Git commit: 31 files with complete optimization suite');
 console.log('✅ Pushed to GitHub: main branch updated');
-console.log('✅ Netlify auto-deploy: Triggered from GitHub');
+console.log('✅ Vercel auto-deploy: Triggered from GitHub');
 console.log('✅ Custom domain: Already configured');
 
 console.log('\n📋 POST-DEPLOYMENT VALIDATION CHECKLIST:');

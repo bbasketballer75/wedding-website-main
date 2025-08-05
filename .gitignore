@@ -116,3 +116,19 @@ connection-monitor.log*
 # Vercel environment configuration files
 vercel-env-variables.json
 **/vercel-env-variables.json
+
+# Million Lint
+.million
+
+# Backup and temporary files (prevent future duplicate accumulation)
+*.backup
+*.old
+*.bak
+*.tmp
+*.temp
+*~
+.#*
+
+# Editor temporary files
+.vscode/settings.json.tmp
+.vscode/tasks.json.tmp

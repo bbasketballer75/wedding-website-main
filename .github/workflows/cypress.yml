@@ -50,6 +50,7 @@ jobs:
           parallel: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_BASE_URL: 'http://localhost:3000'
       - name: Cleanup after tests
         if: always()
         run: |

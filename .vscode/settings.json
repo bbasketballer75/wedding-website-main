@@ -535,5 +535,9 @@
   "production.experimental.securityAuditing": true,
   "search.quickAccess.preserveInput": true,
   "editor.stickyScroll.maxLineCount": 5,
-  "cSpell.words": ["firestore"]
+  "cSpell.words": ["firestore"],
+
+  // Jest Configuration for VS Code Extension - Disabled because we use Vitest
+  "jest.enable": false,
+  "jest.disabledWorkspaceFolders": ["wedding-website"]
 }

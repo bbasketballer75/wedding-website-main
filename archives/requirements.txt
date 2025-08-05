@@ -1,6 +1,0 @@
-# Requirements for MCP Python servers
-markdownify
-readabilipy
-mcp
-protego
-tzlocal

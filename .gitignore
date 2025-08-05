@@ -132,3 +132,12 @@ vercel-env-variables.json
 # Editor temporary files
 .vscode/settings.json.tmp
 .vscode/tasks.json.tmp
+
+# Debug and error logs
+*.log
+logs/
+ERROR*LOGS*/
+connection-monitor.log
+firebase-debug.log
+firestore-debug.log
+temp-private-key.txt

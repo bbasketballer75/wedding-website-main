@@ -1,5 +1,4 @@
 import express from 'express';
-import compression from 'compression';
 import cors from 'cors';
 import path from 'path';
 import rateLimit from 'express-rate-limit';
@@ -10,6 +9,11 @@ import winston from 'winston';
 import xss from 'xss';
 import { fileURLToPath } from 'url';
 import { CORS_ORIGINS, PORTS } from '../config/ports.js';
+
+// Import enhanced services
+import performanceManager from './services/performanceManager.js';
+import wsManager from './services/websocketManager.js';
+import aiServices from './services/aiServices.js';
 
 // Import routes
 import healthRoutes from './routes/healthRoutes.js';
@@ -22,6 +26,9 @@ import analyticsRoutes from './routes/analytics.js';
 import visitorsRoutes from './routes/visitors.js';
 import photoTagsRoutes from './routes/photoTags.js';
 import guestMemoriesRoutes from './routes/guestMemories.js';
+import activityRoutes from './routes/activityRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
+import reactionRoutes from './routes/reactionRoutes.js';
 import { errorHandler } from './utils/errorHandler.js';
 
 // Get __dirname equivalent in ESM
@@ -29,8 +36,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-// Enable gzip compression for all responses
-app.use(compression());
+
+// Enhanced compression with smart configuration
+app.use(performanceManager.createCompressionMiddleware());
+
+// Performance monitoring middleware
+app.use(performanceManager.createPerformanceMiddleware());
 
 // Response time monitoring middleware
 app.use((req, res, next) => {
@@ -163,6 +174,9 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/visitors', visitorsRoutes);
 app.use('/api/photos', photoTagsRoutes);
 app.use('/api/memories', guestMemoriesRoutes);
+app.use('/api/activity', activityRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/reactions', reactionRoutes);
 
 // Rate limiting to prevent abuse
 const limiter = rateLimit({

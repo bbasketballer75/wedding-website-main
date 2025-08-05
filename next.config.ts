@@ -7,18 +7,20 @@ const bundleAnalyzer = withBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // Static export for optimal Netlify hosting
-  output: 'export',
-  trailingSlash: true,
+  // Vercel-optimized configuration
+  experimental: {
+    // Optimize for Vercel's infrastructure
+    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+  },
 
-  // Performance optimizations
+  // Performance optimizations for Vercel
   compress: true,
   poweredByHeader: false,
 
-  // Disable source maps in production for Netlify (reduces bundle size)
-  productionBrowserSourceMaps: false,
+  // Enable source maps for better debugging on Vercel
+  productionBrowserSourceMaps: true,
 
-  // Image optimization
+  // Vercel-optimized image configuration
   images: {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -26,10 +28,13 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Disable optimization for static export
-    unoptimized: true,
+    // Vercel automatically optimizes images
+    loader: 'default',
   },
 
+  // Vercel-specific optimizations
+  outputFileTracing: true,
+  swcMinify: true,
   webpack: (config, { dev, isServer }) => {
     // Ensure we're using standard Webpack, not Turbopack
     config.name = isServer ? 'server' : 'client';

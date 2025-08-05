@@ -6,6 +6,7 @@
   "scripts": {
     "deploy:prod": "vercel --prod",
     "deploy:preview": "vercel",
+    "deploy:check": "pwsh -ExecutionPolicy Bypass -File scripts/deploy-vercel.ps1 -CheckOnly",
     "dev": "cross-env PORT=3001 next dev",
     "dev:start": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1",
     "dev:clean": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Clean",
@@ -16,13 +17,12 @@
     "dev:backend": "cd backend && cross-env NODE_ENV=development FIRESTORE_EMULATOR_HOST=localhost:8082 PORT=3002 npm start",
     "build": "next build",
     "build:analyze": "cross-env ANALYZE=true npm run build",
-    "bundle:analyze": "npx webpack-bundle-analyzer .next/static/chunks/*.js",
+    "build:vercel": "next build && echo 'Build completed for Vercel'",
     "convert:webp": "node scripts/convert-to-webp.js",
     "audit:a11y": "node scripts/accessibility-audit.mjs",
     "validate:optimizations": "node scripts/validate-optimizations.mjs",
-    "deploy:validate": "node scripts/production-deployment.mjs",
-    "start": "http-server out -p 3000 -c-1",
-    "start:prod": "npm run build && http-server out -p 3000 -c-1",
+    "start": "next start",
+    "start:prod": "npm run build && next start",
     "lint": "next lint",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -120,5 +120,9 @@
     "path-to-regexp": "^8.0.0",
     "undici": "^6.0.0",
     "esbuild": "^0.25.0"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": ">=8.0.0"
   }
 }

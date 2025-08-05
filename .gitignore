@@ -112,3 +112,7 @@ backend/coverage/
 .env.local
 .env.*.local
 connection-monitor.log*
+
+# Vercel environment configuration files
+vercel-env-variables.json
+**/vercel-env-variables.json

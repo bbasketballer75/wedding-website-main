@@ -56,3 +56,69 @@ if (typeof global.IntersectionObserver === 'undefined') {
 }
 
 // If you need to mock axios or fetch, use Vitest's vi.mock in your test files.
+
+// Mock web-vitals library for performance testing
+if (typeof vi !== 'undefined') {
+  vi.mock('web-vitals', () => ({
+    getCLS: vi.fn((callback) => {
+      // Simulate CLS metric
+      setTimeout(() => {
+        callback({
+          name: 'CLS',
+          value: 0.05,
+          rating: 'good',
+          delta: 0.05,
+          entries: [],
+        });
+      }, 100);
+    }),
+    getFID: vi.fn((callback) => {
+      // Simulate FID metric
+      setTimeout(() => {
+        callback({
+          name: 'FID',
+          value: 50,
+          rating: 'good',
+          delta: 50,
+          entries: [],
+        });
+      }, 100);
+    }),
+    getFCP: vi.fn((callback) => {
+      // Simulate FCP metric
+      setTimeout(() => {
+        callback({
+          name: 'FCP',
+          value: 1200,
+          rating: 'good',
+          delta: 1200,
+          entries: [],
+        });
+      }, 100);
+    }),
+    getLCP: vi.fn((callback) => {
+      // Simulate LCP metric
+      setTimeout(() => {
+        callback({
+          name: 'LCP',
+          value: 1800,
+          rating: 'good',
+          delta: 1800,
+          entries: [],
+        });
+      }, 100);
+    }),
+    getTTFB: vi.fn((callback) => {
+      // Simulate TTFB metric
+      setTimeout(() => {
+        callback({
+          name: 'TTFB',
+          value: 400,
+          rating: 'good',
+          delta: 400,
+          entries: [],
+        });
+      }, 100);
+    }),
+  }));
+}

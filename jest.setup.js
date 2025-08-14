@@ -7,7 +7,7 @@ if (typeof globalThis.import.meta === 'undefined') {
 }
 // Polyfill for Node.js globals required by some dependencies
 
-import { TextEncoder, TextDecoder } from 'node:util';
+import { TextDecoder, TextEncoder } from 'node:util';
 if (typeof global.TextEncoder === 'undefined') {
   global.TextEncoder = TextEncoder;
 }
@@ -68,4 +68,68 @@ global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
   disconnect: jest.fn(),
   // Simulate intersection for testing
   triggerIntersection: (entries) => callback(entries),
+}));
+
+// Mock web-vitals library
+jest.mock('web-vitals', () => ({
+  getCLS: jest.fn((callback) => {
+    // Simulate CLS metric
+    setTimeout(() => {
+      callback({
+        name: 'CLS',
+        value: 0.05,
+        rating: 'good',
+        delta: 0.05,
+        entries: [],
+      });
+    }, 100);
+  }),
+  getFID: jest.fn((callback) => {
+    // Simulate FID metric
+    setTimeout(() => {
+      callback({
+        name: 'FID',
+        value: 50,
+        rating: 'good',
+        delta: 50,
+        entries: [],
+      });
+    }, 100);
+  }),
+  getFCP: jest.fn((callback) => {
+    // Simulate FCP metric
+    setTimeout(() => {
+      callback({
+        name: 'FCP',
+        value: 1200,
+        rating: 'good',
+        delta: 1200,
+        entries: [],
+      });
+    }, 100);
+  }),
+  getLCP: jest.fn((callback) => {
+    // Simulate LCP metric
+    setTimeout(() => {
+      callback({
+        name: 'LCP',
+        value: 1800,
+        rating: 'good',
+        delta: 1800,
+        entries: [],
+      });
+    }, 100);
+  }),
+  getTTFB: jest.fn((callback) => {
+    // Simulate TTFB metric
+    setTimeout(() => {
+      callback({
+        name: 'TTFB',
+        value: 400,
+        rating: 'good',
+        delta: 400,
+        entries: [],
+      });
+    }, 100);
+  }),
 }));

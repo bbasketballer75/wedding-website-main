@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGuestbookEntries, createGuestbookEntry } from "../../services/api";
+import { getGuestbookEntries, createGuestbookEntry } from '../../services/api';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 import GuestPhotoUpload from '../../components/forms/GuestPhotoUpload';
 import './GuestbookPage.css';

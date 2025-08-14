@@ -6,17 +6,20 @@ export function useIntersectionObserver(elementRef, options = {}) {
 
   useEffect(() => {
     const element = elementRef?.current;
-    
+
     if (!element) return;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting);
-      setEntry(entry);
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px',
-      ...options
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+        setEntry(entry);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px',
+        ...options,
+      }
+    );
 
     observer.observe(element);
 

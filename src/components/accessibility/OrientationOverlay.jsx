@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./OrientationOverlay.css";
+import './OrientationOverlay.css';
 
 function isPortrait() {
   return window.matchMedia('(orientation: portrait)').matches;

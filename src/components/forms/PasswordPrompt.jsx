@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import "./PasswordPrompt.css";
+import './PasswordPrompt.css';
 
 const PasswordPrompt = ({ onCorrectPassword }) => {
   const [password, setPassword] = useState('');

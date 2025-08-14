@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import "./VideoPlayer.css";
+import './VideoPlayer.css';
 
 const VideoPlayer = ({ src, title = 'Wedding Video' }) => {
   const [isLoading, setIsLoading] = useState(true);

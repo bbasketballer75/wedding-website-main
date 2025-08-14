@@ -6,7 +6,7 @@ import { AudioProvider } from '../components/AmbientSoundSystem';
 import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
 import { ToastProvider } from '../components/MagicalToastSystem';
 import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
-import '../styles/modern-2025-design.css';
+import "../styles/core/modern-2025-design.css";
 import './globals.css';
 
 // Configure premium wedding fonts

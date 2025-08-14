@@ -5,7 +5,7 @@ import { useInteractionSounds } from '../components/AmbientSoundSystem';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 import MagicalPhotoGallery from '../components/MagicalPhotoGallery';
 import { useToast, useWeddingToasts } from '../components/MagicalToastSystem';
-import { getAlbumMedia, uploadMedia } from "../../services/api";
+import { getAlbumMedia, uploadMedia } from '../../services/api';
 
 import './AlbumPage.css';
 

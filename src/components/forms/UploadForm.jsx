@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { uploadMedia } from "../../services/api";
-import "./UploadForm.css";
+import { uploadMedia } from '../../services/api';
+import './UploadForm.css';
 
 const MAX_FILE_SIZE_MB = 100;
 const ACCEPTED_TYPES = [

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import "./VideoModal.css";
+import './VideoModal.css';
 
 function VideoModal({ videoUrl, onClose }) {
   const [loading, setLoading] = useState(true);

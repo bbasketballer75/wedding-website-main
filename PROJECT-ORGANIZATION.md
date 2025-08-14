@@ -1,9 +1,11 @@
 # Project Organization Index
+
 Generated: 2025-08-14 15:06:27
 
 ## Directory Structure
 
 ### Scripts (/scripts)
+
 - **core/**: Essential maintenance and project management scripts
 - **development/**: Development environment and workflow scripts
 - **deployment/**: Build, deploy, and production scripts
@@ -16,7 +18,9 @@ Generated: 2025-08-14 15:06:27
 - **utilities/**: General purpose utility scripts
 
 ### Source (/src)
+
 #### Components (/src/components)
+
 - **ui/**: Basic UI components (buttons, cards, navigation)
 - **forms/**: Form-related components
 - **media/**: Media handling components (gallery, video, audio)
@@ -26,6 +30,7 @@ Generated: 2025-08-14 15:06:27
 - **performance/**: Performance monitoring and optimization components
 
 #### Page Components (/src/page-components)
+
 - **core/**: Main page components (home, landing)
 - **gallery/**: Photo and media gallery pages
 - **interactive/**: Interactive features (guestbook, maps)
@@ -33,11 +38,13 @@ Generated: 2025-08-14 15:06:27
 - **admin/**: Administrative pages
 
 #### Styles (/src/styles)
+
 - **core/**: Base design system and core styles
 - **features/**: Feature-specific styling
 - **components/**: Component-specific styles
 
 #### Utils (/src/utils)
+
 - **core/**: Core utility functions
 - **seo/**: SEO and metadata utilities
 - **performance/**: Performance monitoring and optimization
@@ -45,6 +52,7 @@ Generated: 2025-08-14 15:06:27
 - **security/**: Security-related utilities
 
 ### Public (/public)
+
 - **images/**: All image assets organized by category
 - **scripts/**: Public JavaScript files
 - **media/**: Audio and video files
@@ -75,4 +83,4 @@ npm run organize
 For validation:
 `ash
 npm run organize:validate
-`
+`

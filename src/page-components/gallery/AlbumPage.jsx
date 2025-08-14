@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAlbumMedia, uploadMedia } from "../../services/api";
+import { getAlbumMedia, uploadMedia } from '../../services/api';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 
 import './AlbumPage.css';

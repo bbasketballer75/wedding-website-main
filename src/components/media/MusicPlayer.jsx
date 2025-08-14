@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import "./MusicPlayer.css";
+import './MusicPlayer.css';
 
 const MusicPlayer = ({ isEnabled = false, position = 'bottom-right' }) => {
   const [isPlaying, setIsPlaying] = useState(false);

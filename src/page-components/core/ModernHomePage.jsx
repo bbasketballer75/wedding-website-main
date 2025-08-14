@@ -10,7 +10,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useRef } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import "../../styles/modern-2025-design.css";
+import '../../styles/modern-2025-design.css';
 
 const ModernHomePage = () => {
   const containerRef = useRef(null);

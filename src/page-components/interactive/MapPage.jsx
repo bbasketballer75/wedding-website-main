@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getMapLocations as getPins } from "../../services/api";
+import { getMapLocations as getPins } from '../../services/api';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 import './MapPage.css';
 

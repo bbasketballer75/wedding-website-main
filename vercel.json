@@ -7,7 +7,7 @@
   "devCommand": "npm run dev",
   "regions": ["iad1"],
   "functions": {
-    "api/**/*.js": {
+    "src/app/api/**/*.ts": {
       "runtime": "@vercel/node@3.0.0"
     }
   },
@@ -22,12 +22,6 @@
         }
       ],
       "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index"
     }
   ],
   "headers": [

@@ -37,13 +37,44 @@ class WeddingAnalytics {
 
   // Track Core Web Vitals
   trackCoreWebVitals() {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(this.sendMetric.bind(this));
-      getFID(this.sendMetric.bind(this));
-      getFCP(this.sendMetric.bind(this));
-      getLCP(this.sendMetric.bind(this));
-      getTTFB(this.sendMetric.bind(this));
-    });
+    try {
+      import('web-vitals')
+        .then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+          getCLS(this.sendMetric.bind(this));
+          getFID(this.sendMetric.bind(this));
+          getFCP(this.sendMetric.bind(this));
+          getLCP(this.sendMetric.bind(this));
+          getTTFB(this.sendMetric.bind(this));
+        })
+        .catch((error) => {
+          console.warn('web-vitals module not available, using fallback:', error.message);
+          // Use fallback implementation
+          this.setupWebVitalsFallback();
+        });
+    } catch (error) {
+      console.warn('web-vitals module not available, using fallback:', error.message);
+      this.setupWebVitalsFallback();
+    }
+  }
+
+  // Fallback implementation for web vitals
+  setupWebVitalsFallback() {
+    // Simple performance tracking fallback
+    if ('PerformanceObserver' in window) {
+      const observer = new PerformanceObserver((list) => {
+        list.getEntries().forEach((entry) => {
+          if (entry.name === 'largest-contentful-paint') {
+            this.sendMetric({ name: 'LCP', value: entry.startTime });
+          }
+        });
+      });
+
+      try {
+        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+      } catch {
+        console.warn('Performance Observer not supported');
+      }
+    }
   }
 
   // Performance monitoring

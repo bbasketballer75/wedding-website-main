@@ -21,7 +21,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
       title: 'First Met 💫',
       story:
         "Our eyes met across the crowded coffee shop, and somehow we both knew this was the beginning of something magical. Austin spilled his latte when he saw Jordyn's smile.",
-      photo: '/images/first-meeting.jpg',
+      photo: '/images/highlights/sunset-couple.webp',
       icon: '☕',
       color: '#FFB6C1',
       location: 'Starbucks on Main Street',
@@ -31,7 +31,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
       title: 'First Date 🌹',
       story:
         'A perfect evening at the local park, complete with a picnic under the stars. We talked until 2 AM and knew we had found something special.',
-      photo: '/images/first-date.jpg',
+      photo: '/images/highlights/first-dance.webp',
       icon: '🌟',
       color: '#DDA0DD',
       location: 'Riverside Park',
@@ -41,7 +41,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
       title: 'Made It Official 💕',
       story:
         'After months of growing closer, we officially became a couple on this beautiful autumn day. The leaves were falling, but we were falling harder for each other.',
-      photo: '/images/official.jpg',
+      photo: '/images/highlights/ceremony-kiss.webp',
       icon: '💕',
       color: '#FFD700',
       location: 'Central Park',

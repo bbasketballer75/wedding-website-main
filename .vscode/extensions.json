@@ -39,7 +39,7 @@
     // 🌐 CLOUD & DEPLOYMENT
     "ms-vscode.azure-account",
     "googlecloudtools.cloudcode",
-    "netlify.netlify-vscode",
+    "vercel.vscode-vercel",
 
     // 🧪 TESTING & QUALITY
     "ms-vscode.vscode-jest",

@@ -2,8 +2,8 @@
 
 ## Project Overview & Current Status (July 2025)
 
-**PROJECT:** Full-stack wedding website for Austin & Jordyn Porada (née Pringle)  
-**STATUS:** Production-ready, live at www.theporadas.com  
+**PROJECT:** Full-stack wedding website for Austin & Jordyn Porada (née Pringle)
+**STATUS:** Production-ready, live at www.theporadas.com
 **LAST MAJOR UPDATE:** Complete migration from React Router to Next.js App Router, accessibility overhaul, CI/CD optimization
 
 ### Key Features
@@ -46,10 +46,10 @@
 
 ### Deployment & Infrastructure
 
-- **Primary Hosting:** Netlify with serverless functions
+- **Primary Hosting:** Vercel with serverless functions
 - **Domain:** www.theporadas.com (Porkbun DNS management)
-- **SSL:** Automatic HTTPS via Netlify/Let's Encrypt
-- **CDN:** Netlify Edge for global content delivery
+- **SSL:** Automatic HTTPS via Vercel/Let's Encrypt
+- **CDN:** Vercel Edge Network for global content delivery
 - **CI/CD:** GitHub Actions with automated testing and deployment
 
 ### Monitoring & Analytics
@@ -87,7 +87,7 @@
 - `next.config.ts` - Next.js optimization settings (bundle analyzer, Sentry, security headers)
 - `babel.config.js` - TEST ONLY (SWC disabled for Jest compatibility)
 - `vitest.config.ts` - Frontend test runner configuration
-- `netlify.toml` - Deployment and function configuration
+- `vercel.json` - Deployment and function configuration
 - `jest.config.js` - Backend testing configuration
 
 ## Developer Workflows & Commands
@@ -110,7 +110,7 @@ npm run test:coverage         # Generate coverage reports
 
 # Building & Deployment
 npm run build                 # Production build (works perfectly)
-npm run deploy:prod           # Deploy to Netlify production
+vercel --prod                 # Deploy to Vercel production
 npm run build:analyze         # Analyze bundle size
 
 # Optimization & Monitoring
@@ -129,14 +129,14 @@ any React Router commands     # REMOVED - migrated to Next.js App Router
 
 ### Development Environment Setup
 
-1. **Node.js:** Version 18+ required (Netlify compatibility)
+1. **Node.js:** Version 18+ required (Vercel compatibility)
 2. **Environment:** Set `NODE_ENV=development` for local development
 3. **Ports:** Frontend (3000), Backend (5000), Storybook (6006)
 4. **Database:** Use Firebase emulator for local Firestore testing
 
 ## Environment Variables & Configuration
 
-### Required Production Environment Variables (Netlify)
+### Required Production Environment Variables (Vercel)
 
 ```bash
 # Security & Authentication
@@ -382,9 +382,9 @@ npm run validate:optimizations
 
 ## Project Context for AI Agents
 
-**User Experience Level:** Beginner (requires detailed guidance and validation)  
-**Project Phase:** Production-ready with ongoing optimization  
-**Primary Goals:** Maintain stability, improve performance, ensure accessibility  
+**User Experience Level:** Beginner (requires detailed guidance and validation)
+**Project Phase:** Production-ready with ongoing optimization
+**Primary Goals:** Maintain stability, improve performance, ensure accessibility
 **Current Focus:** Post-deployment monitoring and incremental improvements
 
 **Key Success Metrics:**

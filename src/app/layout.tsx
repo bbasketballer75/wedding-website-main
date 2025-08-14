@@ -1,10 +1,12 @@
-import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
-import { Cormorant_Garamond, Inter, Allura } from 'next/font/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import './globals.css';
-import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
+import type { Metadata, Viewport } from 'next';
+import { Allura, Cormorant_Garamond, Inter } from 'next/font/google';
+import Script from 'next/script';
+import { AudioProvider } from '../components/AmbientSoundSystem';
 import { EnhancedErrorBoundary } from '../components/EnhancedErrorBoundary';
+import { ToastProvider } from '../components/MagicalToastSystem';
+import ServiceWorkerRegistration from '../components/ServiceWorkerRegistration';
+import './globals.css';
 
 // Configure premium wedding fonts
 const cormorantGaramond = Cormorant_Garamond({
@@ -154,9 +156,13 @@ export default function RootLayout({
         <Script src="/analytics.js" strategy="afterInteractive" />
         <Script src="/utils/performanceMonitor.js" strategy="afterInteractive" />
         <SpeedInsights />
-        <EnhancedErrorBoundary componentName="RootLayout" sessionStart={Date.now()}>
-          {children}
-        </EnhancedErrorBoundary>
+        <AudioProvider>
+          <ToastProvider>
+            <EnhancedErrorBoundary componentName="RootLayout" sessionStart={Date.now()}>
+              {children}
+            </EnhancedErrorBoundary>
+          </ToastProvider>
+        </AudioProvider>
       </body>
     </html>
   );

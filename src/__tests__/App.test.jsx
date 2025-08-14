@@ -1,5 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Home from '../app/page';
 
@@ -102,9 +103,45 @@ vi.mock('../scrollFadeIn', () => ({
   setupSectionFadeIn: vi.fn(),
 }));
 
+// Mock the AudioProvider and ToastProvider to avoid context issues
+vi.mock('../components/AmbientSoundSystem', () => ({
+  __esModule: true,
+  AudioProvider: function AudioProvider(props) {
+    AudioProvider.propTypes = { children: PropTypes.node };
+    return React.createElement('div', { 'data-testid': 'audio-provider' }, props.children);
+  },
+  AudioControls: function AudioControls() {
+    return React.createElement('div', { 'data-testid': 'audio-controls' }, 'Audio Controls');
+  },
+  default: () =>
+    React.createElement('div', { 'data-testid': 'mock-ambient-sound' }, 'Audio Controls'),
+}));
+
+vi.mock('../components/MagicalToastSystem', () => ({
+  __esModule: true,
+  ToastProvider: function ToastProvider(props) {
+    ToastProvider.propTypes = { children: PropTypes.node };
+    return React.createElement('div', { 'data-testid': 'toast-provider' }, props.children);
+  },
+  default: () => React.createElement('div', { 'data-testid': 'mock-toast-system' }, 'Toast System'),
+}));
+
+// Mock all the other magical components
+vi.mock('../components/RealTimeActivityFeed', () => ({
+  __esModule: true,
+  default: () =>
+    React.createElement('div', { 'data-testid': 'real-time-activity-feed' }, 'Activity Feed'),
+}));
+
+vi.mock('../components/InteractiveLoveTimeline', () => ({
+  __esModule: true,
+  default: () =>
+    React.createElement('div', { 'data-testid': 'interactive-love-timeline' }, 'Love Timeline'),
+}));
+
 describe('App (Next.js Home Page)', () => {
   test('renders main app structure', () => {
-    render(<Home />);
+    render(React.createElement(Home));
 
     // Should have skip link
     expect(screen.getByText('Skip to main content')).toBeInTheDocument();
@@ -114,7 +151,7 @@ describe('App (Next.js Home Page)', () => {
   });
 
   test('renders app container with proper class', () => {
-    render(<Home />);
+    render(React.createElement(Home));
 
     // Should have app container
     const appContainer = document.querySelector('.App');
@@ -122,7 +159,7 @@ describe('App (Next.js Home Page)', () => {
   });
 
   test('contains proper accessibility structure', () => {
-    render(<Home />);
+    render(React.createElement(Home));
 
     // Should have skip link with proper href
     const skipLink = screen.getByText('Skip to main content');

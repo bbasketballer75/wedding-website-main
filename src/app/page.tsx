@@ -2,18 +2,22 @@
 import { Suspense, useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
+import { AudioControls } from '../components/AmbientSoundSystem';
+import InteractiveLoveTimeline from '../components/InteractiveLoveTimeline';
 import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
+import RealTimeActivityFeed from '../components/RealTimeActivityFeed';
 import ThankYouSection from '../components/ThankYouSection';
 import { setupSectionFadeIn } from '../scrollFadeIn';
+import { magicalExperience } from '../utils/magicalInteractions';
 
 // Dynamically load heavy components with SSR disabled for client-side optimizations
 const MemoryWall = dynamic(() => import('../components/MemoryWall'), {
   loading: () => <LoadingScreen message="Illuminating precious memories..." />,
   ssr: false,
 });
-const AlbumPage = dynamic(() => import('../page-components/AlbumPage'), {
-  loading: () => <LoadingScreen message="Unveiling our engagement enchantment..." />,
+const MagicalAlbumPage = dynamic(() => import('../page-components/MagicalAlbumPage'), {
+  loading: () => <LoadingScreen message="Unveiling our magical photo gallery..." />,
   ssr: false,
 });
 const GuestbookPage = dynamic(() => import('../page-components/GuestbookPage'), {
@@ -36,6 +40,12 @@ const StayInTouchSection = dynamic(() => import('../components/StayInTouchSectio
 export default function Home() {
   useEffect(() => {
     setupSectionFadeIn();
+    // Initialize magical interactions for enhanced UX
+    magicalExperience.init();
+
+    return () => {
+      magicalExperience.destroy();
+    };
   }, []);
 
   return (
@@ -44,9 +54,33 @@ export default function Home() {
         Skip to main content
       </a>
       <Navbar onePage />
+
+      {/* Floating Audio Controls */}
+      <div
+        className="fixed top-4 left-4 z-50 transition-all duration-300 hover:scale-105"
+        style={{ backdropFilter: 'blur(10px)' }}
+      >
+        <AudioControls className="shadow-lg" />
+      </div>
+
+      {/* Real-Time Activity Feed */}
+      <div
+        className="fixed bottom-4 right-4 z-40 transition-all duration-300 hover:scale-105"
+        style={{ maxWidth: '300px' }}
+      >
+        <RealTimeActivityFeed />
+      </div>
+
       <main className="onepage-main" id="main-content" role="main" aria-label="Main content">
         {/* Hero Section */}
         <ThankYouSection />
+
+        {/* Interactive Love Story Timeline */}
+        <Suspense fallback={<LoadingScreen message="Crafting your love story..." />}>
+          <section id="love-story" aria-label="Our Love Story Timeline" className="magical-section">
+            <InteractiveLoveTimeline />
+          </section>
+        </Suspense>
 
         {/* Memory Wall & Photo Booth */}
         <Suspense fallback={<LoadingScreen message="Unveiling cherished moments..." />}>
@@ -56,9 +90,9 @@ export default function Home() {
         </Suspense>
 
         {/* Engagement & Photo Album */}
-        <Suspense fallback={<LoadingScreen message="Loading Engagement & Album..." />}>
-          <section id="album" aria-label="Engagement & Photo Album">
-            <AlbumPage />
+        <Suspense fallback={<LoadingScreen message="Loading Magical Photo Gallery..." />}>
+          <section id="album" aria-label="Engagement & Photo Album" className="magical-section">
+            <MagicalAlbumPage />
           </section>
         </Suspense>
 

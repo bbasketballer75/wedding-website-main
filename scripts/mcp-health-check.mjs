@@ -93,7 +93,7 @@ class MCPHealthChecker {
         process.on('error', reject);
         setTimeout(() => reject(new Error('Timeout')), 5000);
       });
-    } catch (error) {
+    } catch {
       result.commandAvailable = false;
       result.issues.push(`Command '${config.command}' not available`);
       result.recommendations.push(`Install ${config.command} or update PATH`);
@@ -173,7 +173,10 @@ class MCPHealthChecker {
     // Port summary
     console.log(`\n🔌 Port Usage:`);
     Object.entries(this.results.ports).forEach(([port, info]) => {
-      const icon = port === '5188' ? (info.inUse ? '✅' : '❌') : '📡';
+      let icon = '📡';
+      if (port === '5188') {
+        icon = info.inUse ? '✅' : '❌';
+      }
       console.log(`  ${icon} Port ${port}: ${info.status}`);
     });
 

@@ -205,7 +205,7 @@ const GuestPhotoUpload = () => {
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {preview.map((item, index) => (
-                <div key={index} className="relative group">
+                <div key={`${item.name}-${index}`} className="relative group">
                   <img
                     src={item.url}
                     alt={item.name}

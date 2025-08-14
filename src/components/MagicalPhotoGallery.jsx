@@ -5,6 +5,7 @@
  * Enhanced photo gallery with incredible UX features
  */
 
+import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ConfettiCelebration, TouchMagic } from '../utils/magicalInteractions.js';
 
@@ -96,7 +97,7 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
       <div className={`magical-gallery-loading ${className}`}>
         <div className="skeleton-grid">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="skeleton photo-skeleton" />
+            <div key={`skeleton-${i}`} className="skeleton photo-skeleton" />
           ))}
         </div>
       </div>
@@ -148,7 +149,7 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
       <div className="thumbnail-grid">
         {photos.map((photo, index) => (
           <div
-            key={index}
+            key={photo.url || photo.src || `photo-${index}`}
             className={`thumbnail-wrapper stagger-animation ${
               index === currentIndex ? 'active' : ''
             }`}
@@ -202,3 +203,15 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
 };
 
 export default MagicalPhotoGallery;
+
+// PropTypes validation
+MagicalPhotoGallery.propTypes = {
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      caption: PropTypes.string,
+    })
+  ),
+  onPhotoClick: PropTypes.func,
+  className: PropTypes.string,
+};

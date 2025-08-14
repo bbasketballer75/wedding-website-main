@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
-const winston = require('winston');
+import nodemailer from 'nodemailer';
+import winston from 'winston';
 
 class MemoryEmailService {
   constructor() {
@@ -374,4 +374,4 @@ Austin & Jordyn Porada
   }
 }
 
-module.exports = MemoryEmailService;
+export default MemoryEmailService;

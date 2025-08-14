@@ -29,7 +29,7 @@ export const supportsWebP = () => {
     if (!ctx) return false;
 
     return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -41,7 +41,7 @@ export const supportsLocalStorage = () => {
     localStorage.setItem('test', 'test');
     localStorage.removeItem('test');
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -52,7 +52,7 @@ export const supportsSessionStorage = () => {
     sessionStorage.setItem('test', 'test');
     sessionStorage.removeItem('test');
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -65,7 +65,7 @@ export const getStorageQuota = async () => {
   if (navigator && navigator.storage && navigator.storage.estimate) {
     try {
       return await navigator.storage.estimate();
-    } catch (e) {
+    } catch {
       return { quota: 0, usage: 0 };
     }
   }
@@ -174,7 +174,7 @@ export const supportsAudioFormat = (format) => {
 
     const support = audio.canPlayType(mimeType);
     return support === 'probably' || support === 'maybe';
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -193,7 +193,7 @@ export const supportsVideoFormat = (format) => {
 
     const support = video.canPlayType(mimeType);
     return support === 'probably' || support === 'maybe';
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -208,7 +208,7 @@ export const supportsES6 = () => {
     // Test for arrow functions, const/let, template literals
     eval('const test = () => `test`; let x = 1;');
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };

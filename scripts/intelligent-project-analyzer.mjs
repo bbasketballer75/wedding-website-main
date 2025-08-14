@@ -5,9 +5,8 @@
  * Advanced AI-powered project analysis and optimization system
  */
 
-import { promises as fs } from 'fs';
-import path from 'path';
 import { exec } from 'child_process';
+import { promises as fs } from 'fs';
 import { promisify } from 'util';
 
 const execAsync = promisify(exec);
@@ -588,17 +587,20 @@ Each recommendation includes specific implementation steps. Use the JSON report 
       const hasZustand = !!packageJson.dependencies?.zustand;
       const hasContext = await this.checkForReactContext();
 
+      let statePattern = 'Local State';
+      if (hasRedux) {
+        statePattern = 'Redux';
+      } else if (hasZustand) {
+        statePattern = 'Zustand';
+      } else if (hasContext) {
+        statePattern = 'React Context';
+      }
+
       return {
         redux: hasRedux,
         zustand: hasZustand,
         context: hasContext,
-        pattern: hasRedux
-          ? 'Redux'
-          : hasZustand
-            ? 'Zustand'
-            : hasContext
-              ? 'React Context'
-              : 'Local State',
+        pattern: statePattern,
       };
     } catch {
       return { pattern: 'Unknown' };
@@ -844,7 +846,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const analyzer = new IntelligentProjectAnalyzer();
   analyzer
     .performDeepAnalysis()
-    .then((analysis) => {
+    .then((_analysis) => {
       console.log('\n🎉 Analysis complete! Check PROJECT-ANALYSIS-REPORT.md for details.');
     })
     .catch(console.error);

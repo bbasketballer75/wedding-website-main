@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import winston from 'winston';
+import GuestPhotoUploadService from '../services/GuestPhotoUploadService.js';
+import MemoryAnalyticsService from '../services/MemoryAnalyticsService.js';
+import MemoryEmailService from '../services/MemoryEmailService.js';
 const router = express.Router();
-const GuestPhotoUploadService = require('../services/GuestPhotoUploadService');
-const MemoryEmailService = require('../services/MemoryEmailService');
-const MemoryAnalyticsService = require('../services/MemoryAnalyticsService');
-const winston = require('winston');
 
 // Initialize services
 const photoUploadService = new GuestPhotoUploadService();
@@ -91,9 +91,13 @@ router.post('/upload', photoUploadService.upload.array('photos', 10), async (req
     const successCount = uploadResults.filter((r) => !r.error).length;
     const errorCount = uploadResults.filter((r) => r.error).length;
 
+    const photoText = successCount !== 1 ? 's' : '';
+    const errorText = errorCount > 0 ? ` (${errorCount} failed)` : '';
+    const message = `Successfully uploaded ${successCount} photo${photoText}${errorText}`;
+
     res.json({
       success: true,
-      message: `Successfully uploaded ${successCount} photo${successCount !== 1 ? 's' : ''}${errorCount > 0 ? ` (${errorCount} failed)` : ''}`,
+      message,
       results: uploadResults,
       requiresApproval: process.env.GUEST_UPLOAD_REQUIRE_APPROVAL === 'true',
     });
@@ -289,4 +293,4 @@ router.post('/send-anniversary-email', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

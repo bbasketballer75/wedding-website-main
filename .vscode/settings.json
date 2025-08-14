@@ -394,6 +394,33 @@
   "telemetry.telemetryLevel": "all",
   "workbench.enableExperiments": true,
 
+  // 🤖 MCP (Model Context Protocol) CONFIGURATION
+  "chat.mcp.discovery": {
+    "enabled": true
+  },
+  "chat.mcp.servers": {
+    "wedding-photos": {
+      "name": "Wedding Photos Manager",
+      "description": "AI-powered wedding photo organization and optimization tools",
+      "command": "npx",
+      "args": ["tsx", "./mcp-servers/wedding-photos-server.ts"],
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "wedding-content": {
+      "name": "Wedding Content Manager",
+      "description": "Guest story moderation and content analytics tools",
+      "command": "npx",
+      "args": ["tsx", "./mcp-servers/wedding-content-server.ts"],
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  },
+
   // 🌐 WEB DEVELOPMENT SPECIFIC
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
@@ -439,5 +466,11 @@
   "sonarlint.connectedMode.project": {
     "connectionId": "wedding-website-main",
     "projectKey": "bbasketballer75_wedding-website-main"
+  },
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "cursor-workspace": true
   }
 }

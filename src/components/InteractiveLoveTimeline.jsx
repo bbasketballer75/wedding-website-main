@@ -162,7 +162,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
         <div className="milestones-container">
           {milestones.map((milestone, index) => (
             <div
-              key={index}
+              key={`milestone-${milestone.date}-${index}`}
               className={`milestone-item ${index === activeIndex ? 'active' : ''} ${
                 index <= activeIndex ? 'completed' : ''
               } stagger-animation elegant-lift`}
@@ -231,12 +231,12 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
         </button>
 
         <div className="progress-dots">
-          {milestones.map((_, index) => (
+          {milestones.map((milestone, index) => (
             <button
-              key={index}
+              key={`dot-${milestone.date}-${index}`}
               className={`progress-dot ${index === activeIndex ? 'active' : ''}`}
               onClick={() => handleMilestoneClick(index)}
-              aria-label={`Go to milestone ${index + 1}`}
+              aria-label={`Go to milestone ${index + 1}: ${milestone.title}`}
             />
           ))}
         </div>

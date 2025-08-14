@@ -5,9 +5,8 @@
  * Advanced Model Context Protocol server orchestrator with enhanced capabilities
  */
 
-import { spawn, exec } from 'child_process';
+import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
-import path from 'path';
 
 const MCP_SERVERS = [
   {

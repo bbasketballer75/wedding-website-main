@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getGuestbookEntries, createGuestbookEntry } from '../services/api';
 import LoadingScreen from '../components/LoadingScreen';
+import GuestPhotoUpload from '../components/GuestPhotoUpload';
 import './GuestbookPage.css';
 
 const GuestbookPage = () => {
@@ -192,6 +193,28 @@ const GuestbookPage = () => {
                 ))}
               </>
             )}
+          </section>
+
+          {/* Photo Upload Section */}
+          <section
+            className="photo-upload-section"
+            style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #e2e8f0' }}
+          >
+            <h3
+              style={{
+                textAlign: 'center',
+                marginBottom: '1rem',
+                fontSize: '1.5rem',
+                color: '#4a5568',
+              }}
+            >
+              Share Your Wedding Memories
+            </h3>
+            <p style={{ textAlign: 'center', marginBottom: '2rem', color: '#718096' }}>
+              Help us preserve the magic of May 10th, 2025 by uploading your favorite photos from
+              our special day!
+            </p>
+            <GuestPhotoUpload />
           </section>
         </>
       )}

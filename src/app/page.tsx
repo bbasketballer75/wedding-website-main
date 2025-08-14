@@ -1,12 +1,11 @@
 'use client';
-import React, { useEffect, Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
-import { setupSectionFadeIn } from '../scrollFadeIn';
+import LoadingScreen from '../components/LoadingScreen';
 import Navbar from '../components/Navbar';
 import ThankYouSection from '../components/ThankYouSection';
-import LoadingScreen from '../components/LoadingScreen';
-import '../App.css';
+import { setupSectionFadeIn } from '../scrollFadeIn';
 
 // Dynamically load heavy components with SSR disabled for client-side optimizations
 const MemoryWall = dynamic(() => import('../components/MemoryWall'), {

@@ -1,7 +1,6 @@
 // Content Validation Test
 
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import GuestbookPage from '../page-components/GuestbookPage.jsx';
 
@@ -15,7 +14,8 @@ describe('Guest Content Experience', () => {
     fireEvent.change(messageField, {
       target: { value: '<script>alert("xss")</script>' },
     });
-    const nameField = screen.getByPlaceholderText('Your name');
+    // Use label text instead of placeholder to be more specific for guestbook form
+    const nameField = screen.getByLabelText(/Name \(optional\)/i);
     fireEvent.change(nameField, { target: { value: 'Evil User' } });
 
     // Verify that the form exists and handles XSS protection

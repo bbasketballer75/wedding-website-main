@@ -1,22 +1,105 @@
-# 🌐 Domain Setup Guide - theporadas.com → Vercel
+# 🌐 Complete Vercel Custom Domain Setup Guide
 
-## Complete DNS Configuration for Austin & Jordyn's Wedding Website
+## Step-by-Step Instructions for theporadas.com
 
----
-
-## 🎯 **Overview**
-
-You'll be configuring your domain `theporadas.com` to point to Vercel so visitors can access your wedding website at `www.theporadas.com`.
-
-### **What We're Setting Up:**
-
-- **Domain:** `theporadas.com` (purchased from Porkbun)
-- **Target:** Vercel hosting platform
-- **Result:** `www.theporadas.com` → Your wedding website
+### 🎯 **GOAL**: Set up theporadas.com to work perfectly with Vercel hosting
 
 ---
 
-## 📋 **Prerequisites**
+## **STEP 1: Install Vercel CLI (Required)**
+
+### Windows PowerShell Installation:
+
+```powershell
+# Option 1: Install via npm (Recommended)
+npm install -g vercel
+
+# Option 2: Install via yarn
+yarn global add vercel
+
+# Option 3: Download installer from vercel.com/download
+```
+
+### Verify Installation:
+
+```powershell
+vercel --version
+# Should show: Vercel CLI 32.x.x or similar
+```
+
+---
+
+## **STEP 2: Login to Vercel**
+
+### Login Command:
+
+```powershell
+vercel login
+```
+
+**What happens:**
+
+1. Opens browser automatically
+2. Login with GitHub, GitLab, or Bitbucket account
+3. Authorize Vercel CLI access
+4. Returns to terminal with "Success!" message
+
+### Verify Login:
+
+```powershell
+vercel whoami
+# Should show your username/email
+```
+
+---
+
+## **STEP 3: Connect Your Project to Vercel**
+
+### Navigate to your project:
+
+```powershell
+cd "c:\Users\Austin\Downloads\wedding-website"
+```
+
+### Initialize Vercel project:
+
+```powershell
+vercel
+```
+
+**Follow the prompts:**
+
+1. **"Set up and deploy?"** → Press `Y` (Yes)
+2. **"Which scope?"** → Select your personal account
+3. **"Link to existing project?"** → Press `N` (No, create new)
+4. **"What's your project's name?"** → `wedding-website` or `theporadas`
+5. **"In which directory is your code located?"** → Press Enter (current directory)
+6. **Override settings?** → Press `N` (No, use detected settings)
+
+**Expected Output:**
+
+```
+✅ Production: https://wedding-website-xyz.vercel.app
+📝 Deployed to production. Run `vercel --prod` to overwrite later.
+```
+
+---
+
+## **STEP 4: Add Custom Domain in Vercel Dashboard**
+
+### Access Vercel Dashboard:
+
+1. Open browser: https://vercel.com/dashboard
+2. Click on your project (`wedding-website` or similar)
+3. Click **"Settings"** tab
+4. Click **"Domains"** in left sidebar
+
+### Add Domain:
+
+1. Click **"Add Domain"** button
+2. Enter: `theporadas.com`
+3. Click **"Add"**
+4. Vercel will suggest adding `www.theporadas.com` → Click **"Add"**
 
 Before starting, ensure you have:
 

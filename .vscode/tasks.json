@@ -1,467 +1,96 @@
 {
-  // Updated tasks configuration - no more mcp-fetch errors
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Ask Claude",
+      "label": "🚀 Agent Mode: Full Development Environment",
       "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\.vscode\\claude-api.ps1",
-        "-prompt",
-        "${input:claudePrompt}",
-        "-contextFile",
-        "${workspaceFolder}\\.copilot_context.txt"
-      ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true,
-        "close": true
-      },
+      "command": "npm",
+      "args": ["run", "dev:full"],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "options": {
-        "env": {
-          "ANTHROPIC_API_KEY": "your-api-key-here",
-          "MAX_TOKENS": "4096"
-        }
-      }
-    },
-    {
-      "label": "Update AI Context",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\.vscode\\update-context.ps1"
-      ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "silent",
-        "panel": "shared"
-      },
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "Claude: Web Search",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\.vscode\\claude-api.ps1",
-        "-prompt",
-        "@web ${input:webQuery}",
-        "-contextFile",
-        "${workspaceFolder}\\.copilot_context.txt"
-      ],
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated"
-      }
-    },
-    {
-      "label": "Start MCP Filesystem Server",
-      "type": "shell",
-      "command": "node",
-      "args": [
-        "C:/Users/Austin/Documents/GitHub/servers/src/filesystem/dist/index.js",
-        "${workspaceFolder}"
-      ],
       "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Fetch Server",
-      "type": "shell",
-      "command": "python",
-      "args": ["-m", "mcp_server_fetch"],
-      "options": {
-        "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/fetch/src"
-      },
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Time Server",
-      "type": "shell",
-      "command": "python",
-      "args": ["-m", "mcp_server_time"],
-      "options": {
-        "cwd": "C:/Users/Austin/Documents/GitHub/servers/src/time/src"
-      },
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP MongoDB Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["tsx", "C:/Users/Austin/Documents/GitHub/mongodb-mcp-server/src/index.ts"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Git Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "mcp-git", "${workspaceFolder}"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Playwright Server",
-      "type": "shell",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start MCP Sequential Thinking Server",
-      "type": "shell",
-      "command": "node",
-      "args": ["C:/Users/Austin/Documents/GitHub/servers/src/sequentialthinking/dist/index.js"],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Manage Sequential Thinking Server",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\start-sequential-thinking.ps1"
-      ],
-      "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
         "focus": false,
         "panel": "shared",
         "showReuseMessage": true,
-        "clear": true
+        "clear": false
       },
       "problemMatcher": []
     },
     {
-      "label": "Sequential Thinking Server - Status",
+      "label": "🤖 Agent: Analyze Project",
       "type": "shell",
       "command": "pwsh",
       "args": [
         "-NoProfile",
         "-ExecutionPolicy",
         "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\start-sequential-thinking.ps1",
-        "-Status"
+        "-Command",
+        "Write-Host '🔍 Analyzing project structure...'; Get-ChildItem -Recurse -File | Where-Object {$_.Extension -match '\\.(js|ts|jsx|tsx|css|scss|json|md)$'} | Group-Object Extension | Sort-Object Count -Descending | Format-Table Name, Count"
       ],
       "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": true
-      },
-      "problemMatcher": []
+        "focus": true,
+        "panel": "new"
+      }
     },
     {
-      "label": "Start MCP Memory Server",
-      "type": "shell",
-      "command": "node",
-      "args": [
-        "C:/Users/Austin/Documents/GitHub/servers/src/memory/dist/index.js",
-        "${workspaceFolder}"
-      ],
-      "isBackground": true,
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Start All MCP Servers",
-      "dependsOrder": "parallel",
-      "dependsOn": [
-        "Start MCP Filesystem Server",
-        "Start MCP Fetch Server",
-        "Start MCP Time Server",
-        "Start MCP MongoDB Server",
-        "Start MCP Git Server",
-        "Start MCP Playwright Server",
-        "Start MCP Sequential Thinking Server",
-        "Start MCP Memory Server",
-        "Start Frontend Dev Server",
-        "Start Backend Server"
-      ],
-      "runOptions": { "runOn": "folderOpen" }
-    },
-    {
-      "label": "Start Frontend Dev Server",
+      "label": "🧪 Agent: Run All Tests",
       "type": "shell",
       "command": "npm",
-      "args": ["run", "dev"],
-      "isBackground": true,
-      "options": { "cwd": "${workspaceFolder}" },
-      "runOptions": { "runOn": "folderOpen" },
+      "args": ["test"],
+      "group": "test",
       "presentation": {
         "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
-      "group": "build",
-      "problemMatcher": []
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
+      }
     },
     {
-      "label": "Start Backend Server",
+      "label": "🔧 Agent: Fix All Issues",
       "type": "shell",
       "command": "npm",
-      "args": ["start"],
-      "isBackground": true,
-      "options": { "cwd": "${workspaceFolder}/backend" },
-      "runOptions": { "runOn": "folderOpen" },
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      },
+      "args": ["run", "lint:fix"],
       "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Connection Monitor",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\monitoring\\connection-monitor.ps1",
-        "-LogToFile"
-      ],
-      "isBackground": true,
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": false,
-        "clear": true,
-        "group": "monitoring"
-      },
-      "group": "build",
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}"
+        "focus": true,
+        "panel": "new"
       }
     },
     {
-      "label": "Connection Monitor (Quiet)",
+      "label": "📊 Agent: Performance Analysis",
       "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\monitoring\\connection-monitor.ps1",
-        "-Quiet",
-        "-LogToFile"
-      ],
-      "isBackground": true,
-      "presentation": {
-        "echo": false,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": false,
-        "clear": false,
-        "group": "monitoring"
-      },
+      "command": "npm",
+      "args": ["run", "build:analyze"],
       "group": "build",
-      "problemMatcher": [],
-      "options": {
-        "cwd": "${workspaceFolder}"
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "new"
       }
     },
     {
-      "label": "Fix All Issues (Auto)",
+      "label": "🚀 Agent: Deploy to Production",
       "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\fix-all-issues-auto.ps1",
-        "-ShowDetails"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": ["$eslint-stylish"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": "Automatically fixes ESLint, PowerShell, formatting, and other code quality issues"
-    },
-    {
-      "label": "Fix All Issues (Quick)",
-      "type": "shell",
-      "command": "pwsh",
-      "args": [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        "${workspaceFolder}\\scripts\\fix-all-issues-auto.ps1",
-        "-SkipTests"
-      ],
+      "command": "npm",
+      "args": ["run", "deploy:prod"],
       "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": false,
-        "panel": "dedicated",
-        "showReuseMessage": false,
-        "clear": true
-      },
-      "problemMatcher": ["$eslint-stylish"],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "detail": "Quick fix without running tests"
-    }
-  ],
-  "inputs": [
-    {
-      "id": "claudePrompt",
-      "type": "promptString",
-      "description": "Enter prompt for Claude 4 (add @web for live search):",
-      "default": "How can I improve this code for Windows 11?"
-    },
-    {
-      "id": "webQuery",
-      "type": "promptString",
-      "description": "Enter web search query for Claude:",
-      "default": "latest Windows 11 development best practices"
+        "focus": true,
+        "panel": "new"
+      }
     }
   ]
 }

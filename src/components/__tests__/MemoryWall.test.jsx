@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import MemoryWall from '../MemoryWall.jsx';
 
@@ -93,15 +92,17 @@ describe('MemoryWall', () => {
     expect(screen.getByText('3')).toBeInTheDocument();
   });
 
-  test('handles file upload for image preview', () => {
+  test('handles file upload for image preview', async () => {
     const { container } = render(<MemoryWall />);
-    // Select the file input directly from the rendered container
-    const fileInput = container.querySelector('input[type="file"]');
+    // Select the specific file input for memory wall (not the guest photo upload)
+    const fileInput = container.querySelector('input[id="memory-image"]');
     const file = new File(['test'], 'test.jpg', { type: 'image/jpeg' });
 
     fireEvent.change(fileInput, { target: { files: [file] } });
 
-    // Should show preview image
-    expect(screen.getByAltText('Preview of uploaded memory')).toBeInTheDocument();
+    // Should show preview image after file selection
+    await waitFor(() => {
+      expect(screen.getByAltText('Preview of uploaded memory')).toBeInTheDocument();
+    });
   });
 });

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './MemoryWall.css';
+import GuestPhotoUpload from './GuestPhotoUpload';
 
 // Placeholder for uploaded memories
 const initialMemories = [
@@ -138,6 +139,14 @@ const MemoryWall = () => {
   return (
     <section className="memorywall-section">
       <h2 className="memorywall-title">Tapestry of Cherished Moments</h2>
+
+      {/* Enhanced Guest Photo Upload Section */}
+      <div className="memorywall-upload-section">
+        <h3>Share Your Wedding Day Photos</h3>
+        <p>Help us preserve the magic by uploading your favorite photos from our special day!</p>
+        <GuestPhotoUpload />
+      </div>
+
       <form className="memorywall-form" onSubmit={handleSubmit}>
         <label htmlFor="memory-name" className="sr-only">
           Your Name (optional)

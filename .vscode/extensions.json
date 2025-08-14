@@ -1,42 +1,66 @@
 {
   "recommendations": [
-    // Core Development
+    // 🤖 AI & COPILOT EXTENSIONS
+    "github.copilot",
+    "github.copilot-chat",
+    "github.copilot-labs",
+    "github.vscode-github-actions",
+
+    // 🚀 WEB DEVELOPMENT POWERHOUSE
+    "bradlc.vscode-tailwindcss",
     "ms-vscode.vscode-typescript-next",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-
-    // Code Quality & Auto-fixing
-    "sonarsource.sonarlint-vscode",
-    "ms-vscode.powershell",
-    "streetsidesoftware.code-spell-checker",
-    "usernamehw.errorlens",
-
-    // React/Next.js Development
-    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-json",
     "formulahendry.auto-rename-tag",
     "christian-kohler.path-intellisense",
     "zignd.html-css-class-completion",
 
-    // Testing & Debugging
-    "ms-vscode.vscode-json",
+    // 🎨 UI/UX ENHANCEMENTS
+    "pkief.material-icon-theme",
+    "aaron-bond.better-comments",
+    "usernamehw.errorlens",
+    "oderwat.indent-rainbow",
+    "ms-vscode.hexeditor",
+
+    // 🔧 DEVELOPMENT TOOLS
+    "ms-vscode.powershell",
+    "ms-vscode.remote-repositories",
     "ms-playwright.playwright",
+    "ms-vscode.test-adapter-converter",
     "hbenl.vscode-test-explorer",
 
-    // Git & Collaboration
-    "eamodio.gitlens",
-    "ms-vscode.vscode-github-issue-notebooks",
+    // 📊 PRODUCTIVITY & ANALYSIS
+    "ms-vscode.vscode-edge-devtools",
+    "firefox-devtools.vscode-firefox-debug",
+    "ms-vscode.live-server",
+    "ritwickdey.liveserver",
 
-    // Productivity
-    "ms-vscode.vscode-json",
-    "redhat.vscode-yaml",
-    "ms-vscode.notepadplusplus-keybindings",
+    // 🌐 CLOUD & DEPLOYMENT
+    "ms-vscode.azure-account",
+    "googlecloudtools.cloudcode",
+    "netlify.netlify-vscode",
 
-    // Documentation
+    // 🧪 TESTING & QUALITY
+    "ms-vscode.vscode-jest",
+    "kavod-io.vscode-jest-test-adapter",
+    "orta.vscode-jest",
+    "ms-vscode.vscode-coverage-gutters",
+
+    // 🔍 CODE ANALYSIS
+    "sonarsource.sonarlint-vscode",
+    "ms-vscode.vscode-lighthouse",
+    "wayou.vscode-todo-highlight",
+
+    // 📝 DOCUMENTATION & MARKDOWN
     "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
     "bierner.markdown-mermaid",
 
-    // Performance & Monitoring
-    "ms-vscode.vscode-js-profile-flame"
-  ],
-  "unwantedRecommendations": ["ms-vscode.vscode-typescript-tslint-plugin"]
+    // 🎯 SPECIALIZED TOOLS
+    "ms-vscode.vscode-npm-scripts",
+    "christian-kohler.npm-intellisense",
+    "eg2.vscode-npm-script",
+    "ms-vscode.references-view"
+  ]
 }

@@ -1,144 +1,5 @@
 {
-  // Enhanced Editor Settings (WITH COMPREHENSIVE AUTO-FIXING!)
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.sonarjs": "explicit",
-    "source.fixAll.powershell": "explicit",
-    "source.organizeImports": "explicit",
-    "source.sortMembers": "explicit",
-    "source.fixAll": "explicit",
-    "source.addMissingImports": "explicit",
-    "source.removeUnusedImports": "explicit",
-    "source.convertImports": "explicit"
-  },
-  "editor.inlayHints.enabled": "on",
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.tabCompletion": "on",
-  "editor.wordBasedSuggestions": "allDocuments",
-  "editor.experimental.asyncTokenization": true,
-  "editor.experimental.asyncTokenizationLogging": false,
-  "editor.unicodeHighlight.invisibleCharacters": true,
-  "editor.unicodeHighlight.ambiguousCharacters": true,
-  "editor.stickyScroll.enabled": true,
-  "editor.experimental.pasteActions.enabled": true,
-  "editor.experimental.agentMode.enabled": true,
-  "editor.experimental.agentMode.autoSuggest": true,
-  "editor.experimental.agentMode.contextualActions": true,
-  "editor.experimental.agentMode.proactiveRefactoring": true,
-  "editor.quickSuggestions": {
-    "other": "on",
-    "comments": "on",
-    "strings": "on"
-  },
-  "editor.suggestOnTriggerCharacters": true,
-  "editor.acceptSuggestionOnCommitCharacter": true,
-  "editor.acceptSuggestionOnEnter": "smart",
-  // Enhanced Linting Configuration
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "eslint.run": "onSave",
-  "eslint.codeAction.showDocumentation": {
-    "enable": true
-  },
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  // React/Next.js Development (Enhanced with new extensions)
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "typescript": "typescriptreact"
-  },
-  "emmet.triggerExpansionOnTab": true,
-  // TypeScript/JavaScript Enhanced Configuration (AGENT MODE AUTOMATION!)
-  "typescript.preferences.includePackageJsonAutoImports": "auto",
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.inlayHints.parameterNames.enabled": "all",
-  "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "typescript.experimental.aiCodeActions": true,
-  "typescript.experimental.tsserver.web.projectWideIntellisense.enabled": true,
-  "typescript.experimental.tsserver.web.projectWideIntellisense.suppressSemanticErrors": false,
-  "typescript.suggest.includeCompletionsForImportStatements": true,
-  "typescript.suggest.includeCompletionsWithSnippetText": true,
-  "typescript.experimental.agentMode.autoRefactor": true,
-  "typescript.experimental.agentMode.smartRename": true,
-  "typescript.experimental.agentMode.contextualSuggestions": true,
-  "typescript.experimental.agentMode.errorCorrection": true,
-  "typescript.codeActions.enabled": true,
-  "typescript.implementationsCodeLens.enabled": true,
-  "typescript.referencesCodeLens.enabled": true,
-  "typescript.suggest.completeFunctionCalls": true,
-  "javascript.suggest.autoImports": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "javascript.preferences.importModuleSpecifier": "relative",
-  "javascript.experimental.aiCodeActions": true,
-  "javascript.experimental.agentMode.autoRefactor": true,
-  "javascript.experimental.agentMode.smartRename": true,
-  "javascript.experimental.agentMode.contextualSuggestions": true,
-  "javascript.suggest.completeFunctionCalls": true,
-  // TailwindCSS IntelliSense Configuration (DESIGN SUPERPOWERS!)
-  "tailwindCSS.includeLanguages": {
-    "javascript": "javascript",
-    "html": "HTML",
-    "typescript": "typescript"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["className\\s*:\\s*['\"`]([^'\"`]*)['\"`]"],
-    ["class\\s*:\\s*['\"`]([^'\"`]*)['\"`]"],
-    ["tw`([^`]*)`", "'([^']*)'"],
-    ["tw\\.[^`]+`([^`]*)`", "'([^']*)'"],
-    ["styled\\.[^`]+`([^`]*)`", "'([^']*)'"]
-  ],
-  "tailwindCSS.experimental.configFile": null,
-  "tailwindCSS.experimental.showPixelEquivalents": true,
-  "tailwindCSS.experimental.colorDecorators": true,
-  "tailwindCSS.codeActions": true,
-  "tailwindCSS.lint.cssConflict": "warning",
-  "tailwindCSS.lint.invalidApply": "error",
-  "tailwindCSS.lint.invalidConfigPath": "error",
-  "tailwindCSS.lint.invalidTailwindDirective": "error",
-  "tailwindCSS.lint.invalidVariant": "error",
-  "tailwindCSS.lint.recommendedVariantOrder": "warning",
-  // Accessibility Enhancements
-  "accessibility.defaultLinter": "axe",
-  "accessibility.runOnSave": true,
-  "accessibility.highlightViolations": true,
-  // Error Lens Configuration (Inline Error Display)
-  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info"],
-  "errorLens.gutterIconsEnabled": true,
-  "errorLens.statusBarIconsEnabled": true,
-  // Firebase Integration
-  "firebase.hosting.source": ".next",
-  "firebase.firestore.indexes": true,
-  "firebase.functions.source": "backend",
-  // AI Integration Enhancements (WITH AGENT MODE SUPERPOWERS!)
-  "github.copilot.advanced": {
-    "indexing.enable": true,
-    "agent.mode": "automatic",
-    "context.include": ["**/*.{js,ts,jsx,tsx,json,md}", "!**/node_modules/**"],
-    "debug.useNodeFetcher": true,
-    "length": 8000,
-    "temperature": 0.1,
-    "top_p": 1,
-    "experimental.chat.codeActions": true,
-    "experimental.chat.followUps": true,
-    "experimental.chat.references": true,
-    "experimental.multilineCompletions": true,
-    "experimental.contextualInlineCompletions": true,
-    "experimental.agentMode.autoComplete": true,
-    "experimental.agentMode.contextAware": true,
-    "experimental.agentMode.proactiveAssistance": true,
-    "experimental.agentMode.codeGeneration": true,
-    "experimental.agentMode.refactoring": true,
-    "experimental.agentMode.debugging": true,
-    "experimental.agentMode.testing": true,
-    "experimental.agentMode.documentation": true
-  },
+  // 🚀 MAXIMUM COPILOT AGENT MODE CONFIGURATION
   "github.copilot.enable": {
     "*": true,
     "yaml": true,
@@ -146,398 +7,437 @@
     "markdown": true,
     "json": true,
     "jsonc": true,
+    "javascript": true,
+    "typescript": true,
+    "jsx": true,
+    "tsx": true,
+    "python": true,
     "css": true,
     "scss": true,
-    "sass": true,
-    "less": true
+    "html": true,
+    "xml": true,
+    "powershell": true,
+    "shellscript": true
   },
+
+  // 🤖 GITHUB COPILOT ONLY - NO OTHER AI AGENTS
   "github.copilot.editor.enableAutoCompletions": true,
-  "github.copilot.editor.iterativeEditing": true,
+  "github.copilot.editor.enableCodeActions": true,
+  "github.copilot.advanced": {
+    "secret_key": "experimental-features",
+    "inlineSuggestEnable": true,
+    "listCount": 10,
+    "temperature": 0.2
+  },
+
+  //  COPILOT EXPERIMENTAL SETTINGS
+  "github.copilot.experimental.codeActions": true,
+  "github.copilot.experimental.inlineCompletions": true,
+  "github.copilot.experimental.generateCommitMessage": true,
+  "github.copilot.experimental.generateTests": true,
+  "github.copilot.experimental.generateDocstring": true,
+  "github.copilot.experimental.generateImports": true,
+  "github.copilot.experimental.explainCode": true,
+  "github.copilot.experimental.fixCode": true,
+  "github.copilot.experimental.optimizeCode": true,
+  "github.copilot.experimental.translateCode": true,
+  "github.copilot.experimental.refactorCode": true,
+  "github.copilot.experimental.multiFileEdits": true,
+  "github.copilot.experimental.workspaceContext": true,
+  "github.copilot.experimental.projectAnalysis": true,
+  "github.copilot.experimental.semanticSearch": true,
+  "github.copilot.experimental.codebaseUnderstanding": true,
+
+  // ⚡ MAXIMUM AUTO-SAVE & PRODUCTIVITY FEATURES
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.autoSaveWhenNoErrors": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit",
+    "source.removeUnusedImports": "explicit",
+    "source.sortImports": "explicit"
+  },
+  "editor.quickSuggestionDelay": 0,
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "onlySnippets",
+
+  // 🚀 ENHANCED COPILOT AUTOMATION
   "github.copilot.chat.localeOverride": "en",
-  "github.copilot.chat.welcomeMessage": "never",
-  "github.copilot.chat.experimental.codeGeneration": true,
-  "github.copilot.chat.experimental.contextualChat": true,
-  "github.copilot.chat.experimental.slashCommands": true,
-  "github.copilot.chat.experimental.agentMode": true,
-  "github.copilot.chat.experimental.autonomousEditing": true,
-  "github.copilot.chat.experimental.batchProcessing": true,
-  "github.copilot.chat.experimental.workspaceAnalysis": true,
-  // Claude Sonnet 4 as default AI model (ENHANCED FOR WEDDING PROJECT!)
-  "claude.defaultModel": "claude-3-sonnet-20240229",
-  "claude.preferredModel": "claude-3-sonnet-20240229",
-  "claude.fallbackModel": "claude-3-sonnet-20240229",
-  "claude.forceSonnet": true,
-  "claude.billingEnabled": true,
-  "claude.mcpFullAccess": true,
-  "claude.mcpServers": [
-    "filesystem",
-    "fetch",
-    "time",
-    "mongodb",
-    "git",
-    "playwright",
-    "sequentialthinking",
-    "memory"
-  ],
-  "claude.alwaysUseSonnet": true,
-  "claude.experimental.contextEnhancement": true,
-  "claude.experimental.projectSpecificKnowledge": true,
-  "claude.experimental.multiModalAssistance": true,
-  "claude.experimental.creativeSuggestions": true,
-  // Task and File Watching (AGENT MODE AUTOMATION!)
-  "task.autoDetect": "on",
-  "task.experimental.agentMode": true,
-  "task.experimental.autoRun": true,
-  "task.experimental.smartExecution": true,
-  "task.experimental.contextualTasks": true,
-  "files.watcherExclude": {
-    "**/.copilot_context.txt": true,
-    "**/node_modules/**": true,
-    "**/.git/**": true
-  },
-  "files.associations": {
-    "*.env.*": "dotenv",
-    "package.json": "json",
-    "*.json": "json"
-  },
-  "files.experimental.agentMode.autoSave": true,
-  "files.experimental.agentMode.smartBackup": true,
-  // Windows-Specific Optimizations (WITH EXPERIMENTAL FEATURES!)
-  "files.eol": "\r\n",
-  "files.autoGuessEncoding": true,
-  "powershell.codeFormatting.preset": "OTBS",
-  "terminal.integrated.shell.windows": "pwsh.exe",
-  "terminal.integrated.experimental.tabs": true,
-  "terminal.integrated.experimental.stickyScroll.enabled": true,
-  "terminal.integrated.suggest.enabled": true,
-  "terminal.integrated.enablePersistentSessions": true,
-  "terminal.integrated.experimental.typeAhead": true,
-  "[powershell]": {
-    "editor.defaultFormatter": "ms-vscode.powershell"
-  },
-  // CSS/SCSS Linting Configuration (DESIGN SUPERPOWERS!)
-  "css.lint.unknownAtRules": "ignore",
-  "css.completion.completePropertyWithSemicolon": true,
-  "css.completion.triggerPropertyValueCompletion": true,
-  "css.hover.documentation": true,
-  "css.hover.references": true,
-  "css.validate": true,
-  "scss.lint.unknownAtRules": "ignore",
-  "scss.completion.completePropertyWithSemicolon": true,
-  "scss.completion.triggerPropertyValueCompletion": true,
-  "scss.hover.documentation": true,
-  "scss.hover.references": true,
-  "scss.validate": true,
-  "less.completion.completePropertyWithSemicolon": true,
-  "less.completion.triggerPropertyValueCompletion": true,
-  "less.hover.documentation": true,
-  "less.hover.references": true,
-  "less.validate": true,
-  // SonarLint Configuration
-  "sonarlint.rules": {
-    "css:S4662": "off"
-  },
-  // PowerShell Analysis Configuration (ENHANCED)
-  "powershell.scriptAnalysis.enable": true,
-  "powershell.scriptAnalysis.settingsPath": "",
-  "powershell.codeFormatting.autoCorrectAliases": true,
-  "powershell.codeFormatting.avoidSemicolonsAsLineTerminators": true,
-  "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
-  "powershell.codeFormatting.useConstantStrings": true,
-  "powershell.codeFormatting.useCorrectCasing": true,
-  "powershell.integratedConsole.focusConsoleOnExecute": false,
-  // Stylelint Configuration
-  "stylelint.validate": ["css", "scss", "sass"],
-  "stylelint.customSyntax": "postcss-scss",
-  // Search and File Explorer Enhancements (PREVIEW FEATURES!)
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/coverage": true,
-    "**/.next": true,
-    "**/dist": true,
-    "**/logs": true,
-    "**/*.log": true
-  },
-  "files.exclude": {
-    "**/.copilot_context.txt": true,
-    "**/coverage": true,
-    "**/.next": true
-  },
+  "github.copilot.chat.useProjectTemplates": true,
+  "github.copilot.editor.iterativeFixMode": true,
+  "github.copilot.conversations.detachCopilotConversations": false,
+  "github.copilot.renameSuggestions.triggerAutomatically": true,
+
+  // 🔥 ADVANCED EDITOR AUTOMATION & INTELLIGENCE
+  "editor.suggest.insertMode": "replace",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.experimental.asyncTokenization": true,
+  "editor.experimental.asyncTokenizationLogging": true,
+  "editor.experimental.asyncTokenizationVerification": true,
+  "editor.unicodeHighlight.invisibleCharacters": true,
+  "editor.unicodeHighlight.ambiguousCharacters": true,
+  "editor.unicodeHighlight.nonBasicASCII": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.guides.highlightActiveIndentation": true,
+  "editor.guides.indentation": true,
+  "editor.linkedEditing": true,
+  "editor.occurrencesHighlight": "multiFile",
+  "editor.selectionHighlight": true,
+  "editor.wordHighlightBackground": "rgba(144, 238, 144, 0.2)",
+  "editor.wordHighlightStrongBackground": "rgba(255, 165, 0, 0.2)",
+
+  // 💾 ADVANCED AUTO-SAVE & FILE MANAGEMENT
+  "files.autoSaveWorkspaceFilesOnly": true,
+  "files.hotExit": "onExitAndWindowClose",
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.refactoring.autoSave": true,
+  "files.participants.timeout": 60000,
+
+  // 🚀 WORKSPACE INTELLIGENCE & AUTOMATION
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.enablePreviewFromCodeNavigation": true,
+  "workbench.list.automaticKeyboardNavigation": true,
+  "workbench.list.fastScrollSensitivity": 5,
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.commandPalette.experimental.suggestCommands": true,
+  "workbench.quickOpen.closeOnFocusLost": false,
+  "workbench.quickOpen.preserveInput": true,
+
+  // 🔍 ENHANCED SEARCH & NAVIGATION
+  "search.smartCase": true,
+  "search.globalFindClipboard": true,
+  "search.maintainFileSearchCache": true,
+  "search.collapseResults": "alwaysCollapse",
+  "search.showLineNumbers": true,
+  "search.useIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true,
   "search.experimental.searchInOpenEditors": true,
-  "explorer.experimental.fileNesting.enabled": true,
-  "explorer.experimental.fileNesting.expand": false,
-  "explorer.experimental.fileNesting.patterns": {
-    "*.ts": "${capture}.js, ${capture}.d.ts, ${capture}.js.map",
-    "*.tsx": "${capture}.js, ${capture}.jsx",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml",
-    "*.config.js": "${capture}.config.*.js, ${capture}.config.*.ts",
-    "next.config.*": "next-env.d.ts, .env*, *.config.*"
-  },
-  // Performance Optimizations (WITH EXPERIMENTAL FEATURES!)
-  "extensions.autoUpdate": false,
-  "extensions.autoCheckUpdates": false,
-  "workbench.enableExperiments": true,
-  "workbench.experimental.settingsProfiles.enabled": true,
-  "workbench.experimental.cloudChanges.enabled": true,
-  "workbench.experimental.cloudChanges.autoResume": "onReload",
-  "workbench.experimental.editSessions.enabled": true,
-  "workbench.experimental.shareLocalFileSystem.enabled": true,
-  "telemetry.telemetryLevel": "off",
-  "workbench.editor.experimental.defaultBinaryEditor": "default",
+
+  // 🎯 INTELLIGENT CODE COMPLETION
+  "editor.hover.enabled": true,
+  "editor.hover.delay": 300,
+  "editor.hover.sticky": true,
+  "editor.lightbulb.enabled": "onCode",
+  "editor.codeLens": true,
+  "editor.codeLensProvider": true,
+  "editor.showFoldingControls": "mouseover",
+  "editor.foldingStrategy": "indentation",
+  "editor.foldingHighlight": true,
+  "editor.unfoldOnClickAfterEndOfLine": true,
+
+  // 🛡️ ENHANCED ERROR DETECTION & FIXING
+  "problems.decorations.enabled": true,
+  "problems.showCurrentInStatus": true,
+  "problems.sortOrder": "severity",
+  "editor.rulers": [80, 120],
+  "editor.renderWhitespace": "boundary",
+  "editor.renderControlCharacters": true,
+  "editor.renderLineHighlight": "all",
+  "editor.renderLineHighlightOnlyWhenFocus": false,
+
+  // 🎨 ENHANCED UI RESPONSIVENESS
+  "workbench.reduceMotion": "off",
+  "workbench.layoutControl.enabled": true,
+  "workbench.layoutControl.type": "toggles",
+  "workbench.activityBar.location": "default",
+  "workbench.statusBar.visible": true,
+  "workbench.sideBar.location": "left",
+  "workbench.panel.defaultLocation": "bottom",
+  "workbench.editor.tabSizing": "fit",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.scrollToSwitchTabs": true,
+
+  // 🧪 CUTTING-EDGE VS CODE INSIDERS EXPERIMENTAL FEATURES
+  "editor.experimental.pasteActions.enabled": true,
+  "editor.experimental.dropIntoEditor.enabled": true,
+  "editor.experimental.smartSelect.enabled": true,
+  "workbench.experimental.auxiliaryBarLayout": "vertical",
   "workbench.experimental.layoutControl.enabled": true,
-  // Git Integration Enhancements
+  "workbench.experimental.enableNewWebFileExplorer": true,
+  "workbench.experimental.cloudChanges": true,
+  "workbench.experimental.editSessions.enabled": true,
+  "workbench.experimental.settingsProfiles.enabled": true,
+  "extensions.experimental.useSessionStorage": true,
+
+  // 🚀 ADVANCED GITHUB COPILOT INSIDERS FEATURES
+  "github.copilot.editor.enableInlineEdit": true,
+  "github.copilot.editor.enableMultiLineEdit": true,
+  "github.copilot.editor.enableBlockCompletion": true,
+  "github.copilot.editor.enableSuggestWidget": true,
+  "github.copilot.editor.enableQuickFix": true,
+  "github.copilot.editor.enableContextualActions": true,
+  "github.copilot.experimental.contentExclusion": false,
+  "github.copilot.experimental.generateDocs": true,
+  "github.copilot.experimental.generateUnitTests": true,
+  "github.copilot.experimental.ghostText": true,
+  "github.copilot.experimental.completionSettings": {
+    "maxPromptLength": 20000,
+    "suffixPercent": 15,
+    "temperature": 0.2,
+    "topP": 1.0,
+    "stops": {
+      "common": ["\n\n", "\n\r\n", "\n    \n"],
+      "python": ["\ndef ", "\nclass ", "\nif ", "\n#"],
+      "javascript": ["\nfunction ", "\nconst ", "\nlet ", "\nvar ", "\n//"],
+      "typescript": [
+        "\nfunction ",
+        "\nconst ",
+        "\nlet ",
+        "\nvar ",
+        "\ninterface ",
+        "\ntype ",
+        "\n//"
+      ]
+    }
+  },
+
+  // 💡 INTELLIGENT WORKFLOW AUTOMATION
+  "workbench.commandPalette.preserveInput": true,
+  "workbench.quickOpen.preserveInput": true,
+  "workbench.trust.enabled": false,
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.emptyWindow": false,
+
+  // 🔧 ADVANCED TERMINAL CAPABILITIES
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExit",
+  "terminal.integrated.showExitAlert": false,
+  "terminal.integrated.experimentalLinkProvider": true,
+  "terminal.integrated.enableFileLinks": "on",
+  "terminal.integrated.altClickMovesCursor": true,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.rightClickBehavior": "default",
+  "terminal.integrated.tabs.enabled": true,
+  "terminal.integrated.tabs.showActions": "always",
+
+  // 🎯 MAXIMUM PERFORMANCE OPTIMIZATION
+  "extensions.experimental.sharedCache": true,
+  "editor.experimental.useWebWorkerForSyntaxHighlighting": true,
+  "workbench.experimental.enableNewWebFileExplorer": true,
+  "typescript.preferences.useLabelDetailsInCompletionEntries": true,
+  "typescript.suggest.objectLiteralMethodSnippets.enabled": true,
+  "typescript.workspaceSymbols.scope": "allOpenProjects",
+  "typescript.workspaceSymbols.excludeLibrarySymbols": false,
+
+  // 🧠 ENHANCED INTELLISENSE & AI INTEGRATION
+  "typescript.experimental.tsserver.web.useAsyncSemantic": true,
+  "typescript.experimental.tsserver.web.projectWideIntellisense": true,
+  "typescript.experimental.enableProjectDiagnostics": true,
+  "javascript.experimental.preferences.renameShorthandProperties": true,
+  "javascript.experimental.preferences.includePackageJsonAutoImports": "on",
+
+  // 🎨 ADVANCED UI CUSTOMIZATION
+  "apc.electron": {
+    "titleBarStyle": "hiddenInset",
+    "trafficLightPosition": {
+      "x": 11,
+      "y": 10
+    },
+    "frame": false,
+    "transparent": true,
+    "vibrancy": "ultra-dark",
+    "visualEffectState": "active"
+  },
+  "apc.stylesheet": {
+    ".editor-container .monaco-editor .overflow-guard .margin": {
+      "background-color": "rgba(16, 20, 24, 0.8)"
+    },
+    ".editor-container .monaco-editor": {
+      "background-color": "rgba(16, 20, 24, 0.9)"
+    }
+  },
+
+  // 🔧 JUPYTER POWERTOYS
+  "jupyter.experimental.kernelPickerSuggestions": true,
+  "jupyter.experimental.cellToolbar": true,
+  "jupyter.experimental.interactiveWindow": true,
+  "jupyter.experimental.variableExplorer": true,
+
+  // 🎯 AGENT MODE SPECIFIC SETTINGS
+  "github.copilot.agent.enabled": true,
+  "github.copilot.agent.maxConcurrency": 10,
+  "github.copilot.agent.multiFileEditing": true,
+  "github.copilot.agent.projectWideRefactoring": true,
+  "github.copilot.agent.autoApplyChanges": false,
+  "github.copilot.agent.showPreview": true,
+  "github.copilot.agent.contextWindow": "large",
+  "github.copilot.agent.codebaseAnalysis": true,
+  "github.copilot.agent.dependencyTracking": true,
+  "github.copilot.agent.architecturalSuggestions": true,
+
+  // 📝 ENHANCED EDITING CAPABILITIES
+  "github.copilot.chat.enabled": true,
+  "github.copilot.chat.welcomeMessage": "never",
+  "github.copilot.chat.scopeSelection": true,
+  "github.copilot.chat.executeCommands": true,
+  "github.copilot.chat.runTerminalCommands": true,
+  "github.copilot.chat.modifyFiles": true,
+  "github.copilot.chat.createFiles": true,
+  "github.copilot.chat.deleteFiles": true,
+  "github.copilot.chat.refactorCode": true,
+  "github.copilot.chat.generateTests": true,
+  "github.copilot.chat.explainCode": true,
+  "github.copilot.chat.debugCode": true,
+  "github.copilot.chat.optimizePerformance": true,
+  "github.copilot.chat.codeReview": true,
+  "github.copilot.chat.architecturalAdvice": true,
+
+  // 🔍 WORKSPACE ANALYSIS FEATURES
+  "github.copilot.workspace.indexing": true,
+  "github.copilot.workspace.semanticSearch": true,
+  "github.copilot.workspace.codebaseMapping": true,
+  "github.copilot.workspace.dependencyAnalysis": true,
+  "github.copilot.workspace.technicalDebtDetection": true,
+  "github.copilot.workspace.performanceAnalysis": true,
+  "github.copilot.workspace.securityAnalysis": true,
+  "github.copilot.workspace.testCoverageAnalysis": true,
+  "github.copilot.workspace.documentationGeneration": true,
+
+  // 🚨 EDITOR ENHANCEMENTS
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.showToolbar": "always",
+  "editor.suggest.preview": true,
+  "editor.suggest.showMethods": true,
+  "editor.suggest.showFunctions": true,
+  "editor.suggest.showConstructors": true,
+  "editor.suggest.showClasses": true,
+  "editor.suggest.showModules": true,
+  "editor.suggest.showKeywords": true,
+  "editor.suggest.showSnippets": true,
+  "editor.suggest.showColors": true,
+  "editor.suggest.showFiles": true,
+  "editor.suggest.showReferences": true,
+  "editor.suggest.showFolders": true,
+  "editor.suggest.showTypeParameters": true,
+  "editor.suggest.showIssues": true,
+  "editor.suggest.showUsers": true,
+  "editor.suggest.showWords": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.tabCompletion": "onlySnippets",
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "on",
+    "strings": "on"
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
+  "editor.parameterHints.enabled": true,
+  "editor.parameterHints.cycle": true,
+
+  // 🔬 EXPERIMENTAL VS CODE INSIDERS FEATURES
+  "workbench.experimental.cloudChanges": true,
+  "workbench.experimental.editSessions.enabled": true,
+  "workbench.experimental.enableNewWebFileExplorer": true,
+  "workbench.experimental.settingsProfiles.enabled": true,
+  "extensions.experimental.affinity": {
+    "github.copilot": 1,
+    "github.copilot-chat": 1,
+    "ms-vscode.vscode-typescript-next": 1
+  },
+
+  // 🧠 INTELLISENSE & ANALYSIS
+  "typescript.suggest.enabled": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "javascript.suggest.enabled": true,
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.completeFunctionCalls": true,
+
+  // 🎨 UI/UX OPTIMIZATIONS FOR AGENT MODE
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.iconTheme": "vs-seti",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "git.showPushSuccessNotification": true,
-  "scm.diffDecorationsGutterVisibility": "always",
-  // Debugging Configuration (AGENT MODE AUTOMATION!)
-  "debug.allowBreakpointsEverywhere": true,
-  "debug.inlineValues": "on",
-  "debug.showBreakpointsInOverviewRuler": true,
-  "debug.experimental.agentMode.autoBreakpoints": true,
-  "debug.experimental.agentMode.smartStepping": true,
-  "debug.experimental.agentMode.contextualDebugging": true,
-  "debug.experimental.agentMode.autoWatch": true,
-  "debug.experimental.agentMode.predictiveDebugging": true,
-  // Intellisense Enhancements
-  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "vsintellicode.features.python.deepLearning": "enabled",
-  // Test Explorer Integration (AGENT MODE AUTOMATION!)
-  "testing.automaticallyOpenPeekView": "failureInVisibleDocument",
-  "testing.followRunningTest": true,
-  "testing.experimental.agentMode.autoGenerate": true,
-  "testing.experimental.agentMode.smartExecution": true,
-  "testing.experimental.agentMode.contextualTests": true,
-  "testing.experimental.agentMode.autoFix": true,
-  "testing.experimental.continuousIntegration": true,
-  "testing.experimental.smartCoverage": true,
-  // Markdown Enhancement
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on",
-    "editor.lineNumbers": "off"
-  },
-  // JSON Enhancement
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  // 🚀 EXPERIMENTAL SUPERPOWERS SECTION 🚀
-  "workbench.experimental.quickOpen.enableExperimentalNewVersion": true,
-  "workbench.experimental.commandPalette.experimental": true,
-  "diffEditor.experimental.showMoves": true,
-  "diffEditor.experimental.useVersion2": true,
-  "notebook.experimental.remoteSave": true,
-  "notebook.experimental.useMarkdownRenderer": true,
-  "scm.experimental.showHistoryGraph": true,
-  "remote.experimental.tunnelInformation": true,
-  // AI-Powered Development Features
-  "workbench.experimental.AI.enabled": true,
-  "editor.experimental.predictiveCursor": true,
-  "editor.experimental.smartCommitCharacterCompletion": true,
-  // Advanced Git Integration
-  "git.experimental.branchProtection": true,
-  "git.experimental.includeCommitMessageInStash": true,
-  "git.experimental.timeline.date": "committed",
-  // Enhanced Language Server Features
-  "typescript.experimental.expandableHover": true,
-  "html.experimental.custom.tags": true,
-  "css.experimental.customData": true,
-  // 🎨 VISUAL DESIGN & STYLING SUPERPOWERS 🎨
-  "html.format.wrapAttributes": "force-expand-multiline",
-  "html.format.wrapLineLength": 120,
-  "html.format.indentInnerHtml": true,
-  "html.format.preserveNewLines": true,
-  "html.format.maxPreserveNewLines": 2,
-  "html.format.endWithNewline": true,
-  "html.format.extraLiners": "head, body, /html",
-  "html.completion.attributeDefaultValue": "doublequotes",
-  "html.autoClosingTags": true,
-  "editor.linkedEditing": true,
-  "html.trace.server": "verbose",
-  // Emmet Enhanced for Design
-  "emmet.showExpandedAbbreviation": "always",
-  "emmet.showSuggestionsAsSnippets": true,
-  "emmet.variables": {
-    "lang": "en",
-    "charset": "UTF-8"
-  },
-  "emmet.syntaxProfiles": {
-    "html": {
-      "inline_break": 3,
-      "wrap_line_length": 120,
-      "tag_case": "lower",
-      "attr_case": "lower",
-      "attr_quotes": "double",
-      "markup": true,
-      "bem": true
-    }
-  },
-  // Color Preview & Management
-  "editor.colorDecorators": true,
-  "editor.experimental.colorDecoratorsLimit": 500,
-  "workbench.colorCustomizations": {},
-  "workbench.experimental.colorCustomizations": true,
-  // Advanced Bracket Management for Design
-  "editor.guides.bracketPairsHorizontal": "active",
-  "editor.guides.highlightActiveBracketPair": true,
-  "editor.matchBrackets": "always",
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  // Font & Typography Enhancements
-  "editor.fontLigatures": true,
-  "editor.experimental.fontFamily": "'Cascadia Code', 'Fira Code', 'JetBrains Mono', Consolas, 'Courier New', monospace",
-  "editor.fontSize": 14,
-  "editor.lineHeight": 1.5,
-  "editor.experimental.typescriptClientTheme": "dark",
-  // Live Preview & Design Tools
-  "livePreview.defaultPreviewPath": "/index.html",
-  "livePreview.portNumber": 3001,
-  "livePreview.showStatusBarItem": true,
-  "livePreview.autoRefreshPreview": "onChange",
-  "livePreview.experimentalClientPendingHighlight": true,
-  // Advanced CSS Grid & Flexbox Tools
-  "css.experimental.gridLayout": true,
-  "css.experimental.flexboxLayout": true,
-  "css.experimental.containerQueries": true,
-  "css.experimental.cascade": true,
-  // Design Token & Variable Management
-  "css.customData": [],
-  "css.experimental.postcss": true,
-  "css.experimental.atProperty": true,
-  // Responsive Design Tools
-  "html.experimental.customData": true,
-  "html.experimental.responsive": true,
-  // Design System Integration
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": "explicit"
-    },
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": "explicit"
-    },
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  "[less]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.suggest.insertMode": "replace",
-    "editor.experimental.colorDecorators": true
-  },
-  // SVG & Icon Management
-  "svg.completion.emmet": true,
-  "svg.preview.mode": "svg",
-  "svg.experimental.minify": false,
-  // Image & Media Optimization Hints
-  "images.experimental.optimization": true,
-  "images.experimental.webp": true,
-  "images.experimental.avif": true,
-  // 🤖 ULTIMATE AGENT MODE AUTOMATION SUPERPOWERS 🤖
-  "workbench.experimental.agentMode.enabled": true,
-  "workbench.experimental.agentMode.autoComplete": true,
-  "workbench.experimental.agentMode.contextualAssistance": true,
-  "workbench.experimental.agentMode.proactiveActions": true,
-  "workbench.experimental.agentMode.smartWorkspace": true,
-  "workbench.experimental.agentMode.automatedRefactoring": true,
-  "workbench.experimental.agentMode.intelligentCodeGeneration": true,
-  "workbench.experimental.agentMode.predictiveEditing": true,
-  "workbench.experimental.agentMode.contextualDocumentation": true,
-  "workbench.experimental.agentMode.smartTesting": true,
-  "workbench.experimental.agentMode.autonomousDebugging": true,
-  "workbench.experimental.agentMode.workflowOptimization": true,
-  // Autonomous Code Actions
-  "editor.experimental.agentMode.autoImportOptimization": true,
-  "editor.experimental.agentMode.smartCodeCompletion": true,
-  "editor.experimental.agentMode.contextualHints": true,
-  "editor.experimental.agentMode.proactiveErrorPrevention": true,
-  "editor.experimental.agentMode.intelligentFormatting": true,
-  // Workspace Intelligence
-  "workspace.experimental.agentMode.fileAnalysis": true,
-  "workspace.experimental.agentMode.dependencyManagement": true,
-  "workspace.experimental.agentMode.projectInsights": true,
-  "workspace.experimental.agentMode.performanceOptimization": true,
-  "workspace.experimental.agentMode.securityScanning": true,
-  // Advanced Automation Workflows
-  "automation.experimental.cicdIntegration": true,
-  "automation.experimental.deploymentOptimization": true,
-  "automation.experimental.codeQualityMonitoring": true,
-  "automation.experimental.performanceTracking": true,
-  "automation.experimental.accessibilityAuditing": true,
-  "automation.experimental.smartBackups": true,
-  // AI-Powered Code Generation
-  "codeGeneration.experimental.contextAware": true,
-  "codeGeneration.experimental.patternRecognition": true,
-  "codeGeneration.experimental.architectureOptimization": true,
-  "codeGeneration.experimental.bestPracticeEnforcement": true,
-  "codeGeneration.experimental.crossFileIntelligence": true,
-  // Predictive Development Features
-  "prediction.experimental.nextAction": true,
-  "prediction.experimental.codeCompletion": true,
-  "prediction.experimental.errorPrevention": true,
-  "prediction.experimental.optimizationSuggestions": true,
-  "prediction.experimental.refactoringOpportunities": true,
-  // 💍 PROJECT-SPECIFIC POST-WEDDING CELEBRATION WEBSITE ENHANCEMENTS 💍
-  "project.experimental.postWeddingOptimizations": true,
-  "project.experimental.memoryPreservation": true,
-  "project.experimental.photoGalleryEnhancements": true,
-  "project.experimental.guestMemorySharing": true,
-  "project.experimental.weddingStorytellingFeatures": true,
-  "project.experimental.responsiveDesignFocus": true,
-  "project.experimental.accessibilityFirstApproach": true,
-  "project.experimental.performanceOptimization": true,
-  "project.experimental.firebaseIntegration": true,
-  "project.experimental.netlifyDeploymentOptimization": true,
-  // Post-Wedding Celebration Specific Development Helpers
-  "wedding.experimental.imageOptimization": true,
-  "wedding.experimental.guestbookFeatures": true,
-  "wedding.experimental.memorySharing": true,
-  "wedding.experimental.photoStorytellingFeatures": true,
-  "wedding.experimental.celebrationHighlights": true,
-  "wedding.experimental.mobileFirstDesign": true,
-  "wedding.experimental.socialMediaIntegration": true,
-  "wedding.experimental.seoOptimization": true,
-  "wedding.experimental.weddingMemoriesArchiving": true, // Next.js Post-Wedding Celebration Site Specific
-  "nextjs.experimental.postWeddingSiteOptimizations": true,
-  "nextjs.experimental.memoryGalleryPerformance": true,
-  "nextjs.experimental.photoArchivingOptimization": true,
-  "nextjs.experimental.guestStorytellingFeatures": true,
-  "nextjs.experimental.imageGalleryPerformance": true,
-  "nextjs.experimental.staticGenerationOptimization": true,
-  "nextjs.experimental.webVitalsMonitoring": true,
-  "nextjs.experimental.coreWebVitalsOptimization": true,
-  // Creative & Design Assistance for Celebration Site
-  "creative.experimental.colorPaletteGeneration": true,
-  "creative.experimental.layoutSuggestions": true,
-  "creative.experimental.typographyRecommendations": true,
-  "creative.experimental.userExperienceOptimization": true,
-  "creative.experimental.celebrationThemeConsistency": true,
-  "creative.experimental.memoryPresentationDesign": true,
-  "creative.experimental.photoGalleryAesthetics": true,
-  // Production Readiness Features
-  "production.experimental.deploymentValidation": true,
-  "production.experimental.lighthouseIntegration": true,
-  "production.experimental.crossBrowserTesting": true,
-  "production.experimental.performanceMonitoring": true,
-  "production.experimental.errorTrackingOptimization": true,
-  "production.experimental.securityAuditing": true,
-  "search.quickAccess.preserveInput": true,
-  "editor.stickyScroll.maxLineCount": 5,
-  "cSpell.words": ["firestore"],
 
-  // Jest Configuration for VS Code Extension - Disabled because we use Vitest
-  "jest.enable": false,
-  "jest.disabledWorkspaceFolders": ["wedding-website"]
+  // 🔧 TERMINAL & TASKS
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "both",
+  "task.autoDetect": "on",
+  "task.showDecorations": true,
+
+  // 📊 PERFORMANCE & MONITORING
+  "extensions.autoUpdate": true,
+  "extensions.autoCheckUpdates": true,
+  "update.mode": "start",
+  "update.enableWindowsBackgroundUpdates": true,
+  "telemetry.telemetryLevel": "all",
+  "workbench.enableExperiments": true,
+
+  // 🌐 WEB DEVELOPMENT SPECIFIC
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "css.validate": true,
+  "css.lint.unknownAtRules": "ignore",
+  "scss.validate": true,
+  "html.validate.scripts": true,
+  "html.validate.styles": true,
+  "html.autoClosingTags": true,
+  "html.autoCreateQuotes": true,
+  "html.format.wrapLineLength": 120,
+
+  // 🎯 PROJECT SPECIFIC OPTIMIZATIONS
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/tmp": true,
+    "**/coverage": true,
+    "**/.next": true,
+    "**/build": true,
+    "**/dist": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": false,
+    "**/.next": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/coverage/**": true,
+    "**/.next/**": true
+  },
+  "editor.stickyScroll.enabled": true,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "wedding-website-main",
+    "projectKey": "bbasketballer75_wedding-website-main"
+  }
 }

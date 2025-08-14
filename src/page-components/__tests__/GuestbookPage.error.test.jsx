@@ -1,7 +1,6 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
-import GuestbookPage from '../GuestbookPage.jsx';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import * as api from '../../services/api.js';
+import GuestbookPage from '../GuestbookPage.jsx';
 
 vi.spyOn(api, 'getGuestbookEntries').mockResolvedValue({ data: [] });
 vi.spyOn(api, 'createGuestbookEntry').mockImplementation(({ message }) => {
@@ -14,15 +13,18 @@ vi.spyOn(api, 'createGuestbookEntry').mockImplementation(({ message }) => {
 describe('GuestbookPage Error States', () => {
   it('shows error for empty message submission', async () => {
     render(<GuestbookPage />);
-    await screen.findByPlaceholderText('Your name');
-    fireEvent.change(screen.getByPlaceholderText('Your name'), { target: { value: 'Test User' } });
+    // Use more specific selector for guestbook name field to avoid conflicts with photo upload
+    await screen.findByLabelText(/Name \(optional\)/i);
+    fireEvent.change(screen.getByLabelText(/Name \(optional\)/i), {
+      target: { value: 'Test User' },
+    });
     const textarea = screen.getByPlaceholderText(
       'Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!'
     );
     fireEvent.change(textarea, { target: { value: '' } });
     // eslint-disable-next-line no-console
     // ...existing code...
-    const form = document.querySelector('form');
+    const form = document.querySelector('.guestbook-form'); // More specific form selector
     await act(async () => {
       fireEvent.submit(form);
     });

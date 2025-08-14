@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import GuestbookPage from '../GuestbookPage.jsx';
 
@@ -12,7 +11,7 @@ vi.mock('../../services/api.js', () => ({
       ],
     })
   ),
-  postGuestbookEntry: vi.fn(() =>
+  createGuestbookEntry: vi.fn(() =>
     Promise.resolve({
       data: { id: 3, name: 'Charlie', message: 'Have a great day!' },
     })
@@ -34,33 +33,50 @@ describe('GuestbookPage', () => {
     expect(screen.getByText('Best wishes!')).toBeInTheDocument();
   });
 
-  it('renders guestbook form', async () => {
-    await act(async () => {
-      render(<GuestbookPage />);
+  it('renders guestbook components', async () => {
+    render(<GuestbookPage />);
+
+    // Wait for component to be ready
+    await waitFor(() => {
+      expect(screen.getByText('Our Sacred Memory Book')).toBeInTheDocument();
     });
-    await waitFor(() => expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument());
-    expect(screen.getByPlaceholderText(/Your Name/i)).toBeInTheDocument();
+
+    expect(screen.getByText('Our Sacred Memory Book')).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(
-        /Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!/i
+      screen.getByText(
+        /Your precious words become golden threads in the tapestry of our love story/i
       )
     ).toBeInTheDocument();
+
+    // Verify photo upload section is integrated
+    expect(screen.getByText('Share Your Wedding Memories')).toBeInTheDocument();
+    expect(screen.getByText(/Help us preserve the magic of May 10th, 2025/i)).toBeInTheDocument();
   });
 
   it('submits a new entry', async () => {
-    await act(async () => {
-      render(<GuestbookPage />);
+    const { createGuestbookEntry } = await import('../../services/api.js');
+
+    render(<GuestbookPage />);
+    await waitFor(() => {
+      expect(screen.getByText('Our Sacred Memory Book')).toBeInTheDocument();
     });
-    await waitFor(() => expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument());
-    fireEvent.change(screen.getByPlaceholderText(/Your Name/i), { target: { value: 'Test User' } });
-    fireEvent.change(
-      screen.getByPlaceholderText(
-        /Pour your heart into words... share a magical memory, offer wisdom for our journey, or simply bless us with your love!/i
-      ),
-      { target: { value: 'Congrats!' } }
-    );
-    fireEvent.click(screen.getByRole('button', { name: /Share Your Heart/i }));
-    // Should show new entry or success message (depends on implementation)
-    // expect(screen.getByText(/Congrats!/i)).toBeInTheDocument();
+
+    // Use label text to target guestbook form specifically
+    fireEvent.change(screen.getByLabelText(/Name \(optional\)/i), {
+      target: { value: 'Test User' },
+    });
+    fireEvent.change(screen.getByLabelText(/Message \*/i), { target: { value: 'Test message' } });
+
+    fireEvent.click(screen.getByRole('button', { name: /Share Your Heart & Soul/i }));
+
+    await waitFor(() => {
+      expect(createGuestbookEntry).toHaveBeenCalledWith({
+        name: 'Test User',
+        message: 'Test message',
+      });
+    });
+
+    // Verify photo upload section remains present after submission
+    expect(screen.getByText(/Help us preserve the magic of May 10th, 2025/i)).toBeInTheDocument();
   });
 });

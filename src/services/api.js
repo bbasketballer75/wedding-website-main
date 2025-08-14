@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getApiBaseUrl } from '../../config/ports.js';
+// import { getApiBaseUrl } from '../../config/ports.js';
 
 /**
  * Determine the API URL based on environment
@@ -20,8 +20,8 @@ const getApiUrl = () => {
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      // Return local backend URL for development using port config
-      return getApiBaseUrl();
+      // Return local backend URL for development
+      return `http://localhost:3002/api`;
     }
   }
 

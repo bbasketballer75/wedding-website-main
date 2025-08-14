@@ -7,6 +7,10 @@
     "deploy:prod": "vercel --prod",
     "deploy:preview": "vercel",
     "deploy:check": "pwsh -ExecutionPolicy Bypass -File scripts/deploy-vercel.ps1 -CheckOnly",
+    "git:commit": "pwsh -ExecutionPolicy Bypass -File scripts/quick-commit.ps1",
+    "git:commit-force": "pwsh -ExecutionPolicy Bypass -File scripts/quick-commit.ps1 -Force",
+    "git:auto": "pwsh -ExecutionPolicy Bypass -File scripts/auto-commit.ps1",
+    "git:sync": "git pull origin main && pwsh -ExecutionPolicy Bypass -File scripts/quick-commit.ps1 -Force",
     "dev": "cross-env PORT=3001 next dev",
     "dev:start": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1",
     "dev:clean": "pwsh -ExecutionPolicy Bypass -File scripts/dev-startup.ps1 -Clean",
@@ -126,7 +130,7 @@
     "glob": "^10.4.0"
   },
   "engines": {
-    "node": "18.x",
+    "node": "22.x",
     "npm": ">=8.0.0"
   }
 }

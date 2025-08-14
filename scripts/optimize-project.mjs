@@ -40,7 +40,7 @@ if (unusedDeps.length > 0) {
     console.log(`   Removing: ${unusedDeps.join(', ')}`);
     execSync(`npm uninstall ${unusedDeps.join(' ')}`, { stdio: 'inherit' });
     console.log('   ✅ Regular dependencies cleaned');
-  } catch (error) {
+  } catch {
     console.log('   ⚠️  Some dependencies might already be removed');
   }
 }
@@ -51,7 +51,7 @@ if (unusedDevDeps.length > 0) {
     console.log(`   Removing dev deps: ${unusedDevDeps.join(', ')}`);
     execSync(`npm uninstall ${unusedDevDeps.join(' ')}`, { stdio: 'inherit' });
     console.log('   ✅ Dev dependencies cleaned');
-  } catch (error) {
+  } catch {
     console.log('   ⚠️  Some dev dependencies might already be removed');
   }
 }
@@ -61,7 +61,7 @@ console.log('\n📋 Installing missing dependencies...');
 try {
   execSync('npm install chalk @modelcontextprotocol/sdk', { stdio: 'inherit' });
   console.log('   ✅ Missing dependencies installed');
-} catch (error) {
+} catch {
   console.log('   ⚠️  Some dependencies might already be installed');
 }
 
@@ -104,7 +104,7 @@ try {
     fs.rmSync('node_modules/.cache', { recursive: true, force: true });
     console.log('   ✅ Node modules cache cleared');
   }
-} catch (error) {
+} catch {
   console.log('   ⚠️  Some cache directories might not exist');
 }
 
@@ -118,7 +118,7 @@ try {
   console.log('   Running tests to verify functionality...');
   execSync('npm test', { stdio: 'pipe' });
   console.log('   ✅ All tests passing');
-} catch (error) {
+} catch {
   console.log('   ⚠️  Build or test issues detected - please review');
 }
 

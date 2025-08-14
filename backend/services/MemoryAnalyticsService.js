@@ -1,4 +1,4 @@
-const winston = require('winston');
+import winston from 'winston';
 
 class MemoryAnalyticsService {
   constructor() {
@@ -336,4 +336,4 @@ class MemoryAnalyticsService {
   }
 }
 
-module.exports = MemoryAnalyticsService;
+export default MemoryAnalyticsService;

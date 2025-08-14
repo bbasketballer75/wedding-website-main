@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import winston from 'winston';
+import GuestPhotoUploadService from '../services/GuestPhotoUploadService.js';
+import MemoryAnalyticsService from '../services/MemoryAnalyticsService.js';
+import MemoryEmailService from '../services/MemoryEmailService.js';
 const router = express.Router();
-const GuestPhotoUploadService = require('../services/GuestPhotoUploadService');
-const MemoryEmailService = require('../services/MemoryEmailService');
-const MemoryAnalyticsService = require('../services/MemoryAnalyticsService');
-const winston = require('winston');
 
 // Initialize services
 const photoUploadService = new GuestPhotoUploadService();
@@ -289,4 +289,4 @@ router.post('/send-anniversary-email', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

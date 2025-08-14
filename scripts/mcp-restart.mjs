@@ -5,7 +5,7 @@
  * Fixes common MCP server issues and restarts them properly
  */
 
-import { spawn, exec } from 'child_process';
+import { exec, spawn } from 'child_process';
 import { promises as fs } from 'fs';
 import { promisify } from 'util';
 
@@ -34,14 +34,14 @@ class MCPServerManager {
 
     try {
       // Kill any existing MCP processes
-      const { stdout } = await execPromise(
+      await execPromise(
         'Get-Process | Where-Object {$_.ProcessName -like "*node*" -or $_.ProcessName -like "*python*"} | Where-Object {$_.CommandLine -like "*mcp*"} | Stop-Process -Force -ErrorAction SilentlyContinue',
         {
           shell: 'powershell',
         }
       );
       console.log('✅ Stopped existing MCP processes');
-    } catch (error) {
+    } catch {
       console.log('ℹ️  No existing MCP processes to stop');
     }
 
@@ -63,7 +63,7 @@ class MCPServerManager {
       try {
         await execPromise(dep.check, { timeout: 5000 });
         console.log(`  ✅ ${dep.name}: Available`);
-      } catch (error) {
+      } catch {
         console.log(`  ❌ ${dep.name}: Missing`);
         if (dep.install && dep.install.startsWith('npm')) {
           console.log(`  🔧 Installing ${dep.name}...`);

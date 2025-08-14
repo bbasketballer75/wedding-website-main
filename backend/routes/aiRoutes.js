@@ -1,5 +1,4 @@
 import express from 'express';
-import getDbPromise from '../config/firestore-enhanced.js';
 import aiServices from '../services/aiServices.js';
 import performanceManager from '../services/performanceManager.js';
 

@@ -1,9 +1,9 @@
-const multer = require('multer');
-const { Storage } = require('@google-cloud/storage');
-const sharp = require('sharp');
-const path = require('path');
-const winston = require('winston');
-const MemoryEmailService = require('../services/MemoryEmailService');
+import { Storage } from '@google-cloud/storage';
+import multer from 'multer';
+import path from 'path';
+import sharp from 'sharp';
+import winston from 'winston';
+import MemoryEmailService from '../services/MemoryEmailService.js';
 
 class GuestPhotoUploadService {
   constructor() {
@@ -200,11 +200,11 @@ class GuestPhotoUploadService {
     };
   }
 
-  async queryDatabase(query) {
+  async queryDatabase(_query) {
     // Placeholder for database query implementation
     // Replace with actual Firestore or MongoDB query
     return [];
   }
 }
 
-module.exports = GuestPhotoUploadService;
+export default GuestPhotoUploadService;

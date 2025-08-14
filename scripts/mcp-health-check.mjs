@@ -93,7 +93,7 @@ class MCPHealthChecker {
         process.on('error', reject);
         setTimeout(() => reject(new Error('Timeout')), 5000);
       });
-    } catch (error) {
+    } catch {
       result.commandAvailable = false;
       result.issues.push(`Command '${config.command}' not available`);
       result.recommendations.push(`Install ${config.command} or update PATH`);

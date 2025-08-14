@@ -1,34 +1,32 @@
-import express from 'express';
 import cors from 'cors';
-import path from 'path';
+import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
+import path from 'path';
 import swaggerUi from 'swagger-ui-express';
-import specs from './config/swagger.js';
+import { fileURLToPath } from 'url';
 import winston from 'winston';
 import xss from 'xss';
-import { fileURLToPath } from 'url';
 import { CORS_ORIGINS, PORTS } from '../config/ports.js';
+import specs from './config/swagger.js';
 
 // Import enhanced services
 import performanceManager from './services/performanceManager.js';
-import wsManager from './services/websocketManager.js';
-import aiServices from './services/aiServices.js';
 
 // Import routes
-import healthRoutes from './routes/healthRoutes.js';
-import guestbookRoutes from './routes/guestbookRoutes.js';
-import albumRoutes from './routes/album.js';
-import videoRoutes from './routes/videoRoutes.js';
-import mapRoutes from './routes/mapRoutes.js';
-import uploadRoutes from './routes/uploadRoutes.js';
-import analyticsRoutes from './routes/analytics.js';
-import visitorsRoutes from './routes/visitors.js';
-import photoTagsRoutes from './routes/photoTags.js';
-import guestMemoriesRoutes from './routes/guestMemories.js';
 import activityRoutes from './routes/activityRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
+import albumRoutes from './routes/album.js';
+import analyticsRoutes from './routes/analytics.js';
+import guestbookRoutes from './routes/guestbookRoutes.js';
+import guestMemoriesRoutes from './routes/guestMemories.js';
+import healthRoutes from './routes/healthRoutes.js';
+import mapRoutes from './routes/mapRoutes.js';
+import photoTagsRoutes from './routes/photoTags.js';
 import reactionRoutes from './routes/reactionRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import videoRoutes from './routes/videoRoutes.js';
+import visitorsRoutes from './routes/visitors.js';
 import { errorHandler } from './utils/errorHandler.js';
 
 // Get __dirname equivalent in ESM

@@ -5,9 +5,8 @@
  * Advanced AI-powered project analysis and optimization system
  */
 
-import { promises as fs } from 'fs';
-import path from 'path';
 import { exec } from 'child_process';
+import { promises as fs } from 'fs';
 import { promisify } from 'util';
 
 const execAsync = promisify(exec);
@@ -844,7 +843,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const analyzer = new IntelligentProjectAnalyzer();
   analyzer
     .performDeepAnalysis()
-    .then((analysis) => {
+    .then((_analysis) => {
       console.log('\n🎉 Analysis complete! Check PROJECT-ANALYSIS-REPORT.md for details.');
     })
     .catch(console.error);

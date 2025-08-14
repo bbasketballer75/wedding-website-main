@@ -589,12 +589,15 @@ export const AudioControls = ({ className = '' }) => {
 
       <style jsx>{`
         .audio-controls {
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 12px;
-          padding: 1rem;
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.3);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 20px;
+          padding: 1.25rem;
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            0 2px 8px rgba(0, 0, 0, 0.05);
+          max-width: 280px;
         }
 
         .audio-controls__header {
@@ -605,62 +608,102 @@ export const AudioControls = ({ className = '' }) => {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          background: linear-gradient(45deg, #ff69b4, #dda0dd);
+          background: linear-gradient(135deg, #8fa876 0%, #6b8a4f 100%);
           color: white;
           border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 25px;
+          padding: 0.875rem 1.5rem;
+          border-radius: 50px;
           cursor: pointer;
           font-weight: 600;
-          transition: all 0.3s ease;
+          font-family: 'Inter', sans-serif;
+          transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           width: 100%;
           justify-content: center;
+          box-shadow: 0 4px 15px rgba(143, 168, 118, 0.3);
         }
 
         .audio-toggle:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+          box-shadow: 0 8px 25px rgba(143, 168, 118, 0.4);
+          background: linear-gradient(135deg, #9bb87e 0%, #8fa876 100%);
         }
 
         .audio-toggle--enabled {
-          background: linear-gradient(45deg, #10b981, #059669);
+          background: linear-gradient(135deg, #8fa876 0%, #6b8a4f 100%);
+          box-shadow: 0 4px 15px rgba(143, 168, 118, 0.4);
+        }
+
+        .audio-toggle--enabled:hover {
+          background: linear-gradient(135deg, #9bb87e 0%, #8fa876 100%);
         }
 
         .audio-icon {
           font-size: 1.2rem;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        .audio-label {
+          font-size: 0.9rem;
+          letter-spacing: 0.025em;
         }
 
         .volume-control {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
           margin-bottom: 1rem;
+          padding: 0.5rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 15px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .volume-label {
           font-weight: 600;
-          min-width: 80px;
+          font-size: 0.85rem;
+          color: #4a4742;
+          min-width: 60px;
+          font-family: 'Inter', sans-serif;
         }
 
         .volume-slider {
           flex: 1;
           height: 6px;
-          background: #e5e7eb;
+          background: linear-gradient(90deg, #e8e5e0 0%, #d4e2c9 100%);
           border-radius: 3px;
           outline: none;
-          opacity: 0.7;
-          transition: opacity 0.2s;
+          -webkit-appearance: none;
+          transition: all 0.2s ease;
         }
 
-        .volume-slider:hover {
-          opacity: 1;
+        .volume-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #8fa876 0%, #6b8a4f 100%);
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(143, 168, 118, 0.3);
+          border: 2px solid white;
+        }
+
+        .volume-slider::-moz-range-thumb {
+          height: 18px;
+          width: 18px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #8fa876 0%, #6b8a4f 100%);
+          cursor: pointer;
+          border: 2px solid white;
+          box-shadow: 0 2px 6px rgba(143, 168, 118, 0.3);
         }
 
         .volume-value {
-          min-width: 40px;
+          min-width: 35px;
           text-align: right;
           font-weight: 600;
+          font-size: 0.8rem;
           color: #6b7280;
+          font-family: 'Inter', sans-serif;
         }
 
         .ambient-controls {
@@ -671,7 +714,10 @@ export const AudioControls = ({ className = '' }) => {
 
         .ambient-label {
           font-weight: 600;
-          color: #374151;
+          color: #4a4742;
+          font-size: 0.85rem;
+          font-family: 'Inter', sans-serif;
+          letter-spacing: 0.025em;
         }
 
         .ambient-options {
@@ -681,30 +727,44 @@ export const AudioControls = ({ className = '' }) => {
         }
 
         .ambient-btn {
-          background: rgba(255, 255, 255, 0.7);
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.6);
+          border: 1px solid rgba(143, 168, 118, 0.2);
+          padding: 0.5rem 0.875rem;
+          border-radius: 25px;
           cursor: pointer;
-          transition: all 0.2s ease;
-          font-size: 0.875rem;
+          transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+          font-size: 0.8rem;
+          font-weight: 500;
           white-space: nowrap;
+          color: #4a4742;
+          font-family: 'Inter', sans-serif;
+          backdrop-filter: blur(10px);
         }
 
         .ambient-btn:hover {
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.8);
           transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(143, 168, 118, 0.2);
+          border-color: rgba(143, 168, 118, 0.3);
         }
 
         .ambient-btn--active {
-          background: linear-gradient(45deg, #dda0dd, #ffb6c1);
-          color: white;
-          border-color: transparent;
+          background: linear-gradient(135deg, #d4e2c9 0%, #b8d1a6 100%);
+          color: #4a6136;
+          border-color: rgba(143, 168, 118, 0.4);
+          box-shadow: 0 2px 8px rgba(143, 168, 118, 0.2);
+        }
+
+        .ambient-btn--active:hover {
+          background: linear-gradient(135deg, #e9f0e3 0%, #d4e2c9 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(143, 168, 118, 0.3);
         }
 
         @media (max-width: 768px) {
           .audio-controls {
-            padding: 0.75rem;
+            padding: 1rem;
+            max-width: 260px;
           }
 
           .volume-control {
@@ -713,12 +773,22 @@ export const AudioControls = ({ className = '' }) => {
             gap: 0.5rem;
           }
 
+          .volume-label {
+            text-align: center;
+            min-width: auto;
+          }
+
           .ambient-options {
             flex-direction: column;
           }
 
           .ambient-btn {
             text-align: center;
+            justify-content: center;
+          }
+
+          .audio-toggle {
+            padding: 0.75rem 1.25rem;
           }
         }
       `}</style>

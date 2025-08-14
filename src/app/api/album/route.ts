@@ -12,9 +12,9 @@ export async function GET(_request: NextRequest) {
           url: '/images/sample-photo.jpg',
           caption: 'Beautiful wedding moment',
           uploadedAt: new Date().toISOString(),
-          approved: true
-        }
-      ]
+          approved: true,
+        },
+      ],
     };
 
     return NextResponse.json(albumData);
@@ -31,15 +31,15 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log('Album upload request:', body);
-    
+
     // Return success response
     return NextResponse.json({
       success: true,
       message: 'Photo uploaded successfully',
       data: {
         id: `upload-${Date.now()}`,
-        status: 'pending_approval'
-      }
+        status: 'pending_approval',
+      },
     });
   } catch (error) {
     console.error('Album POST API error:', error);

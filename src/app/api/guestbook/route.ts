@@ -11,16 +11,16 @@ export async function GET(_request: NextRequest) {
           name: 'Austin & Jordyn',
           message: 'Thank you for celebrating with us! 💕',
           timestamp: new Date().toISOString(),
-          approved: true
+          approved: true,
         },
         {
           id: 'sample-2',
           name: 'Wedding Guest',
           message: 'Congratulations on your beautiful wedding!',
           timestamp: new Date(Date.now() - 86400000).toISOString(),
-          approved: true
-        }
-      ]
+          approved: true,
+        },
+      ],
     };
 
     return NextResponse.json(guestbookData);
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log('Guestbook entry request:', body);
-    
+
     // Validate required fields
     if (!body.name || !body.message) {
       return NextResponse.json(
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     // Return success response
     return NextResponse.json({
       success: true,
@@ -55,8 +55,8 @@ export async function POST(request: NextRequest) {
         name: body.name,
         message: body.message,
         timestamp: new Date().toISOString(),
-        status: 'pending_approval'
-      }
+        status: 'pending_approval',
+      },
     });
   } catch (error) {
     console.error('Guestbook POST API error:', error);

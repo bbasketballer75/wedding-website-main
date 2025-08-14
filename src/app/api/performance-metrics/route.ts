@@ -4,13 +4,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log('Performance metrics:', body);
-    
+
     // In a real implementation, this would store to monitoring service
     // For now, just log and return success
-    
+
     return NextResponse.json({
       success: true,
-      message: 'Performance metrics recorded successfully'
+      message: 'Performance metrics recorded successfully',
     });
   } catch (error) {
     console.error('Performance metrics API error:', error);

@@ -4,13 +4,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     console.log('Performance alert:', body);
-    
+
     // In a real implementation, this would trigger alerts/notifications
     // For now, just log and return success
-    
+
     return NextResponse.json({
       success: true,
-      message: 'Performance alert recorded successfully'
+      message: 'Performance alert recorded successfully',
     });
   } catch (error) {
     console.error('Performance alerts API error:', error);

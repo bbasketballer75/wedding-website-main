@@ -1,8 +1,7 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import AlbumPage from '../../page-components/AlbumPage.jsx';
+import AlbumPage from '../../page-components/gallery/AlbumPage.jsx';
 
-import * as api from '../../services/api.js';
+import * as api from '../../services/api';
 
 vi.spyOn(api, 'getAlbumMedia').mockResolvedValue({ data: [] });
 

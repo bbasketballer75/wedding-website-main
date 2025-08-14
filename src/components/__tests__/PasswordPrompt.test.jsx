@@ -15,7 +15,7 @@ describe('PasswordPrompt', () => {
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import PasswordPrompt from '../PasswordPrompt.jsx';
+import PasswordPrompt from '../forms/PasswordPrompt.jsx';
 
 describe('PasswordPrompt', () => {
   it('renders the password prompt and calls onCorrectPassword on submit', async () => {

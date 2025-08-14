@@ -7,7 +7,7 @@ describe('Guest Error Recovery', () => {
   it('should recover from temporary network issues in album', async () => {
     vi.resetModules();
     let callCount = 0;
-    vi.doMock('../services/api', () => ({
+    vi.doMock('../../services/api', () => ({
       getAlbumMedia: vi.fn(() => {
         callCount++;
         if (callCount === 1) throw new Error('Network error');
@@ -16,7 +16,7 @@ describe('Guest Error Recovery', () => {
       uploadMedia: vi.fn(),
     }));
     // Re-import after mock
-    const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
+    const { default: AlbumPageReloaded } = await import('../page-components/gallery/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
     // Wait for error message
     const errorEl = await screen.findByText(
@@ -36,14 +36,14 @@ describe('Guest Error Recovery', () => {
   it('should recover from temporary network issues in map', async () => {
     vi.resetModules();
     let callCount = 0;
-    vi.doMock('../services/api', () => ({
+    vi.doMock('../../services/api', () => ({
       getMapLocations: vi.fn(() => {
         callCount++;
         if (callCount === 1) throw new Error('Network error');
         return Promise.resolve({ data: [] });
       }),
     }));
-    const { default: MapPageReloaded } = await import('../page-components/MapPage.jsx');
+    const { default: MapPageReloaded } = await import('../page-components/interactive/MapPage.jsx');
     const { unmount } = render(<MapPageReloaded />);
     // Wait for error message(s)
     const errorEls = await screen.findAllByText(

@@ -1,5 +1,5 @@
 import React from 'react';
-import FamilyTree from '../FamilyTree.jsx';
+import FamilyTree from '../features/FamilyTree.jsx';
 
 describe('FamilyTree', () => {
   it('renders all family members', () => {

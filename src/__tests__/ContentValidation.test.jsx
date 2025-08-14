@@ -2,7 +2,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import GuestbookPage from '../page-components/GuestbookPage.jsx';
+import GuestbookPage from '../page-components/interactive/GuestbookPage.jsx';
 
 describe('Guest Content Experience', () => {
   it('should sanitize and validate guestbook entries', async () => {

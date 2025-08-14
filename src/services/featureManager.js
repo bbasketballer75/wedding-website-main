@@ -1,5 +1,5 @@
 // Feature Integration Manager for Wedding Website
-import { analyticsManager } from '../services/analyticsManager';
+import { analyticsManager } from '../../services/api/analyticsManager';
 
 class FeatureManager {
   constructor() {

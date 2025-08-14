@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import AlbumPage from '../page-components/AlbumPage.jsx';
+import AlbumPage from '../page-components/gallery/AlbumPage.jsx';
 
 // Mock uploadMedia and getAlbumMedia
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   getAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
   uploadMedia: vi.fn(() => new Promise((resolve) => setTimeout(resolve, 500))),
 }));

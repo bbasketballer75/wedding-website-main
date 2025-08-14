@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import AdminPage from '../AdminPage.jsx';
+import AdminPage from '../admin/AdminPage.jsx';
 
 expect.extend(toHaveNoViolations);
 

@@ -4,10 +4,10 @@ import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import Navbar from '../components/Navbar';
-import HomePage from '../page-components/HomePage';
+import HomePage from '../page-components/core/HomePage';
 
 // Mock the API service
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   logVisit: vi.fn(() => Promise.resolve()),
 }));
 

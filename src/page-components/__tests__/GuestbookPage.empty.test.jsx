@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import GuestbookPage from '../GuestbookPage.jsx';
+import GuestbookPage from '../interactive/GuestbookPage.jsx';
 
 describe('GuestbookPage Empty State', () => {
   it('shows empty state when no entries are available', async () => {

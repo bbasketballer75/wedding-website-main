@@ -55,6 +55,27 @@ if (typeof global.IntersectionObserver === 'undefined') {
   };
 }
 
+// Mock ResizeObserver for Lenis smooth scroll
+if (typeof global.ResizeObserver === 'undefined') {
+  global.ResizeObserver = class ResizeObserver {
+    constructor(callback) {
+      this.callback = callback;
+    }
+
+    observe() {
+      // Mock implementation
+    }
+
+    unobserve() {
+      // Mock implementation
+    }
+
+    disconnect() {
+      // Mock implementation
+    }
+  };
+}
+
 // If you need to mock axios or fetch, use Vitest's vi.mock in your test files.
 
 // Mock web-vitals library for performance testing

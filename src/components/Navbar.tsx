@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from 'react';
 import Link from 'next/link';
 import NavLink from './NavLink';
-import './Navbar-premium.css';
+import '../Navbar-premium.css';
 
 type NavbarProps = {
   onePage?: boolean;

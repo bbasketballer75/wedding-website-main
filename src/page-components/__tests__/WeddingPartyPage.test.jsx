@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import WeddingPartyPage from '../WeddingPartyPage.jsx';
+import WeddingPartyPage from '../interactive/WeddingPartyPage.jsx';
 
 describe('WeddingPartyPage', () => {
   it('renders wedding party heading', () => {

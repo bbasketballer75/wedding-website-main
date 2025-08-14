@@ -19,11 +19,11 @@ describe('Guest Performance Experience', () => {
   it('should show loading states during slow network', async () => {
     vi.resetModules();
 
-    vi.doMock('../services/api', () => ({
+    vi.doMock('../../services/api', () => ({
       getAlbumMedia: vi.fn(() => createDelayedResolver({ data: [] })),
       uploadMedia: vi.fn(),
     }));
-    const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
+    const { default: AlbumPageReloaded } = await import('../page-components/gallery/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
     await screen.findByText(/Illuminating our gallery/i);
     await waitFor(
@@ -37,11 +37,11 @@ describe('Guest Performance Experience', () => {
   it('should handle network failures gracefully', async () => {
     vi.resetModules();
 
-    vi.doMock('../services/api', () => ({
+    vi.doMock('../../services/api', () => ({
       getAlbumMedia: vi.fn(createRejectionHandler('Network error')),
       uploadMedia: vi.fn(),
     }));
-    const { default: AlbumPageReloaded } = await import('../page-components/AlbumPage.jsx');
+    const { default: AlbumPageReloaded } = await import('../page-components/gallery/AlbumPage.jsx');
     render(<AlbumPageReloaded />);
     // Wait for error message to appear
     await screen.findByText(

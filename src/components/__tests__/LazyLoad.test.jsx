@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import FamilyTree from '../FamilyTree.jsx';
+import FamilyTree from '../features/FamilyTree.jsx';
 
 describe('Lazy Loading', () => {
   it('images are lazy-loaded', () => {

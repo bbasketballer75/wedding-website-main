@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import GuestbookPage from '../GuestbookPage.jsx';
+import GuestbookPage from '../interactive/GuestbookPage.jsx';
 
 expect.extend(toHaveNoViolations);
 

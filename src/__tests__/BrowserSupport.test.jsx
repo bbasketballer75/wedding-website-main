@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import PhotoGallery from '../components/PhotoGallery.jsx';
+import PhotoGallery from '../components/media/PhotoGallery.jsx';
 
 describe('Cross-Browser Guest Experience', () => {
   it('should work without modern JavaScript features', () => {

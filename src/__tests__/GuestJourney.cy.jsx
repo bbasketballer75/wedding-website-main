@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import HomePage from '../page-components/HomePage';
+import HomePage from '../page-components/core/HomePage';
 
 // Mock Next.js router for testing
 jest.mock('next/navigation', () => ({

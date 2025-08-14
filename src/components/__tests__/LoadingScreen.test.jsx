@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import LoadingScreen from '../LoadingScreen.jsx';
+import LoadingScreen from '../ui/LoadingScreen.jsx';
 
 describe('LoadingScreen', () => {
   it('renders loading message', () => {

@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './PhotoTagging.css';
+import '../PhotoTagging.css';
 
 const PhotoTagging = ({ photoId, photoUrl, existingTags, onTagAdded, onTagRemoved, isGuest }) => {
   const [tags, setTags] = useState(existingTags || []);

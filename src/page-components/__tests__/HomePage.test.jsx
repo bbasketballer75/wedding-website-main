@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import HomePage from '../HomePage.jsx';
+import HomePage from '../core/HomePage.jsx';
 
 describe('HomePage', () => {
   it('renders welcome message and main CTA', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import FamilyTreePage from '../../page-components/FamilyTreePage.jsx';
+import FamilyTreePage from '../../page-components/family/FamilyTreePage.jsx';
 
 describe('FamilyTreePage', () => {
   it('renders all parent cards', () => {

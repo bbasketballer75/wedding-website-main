@@ -1,7 +1,6 @@
-import React from 'react';
-import { render, screen, act } from '@testing-library/react';
-import AdminDashboard from '../AdminDashboard.jsx';
-import * as api from '../../services/api.js';
+import { act, render, screen } from '@testing-library/react';
+import * as api from '../../services/api';
+import AdminDashboard from '../admin/AdminDashboard.jsx';
 
 describe('AdminDashboard Unauthorized Access', () => {
   beforeAll(() => {

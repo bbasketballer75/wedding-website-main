@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import * as analytics from '../analytics';
+import * as analytics from '../core/analytics';
 
 // Mock localStorage
 const localStorageMock = {

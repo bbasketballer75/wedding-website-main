@@ -1,30 +1,21 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import AlbumPage from '../AlbumPage.jsx';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import AlbumPage from '../gallery/AlbumPage.jsx';
 
-import * as api from '../../services/api.js';
+import * as api from '../../services/api';
 
-vi.mock('../../services/api.js', () => {
-  return {
-    getAlbumMedia: vi.fn(
-      () =>
-        new Promise((resolve) =>
-          setTimeout(
-            () =>
-              resolve({
-                data: [
-                  { _id: '1', filename: '1.jpg' },
-                  { _id: '2', filename: '2.jpg' },
-                ],
-              }),
-            50
-          )
-        )
-    ),
-    uploadMedia: vi.fn(() => Promise.resolve({})),
-  };
-});
+// Mock the API functions
+vi.mock('../../services/api', () => ({
+  getAlbumMedia: vi.fn(() =>
+    Promise.resolve({
+      data: [
+        { _id: '1', filename: '1.jpg' },
+        { _id: '2', filename: '2.jpg' },
+      ],
+    })
+  ),
+  uploadMedia: vi.fn(() => Promise.resolve({})),
+}));
 
 describe('AlbumPage', () => {
   beforeEach(() => {

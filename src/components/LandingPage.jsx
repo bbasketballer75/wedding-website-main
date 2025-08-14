@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './LandingPage.css';
+import '../LandingPage.css';
 
 const LandingPage = ({ onEnter }) => {
   const handleEnter = () => {

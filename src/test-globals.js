@@ -39,7 +39,7 @@ vi.mock('axios', () => ({
 }));
 
 // Mock API service to prevent network calls
-vi.mock('../services/api.js', () => ({
+vi.mock('../../services/api.js', () => ({
   logVisit: vi.fn().mockResolvedValue({}),
   getAlbumMedia: vi.fn().mockResolvedValue({ data: [] }),
   uploadMedia: vi.fn().mockResolvedValue({ data: { success: true } }),
@@ -74,6 +74,13 @@ Object.defineProperty(window, 'matchMedia', {
 // Mock URL.createObjectURL to prevent warnings
 global.URL.createObjectURL = vi.fn(() => 'mock-url');
 global.URL.revokeObjectURL = vi.fn();
+
+// Mock ResizeObserver for Lenis smooth scroll in tests
+global.ResizeObserver = vi.fn().mockImplementation((_callback) => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
 
 // Auto-cleanup for React components to prevent act() warnings
 afterEach(() => {

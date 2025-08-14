@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import UploadForm from '../UploadForm.jsx';
+import UploadForm from '../forms/UploadForm.jsx';
 
 describe('UploadForm Error States', () => {
   it('shows error for unsupported file type', async () => {

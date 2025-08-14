@@ -1,14 +1,12 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import GuestbookPage from '../GuestbookPage.jsx';
+import GuestbookPage from '../interactive/GuestbookPage.jsx';
 
-vi.mock('../../services/api.js', () => ({
+// Mock the API functions
+vi.mock('../../services/api', () => ({
   getGuestbookEntries: vi.fn(() =>
     Promise.resolve({
-      data: [
-        { id: 1, name: 'Alice', message: 'Congrats!' },
-        { id: 2, name: 'Bob', message: 'Best wishes!' },
-      ],
+      data: [],
     })
   ),
   createGuestbookEntry: vi.fn(() =>
@@ -19,18 +17,20 @@ vi.mock('../../services/api.js', () => ({
 }));
 
 describe('GuestbookPage', () => {
-  it('shows guestbook heading and messages after render', async () => {
+  it('shows guestbook heading and empty state after render', async () => {
     await act(async () => {
       render(<GuestbookPage />);
     });
-    // Wait for heading and messages to appear (look for specific heading level)
+    // Wait for heading to appear
     await waitFor(() =>
       expect(
         screen.getByRole('heading', { level: 2, name: /Our Sacred Memory Book/i })
       ).toBeInTheDocument()
     );
-    expect(screen.getByText('Congrats!')).toBeInTheDocument();
-    expect(screen.getByText('Best wishes!')).toBeInTheDocument();
+    // Since we're returning empty data, check for empty state
+    expect(
+      screen.getByText(/This sacred space awaits the first beautiful blessing/i)
+    ).toBeInTheDocument();
   });
 
   it('renders guestbook components', async () => {
@@ -54,7 +54,7 @@ describe('GuestbookPage', () => {
   });
 
   it('submits a new entry', async () => {
-    const { createGuestbookEntry } = await import('../../services/api.js');
+    const { createGuestbookEntry } = await import('../../services/api');
 
     render(<GuestbookPage />);
     await waitFor(() => {

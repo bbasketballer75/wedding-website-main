@@ -3,11 +3,11 @@
 import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import PhotoGallery from '../components/PhotoGallery.jsx';
+import PhotoGallery from '../components/media/PhotoGallery.jsx';
 import Navbar from '../components/Navbar';
 
 // Mock the API service
-vi.mock('../services/api', () => ({
+vi.mock('../../services/api', () => ({
   logVisit: vi.fn(() => Promise.resolve()),
   getAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));

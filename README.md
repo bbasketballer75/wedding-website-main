@@ -4,14 +4,30 @@ A complete, production-ready wedding website built with Next.js, featuring photo
 
 ## 🚀 Quick Start
 
+### **Maintenance & Organization**
+
+```bash
+# Organize project files and run maintenance
+npm run maintain
+
+# Quick organization cleanup only
+npm run organize
+
+# Full maintenance with tests and optimization
+npm run maintain:full
+```
+
 ### **Start Development Environment**
 
 ```bash
-# Complete startup with monitoring
-.\scripts\development\start-dev-with-monitor.ps1
+# Complete startup with all services
+npm run dev:full
 
-# Quick status check
-.\scripts\monitoring\status-check.ps1
+# Frontend only (Next.js)
+npm run dev
+
+# Backend only (Express API)
+npm run dev:backend
 ```
 
 ### **Manual Setup**
@@ -29,7 +45,7 @@ cd backend && npm start
 
 ## 🌐 Services
 
-- **Frontend:** http://localhost:3005 (Next.js)
+- **Frontend:** http://localhost:3001 (Next.js)
 - **Backend:** http://localhost:3002 (Express API)
 - **API Documentation:** http://localhost:3002/api-docs
 - **Health Check:** http://localhost:3002/api/health
@@ -37,23 +53,55 @@ cd backend && npm start
 ## 📁 Project Structure
 
 ```
-📁 docs/                   # All documentation
-├── setup-guides/         # Setup and deployment guides
-├── monitoring/           # Connection monitoring docs
-├── development/          # Development guides
-├── reports/              # Code quality reports
-└── reference/            # Technical references
+📁 src/                    # Main application source code
+├── app/                  # Next.js App Router (pages & layouts)
+├── components/           # Reusable UI components
+├── page-components/      # Page-specific components
+├── services/             # API clients and external services
+└── utils/                # Utility functions and helpers
 
-📁 scripts/               # Automation scripts
-├── monitoring/           # Connection monitoring tools
-├── development/          # Development helpers
-└── deployment/           # Deployment automation
-
-📁 src/                   # Next.js application source
 📁 backend/               # Express API server
-📁 logs/                  # Log files and reports
-📁 archives/              # Archive and backup files
+├── routes/               # API route definitions
+├── controllers/          # Business logic handlers
+├── models/               # Firestore data models
+├── services/             # External service integrations
+└── config/               # Database and service configurations
+
+📁 docs/                  # All project documentation
+├── status/               # Status reports and completion logs
+├── deployment/           # Deployment guides and reports
+├── troubleshooting/      # Problem resolution guides
+├── configuration/        # Setup and configuration guides
+├── development/          # Development guides
+├── monitoring/           # Monitoring and analytics docs
+├── recommendations/      # Enhancement recommendations
+├── reference/            # Technical reference materials
+├── reports/              # Analysis and audit reports
+└── setup-guides/         # Initial setup instructions
+
+📁 scripts/               # Build and automation scripts
+├── cleanup-root-directory-clean.ps1  # File organization
+├── maintain-project.ps1              # Project maintenance
+├── run-image-optimization.mjs        # Image optimization
+└── other automation scripts
+
+📁 config/                # Configuration files
+└── environment/          # Environment-specific settings
+
+📁 logs/                  # Application logs
+├── mcp/                  # MCP server logs
+└── other application logs
+
+📁 archives/              # Historical data and backups
+└── backups/              # Backup files and directories
 ```
+
+📁 src/ # Next.js application source
+📁 backend/ # Express API server
+📁 logs/ # Log files and reports
+📁 archives/ # Archive and backup files
+
+````
 
 ## 🛠️ Features
 
@@ -95,7 +143,7 @@ Our advanced connection monitoring ensures both frontend and backend services ar
 
 # Quick health check
 .\scripts\monitoring\status-check.ps1
-```
+````
 
 **Features:**
 

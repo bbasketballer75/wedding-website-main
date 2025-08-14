@@ -1,9 +1,9 @@
 'use client';
 import { useEffect } from 'react';
 import { AudioControls } from '../components/AmbientSoundSystem';
-import ModernFooter from '../components/ModernFooter';
-import ModernNavigation from '../components/ModernNavigation';
-import ModernHomePage from '../page-components/ModernHomePage';
+import ModernFooter from '../components/ui/ModernFooter';
+import ModernNavigation from '../components/ui/ModernNavigation';
+import ModernHomePage from '../page-components/core/ModernHomePage';
 import '../styles/modern-2025-design.css';
 
 export default function HomePage() {

@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import * as featureDetection from '../featureDetection';
+import * as featureDetection from '../core/featureDetection';
 
 // Mock global objects for testing
 const mockNavigator = {

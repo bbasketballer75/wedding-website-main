@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { render, screen, act } from '@testing-library/react';
-import AdminDashboard from '../AdminDashboard.jsx';
+import AdminDashboard from '../admin/AdminDashboard.jsx';
 
 // Mock the api service
-vi.mock('../../services/api.js', () => ({
+vi.mock('../../../services/api.js', () => ({
   getAllAlbumMedia: vi.fn(
     () => new Promise((resolve) => setTimeout(() => resolve({ data: [] }), 100))
   ),

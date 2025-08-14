@@ -2,7 +2,7 @@
 
 import React, { Suspense } from 'react';
 import { EnhancedErrorBoundary } from '../../components/EnhancedErrorBoundary';
-import LoadingScreen from '../../components/LoadingScreen';
+import LoadingScreen from '../../components/ui/LoadingScreen';
 
 // Code splitting: Lazy load admin page
 const AdminPage = React.lazy(() => import('../../page-components/AdminPage'));

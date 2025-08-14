@@ -1,8 +1,7 @@
-import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import UploadForm from '../UploadForm.jsx';
-import { uploadMedia } from '../../services/api.js';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { uploadMedia } from '../../services/api';
+import UploadForm from '../forms/UploadForm.jsx';
 
 describe('UploadForm', () => {
   it('renders upload form fields', () => {
@@ -12,7 +11,7 @@ describe('UploadForm', () => {
     expect(screen.getByRole('button', { name: /Upload File/i })).toBeInTheDocument();
   });
 });
-vi.mock('../../services/api.js');
+vi.mock('../../../services/api.js');
 
 describe('UploadForm', () => {
   beforeEach(() => {

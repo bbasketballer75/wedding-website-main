@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import MusicPlayer from '../MusicPlayer.jsx';
+import MusicPlayer from '../media/MusicPlayer.jsx';
 
 // Mock HTMLAudioElement
 window.HTMLAudioElement.prototype.play = vi.fn();

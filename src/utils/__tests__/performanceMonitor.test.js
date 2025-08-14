@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import * as performanceMonitor from '../performanceMonitor';
+import * as performanceMonitor from '../core/performanceMonitor';
 
 // Mock Performance API
 const mockPerformance = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import AdminPage from '../AdminPage.jsx';
+import AdminPage from '../admin/AdminPage.jsx';
 
 describe('AdminPage', () => {
   it('renders password prompt if no adminKey', async () => {

@@ -24,7 +24,7 @@ vi.mock('web-vitals', () => ({
 }));
 
 // Mock all the service calls
-vi.mock('../services/api.js', () => ({
+vi.mock('../../services/api.js', () => ({
   logVisit: vi.fn().mockResolvedValue({}),
   getAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));
@@ -74,7 +74,7 @@ vi.mock('../components/ThankYouSection', () => ({
     ),
 }));
 
-vi.mock('../components/LoadingScreen', () => ({
+vi.mock('../../components/ui/LoadingScreen', () => ({
   __esModule: true,
   default: (props) =>
     React.createElement(
@@ -153,8 +153,8 @@ describe('App (Next.js Home Page)', () => {
   test('renders app container with proper class', () => {
     render(React.createElement(Home));
 
-    // Should have app container
-    const appContainer = document.querySelector('.App');
+    // Should have modern app container
+    const appContainer = document.querySelector('.modern-app');
     expect(appContainer).toBeInTheDocument();
   });
 

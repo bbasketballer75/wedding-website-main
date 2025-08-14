@@ -70,6 +70,15 @@ global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
   triggerIntersection: (entries) => callback(entries),
 }));
 
+// Mock ResizeObserver for Lenis smooth scroll
+global.ResizeObserver = jest.fn().mockImplementation((callback) => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+  // Simulate resize for testing
+  triggerResize: (entries) => callback(entries),
+}));
+
 // Mock web-vitals library
 jest.mock('web-vitals', () => ({
   getCLS: jest.fn((callback) => {

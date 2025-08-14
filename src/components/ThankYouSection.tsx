@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import './ThankYouSection.css';
+import '../ThankYouSection.css';
 
 const ThankYouSection: React.FC = () => {
   return (

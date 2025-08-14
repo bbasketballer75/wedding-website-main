@@ -1,34 +1,35 @@
-import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 
-import MapPage from '../MapPage.jsx';
+import MapPage from '../interactive/MapPage.jsx';
 
-vi.mock('../../services/api.js', () => ({
-  getMapPins: vi.fn(() =>
-    Promise.resolve({
-      data: [
-        { id: 1, lat: 40.7128, lng: -74.006, label: 'NYC' },
-        { id: 2, lat: 34.0522, lng: -118.2437, label: 'LA' },
-      ],
-    })
-  ),
+vi.mock('../../services/api', () => ({
+  getMapLocations: vi.fn(() => Promise.reject(new Error('Map service unavailable'))),
 }));
 
 describe('MapPage', () => {
-  it('shows loading and then map', async () => {
+  it('shows loading and then error message', async () => {
     await act(async () => {
       render(<MapPage />);
     });
-    // If error, check for error message
+
+    // Wait for loading to finish and error to appear
+    await waitFor(() =>
+      expect(screen.queryByText(/Mapping all the love/i)).not.toBeInTheDocument()
+    );
+
+    // Check for error message with alert role
     expect(screen.getByRole('alert')).toHaveTextContent(/We can't load the love map right now/i);
   });
 
-  it('renders map container', async () => {
+  it('renders map container with heading', async () => {
     await act(async () => {
       render(<MapPage />);
     });
-    await waitFor(() => expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument());
-    // Skip this test if map is not rendered due to error
-    // expect(screen.getByTestId('wedding-map')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.queryByText(/Mapping all the love/i)).not.toBeInTheDocument()
+    );
+
+    // Should render the main heading even with error
+    expect(screen.getByRole('heading', { name: /Love Traveled Far & Wide/i })).toBeInTheDocument();
   });
 });

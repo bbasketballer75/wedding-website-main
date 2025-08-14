@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import HomePage from '../HomePage.jsx';
+import HomePage from '../core/HomePage.jsx';
 
 expect.extend(toHaveNoViolations);
 

@@ -1,44 +1,31 @@
-/**
- * 🎯 MODERN INTERSECTION OBSERVER HOOK
- * For smooth scroll-triggered animations
- */
+import { useEffect, useState } from 'react';
 
-import { useEffect, useRef, useState } from 'react';
-
-export const useIntersectionObserver = (options = {}) => {
-  const [isInView, setIsInView] = useState(false);
-  const [hasBeenInView, setHasBeenInView] = useState(false);
-  const elementRef = useRef(null);
+export function useIntersectionObserver(elementRef, options = {}) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [entry, setEntry] = useState(null);
 
   useEffect(() => {
-    const element = elementRef.current;
+    const element = elementRef?.current;
+    
     if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const inView = entry.isIntersecting;
-        setIsInView(inView);
-
-        // Once in view, keep it in view (for animations that should only happen once)
-        if (inView && !hasBeenInView) {
-          setHasBeenInView(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-        ...options,
-      }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsIntersecting(entry.isIntersecting);
+      setEntry(entry);
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px',
+      ...options
+    });
 
     observer.observe(element);
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.unobserve(element);
     };
-  }, [hasBeenInView, options]);
+  }, [elementRef, options]);
 
-  return [elementRef, isInView, hasBeenInView];
-};
+  return { isIntersecting, entry };
+}
+
+export default useIntersectionObserver;

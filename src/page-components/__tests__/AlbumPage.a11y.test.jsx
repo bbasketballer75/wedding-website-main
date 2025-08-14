@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import AlbumPage from '../AlbumPage.jsx';
+import AlbumPage from '../gallery/AlbumPage.jsx';
 
 expect.extend(toHaveNoViolations);
 

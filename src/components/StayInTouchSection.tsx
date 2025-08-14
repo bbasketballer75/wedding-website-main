@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import './StayInTouchSection.css';
+import '../StayInTouchSection.css';
 
 const StayInTouchSection: React.FC = () => {
   return (

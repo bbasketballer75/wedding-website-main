@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
-import OrientationOverlay from '../OrientationOverlay.jsx';
+import OrientationOverlay from '../accessibility/OrientationOverlay.jsx';
 
 // Mock window.matchMedia for jsdom
 beforeAll(() => {

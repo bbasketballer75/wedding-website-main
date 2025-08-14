@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 
-vi.mock('../../services/api.js', () => ({
+vi.mock('../../../services/api.js', () => ({
   moderateMedia: vi.fn(() => Promise.resolve()),
   getAllAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));
-vi.mock('../../services/api.js', () => ({
+vi.mock('../../../services/api.js', () => ({
   moderateMedia: vi.fn(() => Promise.resolve()),
   getAllAlbumMedia: vi.fn(() => Promise.resolve({ data: [] })),
 }));
-import AdminDashboard from '../AdminDashboard.jsx';
+import AdminDashboard from '../admin/AdminDashboard.jsx';
 
 describe('AdminDashboard Moderation', () => {
   it('approves and denies media submissions', async () => {

@@ -1,6 +1,6 @@
-import React from 'react';
-import { render, screen, act } from '@testing-library/react';
-import AdminDashboard from '../AdminDashboard.jsx';
+import { act, render, screen } from '@testing-library/react';
+import * as api from '../../services/api';
+import AdminDashboard from '../admin/AdminDashboard.jsx';
 
 describe('AdminDashboard Session', () => {
   it('persists admin session after refresh', async () => {
@@ -11,5 +11,4 @@ describe('AdminDashboard Session', () => {
     expect(await screen.findByLabelText('Admin moderation dashboard')).toBeInTheDocument();
   });
 });
-import * as api from '../../services/api.js';
 vi.spyOn(api, 'getAllAlbumMedia').mockResolvedValue({ data: [] });

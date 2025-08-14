@@ -15,7 +15,9 @@ const meta: Meta<typeof PasswordPrompt> = {
   },
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    onCorrectPassword: { action: 'password-submitted' },
+    onPasswordSubmit: { action: 'password-submitted' },
+    isError: { control: 'boolean' },
+    message: { control: 'text' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked
 };

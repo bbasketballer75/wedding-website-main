@@ -1,6 +1,6 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import * as api from '../../services/api.js';
-import GuestbookPage from '../GuestbookPage.jsx';
+import * as api from '../../services/api';
+import GuestbookPage from '../interactive/GuestbookPage.jsx';
 
 vi.spyOn(api, 'getGuestbookEntries').mockResolvedValue({ data: [] });
 vi.spyOn(api, 'createGuestbookEntry').mockImplementation(({ message }) => {

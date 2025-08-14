@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import GuestPhotoUpload from '../GuestPhotoUpload.jsx';
+import GuestPhotoUpload from '../forms/GuestPhotoUpload.jsx';
 
 // Mock fetch API
 global.fetch = vi.fn();

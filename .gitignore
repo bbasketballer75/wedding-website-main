@@ -141,3 +141,49 @@ connection-monitor.log
 firebase-debug.log
 firestore-debug.log
 temp-private-key.txt
+
+# Root directory organization - prevent clutter accumulation
+# Status and completion files that should be in docs/status/
+*-COMPLETE.md
+*-STATUS.md
+*-IMPLEMENTATION-*.md
+*-DEPLOYMENT-*.md
+*-OPTIMIZATION-*.md
+*-CONFIGURATION-*.md
+*-ANALYSIS-*.md
+*-GUIDE.md (root only, docs/ are allowed)
+*-CHECKLIST.md (root only)
+*-SUMMARY.md (root only)
+*-REPORT.md (root only)
+*-SUCCESS.md
+*-FIXED.md
+*-RESOLVED.md
+
+# Log files that should be in logs/
+mcp-*.log*
+connection-monitor.log*
+sentry-monitoring-*.txt
+*.log.err
+
+# Environment files that should be in config/environment/
+vercel-env-*.txt
+vercel-env-*.json
+*ENV*.txt (root only)
+
+# Scripts that should be in scripts/
+setup-*.ps1 (root only)
+start-*.ps1 (root only)
+verify-*.sh (root only)
+*-env-setup.sh (root only)
+
+# Backup directories that should be in archives/
+*backup*/
+*-backup-*/
+gcs-backup-*/
+temp-backup*/
+
+# Temporary and build artifacts
+test-payload.json
+--max-warnings=*
+build-output.txt (root only)
+production-deployment-report.txt (root only)

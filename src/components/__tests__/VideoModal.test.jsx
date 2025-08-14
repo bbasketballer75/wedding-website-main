@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import VideoModal from '../VideoModal.jsx';
+import VideoModal from '../media/VideoModal.jsx';
 
 describe('VideoModal', () => {
   const videoSrc = '/videos/intro.mp4';

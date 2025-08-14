@@ -30,8 +30,6 @@ export async function GET(_request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('Album upload request:', body);
-
     // Return success response
     return NextResponse.json({
       success: true,

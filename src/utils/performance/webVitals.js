@@ -68,12 +68,6 @@ function sendToAnalytics(metric) {
 
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
-    console.log(`📊 Web Vitals - ${metric.name}:`, {
-      value: metric.value,
-      rating: rating,
-      delta: metric.delta,
-      entries: metric.entries.length,
-    });
   }
 
   // Send to custom analytics endpoint if available
@@ -101,8 +95,6 @@ function sendToAnalytics(metric) {
 export function initWebVitals() {
   // Only initialize in browser environment
   if (typeof window === 'undefined') return;
-
-  console.log('🚀 Initializing Web Vitals monitoring...');
 
   // Cumulative Layout Shift (CLS)
   getCLS(sendToAnalytics);
@@ -140,7 +132,6 @@ export function initPerformanceObserver() {
           };
 
           if (process.env.NODE_ENV === 'development') {
-            console.log('🔍 Navigation Timing:', navigationTiming);
           }
 
           // Send to analytics

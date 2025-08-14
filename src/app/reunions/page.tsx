@@ -214,7 +214,7 @@ export default function ReunionsPage() {
 
   return (
     <div className="reunions-page">
-      <style jsx>{`
+      <style>{`
         .reunions-page {
           max-width: 1200px;
           margin: 0 auto;
@@ -764,8 +764,8 @@ function EventCreationForm({
   onSubmit,
   onCancel,
 }: {
-  onSubmit: (data: EventCreationData) => void;
-  onCancel: () => void;
+  readonly onSubmit: (data: EventCreationData) => void;
+  readonly onCancel: () => void;
 }) {
   const [formData, setFormData] = useState({
     title: '',
@@ -832,8 +832,11 @@ function EventCreationForm({
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label">Event Title *</label>
+          <label className="form-label" htmlFor="event-title-">
+            Event Title *
+          </label>
           <input
+            id="event-title-"
             type="text"
             className="form-input"
             value={formData.title}
@@ -844,8 +847,11 @@ function EventCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Description</label>
+          <label htmlFor="event-description" className="form-label">
+            Description
+          </label>
           <textarea
+            id="event-description"
             className="form-textarea"
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
@@ -855,8 +861,11 @@ function EventCreationForm({
 
         <div className="form-row">
           <div className="form-group">
-            <label className="form-label">Event Date *</label>
+            <label className="form-label" htmlFor="event-date-">
+              Event Date *
+            </label>
             <input
+              id="event-date-"
               type="date"
               className="form-input"
               value={formData.date}
@@ -867,8 +876,11 @@ function EventCreationForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">RSVP Deadline *</label>
+            <label className="form-label" htmlFor="rsvp-deadline-">
+              RSVP Deadline *
+            </label>
             <input
+              id="rsvp-deadline-"
               type="date"
               className="form-input"
               value={formData.rsvpDeadline}
@@ -881,8 +893,11 @@ function EventCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Venue Name *</label>
+          <label className="form-label" htmlFor="venue-name-">
+            Venue Name *
+          </label>
           <input
+            id="venue-name-"
             type="text"
             className="form-input"
             value={formData.location.venue}
@@ -893,8 +908,11 @@ function EventCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Address *</label>
+          <label className="form-label" htmlFor="address-">
+            Address *
+          </label>
           <input
+            id="address-"
             type="text"
             className="form-input"
             value={formData.location.address}
@@ -906,8 +924,11 @@ function EventCreationForm({
 
         <div className="form-row">
           <div className="form-group">
-            <label className="form-label">City *</label>
+            <label className="form-label" htmlFor="city-">
+              City *
+            </label>
             <input
+              id="city-"
               type="text"
               className="form-input"
               value={formData.location.city}
@@ -918,8 +939,11 @@ function EventCreationForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">State *</label>
+            <label className="form-label" htmlFor="state-">
+              State *
+            </label>
             <input
+              id="state-"
               type="text"
               className="form-input"
               value={formData.location.state}
@@ -931,8 +955,11 @@ function EventCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Capacity *</label>
+          <label className="form-label" htmlFor="capacity-">
+            Capacity *
+          </label>
           <input
+            id="capacity-"
             type="number"
             className="form-input"
             value={formData.capacity}
@@ -945,8 +972,11 @@ function EventCreationForm({
 
         <div className="form-row">
           <div className="form-group">
-            <label className="form-label">Your Name *</label>
+            <label className="form-label" htmlFor="your-name-">
+              Your Name *
+            </label>
             <input
+              id="your-name-"
               type="text"
               className="form-input"
               value={formData.organizer.name}
@@ -957,8 +987,11 @@ function EventCreationForm({
           </div>
 
           <div className="form-group">
-            <label className="form-label">Email *</label>
+            <label className="form-label" htmlFor="email-">
+              Email *
+            </label>
             <input
+              id="email-"
               type="email"
               className="form-input"
               value={formData.organizer.email}
@@ -987,9 +1020,9 @@ function RSVPForm({
   onSubmit,
   onCancel,
 }: {
-  eventId: string;
-  onSubmit: (data: RSVPData) => void;
-  onCancel: () => void;
+  readonly eventId: string;
+  readonly onSubmit: (data: RSVPData) => void;
+  readonly onCancel: () => void;
 }) {
   const [formData, setFormData] = useState({
     attendee: {
@@ -1037,10 +1070,14 @@ function RSVPForm({
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            <label
+              htmlFor="rsvp-name"
+              style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}
+            >
               Your Name *
             </label>
             <input
+              id="rsvp-name"
               type="text"
               style={{
                 width: '100%',
@@ -1060,10 +1097,14 @@ function RSVPForm({
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            <label
+              htmlFor="rsvp-email"
+              style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}
+            >
               Email *
             </label>
             <input
+              id="rsvp-email"
               type="email"
               style={{
                 width: '100%',
@@ -1083,10 +1124,14 @@ function RSVPForm({
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            <label
+              htmlFor="rsvp-plus-one"
+              style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}
+            >
               Plus One (Optional)
             </label>
             <input
+              id="rsvp-plus-one"
               type="text"
               style={{
                 width: '100%',
@@ -1106,10 +1151,14 @@ function RSVPForm({
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+            <label
+              htmlFor="rsvp-response"
+              style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}
+            >
               Response *
             </label>
             <select
+              id="rsvp-response"
               style={{
                 width: '100%',
                 padding: '0.75rem',
@@ -1160,7 +1209,13 @@ function RSVPForm({
   );
 }
 
-function EventModal({ event, onClose }: { event: ReunionEvent; onClose: () => void }) {
+function EventModal({
+  event,
+  onClose,
+}: {
+  readonly event: ReunionEvent;
+  readonly onClose: () => void;
+}) {
   return (
     <div
       style={{

@@ -93,7 +93,7 @@ const GuestReunionPlanner = () => {
 
   return (
     <div className="reunion-planner">
-      <style jsx>{`
+      <style>{`
         .reunion-planner {
           max-width: 1000px;
           margin: 0 auto;

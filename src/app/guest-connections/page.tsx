@@ -292,7 +292,7 @@ export default function GuestConnectionsPage() {
 
   return (
     <div className="guest-connections-page">
-      <style jsx>{`
+      <style>{`
         .guest-connections-page {
           max-width: 1200px;
           margin: 0 auto;

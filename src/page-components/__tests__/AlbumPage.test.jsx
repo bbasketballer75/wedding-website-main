@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AlbumPage from '../gallery/AlbumPage.jsx';
 
 import * as api from '../../services/api';
@@ -27,33 +29,33 @@ describe('AlbumPage', () => {
   });
 
   it('handles album loading error gracefully', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
-    expect(screen.getByText(/Illuminating our gallery/i)).toBeInTheDocument();
+    render(React.createElement(AlbumPage));
+    expect(screen.getByText(/Illuminating our gallery of cherished moments/i)).toBeInTheDocument();
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
     expect(screen.getByRole('heading', { name: 'Gallery of Eternal Moments' })).toBeInTheDocument();
   });
 
   it('displays album photos when loaded', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
-    expect(screen.getByText(/Illuminating our gallery/i)).toBeInTheDocument();
+    render(React.createElement(AlbumPage));
+    expect(screen.getByText(/Illuminating our gallery of cherished moments/i)).toBeInTheDocument();
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
     expect(screen.getByRole('heading', { name: 'Gallery of Eternal Moments' })).toBeInTheDocument();
   });
 
   it('should show upload form when user clicks upload button', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
+    render(React.createElement(AlbumPage));
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
 
     // Find upload button and click it
@@ -66,38 +68,38 @@ describe('AlbumPage', () => {
   });
 
   it('should filter album content when filter is applied', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
+    render(React.createElement(AlbumPage));
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
     expect(screen.getByRole('heading', { name: 'Gallery of Eternal Moments' })).toBeInTheDocument();
   });
   it('renders upload input and button', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
+    render(React.createElement(AlbumPage));
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
     expect(screen.getByRole('button', { name: /Gift Your Memory/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Gift Your Memory/i })).toBeInTheDocument();
     // The input is type="file" with no label, so use querySelector
-    const fileInput = document.querySelector('input[type="file"]');
+    const fileInput = globalThis.document.querySelector('input[type="file"]');
     expect(fileInput).toBeInTheDocument();
   });
 
   it('calls uploadMedia when upload button is clicked', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
+    render(React.createElement(AlbumPage));
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
     // The input is type="file" with id and aria-label, so use the proper selector
     const fileInput = screen.getByLabelText(/Share your captured wedding magic - photo or video/i);
-    const file = new File(['dummy'], 'test.jpg', { type: 'image/jpeg' });
+    const file = new globalThis.File(['dummy'], 'test.jpg', { type: 'image/jpeg' });
     await act(async () => {
       fireEvent.change(fileInput, { target: { files: [file] } });
     });
@@ -109,23 +111,23 @@ describe('AlbumPage', () => {
   });
 
   it('applies correct CSS classes and structure', async () => {
-    await act(async () => {
-      render(<AlbumPage />);
-    });
+    render(React.createElement(AlbumPage));
     await waitFor(() =>
-      expect(screen.queryByText(/Illuminating our gallery/i)).not.toBeInTheDocument()
+      expect(
+        screen.queryByText(/Illuminating our gallery of cherished moments/i)
+      ).not.toBeInTheDocument()
     );
-    const albumContainer = document.querySelector('.album-page');
+    const albumContainer = globalThis.document.querySelector('.album-page');
     expect(albumContainer).toBeInTheDocument();
     expect(albumContainer).toHaveClass('album-page');
-    const photoGrid = document.querySelector('.photo-grid');
+    const photoGrid = globalThis.document.querySelector('.photo-grid');
     expect(photoGrid).toBeInTheDocument();
   });
 
   it('renders without errors', () => {
     expect(() => {
       act(() => {
-        render(<AlbumPage />);
+        render(React.createElement(AlbumPage));
       });
     }).not.toThrow();
   });

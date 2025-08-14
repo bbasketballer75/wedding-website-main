@@ -4,5 +4,4 @@
 
 export async function register() {
   // Temporarily disabled to fix build issues
-  console.log('Instrumentation disabled temporarily');
 }

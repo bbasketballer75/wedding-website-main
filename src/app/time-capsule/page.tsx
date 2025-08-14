@@ -54,6 +54,19 @@ export default function TimeCapsulePage() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [selectedCapsule, setSelectedCapsule] = useState<TimeCapsule | null>(null);
 
+  // Helper functions to extract nested ternary operations
+  const getCapsuleStatusClass = (isOpened: boolean, canOpen: boolean): string => {
+    if (isOpened) return 'open';
+    if (canOpen) return 'pending';
+    return 'sealed';
+  };
+
+  const getCapsuleStatusText = (isOpened: boolean, canOpen: boolean): string => {
+    if (isOpened) return '🔓 Opened';
+    if (canOpen) return '⏰ Ready';
+    return '🔒 Sealed';
+  };
+
   const loadCapsuleData = useCallback(async () => {
     try {
       setLoading(true);
@@ -175,384 +188,6 @@ export default function TimeCapsulePage() {
 
   return (
     <div className="time-capsule-page">
-      <style jsx>{`
-        .time-capsule-page {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 2rem;
-          font-family: 'Georgia', serif;
-          background: linear-gradient(135deg, #f8f6f8 0%, #ffffff 100%);
-          min-height: 100vh;
-        }
-
-        .capsule-header {
-          text-align: center;
-          margin-bottom: 3rem;
-          padding: 2rem;
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          border-radius: 16px;
-          color: white;
-        }
-
-        .capsule-header h1 {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .capsule-actions {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 2rem;
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-
-        .create-capsule-btn {
-          background: linear-gradient(135deg, #d4a574, #8b7a8a);
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: all 0.3s;
-        }
-
-        .create-capsule-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 20px rgba(139, 122, 138, 0.3);
-        }
-
-        .upcoming-section {
-          margin-bottom: 3rem;
-        }
-
-        .section-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .section-header h2 {
-          color: #8b7a8a;
-          font-size: 1.8rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .upcoming-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-        }
-
-        .upcoming-capsule {
-          background: white;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px rgba(139, 122, 138, 0.1);
-          border-left: 4px solid #d4a574;
-          text-align: center;
-        }
-
-        .countdown-display {
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          color: white;
-          padding: 2rem;
-          border-radius: 12px;
-          margin-bottom: 1rem;
-        }
-
-        .countdown-number {
-          font-size: 2.5rem;
-          font-weight: bold;
-          margin-bottom: 0.5rem;
-        }
-
-        .countdown-label {
-          font-size: 1rem;
-          opacity: 0.9;
-        }
-
-        .capsule-title {
-          color: #8b7a8a;
-          font-size: 1.3rem;
-          margin-bottom: 1rem;
-          font-weight: bold;
-        }
-
-        .capsule-description {
-          color: #666;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .capsule-meta {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.9rem;
-          color: #666;
-        }
-
-        .all-capsules {
-          margin-top: 3rem;
-        }
-
-        .capsules-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-        }
-
-        .capsule-card {
-          background: white;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s;
-          border-left: 4px solid #8b7a8a;
-        }
-
-        .capsule-card:hover {
-          transform: translateY(-4px);
-        }
-
-        .capsule-card.sealed {
-          border-left-color: #d4a574;
-          background: linear-gradient(135deg, #f8f6f8, #ffffff);
-        }
-
-        .capsule-card.openable {
-          border-left-color: #48bb78;
-          background: linear-gradient(135deg, #f0fff4, #ffffff);
-        }
-
-        .capsule-status {
-          display: inline-block;
-          padding: 0.25rem 0.75rem;
-          border-radius: 12px;
-          font-size: 0.8rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-        }
-
-        .capsule-status.sealed {
-          background: #fed7d7;
-          color: #c53030;
-        }
-
-        .capsule-status.open {
-          background: #c6f6d5;
-          color: #2f855a;
-        }
-
-        .capsule-status.pending {
-          background: #feebc8;
-          color: #c05621;
-        }
-
-        .capsule-content-count {
-          background: #edf2f7;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          margin: 1rem 0;
-          text-align: center;
-          color: #4a5568;
-        }
-
-        .capsule-actions-row {
-          display: flex;
-          gap: 0.5rem;
-          margin-top: 1rem;
-        }
-
-        .capsule-btn {
-          flex: 1;
-          padding: 0.5rem 1rem;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 0.9rem;
-          transition: all 0.3s;
-        }
-
-        .capsule-btn.primary {
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          color: white;
-        }
-
-        .capsule-btn.secondary {
-          background: transparent;
-          border: 1px solid #8b7a8a;
-          color: #8b7a8a;
-        }
-
-        .capsule-btn:hover {
-          transform: translateY(-1px);
-        }
-
-        .capsule-btn:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-          transform: none;
-        }
-
-        .creation-form {
-          background: white;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px rgba(139, 122, 138, 0.1);
-          margin-bottom: 3rem;
-        }
-
-        .form-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .form-header h3 {
-          color: #8b7a8a;
-          font-size: 1.5rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .form-group {
-          margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          color: #4a5568;
-          font-weight: bold;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-          width: 100%;
-          padding: 0.75rem;
-          border: 2px solid #e2e8f0;
-          border-radius: 8px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-          outline: none;
-          border-color: #8b7a8a;
-        }
-
-        .form-textarea {
-          min-height: 100px;
-          resize: vertical;
-        }
-
-        .form-actions {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-        }
-
-        .form-btn {
-          padding: 0.75rem 1.5rem;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: all 0.3s;
-        }
-
-        .form-btn.primary {
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          color: white;
-        }
-
-        .form-btn.secondary {
-          background: transparent;
-          border: 2px solid #8b7a8a;
-          color: #8b7a8a;
-        }
-
-        .form-btn:hover {
-          transform: translateY(-2px);
-        }
-
-        .capsule-loading {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 50vh;
-          color: #8b7a8a;
-        }
-
-        .loading-spinner {
-          width: 50px;
-          height: 50px;
-          border: 3px solid #e2e8f0;
-          border-top: 3px solid #8b7a8a;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        .capsule-error {
-          text-align: center;
-          padding: 3rem;
-          color: #e53e3e;
-        }
-
-        .capsule-error button {
-          background: #8b7a8a;
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 8px;
-          cursor: pointer;
-          margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-          .time-capsule-page {
-            padding: 1rem;
-          }
-
-          .capsule-header h1 {
-            font-size: 2rem;
-          }
-
-          .capsule-actions {
-            flex-direction: column;
-            align-items: stretch;
-          }
-
-          .upcoming-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .capsules-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .countdown-number {
-            font-size: 2rem;
-          }
-        }
-      `}</style>
-
       <div className="capsule-header">
         <h1>⏰ Digital Time Capsules</h1>
         <p>Preserve memories to be discovered in the future</p>
@@ -641,10 +276,8 @@ export default function TimeCapsulePage() {
                 key={capsule.id}
                 className={`capsule-card ${capsule.isSealed ? 'sealed' : ''} ${canOpen ? 'openable' : ''}`}
               >
-                <div
-                  className={`capsule-status ${isOpened ? 'open' : canOpen ? 'pending' : 'sealed'}`}
-                >
-                  {isOpened ? '🔓 Opened' : canOpen ? '⏰ Ready' : '🔒 Sealed'}
+                <div className={`capsule-status ${getCapsuleStatusClass(isOpened, canOpen)}`}>
+                  {getCapsuleStatusText(isOpened, canOpen)}
                 </div>
 
                 <div className="capsule-title">{capsule.title}</div>
@@ -697,8 +330,8 @@ function CapsuleCreationForm({
   onSubmit,
   onCancel,
 }: {
-  onSubmit: (data: CapsuleCreationData) => void;
-  onCancel: () => void;
+  readonly onSubmit: (data: CapsuleCreationData) => void;
+  readonly onCancel: () => void;
 }) {
   const [formData, setFormData] = useState({
     title: '',
@@ -747,8 +380,11 @@ function CapsuleCreationForm({
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label">Capsule Title *</label>
+          <label className="form-label" htmlFor="capsule-title-1">
+            Capsule Title *
+          </label>
           <input
+            id="capsule-title-1"
             type="text"
             className="form-input"
             value={formData.title}
@@ -759,8 +395,11 @@ function CapsuleCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Description</label>
+          <label htmlFor="capsule-description" className="form-label">
+            Description
+          </label>
           <textarea
+            id="capsule-description"
             className="form-textarea"
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
@@ -769,8 +408,11 @@ function CapsuleCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Opening Date *</label>
+          <label className="form-label" htmlFor="opening-date-2">
+            Opening Date *
+          </label>
           <input
+            id="opening-date-2"
             type="date"
             className="form-input"
             value={formData.openDate}
@@ -781,8 +423,11 @@ function CapsuleCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Your Name *</label>
+          <label className="form-label" htmlFor="your-name-3">
+            Your Name *
+          </label>
           <input
+            id="your-name-3"
             type="text"
             className="form-input"
             value={formData.creator.name}
@@ -793,8 +438,11 @@ function CapsuleCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Email *</label>
+          <label className="form-label" htmlFor="email-4">
+            Email *
+          </label>
           <input
+            id="email-4"
             type="email"
             className="form-input"
             value={formData.creator.email}
@@ -817,7 +465,13 @@ function CapsuleCreationForm({
   );
 }
 
-function CapsuleModal({ capsule, onClose }: { capsule: TimeCapsule; onClose: () => void }) {
+function CapsuleModal({
+  capsule,
+  onClose,
+}: {
+  readonly capsule: TimeCapsule;
+  readonly onClose: () => void;
+}) {
   return (
     <div
       style={{

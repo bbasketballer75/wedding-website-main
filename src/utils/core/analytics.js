@@ -185,7 +185,6 @@ class WeddingAnalytics {
         });
       } catch (backendError) {
         // Silently fail - analytics is non-critical
-        console.log('Analytics tracking failed:', backendError);
       }
     }
   }

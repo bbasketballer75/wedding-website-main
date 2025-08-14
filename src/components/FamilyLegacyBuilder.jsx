@@ -217,7 +217,7 @@ const FamilyLegacyBuilder = () => {
 
   return (
     <div className="family-legacy-builder">
-      <style jsx>{`
+      <style>{`
         .family-legacy-builder {
           max-width: 1200px;
           margin: 0 auto;

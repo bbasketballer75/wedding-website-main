@@ -1,13 +1,19 @@
 // Performance & Loading Test
 
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
+import AlbumPage from '../page-components/gallery/AlbumPage.jsx';
+import { getAlbumMedia } from '../services/api';
+
+// Mock the API
+vi.mock('../services/api');
 
 // Extract helper functions to reduce nesting
 const createDelayedResolver = (data, delay = 1000) => {
   return new Promise((resolve) => {
     const timeoutHandler = () => resolve(data);
-    setTimeout(timeoutHandler, delay);
+    globalThis.setTimeout(timeoutHandler, delay);
   });
 };
 
@@ -17,15 +23,10 @@ const createRejectionHandler = (errorMessage) => {
 
 describe('Guest Performance Experience', () => {
   it('should show loading states during slow network', async () => {
-    vi.resetModules();
+    getAlbumMedia.mockImplementation(() => createDelayedResolver({ data: [] }));
 
-    vi.doMock('../../services/api', () => ({
-      getAlbumMedia: vi.fn(() => createDelayedResolver({ data: [] })),
-      uploadMedia: vi.fn(),
-    }));
-    const { default: AlbumPageReloaded } = await import('../page-components/gallery/AlbumPage.jsx');
-    render(<AlbumPageReloaded />);
-    await screen.findByText(/Illuminating our gallery/i);
+    render(React.createElement(AlbumPage));
+    await screen.findByText(/Illuminating our gallery of cherished moments/i);
     await waitFor(
       () => expect(screen.queryByText(/Loading our beautiful memories/i)).not.toBeInTheDocument(),
       {
@@ -35,14 +36,9 @@ describe('Guest Performance Experience', () => {
   });
 
   it('should handle network failures gracefully', async () => {
-    vi.resetModules();
+    getAlbumMedia.mockImplementation(createRejectionHandler('Network error'));
 
-    vi.doMock('../../services/api', () => ({
-      getAlbumMedia: vi.fn(createRejectionHandler('Network error')),
-      uploadMedia: vi.fn(),
-    }));
-    const { default: AlbumPageReloaded } = await import('../page-components/gallery/AlbumPage.jsx');
-    render(<AlbumPageReloaded />);
+    render(React.createElement(AlbumPage));
     // Wait for error message to appear
     await screen.findByText(
       /Our photo sanctuary is temporarily resting. Please return in a moment to view our treasures!/i,

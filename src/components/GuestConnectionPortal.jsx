@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
  * Facilitate ongoing connections between wedding guests
  */
 const GuestConnectionPortal = () => {
-  const [connections, setConnections] = useState([]);
   const [guestDirectory, setGuestDirectory] = useState([]);
   const [networkStats, setNetworkStats] = useState({
     totalConnections: 0,
@@ -101,7 +100,6 @@ const GuestConnectionPortal = () => {
 
   const handleConnectionRequest = (guestId) => {
     // In real app, would send connection request
-    console.log(`Connection request sent to guest ${guestId}`);
   };
 
   const renderDashboard = () => (
@@ -365,7 +363,7 @@ const GuestConnectionPortal = () => {
 
   return (
     <div className="guest-connection-portal">
-      <style jsx>{`
+      <style>{`
         .guest-connection-portal {
           max-width: 1200px;
           margin: 0 auto;

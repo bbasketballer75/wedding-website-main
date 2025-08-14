@@ -403,8 +403,6 @@ export class MagicalExperienceManager {
 
     // Setup celebration triggers
     this.setupCelebrationTriggers();
-
-    console.log('✨ Magical experience initialized!');
   }
 
   addRippleEffects() {

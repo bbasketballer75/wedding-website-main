@@ -24,20 +24,15 @@ const handleUpdateFound = (registration: ServiceWorkerRegistration) => {
 const registerServiceWorker = async (): Promise<void> => {
   try {
     const registration = await navigator.serviceWorker.register('/sw.js');
-    console.log('✅ Service Worker registered:', registration);
-
     // Check for updates
     registration.addEventListener('updatefound', () => handleUpdateFound(registration));
-  } catch (error) {
-    console.log('❌ Service Worker registration failed:', error);
-  }
+  } catch (error) {}
 };
 
 // Helper function to handle service worker messages
 const setupServiceWorkerMessages = () => {
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data.type === 'SW_ACTIVATED') {
-      console.log('🎉 Service Worker activated and caching updated');
     }
   });
 };
@@ -47,11 +42,8 @@ const setupBackgroundSync = async (): Promise<void> => {
   try {
     const registration = await navigator.serviceWorker.ready;
     if ('sync' in registration) {
-      console.log('🔄 Background sync is supported');
     }
-  } catch (error) {
-    console.log('Service worker ready check failed:', error);
-  }
+  } catch (error) {}
 };
 
 export default function ServiceWorkerRegistration() {

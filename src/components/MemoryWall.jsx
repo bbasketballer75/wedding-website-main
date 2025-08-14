@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import '../MemoryWall.css';
+import { useRef, useState } from 'react';
+import './MemoryWall.css';
 import GuestPhotoUpload from './forms/GuestPhotoUpload';
 
 // Placeholder for uploaded memories

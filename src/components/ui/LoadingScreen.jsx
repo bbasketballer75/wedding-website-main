@@ -9,7 +9,7 @@ const LoadingScreen = ({ message = 'Loading...' }) => {
         </div>
         <p className="loading-message">{message}</p>
       </div>
-      <style jsx>{`
+      <style>{`
         .loading-screen {
           display: flex;
           flex-direction: column;

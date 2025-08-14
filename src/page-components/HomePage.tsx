@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .home-page {
           min-height: 100vh;
         }

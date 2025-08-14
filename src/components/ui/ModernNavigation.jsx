@@ -248,7 +248,7 @@ const ModernNavigation = () => {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         @media (min-width: 768px) {
           .desktop-nav {
             display: block !important;

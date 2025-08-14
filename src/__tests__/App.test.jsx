@@ -113,6 +113,12 @@ vi.mock('../components/AmbientSoundSystem', () => ({
   AudioControls: function AudioControls() {
     return React.createElement('div', { 'data-testid': 'audio-controls' }, 'Audio Controls');
   },
+  useInteractionSounds: () => ({
+    playClick: vi.fn(),
+    playHover: vi.fn(),
+    playSuccess: vi.fn(),
+    playError: vi.fn(),
+  }),
   default: () =>
     React.createElement('div', { 'data-testid': 'mock-ambient-sound' }, 'Audio Controls'),
 }));

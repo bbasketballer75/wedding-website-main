@@ -20,8 +20,6 @@ export default function FeatureInitializer() {
 
         // Initialize privacy compliance system
         privacyManager.init();
-
-        console.log('✅ Advanced features initialized successfully');
       } catch (error) {
         console.warn('⚠️ Feature initialization failed:', error);
         // Continue without advanced features for graceful degradation

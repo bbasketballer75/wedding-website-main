@@ -49,7 +49,7 @@ const PasswordPrompt: React.FC<PasswordPromptProps> = ({
           </button>
         </form>
       </div>
-      <style jsx>{`
+      <style>{`
         .password-prompt {
           display: flex;
           justify-content: center;

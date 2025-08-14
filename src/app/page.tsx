@@ -2,9 +2,8 @@
 import { useEffect } from 'react';
 import { AudioControls } from '../components/AmbientSoundSystem';
 import ModernFooter from '../components/ui/ModernFooter';
-import ModernNavigation from '../components/ui/ModernNavigation';
-import ModernHomePage from '../page-components/core/ModernHomePage';
-import "../styles/core/modern-2025-design.css";
+import VideoHomePage from '../page-components/VideoHomePage';
+import '../styles/core/modern-2025-design.css';
 
 export default function HomePage() {
   useEffect(() => {
@@ -34,28 +33,14 @@ export default function HomePage() {
         Skip to main content
       </a>
 
-      <ModernNavigation />
-
       {/* Floating Audio Controls */}
       <div className="modern-floating-audio">
         <AudioControls />
       </div>
 
       <main id="main-content" className="modern-main" role="main">
-        {/* Hero Section */}
-        <section id="home" className="modern-section">
-          <ModernHomePage />
-        </section>
-
-        {/* Coming Soon: More Modern Sections */}
-        <section className="modern-section glass-card">
-          <div className="modern-container">
-            <h2 className="modern-title">More Beautiful Sections Coming Soon</h2>
-            <p className="modern-subtitle">
-              We&apos;re transforming each section with our new 2025 design system
-            </p>
-          </div>
-        </section>
+        {/* Video-Centric Homepage */}
+        <VideoHomePage />
       </main>
 
       <ModernFooter />

@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ConfettiCelebration } from '../utils/magicalInteractions.js';
+import { ConfettiCelebration } from '../../utils/features/magicalInteractions.js';
 
 const InteractiveLoveTimeline = ({ className = '' }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -156,7 +156,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
               height: `${((activeIndex + 1) / milestones.length) * 100}%`,
             }}
           />
-        </div>
+            </div>
 
         {/* Timeline Milestones */}
         <div className="milestones-container">
@@ -167,7 +167,10 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
                 index <= activeIndex ? 'completed' : ''
               } stagger-animation elegant-lift`}
               style={{ '--delay': `${index * 0.2}s` }}
-              onClick={() => handleMilestoneClick(index)}
+               role="button" tabIndex={0} onClick={() => handleMilestoneClick(index)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveIndex(index); } }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();  => handleMilestoneClickindex(e); } }}
             >
               <div
                 className="milestone-marker sparkle"
@@ -199,7 +202,7 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
                   e.target.src = '/images/placeholder-love.jpg';
                 }}
               />
-              <div
+            <div
                 className="story-overlay"
                 style={{ '--story-color': getCurrentMilestone().color }}
               >
@@ -267,6 +270,11 @@ const InteractiveLoveTimeline = ({ className = '' }) => {
       </div>
     </div>
   );
+};
+
+
+InteractiveLoveTimeline.propTypes = {
+  className: PropTypes.string
 };
 
 export default InteractiveLoveTimeline;

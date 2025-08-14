@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('Analytics event:', body);
-
     // In a real implementation, this would store to analytics service
     // For now, just log and return success
 

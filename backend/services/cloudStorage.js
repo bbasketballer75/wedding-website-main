@@ -13,7 +13,7 @@ const logger = winston.createLogger({
 });
 
 // Initialize Google Cloud Storage with credentials
-let storageConfig = {};
+const storageConfig = {};
 let storage = null;
 
 try {

@@ -33,7 +33,7 @@ interface GuestStory {
   isFeatured?: boolean;
 }
 
-interface _GuestbookEntry {
+interface GuestbookEntry {
   id: string;
   name: string;
   message: string;

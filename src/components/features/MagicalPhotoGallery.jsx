@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ConfettiCelebration, TouchMagic } from '../utils/magicalInteractions.js';
+import { ConfettiCelebration, TouchMagic } from '../../utils/features/magicalInteractions.js';
 
 const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,6 +32,16 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
     };
   }, []);
 
+  // Helper function to handle successful image load
+  const handleImageLoad = (index) => {
+    setLoadedImages((prev) => new Set([...prev, index]));
+  };
+
+  // Helper function to handle image loading errors
+  const handleImageError = () => {
+    // Continue even if image fails to load
+  };
+
   // Preload images for smooth experience
   useEffect(() => {
     const preloadImages = async () => {
@@ -40,10 +50,13 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
         return new Promise((resolve) => {
           const img = new Image();
           img.onload = () => {
-            setLoadedImages((prev) => new Set([...prev, index]));
+            handleImageLoad(index);
             resolve();
           };
-          img.onerror = () => resolve(); // Continue even if image fails
+          img.onerror = () => {
+            handleImageError();
+            resolve();
+          };
           img.src = photo.url;
         });
       });
@@ -97,7 +110,7 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
       <div className={`magical-gallery-loading ${className}`}>
         <div className="skeleton-grid">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`skeleton-${i}`} className="skeleton photo-skeleton" />
+            <div key={`skeleton-loading-${i}`} className="skeleton photo-skeleton" />
           ))}
         </div>
       </div>
@@ -113,7 +126,7 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
             src={photos[currentIndex]?.url}
             alt={photos[currentIndex]?.caption || `Wedding photo ${currentIndex + 1}`}
             className="featured-photo photo-magic elegant-lift"
-            onClick={toggleFullscreen}
+             role="button" tabIndex={0} onClick={toggleFullscreen} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFullscreen(e); } }}
             onLoad={() => setLoadedImages((prev) => new Set([...prev, currentIndex]))}
           />
 
@@ -159,7 +172,7 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
               src={photo.url}
               alt={photo.caption || `Wedding photo ${index + 1}`}
               className="thumbnail photo-magic ripple"
-              onClick={() => handlePhotoClick(photo, index)}
+               role="button" tabIndex={0} onClick={() => handlePhotoClick(photo, index)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();  => handlePhotoClickphoto, index(e); } }}
               loading="lazy"
             />
             {loadedImages.has(index) && (
@@ -173,13 +186,13 @@ const MagicalPhotoGallery = ({ photos = [], onPhotoClick, className = '' }) => {
 
       {/* Fullscreen Modal */}
       {isFullscreen && (
-        <div className="fullscreen-modal" onClick={toggleFullscreen}>
+        <div className="fullscreen-modal"  role="button" tabIndex={0} onClick={toggleFullscreen} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFullscreen(e); } }}>
           <div className="fullscreen-content">
             <img
               src={photos[currentIndex]?.url}
               alt={photos[currentIndex]?.caption}
               className="fullscreen-image"
-              onClick={(e) => e.stopPropagation()}
+               role="button" tabIndex={0} onClick={(e) => e.stopPropagation()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e => e.stopPropagation(e); } }}
             />
             <button
               className="close-fullscreen btn-magical"

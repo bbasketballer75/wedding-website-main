@@ -80,7 +80,7 @@ const GuestStoryCollection = () => {
 
   return (
     <div className="guest-story-collection">
-      <style jsx>{`
+      <style>{`
         .guest-story-collection {
           max-width: 800px;
           margin: 0 auto;

@@ -318,7 +318,7 @@ class AIServicesManager {
     // For now, return intelligent results based on query analysis
     const queryLower = query.toLowerCase();
 
-    let results = [];
+    const results = [];
     if (queryLower.includes('ceremony') || queryLower.includes('wedding')) {
       results.push({
         id: 'photo1',

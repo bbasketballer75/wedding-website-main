@@ -7,7 +7,16 @@
  * and contextual audio feedback for user interactions throughout the wedding website.
  */
 
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 // Sound Library - Wedding themed ambient sounds
 const SOUND_LIBRARY = {
@@ -193,7 +202,6 @@ class SoundGenerator {
   createBirdSound(oscillator, gainNode, filterNode, duration) {
     // Chirping melody
     const frequencies = [523, 659, 784, 1047]; // C5, E5, G5, C6
-    let currentFreq = 0;
 
     oscillator.type = 'sine';
     oscillator.frequency.setValueAtTime(frequencies[0], this.audioContext.currentTime);
@@ -209,7 +217,7 @@ class SoundGenerator {
     const pauseDuration = 2;
     const totalCycle = chirpDuration + pauseDuration;
 
-    for (let i = 0; i < duration / totalCycle || 20; i++) {
+    for (let i = 0; i < Math.max(duration / totalCycle, 20); i++) {
       const startTime = this.audioContext.currentTime + i * totalCycle;
       const freq = frequencies[Math.floor(Math.random() * frequencies.length)];
 
@@ -275,7 +283,7 @@ class SoundGenerator {
     return { source: noise, lfo: waveLFO };
   }
 
-  createPianoSound(oscillator, gainNode, filterNode, duration) {
+  createPianoSound(oscillator, gainNode, _filterNode, _duration) {
     // Gentle piano chord progression
     const chords = [
       [261.63, 329.63, 392.0], // C major
@@ -288,7 +296,7 @@ class SoundGenerator {
     const chordDuration = 4; // 4 seconds per chord
 
     chords.forEach((chord, chordIndex) => {
-      chord.forEach((freq, noteIndex) => {
+      chord.forEach((freq, _noteIndex) => {
         const osc = this.audioContext.createOscillator();
         const noteGain = this.audioContext.createGain();
 
@@ -481,24 +489,41 @@ export const AudioProvider = ({ children }) => {
 
   // Cleanup on unmount
   useEffect(() => {
+    const generator = soundGenerator.current;
     return () => {
-      soundGenerator.current.stop();
+      if (generator) {
+        generator.stop();
+      }
     };
   }, []);
 
-  const value = {
-    isEnabled,
-    isInitialized,
-    currentAmbient,
-    volume,
-    soundLibrary: SOUND_LIBRARY,
-    toggleAudio,
-    setVolume,
-    playAmbient,
-    stopAmbient,
-    playInteraction,
-    initializeAudio,
-  };
+  const value = useMemo(
+    () => ({
+      isEnabled,
+      isInitialized,
+      currentAmbient,
+      volume,
+      soundLibrary: SOUND_LIBRARY,
+      toggleAudio,
+      setVolume,
+      playAmbient,
+      stopAmbient,
+      playInteraction,
+      initializeAudio,
+    }),
+    [
+      isEnabled,
+      isInitialized,
+      currentAmbient,
+      volume,
+      toggleAudio,
+      setVolume,
+      playAmbient,
+      stopAmbient,
+      playInteraction,
+      initializeAudio,
+    ]
+  );
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;
 };
@@ -562,7 +587,9 @@ export const AudioControls = ({ className = '' }) => {
           </div>
 
           <div className="ambient-controls">
-            <label className="ambient-label">🎵 Ambient Sounds</label>
+            <label className="ambient-label" htmlFor="ambient-select">
+              🎵 Ambient Sounds
+            </label>
             <div className="ambient-options">
               <button
                 className={`ambient-btn ${!currentAmbient ? 'ambient-btn--active' : ''}`}
@@ -587,7 +614,7 @@ export const AudioControls = ({ className = '' }) => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .audio-controls {
           background: rgba(255, 255, 255, 0.1);
           border-radius: 20px;
@@ -810,3 +837,11 @@ export const useInteractionSounds = () => {
 };
 
 export default AudioProvider;
+
+AudioProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+AudioControls.propTypes = {
+  className: PropTypes.string,
+};

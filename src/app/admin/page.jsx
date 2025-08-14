@@ -5,7 +5,7 @@ import { EnhancedErrorBoundary } from '../../components/EnhancedErrorBoundary';
 import LoadingScreen from '../../components/ui/LoadingScreen';
 
 // Code splitting: Lazy load admin page
-const AdminPage = React.lazy(() => import('../../page-components/AdminPage'));
+const AdminPage = React.lazy(() => import('../../page-components/admin/AdminPage'));
 
 function AdminPageRoute() {
   return (

@@ -82,7 +82,7 @@ const DigitalTimeCapsule = () => {
 
   return (
     <div className="time-capsule-container">
-      <style jsx>{`
+      <style>{`
         .time-capsule-container {
           max-width: 900px;
           margin: 0 auto;

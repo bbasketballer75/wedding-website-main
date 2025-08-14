@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ConfettiCelebration } from '../utils/magicalInteractions.js';
+import { ConfettiCelebration } from '../utils/features/magicalInteractions.js';
 
 const RealTimeActivityFeed = ({ className = '' }) => {
   const [activities, setActivities] = useState([]);

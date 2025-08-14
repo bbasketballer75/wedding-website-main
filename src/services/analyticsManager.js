@@ -26,8 +26,6 @@ class AnalyticsManager {
 
     // Setup performance monitoring
     this.setupPerformanceTracking();
-
-    console.log('🎯 Wedding Analytics initialized');
   }
 
   // Track events with queueing support

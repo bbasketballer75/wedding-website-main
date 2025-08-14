@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { getApiBaseUrl } from '../../config/ports.js';
 
 /**
  * Determine the API URL based on environment

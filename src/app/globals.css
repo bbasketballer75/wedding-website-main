@@ -4,11 +4,11 @@
 @tailwind utilities;
 
 /* 🎨 MODERN 2025 DESIGN SYSTEM INTEGRATION */
-@import '../styles/modern-2025-design.css';
+@import '../styles/core/modern-2025-design.css';
 
 /* 🎨 MAGICAL UX ENHANCEMENT STYLES */
-@import '../styles/magical-interactions.css';
-@import '../styles/magical-toast.css';
+@import '../styles/features/magical-interactions.css';
+@import '../styles/components/magical-toast.css';
 /*
  * ✨ OPTIMIZED WEDDING DESIGN SYSTEM ✨
  * Consolidated styling for Austin & Jordyn's Wedding Website

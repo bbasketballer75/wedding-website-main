@@ -38,8 +38,6 @@ export async function GET(_request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('Map location update request:', body);
-
     return NextResponse.json({
       success: true,
       message: 'Location updated successfully',

@@ -1,6 +1,5 @@
-import React from 'react';
 import Image from 'next/image';
-import '../WeddingPartyPage.css';
+import './WeddingPartyPage.css';
 
 const WeddingPartyPage = () => {
   const bridesmaids = [

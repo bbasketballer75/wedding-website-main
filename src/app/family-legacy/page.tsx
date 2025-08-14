@@ -1,5 +1,6 @@
 'use client';
 
+import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
 interface LegacyEntryData {
@@ -203,7 +204,7 @@ export default function FamilyLegacyPage() {
 
   return (
     <div className="family-legacy-page">
-      <style jsx>{`
+      <style>{`
         .family-legacy-page {
           max-width: 1200px;
           margin: 0 auto;
@@ -782,7 +783,7 @@ export default function FamilyLegacyPage() {
               <div className="entry-header">
                 <div className="entry-title">{entry.title}</div>
                 <div className="entry-meta">
-                  <span>By {entry.author.name}</span>
+                  <span>By {entry.author.name}</span>{' '}
                   <span className="entry-category">{entry.category.replace('_', ' ')}</span>
                 </div>
               </div>
@@ -792,7 +793,7 @@ export default function FamilyLegacyPage() {
               {entry.tags.length > 0 && (
                 <div className="entry-tags">
                   {entry.tags.slice(0, 4).map((tag, index) => (
-                    <span key={index} className="entry-tag">
+                    <span key={`${entry.id || 'tag'}-${tag}-${index}`} className="entry-tag">
                       {tag}
                     </span>
                   ))}
@@ -876,8 +877,8 @@ function LegacyCreationForm({
   onSubmit,
   onCancel,
 }: {
-  onSubmit: (data: LegacyEntryData) => void;
-  onCancel: () => void;
+  readonly onSubmit: (data: LegacyEntryData) => void;
+  readonly onCancel: () => void;
 }) {
   const [formData, setFormData] = useState({
     title: '',
@@ -932,8 +933,11 @@ function LegacyCreationForm({
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label">Title *</label>
+          <label htmlFor="legacy-title" className="form-label">
+            Title *
+          </label>
           <input
+            id="legacy-title"
             type="text"
             className="form-input"
             value={formData.title}
@@ -944,7 +948,9 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Content *</label>
+          <label htmlFor="legacy-content" className="form-label">
+            Content *
+          </label>
           <textarea
             className="form-textarea"
             value={formData.content}
@@ -955,8 +961,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Category</label>
+          <label className="form-label" htmlFor="category-1">
+            Category
+          </label>
           <select
+            id="category-1"
             className="form-select"
             value={formData.category}
             onChange={(e) => handleChange('category', e.target.value)}
@@ -971,8 +980,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Generation</label>
+          <label className="form-label" htmlFor="generation-2">
+            Generation
+          </label>
           <select
+            id="generation-2"
             className="form-select"
             value={formData.generation}
             onChange={(e) => handleChange('generation', e.target.value)}
@@ -986,8 +998,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Your Name *</label>
+          <label className="form-label" htmlFor="your-name-3">
+            Your Name *
+          </label>
           <input
+            id="your-name-3"
             type="text"
             className="form-input"
             value={formData.author.name}
@@ -998,8 +1013,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Email *</label>
+          <label className="form-label" htmlFor="email-4">
+            Email *
+          </label>
           <input
+            id="email-4"
             type="email"
             className="form-input"
             value={formData.author.email}
@@ -1010,8 +1028,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Your Relationship</label>
+          <label className="form-label" htmlFor="your-relationship-5">
+            Your Relationship
+          </label>
           <select
+            id="your-relationship-5"
             className="form-select"
             value={formData.author.relationship}
             onChange={(e) => handleChange('author.relationship', e.target.value)}
@@ -1028,8 +1049,11 @@ function LegacyCreationForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Tags (comma-separated)</label>
+          <label className="form-label" htmlFor="tags-comma-separated-6">
+            Tags (comma-separated)
+          </label>
           <input
+            id="tags-comma-separated-6"
             type="text"
             className="form-input"
             value={formData.tags}

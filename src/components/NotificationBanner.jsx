@@ -1,6 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import '../NotificationBanner.css';
+import './NotificationBanner.css';
 
 const NotificationBanner = ({ message, onClose }) => {
   if (!message) return null;

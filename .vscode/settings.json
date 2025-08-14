@@ -146,6 +146,14 @@
   "editor.renderLineHighlight": "all",
   "editor.renderLineHighlightOnlyWhenFocus": false,
 
+  // 🚫 ESLINT FLAT CONFIG ENFORCEMENT - PREVENT LEGACY CONFIG RECREATION
+  "eslint.useFlatConfig": true,
+  "eslint.options": {
+    "overrideConfigFile": "eslint.config.mjs"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
   // 🎨 ENHANCED UI RESPONSIVENESS
   "workbench.reduceMotion": "off",
   "workbench.layoutControl.enabled": true,

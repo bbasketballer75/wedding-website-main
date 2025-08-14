@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import ErrorBoundary from '../ErrorBoundary';
 
@@ -148,3 +149,7 @@ describe('ErrorBoundary', () => {
     expect(screen.queryByText(/something went wrong/i)).not.toBeInTheDocument();
   });
 });
+
+ThrowError.propTypes = {
+  shouldThrow: PropTypes.bool,
+};

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AnniversaryManager from '../../utils/AnniversaryManager';
+import AnniversaryManager from '../../utils/features/AnniversaryManager';
 
 interface Milestone {
   name: string;
@@ -95,7 +95,7 @@ export default function AnniversaryPage() {
 
   return (
     <div className="anniversary-page">
-      <style jsx>{`
+      <style>{`
         .anniversary-page {
           max-width: 1200px;
           margin: 0 auto;

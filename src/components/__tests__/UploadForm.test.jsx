@@ -1,24 +1,29 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { uploadMedia } from '../../services/api';
+import { vi } from 'vitest';
 import UploadForm from '../forms/UploadForm.jsx';
 
+// Mock CSS imports to prevent issues in tests
+vi.mock('../forms/UploadForm.css', () => ({}));
+
+// Mock the API service - this will override the global mock for this test file
+vi.mock('../../services/api.js', () => ({
+  uploadMedia: vi.fn(),
+}));
+
+// Import after mocking
+import { uploadMedia } from '../../services/api';
+
 describe('UploadForm', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('renders upload form fields', () => {
     render(<UploadForm />);
     // The input uses aria-label and placeholder, not a visible label
     expect(screen.getByLabelText(/Select image or video to upload/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Upload File/i })).toBeInTheDocument();
-  });
-});
-vi.mock('../../../services/api.js');
-
-describe('UploadForm', () => {
-  beforeEach(() => {
-    vi.mocked(uploadMedia).mockReset();
-  });
-  afterEach(() => {
-    vi.clearAllMocks();
   });
 
   it('renders the upload form', () => {
@@ -56,14 +61,15 @@ describe('UploadForm', () => {
   }, 15000);
 
   it('calls uploadMedia and shows success on valid upload', async () => {
-    vi.mocked(uploadMedia).mockResolvedValueOnce();
+    const mockUploadMedia = uploadMedia;
+    mockUploadMedia.mockResolvedValue({});
     render(<UploadForm />);
     const fileInput = screen.getByLabelText('Select image or video to upload');
     const file = new File(['dummy'], 'photo.jpg', { type: 'image/jpeg' });
     fireEvent.change(fileInput, { target: { files: [file] } });
     fireEvent.click(screen.getByRole('button', { name: /upload file/i }));
     await waitFor(() => {
-      expect(vi.mocked(uploadMedia)).toHaveBeenCalledTimes(1);
+      expect(mockUploadMedia).toHaveBeenCalledTimes(1);
       expect(screen.getByRole('status')).toHaveTextContent(
         'Thank you! Your file has been uploaded'
       );
@@ -71,7 +77,8 @@ describe('UploadForm', () => {
   });
 
   it('shows error if uploadMedia throws', async () => {
-    vi.mocked(uploadMedia).mockRejectedValueOnce({
+    const mockUploadMedia = uploadMedia;
+    mockUploadMedia.mockRejectedValue({
       response: { data: { message: 'Server error' } },
     });
     render(<UploadForm />);
@@ -84,7 +91,8 @@ describe('UploadForm', () => {
 
   it('disables input and button while uploading', async () => {
     let resolveUpload;
-    vi.mocked(uploadMedia).mockImplementation(
+    const mockUploadMedia = uploadMedia;
+    mockUploadMedia.mockImplementation(
       () =>
         new Promise((resolve) => {
           resolveUpload = resolve;
@@ -97,7 +105,7 @@ describe('UploadForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /upload file/i }));
     expect(fileInput).toBeDisabled();
     expect(screen.getByRole('button', { name: /uploading/i })).toBeDisabled();
-    resolveUpload();
+    resolveUpload({});
     await waitFor(() => {
       expect(fileInput).not.toBeDisabled();
       expect(screen.getByRole('button', { name: /upload file/i })).not.toBeDisabled();
@@ -105,7 +113,8 @@ describe('UploadForm', () => {
   });
 
   it('calls onUploadSuccess callback after successful upload', async () => {
-    vi.mocked(uploadMedia).mockResolvedValueOnce();
+    const mockUploadMedia = uploadMedia;
+    mockUploadMedia.mockResolvedValue({});
     const onUploadSuccess = vi.fn();
     render(<UploadForm onUploadSuccess={onUploadSuccess} />);
     const fileInput = screen.getByLabelText('Select image or video to upload');

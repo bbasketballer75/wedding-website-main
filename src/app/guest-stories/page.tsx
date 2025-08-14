@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface StoryAuthor {
   name: string;
@@ -165,384 +165,6 @@ export default function GuestStoriesPage() {
 
   return (
     <div className="guest-stories-page">
-      <style jsx>{`
-        .guest-stories-page {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 2rem;
-          font-family: 'Georgia', serif;
-          background: linear-gradient(135deg, #f8f6f8 0%, #ffffff 100%);
-          min-height: 100vh;
-        }
-
-        .stories-header {
-          text-align: center;
-          margin-bottom: 3rem;
-          padding: 2rem;
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          border-radius: 16px;
-          color: white;
-        }
-
-        .stories-header h1 {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .stories-header p {
-          font-size: 1.2rem;
-          opacity: 0.9;
-        }
-
-        .stories-actions {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 2rem;
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-
-        .category-filters {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-        }
-
-        .category-filter {
-          background: white;
-          border: 2px solid #e2e8f0;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.3s;
-          font-size: 0.9rem;
-        }
-
-        .category-filter.active {
-          background: #8b7a8a;
-          border-color: #8b7a8a;
-          color: white;
-        }
-
-        .category-filter:hover {
-          border-color: #8b7a8a;
-          transform: translateY(-2px);
-        }
-
-        .submit-story-btn {
-          background: linear-gradient(135deg, #d4a574, #8b7a8a);
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: all 0.3s;
-          text-decoration: none;
-          display: inline-block;
-        }
-
-        .submit-story-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 20px rgba(139, 122, 138, 0.3);
-        }
-
-        .featured-stories {
-          margin-bottom: 3rem;
-        }
-
-        .featured-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .featured-header h2 {
-          color: #8b7a8a;
-          font-size: 1.8rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .featured-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-          margin-bottom: 3rem;
-        }
-
-        .featured-story {
-          background: white;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px rgba(139, 122, 138, 0.1);
-          border-left: 4px solid #d4a574;
-          transition: transform 0.3s;
-        }
-
-        .featured-story:hover {
-          transform: translateY(-4px);
-        }
-
-        .story-header {
-          margin-bottom: 1rem;
-        }
-
-        .story-title {
-          color: #8b7a8a;
-          font-size: 1.3rem;
-          margin-bottom: 0.5rem;
-          font-weight: bold;
-        }
-
-        .story-meta {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.9rem;
-          color: #666;
-          margin-bottom: 1rem;
-        }
-
-        .story-author {
-          font-weight: bold;
-        }
-
-        .story-category {
-          background: #f7fafc;
-          padding: 0.25rem 0.5rem;
-          border-radius: 4px;
-          font-size: 0.8rem;
-          color: #8b7a8a;
-        }
-
-        .story-content {
-          color: #4a5568;
-          line-height: 1.6;
-          margin-bottom: 1rem;
-        }
-
-        .story-tags {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-        }
-
-        .story-tag {
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          color: white;
-          padding: 0.25rem 0.5rem;
-          border-radius: 4px;
-          font-size: 0.8rem;
-        }
-
-        .all-stories {
-          margin-top: 3rem;
-        }
-
-        .all-stories-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .all-stories-header h2 {
-          color: #8b7a8a;
-          font-size: 1.8rem;
-        }
-
-        .stories-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .story-card {
-          background: white;
-          padding: 1.5rem;
-          border-radius: 12px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s;
-        }
-
-        .story-card:hover {
-          transform: translateY(-2px);
-        }
-
-        .story-preview {
-          color: #666;
-          margin-bottom: 1rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .read-more {
-          color: #8b7a8a;
-          text-decoration: none;
-          font-weight: bold;
-          cursor: pointer;
-        }
-
-        .read-more:hover {
-          text-decoration: underline;
-        }
-
-        .stories-loading {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 50vh;
-          color: #8b7a8a;
-        }
-
-        .loading-spinner {
-          width: 50px;
-          height: 50px;
-          border: 3px solid #e2e8f0;
-          border-top: 3px solid #8b7a8a;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-bottom: 1rem;
-        }
-
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-
-        .stories-error {
-          text-align: center;
-          padding: 3rem;
-          color: #e53e3e;
-        }
-
-        .stories-error button {
-          background: #8b7a8a;
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 8px;
-          cursor: pointer;
-          margin-top: 1rem;
-        }
-
-        .submission-form {
-          background: white;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 8px 32px rgba(139, 122, 138, 0.1);
-          margin-bottom: 3rem;
-        }
-
-        .form-header {
-          text-align: center;
-          margin-bottom: 2rem;
-        }
-
-        .form-header h3 {
-          color: #8b7a8a;
-          font-size: 1.5rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .form-group {
-          margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-          display: block;
-          margin-bottom: 0.5rem;
-          color: #4a5568;
-          font-weight: bold;
-        }
-
-        .form-input,
-        .form-textarea,
-        .form-select {
-          width: 100%;
-          padding: 0.75rem;
-          border: 2px solid #e2e8f0;
-          border-radius: 8px;
-          font-size: 1rem;
-          transition: border-color 0.3s;
-        }
-
-        .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
-          outline: none;
-          border-color: #8b7a8a;
-        }
-
-        .form-textarea {
-          min-height: 120px;
-          resize: vertical;
-        }
-
-        .form-actions {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-        }
-
-        .form-btn {
-          padding: 0.75rem 1.5rem;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: all 0.3s;
-        }
-
-        .form-btn.primary {
-          background: linear-gradient(135deg, #8b7a8a, #d4a574);
-          color: white;
-        }
-
-        .form-btn.secondary {
-          background: transparent;
-          border: 2px solid #8b7a8a;
-          color: #8b7a8a;
-        }
-
-        .form-btn:hover {
-          transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-          .guest-stories-page {
-            padding: 1rem;
-          }
-
-          .stories-header h1 {
-            font-size: 2rem;
-          }
-
-          .stories-actions {
-            flex-direction: column;
-            align-items: stretch;
-          }
-
-          .category-filters {
-            justify-content: center;
-          }
-
-          .featured-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .stories-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
-
       <div className="stories-header">
         <h1>📖 Our Story Collection</h1>
         <p>Beautiful memories shared by our loved ones</p>
@@ -605,7 +227,7 @@ export default function GuestStoriesPage() {
                 {story.tags.length > 0 && (
                   <div className="story-tags">
                     {story.tags.map((tag, index) => (
-                      <span key={index} className="story-tag">
+                      <span key={`tag-${index}`} className="story-tag">
                         {tag}
                       </span>
                     ))}
@@ -643,7 +265,7 @@ export default function GuestStoriesPage() {
               {story.tags.length > 0 && (
                 <div className="story-tags">
                   {story.tags.slice(0, 3).map((tag, index) => (
-                    <span key={index} className="story-tag">
+                    <span key={`tag-${index}`} className="story-tag">
                       {tag}
                     </span>
                   ))}
@@ -661,8 +283,8 @@ function StorySubmissionForm({
   onSubmit,
   onCancel,
 }: {
-  onSubmit: (data: StorySubmission) => void;
-  onCancel: () => void;
+  readonly onSubmit: (data: StorySubmission) => void;
+  readonly onCancel: () => void;
 }) {
   const [formData, setFormData] = useState({
     title: '',
@@ -707,8 +329,11 @@ function StorySubmissionForm({
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label">Story Title *</label>
+          <label className="form-label" htmlFor="story-title-1">
+            Story Title *
+          </label>
           <input
+            id="story-title-1"
             type="text"
             className="form-input"
             value={formData.title}
@@ -719,8 +344,11 @@ function StorySubmissionForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Your Name *</label>
+          <label className="form-label" htmlFor="your-name-2">
+            Your Name *
+          </label>
           <input
+            id="your-name-2"
             type="text"
             className="form-input"
             value={formData.author.name}
@@ -731,8 +359,11 @@ function StorySubmissionForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Email *</label>
+          <label className="form-label" htmlFor="email-3">
+            Email *
+          </label>
           <input
+            id="email-3"
             type="email"
             className="form-input"
             value={formData.author.email}
@@ -743,8 +374,11 @@ function StorySubmissionForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Relationship to Couple</label>
+          <label className="form-label" htmlFor="relationship-to-couple-4">
+            Relationship to Couple
+          </label>
           <select
+            id="relationship-to-couple-4"
             className="form-select"
             value={formData.author.relationship}
             onChange={(e) => handleChange('author.relationship', e.target.value)}
@@ -759,8 +393,11 @@ function StorySubmissionForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Story Category</label>
+          <label className="form-label" htmlFor="story-category-5">
+            Story Category
+          </label>
           <select
+            id="story-category-5"
             className="form-select"
             value={formData.category}
             onChange={(e) => handleChange('category', e.target.value)}
@@ -775,8 +412,11 @@ function StorySubmissionForm({
         </div>
 
         <div className="form-group">
-          <label className="form-label">Your Story *</label>
+          <label className="form-label" htmlFor="your-story-6">
+            Your Story *
+          </label>
           <textarea
+            id="your-story-6"
             className="form-textarea"
             value={formData.content}
             onChange={(e) => handleChange('content', e.target.value)}

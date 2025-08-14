@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useInteractionSounds } from '../components/AmbientSoundSystem';
+import MagicalPhotoGallery from '../../components/features/MagicalPhotoGallery';
 import LoadingScreen from '../../components/ui/LoadingScreen';
-import MagicalPhotoGallery from '../components/MagicalPhotoGallery';
-import { useToast, useWeddingToasts } from '../components/MagicalToastSystem';
 import { getAlbumMedia, uploadMedia } from '../../services/api';
+import { useInteractionSounds } from '../components/AmbientSoundSystem';
+import { useToast, useWeddingToasts } from '../components/MagicalToastSystem';
 
 import './AlbumPage.css';
 
@@ -59,7 +59,10 @@ const MagicalAlbumPage = () => {
         setPhotos(response.data);
         showSuccess('Photo uploaded successfully!', '📸 Upload Complete');
       } catch (error) {
+        console.error('Upload error:', error);
         showError('Failed to upload photo. Please try again.');
+        // Additional error handling could be added here
+        throw error; // Re-throw to maintain error propagation
       } finally {
         setIsUploading(false);
       }
@@ -173,7 +176,7 @@ const MagicalAlbumPage = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .magical-album-page {
           position: relative;
           background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(221, 160, 221, 0.1));

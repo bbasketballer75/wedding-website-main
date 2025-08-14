@@ -22,8 +22,6 @@ class PrivacyManager {
     this.setupConsentBanner();
     this.setupDataRequestHandlers();
     this.initialized = true;
-
-    console.log('🔒 Privacy Manager initialized');
   }
 
   // Load stored consent preferences

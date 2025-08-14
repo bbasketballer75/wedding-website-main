@@ -8,7 +8,7 @@
  */
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
-import '../styles/magical-toast.css';
+import '../styles/components/magical-toast.css';
 
 // Toast Types with Magical Themes
 export const TOAST_TYPES = {
